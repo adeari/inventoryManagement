@@ -3317,27 +3317,48 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_tbAccountsKeyReleased
 
     private void btFirstAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstAccountsActionPerformed
-        // TODO add your handling code here:
+        txPageAccounts.setText("1");
+        viewAccounts();
     }//GEN-LAST:event_btFirstAccountsActionPerformed
 
     private void btPreviousAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousAccountsActionPerformed
-        // TODO add your handling code here:
+        txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) - 1));
+        viewAccounts();
     }//GEN-LAST:event_btPreviousAccountsActionPerformed
 
     private void txPageAccountsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageAccountsFocusLost
-        // TODO add your handling code here:
+        if (txPageAccounts.getText().length() > 0) {
+            common.functionCommon cf = new common.functionCommon();
+            if (!cf.isNumeric(txPageAccounts.getText())) {
+                txPageAccounts.setText("1");
+            }
+        } else {
+            txPageAccounts.setText("1");
+        }
     }//GEN-LAST:event_txPageAccountsFocusLost
 
     private void txPageAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageAccountsKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            if (txPageAccounts.getText().length() > 0) {
+                common.functionCommon cf = new common.functionCommon();
+                if (!cf.isNumeric(txPageAccounts.getText())) {
+                    txPageAccounts.setText("1");
+                }
+            } else {
+                txPageAccounts.setText("1");
+            }
+            viewAccounts();
+        }
     }//GEN-LAST:event_txPageAccountsKeyReleased
 
     private void btNextAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextAccountsActionPerformed
-        // TODO add your handling code here:
+        txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) + 1));
+        viewAccounts();
     }//GEN-LAST:event_btNextAccountsActionPerformed
 
     private void btLastAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastAccountsActionPerformed
-        // TODO add your handling code here:
+        txPageAccounts.setText(String.valueOf(lastPageAccounts));
+        viewAccounts();
     }//GEN-LAST:event_btLastAccountsActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
