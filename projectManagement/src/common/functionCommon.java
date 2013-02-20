@@ -154,4 +154,9 @@ public class functionCommon {
         return (tokens.length == 2 && tokens[0].length() > 0 && tokens[1]
                 .length() > 0);
     }
+    
+    public String viewDatefromSQL(String columnName,String asView) {
+        String getBack="to_char("+columnName+",'DD MON YYYY') AS "+asView;
+        return getBack;
+    }
 }

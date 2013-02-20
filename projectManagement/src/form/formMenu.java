@@ -54,38 +54,18 @@ public class formMenu extends javax.swing.JFrame {
 
     public formMenu() {
         initComponents();
-        InternalFrameUI ui = userFrame.getUI();
-        if (ui instanceof BasicInternalFrameUI) {
-            BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
-            JComponent comp = bui.getNorthPane();
-            comp.setPreferredSize(new Dimension(comp.getWidth(), 0));
-        }
-        ui = userEditFrame.getUI();
-        if (ui instanceof BasicInternalFrameUI) {
-            BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
-            JComponent comp = bui.getNorthPane();
-            comp.setPreferredSize(new Dimension(comp.getWidth(), 0));
-        }
-
-        ui = projectFrame.getUI();
-        if (ui instanceof BasicInternalFrameUI) {
-            BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
-            JComponent comp = bui.getNorthPane();
-            comp.setPreferredSize(new Dimension(comp.getWidth(), 0));
-        }
-        ui = productsFrame.getUI();
-        if (ui instanceof BasicInternalFrameUI) {
-            BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
-            JComponent comp = bui.getNorthPane();
-            comp.setPreferredSize(new Dimension(comp.getWidth(), 0));
-        }
-        ui = productEditFrame.getUI();
-        if (ui instanceof BasicInternalFrameUI) {
-            BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
-            JComponent comp = bui.getNorthPane();
-            comp.setPreferredSize(new Dimension(comp.getWidth(), 0));
-        }
-        ui = projectDetailFrame.getUI();
+        settingInternalFrame(userFrame.getUI());
+        settingInternalFrame(userEditFrame.getUI());
+        settingInternalFrame(projectFrame.getUI());
+        settingInternalFrame(productsFrame.getUI());
+        settingInternalFrame(productEditFrame.getUI());
+        settingInternalFrame(projectDetailFrame.getUI());
+        settingInternalFrame(financeFrame.getUI());
+        settingInternalFrame(accountsFrame.getUI());
+        
+    }
+    
+    void settingInternalFrame(InternalFrameUI ui) {
         if (ui instanceof BasicInternalFrameUI) {
             BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
             JComponent comp = bui.getNorthPane();
@@ -416,6 +396,87 @@ public class formMenu extends javax.swing.JFrame {
         jComboBox5 = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
+        financeFrame = new javax.swing.JInternalFrame();
+        userFrame.getContentPane().setBackground(Color.WHITE);
+        jLabel30 = new javax.swing.JLabel();
+        accountsFrame = new javax.swing.JInternalFrame();
+        userFrame.getContentPane().setBackground(Color.WHITE);
+        jLabel31 = new javax.swing.JLabel();
+        countAccounts = new javax.swing.JLabel();
+        searchProduct1 = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        accName = new javax.swing.JTextField();
+        acc = new javax.swing.JTextField();
+        jButton20 = new javax.swing.JButton();
+        scrolltbAccounts = new javax.swing.JScrollPane();
+        final String columnAccounts[] = {"id","ACC#", "ACCOUNT NAME", "ACCOUNT GROUP", " "};
+        tmTabelAccounts = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnAccounts.length;
+            }
+
+            public int getRowCount() {
+                return vectorAccounts.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorAccounts.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnAccounts[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                if (column1 == 4) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorAccounts.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbAccounts = new javax.swing.JTable(tmTabelAccounts);
+        tbAccounts.setAutoResizeMode(tbProduct.AUTO_RESIZE_OFF);
+        tc=tbAccounts.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        tbAccounts.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        tc=tbAccounts.getColumn("ACC#");
+        tc.setMinWidth(97);
+        tc=tbAccounts.getColumn("ACCOUNT NAME");
+        tc.setMinWidth(355);
+        tbAccounts.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        tc=tbAccounts.getColumn("ACCOUNT GROUP");
+        tc.setMinWidth(300);
+        tc=tbAccounts.getColumn(" ");
+        tc.setMinWidth(50);
+        tc.setCellRenderer(new ButtonsRendererAccounts());
+        tc.setCellEditor(new ButtonsEditorAccounts(tbAccounts));
+        tbAccounts.setRowHeight(35);
+
+        for (int i=1;i<tbAccounts.getColumnCount();i++)
+        tbAccounts.getTableHeader().getColumnModel().getColumn(i)
+        .setHeaderRenderer(new common.HeaderRenderer(tbAccounts, JLabel.CENTER));
+        btFirstAccounts = new javax.swing.JButton();
+        btPreviousAccounts = new javax.swing.JButton();
+        txPageAccounts = new javax.swing.JTextField();
+        lbPageCountAccounts = new javax.swing.JLabel();
+        btNextAccounts = new javax.swing.JButton();
+        btLastAccounts = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -638,6 +699,19 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     btLeftRoles.setBorderPainted(false);
     btLeftRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     btLeftRoles.setFocusPainted(false);
+    btLeftRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btLeftRolesMouseExited(evt);
+        }
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btLeftRolesMouseEntered(evt);
+        }
+    });
+    btLeftRoles.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btLeftRolesActionPerformed(evt);
+        }
+    });
     panelMenu1.add(btLeftRoles);
     btLeftRoles.setBounds(0, 110, 160, 30);
 
@@ -1636,6 +1710,210 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     projectDetailFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(projectDetailFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+    financeFrame.setBackground(new java.awt.Color(255, 255, 255));
+    financeFrame.setBorder(null);
+    financeFrame.setVisible(false);
+    financeFrame.getContentPane().setLayout(null);
+
+    jLabel30.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    jLabel30.setText("FINANCE");
+    financeFrame.getContentPane().add(jLabel30);
+    jLabel30.setBounds(10, 10, 350, 40);
+
+    financeFrame.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(financeFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+    accountsFrame.setBackground(new java.awt.Color(255, 255, 255));
+    accountsFrame.setBorder(null);
+    accountsFrame.setVisible(false);
+    accountsFrame.getContentPane().setLayout(null);
+
+    jLabel31.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    jLabel31.setText("ACCOUNTS");
+    accountsFrame.getContentPane().add(jLabel31);
+    jLabel31.setBounds(10, 10, 350, 40);
+
+    countAccounts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    countAccounts.setText("100 Users");
+    accountsFrame.getContentPane().add(countAccounts);
+    countAccounts.setBounds(10, 50, 180, 20);
+
+    searchProduct1.setText("Search");
+    searchProduct1.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            searchProduct1FocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            searchProduct1FocusLost(evt);
+        }
+    });
+    searchProduct1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            searchProduct1KeyReleased(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(searchProduct1);
+    searchProduct1.setBounds(690, 10, 140, 30);
+
+    jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
+    accountsFrame.getContentPane().add(jLabel32);
+    jLabel32.setBounds(670, 10, 30, 30);
+
+    jPanel8.setLayout(null);
+
+    accName.setForeground(new java.awt.Color(204, 204, 204));
+    accName.setText("Account Name");
+    accName.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            accNameFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            accNameFocusLost(evt);
+        }
+    });
+    accName.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            accNameKeyReleased(evt);
+        }
+    });
+    jPanel8.add(accName);
+    accName.setBounds(90, 10, 310, 25);
+
+    acc.setForeground(new java.awt.Color(204, 204, 204));
+    acc.setText("ACC#");
+    acc.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            accFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            accFocusLost(evt);
+        }
+    });
+    acc.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            accKeyReleased(evt);
+        }
+    });
+    jPanel8.add(acc);
+    acc.setBounds(10, 10, 70, 25);
+
+    jButton20.setBackground(new java.awt.Color(0, 0, 0));
+    jButton20.setForeground(new java.awt.Color(255, 255, 255));
+    jButton20.setText("Add");
+    jButton20.setBorder(null);
+    jButton20.setBorderPainted(false);
+    jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    jButton20.setFocusPainted(false);
+    jButton20.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton20ActionPerformed(evt);
+        }
+    });
+    jPanel8.add(jButton20);
+    jButton20.setBounds(410, 10, 70, 25);
+
+    accountsFrame.getContentPane().add(jPanel8);
+    jPanel8.setBounds(340, 80, 490, 45);
+
+    tbAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            tbAccountsMouseClicked(evt);
+        }
+    });
+    tbAccounts.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbAccountsKeyReleased(evt);
+        }
+    });
+    scrolltbAccounts.setViewportView(tbAccounts);
+
+    accountsFrame.getContentPane().add(scrolltbAccounts);
+    scrolltbAccounts.setBounds(10, 140, 830, 470);
+
+    btFirstAccounts.setBackground(new java.awt.Color(0, 0, 0));
+    btFirstAccounts.setForeground(new java.awt.Color(255, 255, 255));
+    btFirstAccounts.setText("<<");
+    btFirstAccounts.setBorder(null);
+    btFirstAccounts.setBorderPainted(false);
+    btFirstAccounts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btFirstAccounts.setFocusPainted(false);
+    btFirstAccounts.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btFirstAccountsActionPerformed(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(btFirstAccounts);
+    btFirstAccounts.setBounds(10, 620, 60, 30);
+
+    btPreviousAccounts.setBackground(new java.awt.Color(0, 0, 0));
+    btPreviousAccounts.setForeground(new java.awt.Color(255, 255, 255));
+    btPreviousAccounts.setText("<");
+    btPreviousAccounts.setBorder(null);
+    btPreviousAccounts.setBorderPainted(false);
+    btPreviousAccounts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btPreviousAccounts.setFocusPainted(false);
+    btPreviousAccounts.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btPreviousAccountsActionPerformed(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(btPreviousAccounts);
+    btPreviousAccounts.setBounds(80, 620, 60, 30);
+
+    txPageAccounts.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+    txPageAccounts.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txPageAccounts.setText("0");
+    txPageAccounts.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txPageAccountsFocusLost(evt);
+        }
+    });
+    txPageAccounts.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txPageAccountsKeyReleased(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(txPageAccounts);
+    txPageAccounts.setBounds(150, 620, 60, 30);
+
+    lbPageCountAccounts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbPageCountAccounts.setText("of 10000");
+    accountsFrame.getContentPane().add(lbPageCountAccounts);
+    lbPageCountAccounts.setBounds(220, 620, 70, 30);
+
+    btNextAccounts.setBackground(new java.awt.Color(0, 0, 0));
+    btNextAccounts.setForeground(new java.awt.Color(255, 255, 255));
+    btNextAccounts.setText(">");
+    btNextAccounts.setBorder(null);
+    btNextAccounts.setBorderPainted(false);
+    btNextAccounts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btNextAccounts.setFocusPainted(false);
+    btNextAccounts.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btNextAccountsActionPerformed(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(btNextAccounts);
+    btNextAccounts.setBounds(300, 620, 60, 30);
+
+    btLastAccounts.setBackground(new java.awt.Color(0, 0, 0));
+    btLastAccounts.setForeground(new java.awt.Color(255, 255, 255));
+    btLastAccounts.setText(">>");
+    btLastAccounts.setBorder(null);
+    btLastAccounts.setBorderPainted(false);
+    btLastAccounts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btLastAccounts.setFocusPainted(false);
+    btLastAccounts.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btLastAccountsActionPerformed(evt);
+        }
+    });
+    accountsFrame.getContentPane().add(btLastAccounts);
+    btLastAccounts.setBounds(370, 620, 60, 30);
+
+    accountsFrame.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(accountsFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
     panelMenu1.add(jDesktopPane1);
     jDesktopPane1.setBounds(160, 50, 860, 720);
 
@@ -1717,13 +1995,21 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         disableALlButtonHeader();
         jButton1MouseEntered(null);
         btLeftUSer.setVisible(true);
+        btLeftUSer.setText("USERS");
         btLeftRoles.setVisible(true);
+        btLeftRoles.setText("ROLES");
         userFrame.setVisible(true);
         viewUser();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btLeftUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftUSerActionPerformed
-        jButton1ActionPerformed(null);
+        if (btLeftUSer.getText().equalsIgnoreCase("USERS"))
+        {
+            jButton1ActionPerformed(null);
+        } else if (btLeftUSer.getText().equalsIgnoreCase("TRANSACTIONS"))
+        {
+            
+        }
     }//GEN-LAST:event_btLeftUSerActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2829,7 +3115,14 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton18MouseExited
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        closeAllInternalFrame();
+        disableALlButtonHeader();
+        jButton12MouseEntered(null);
+        financeFrame.setVisible(true);
+        btLeftUSer.setVisible(true);
+        btLeftUSer.setText("TRANSACTIONS");
+        btLeftRoles.setVisible(true);
+        btLeftRoles.setText("ACCOUNTS");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
@@ -2860,6 +3153,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         jButton1.setOpaque(false);
         jButton1.setForeground(Color.WHITE);
     }
+    
+    void disableButtonLeft() {
+        btLeftRoles.setBackground(new java.awt.Color(192,192,192));        
+    }
+    
     private void lbFirstnameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseEntered
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
@@ -2894,7 +3192,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton3MouseExited
 
     private void jButton12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseEntered
-        if (!userFrame.isVisible()&&!userEditFrame.isVisible()) {
+        if (!financeFrame.isVisible()&&
+                !accountsFrame.isVisible()) {
             jButton12.setOpaque(true);
             jButton12.setBackground(Color.WHITE);
             jButton12.setForeground(Color.BLACK);
@@ -2902,7 +3201,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton12MouseEntered
 
     private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
-        if (!userFrame.isVisible()&&!userEditFrame.isVisible()) {
+        if (!financeFrame.isVisible()
+                &&!accountsFrame.isVisible()) {
             jButton12.setOpaque(false);
             jButton12.setForeground(Color.WHITE);
         }
@@ -2922,30 +3222,156 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton1.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton1MouseExited
+
+    private void btLeftRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftRolesActionPerformed
+        
+        if (btLeftRoles.getText().equalsIgnoreCase("ACCOUNTS")) {
+            disableButtonLeft();
+            btLeftRolesMouseEntered(null);
+            accountsFrame.setVisible(true);
+            viewAccounts();
+        }
+    }//GEN-LAST:event_btLeftRolesActionPerformed
+
+    private void btLeftRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseEntered
+        if (!accountsFrame.isVisible())
+        btLeftRoles.setBackground(new java.awt.Color(153, 153, 255));
+    }//GEN-LAST:event_btLeftRolesMouseEntered
+
+    private void btLeftRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseExited
+        if (!accountsFrame.isVisible())
+        btLeftRoles.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btLeftRolesMouseExited
+
+    private void searchProduct1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct1FocusGained
+
+    private void searchProduct1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct1FocusLost
+
+    private void searchProduct1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct1KeyReleased
+
+    private void accNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accNameKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accNameKeyReleased
+
+    private void accKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accKeyReleased
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        common.functionCommon fc = new common.functionCommon();
+        try {
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                String qry ="insert into accounts (unique_id,name) "
+                        + "values ('"+acc.getText()+"','"+accName.getText()+"')";
+                st.executeUpdate(qry);
+                cn.close();
+                viewAccounts();
+        } catch (Exception ex) {
+            if (fc.isDebugging)
+                System.out.println(" error in add acconts "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void accFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusGained
+        if (acc.getText().equalsIgnoreCase("ACC#")) {
+            acc.setText("");
+            acc.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_accFocusGained
+
+    private void accFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusLost
+        if (acc.getText().length()<1){
+            acc.setText("ACC#");
+            acc.setForeground(new java.awt.Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_accFocusLost
+
+    private void accNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusGained
+        if (accName.getText().equalsIgnoreCase("Account Name")) {
+            accName.setText("");
+            accName.setForeground(Color.BLACK);
+        }
+        
+    }//GEN-LAST:event_accNameFocusGained
+
+    private void accNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusLost
+        if (accName.getText().length()<1){
+            accName.setText("Account Name");
+            accName.setForeground(new java.awt.Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_accNameFocusLost
+
+    private void tbAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAccountsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbAccountsMouseClicked
+
+    private void tbAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAccountsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbAccountsKeyReleased
+
+    private void btFirstAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstAccountsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btFirstAccountsActionPerformed
+
+    private void btPreviousAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousAccountsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPreviousAccountsActionPerformed
+
+    private void txPageAccountsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageAccountsFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageAccountsFocusLost
+
+    private void txPageAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageAccountsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageAccountsKeyReleased
+
+    private void btNextAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextAccountsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btNextAccountsActionPerformed
+
+    private void btLastAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastAccountsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLastAccountsActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
     private javax.swing.JPopupMenu ProductPopMenu;
+    private javax.swing.JTextField acc;
+    private javax.swing.JTextField accName;
+    private javax.swing.JInternalFrame accountsFrame;
     private javax.swing.JTextField address;
     private javax.swing.JButton btFirst;
+    private javax.swing.JButton btFirstAccounts;
     private javax.swing.JButton btFirstProduct;
     private javax.swing.JButton btLast;
+    private javax.swing.JButton btLastAccounts;
     private javax.swing.JButton btLastProductLast;
     private javax.swing.JButton btLeftRoles;
     private javax.swing.JButton btLeftUSer;
     private javax.swing.JButton btNext;
+    private javax.swing.JButton btNextAccounts;
     private javax.swing.JButton btNextProduct;
     private javax.swing.JButton btPrevious;
+    private javax.swing.JButton btPreviousAccounts;
     private javax.swing.JButton btPreviousProduct;
     private javax.swing.JButton btsaveProject;
     private javax.swing.JComboBox cbCategory;
     private javax.swing.JComboBox cbRoles;
     private javax.swing.JTextField companyName;
+    private javax.swing.JLabel countAccounts;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private javax.swing.JComboBox filterProduct;
     private javax.swing.JComboBox filterSearch;
+    private javax.swing.JInternalFrame financeFrame;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2958,6 +3384,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2994,6 +3421,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3011,6 +3441,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -3026,6 +3457,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel lbCountProjectTable;
     private javax.swing.JLabel lbCountUser;
     public javax.swing.JLabel lbFirstname;
+    private javax.swing.JLabel lbPageCountAccounts;
     private javax.swing.JLabel lbPageCountProduct;
     private javax.swing.JPopupMenu menuPop;
     private panelLayout.panelMenu panelMenu1;
@@ -3035,8 +3467,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextPane projectDescription;
     private javax.swing.JInternalFrame projectDetailFrame;
     private javax.swing.JInternalFrame projectFrame;
+    private javax.swing.JScrollPane scrolltbAccounts;
     private javax.swing.JTextField searchProduct;
+    private javax.swing.JTextField searchProduct1;
     private javax.swing.JTextField taskName1;
+    private javax.swing.JTable tbAccounts;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbProductInProjects;
     private javax.swing.JTable tbUser;
@@ -3050,6 +3485,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPasswordField txPAss1;
     private javax.swing.JPasswordField txPAss2;
     private javax.swing.JTextField txPage;
+    private javax.swing.JTextField txPageAccounts;
     private javax.swing.JTextField txPageProduct;
     private javax.swing.JTextField txPrice;
     private javax.swing.JTextField txProductsID;
@@ -3071,12 +3507,15 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     java.util.Vector vectorProducts = new java.util.Vector();
     javax.swing.table.TableModel tmTableProductsInProject;
     java.util.Vector vectorProductsInProject = new java.util.Vector();
+    javax.swing.table.TableModel tmTabelAccounts;
+    java.util.Vector vectorAccounts = new java.util.Vector();
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     //end  Component
     int lastPageUSer = 0;
     int lastPageProducts = 0;
+    int lastPageAccounts = 0;
     boolean showMenuUser = false;
-
+    
     public void viewProducts() {
         int limit = 15;
         String qry = "", orderBy = "", Condition = "";
@@ -3092,7 +3531,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
 
-        System.out.println("Condition = " + Condition + " filterProduct = " + filterProduct.getSelectedItem());
+        
 
         int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
         common.functionCommon fc = new common.functionCommon();
@@ -3154,7 +3593,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             int positionNOW2 = positionNow * limit;
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select a.id,a.name,a.description,a.sku,a.quantity,"
-                    + "to_char(a.modified_at,'DD MON YYYY') AS modified_at from inventories a "
+                    + fc.viewDatefromSQL("a.modified_at", "modified_at") 
+                    + " from inventories a "
                     + " left join inventory_categories b on a.category_id=b.id  " + Condition
                     + " " + limiTation;
             if (fc.isDebugging) {
@@ -3183,6 +3623,99 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         } catch (Exception ex) {
             if (fc.isDebugging) {
                 System.out.println("Error in viewProducts " + ex.getMessage());
+            }
+        }
+    }
+
+    public void viewAccounts() {
+        int limit = 15;
+        String qry = "", orderBy = "", Condition = "";
+        
+
+        int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
+        common.functionCommon fc = new common.functionCommon();
+        if (positionNow == 0) {
+            btPreviousAccounts.setEnabled(false);
+            btFirstAccounts.setEnabled(false);
+        } else {
+            btPreviousAccounts.setEnabled(true);
+            btFirstAccounts.setEnabled(true);
+        }
+        orderBy = " order by name asc";
+        int total = 0;
+
+        try {
+            qry = "select count(*) as totalCount from accounts";
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                total = rs.getInt("totalCount");
+                countAccounts.setText(rs.getString("totalCount") + " Accounts");
+                if (total > 0) {
+
+                    lastPageAccounts = rs.getInt("totalCount") / limit;
+                    if ((rs.getInt("totalCount") % limit) > 0) {
+                        lastPageAccounts++;
+                    }
+
+                    if ((lastPageAccounts - 1) <= positionNow) {
+                        btNextAccounts.setEnabled(false);
+                        btLastAccounts.setEnabled(false);
+                        txPageAccounts.setText(String.valueOf(lastPageProducts));
+                        positionNow = lastPageAccounts - 1;
+                    } else {
+                        if (positionNow < 0) {
+                            positionNow = 0;
+                            txPageAccounts.setText("1");
+                            btPreviousAccounts.setEnabled(false);
+                            btFirstAccounts.setEnabled(false);
+                        }
+                        if (lastPageAccounts > 1) {
+                            btNextAccounts.setEnabled(true);
+                            btLastAccounts.setEnabled(true);
+                        } else {
+                            btNextAccounts.setEnabled(false);
+                            btLastAccounts.setEnabled(false);
+                        }
+                    }
+                } else {
+                    btNextAccounts.setEnabled(false);
+                    btLastAccounts.setEnabled(false);
+                    btPreviousAccounts.setEnabled(false);
+                    btFirstAccounts.setEnabled(false);
+                    positionNow = 0;
+                    txPageAccounts.setText("0");
+                }
+            }
+            int positionNOW2 = positionNow * limit;
+            String limiTation = " offset " + positionNOW2 + " limit " + limit;
+            qry = "select id,unique_id,name from accounts" + limiTation;
+            if (fc.isDebugging) {
+                System.out.println(" qry = " + qry);
+            }
+            rs = st.executeQuery(qry);
+            java.util.Vector rowData = null;
+            vectorAccounts = new java.util.Vector();
+
+            while (rs.next()) {
+                rowData = new java.util.Vector();
+
+                rowData.addElement(rs.getInt("id"));
+                rowData.addElement(rs.getString("unique_id"));
+                rowData.addElement(rs.getString("name"));
+                rowData.addElement("P/L");
+                rowData.addElement("P/L");
+                vectorAccounts.addElement(rowData);
+
+            }
+            tbAccounts.tableChanged(new javax.swing.event.TableModelEvent(tmTabelAccounts));
+            lbPageCountAccounts.setText(" of " + lastPageAccounts);
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("Error in viewAccounts " + ex.getMessage());
             }
         }
     }
@@ -3360,7 +3893,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         productsFrame.setVisible(false);
         productEditFrame.setVisible(false);
         projectDetailFrame.setVisible(false);
-
+        financeFrame.setVisible(false);
+        accountsFrame.setVisible(false);
     }
 
     void POPUpMenuUsuallycommand() {
@@ -3382,6 +3916,37 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editIcon.png")));
             buttons.get(1).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
+        }
+    }
+    
+    class ButtonsPanelAccounts extends JPanel {
+
+        public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
+
+        public ButtonsPanelAccounts() {
+            super();
+            setOpaque(true);
+            for (JButton b : buttons) {
+                b.setFocusable(false);
+                b.setRolloverEnabled(false);
+                b.setPreferredSize(new Dimension(22, 22));
+                add(b);
+            }
+            buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
+        }
+    }
+    
+    class ButtonsRendererAccounts extends ButtonsPanelAccounts implements TableCellRenderer {
+
+        public ButtonsRendererAccounts() {
+            super();
+            setName("Table.cellRenderer");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+            return this;
         }
     }
 
@@ -3479,7 +4044,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorProducts extends ButtonsPanel implements TableCellEditor {
 
         public ButtonsEditorProducts(final JTable table) {
@@ -3510,6 +4075,80 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     dropDataProduct(table);
                 }
             });
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+
+    class ButtonsEditorAccounts extends ButtonsPanel implements TableCellEditor {
+
+        public ButtonsEditorAccounts(final JTable table) {
+            super();
+            MouseListener ml = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    ButtonModel m = ((JButton) e.getSource()).getModel();
+                    if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
+                        setBackground(table.getBackground());
+                    }
+
+                    table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
+                }
+            };
+            buttons.get(0).addMouseListener(ml);
+
+            buttons.get(0).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prepareEditProduct(table);
+                }
+            });
+
 
         }
 
