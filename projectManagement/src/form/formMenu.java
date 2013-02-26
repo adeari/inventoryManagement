@@ -62,7 +62,7 @@ public class formMenu extends javax.swing.JFrame {
         settingInternalFrame(projectDetailFrame.getUI());
         settingInternalFrame(financeFrame.getUI());
         settingInternalFrame(accountsFrame.getUI());
-        
+        settingInternalFrame(transactionsFrame.getUI());
     }
     
     void settingInternalFrame(InternalFrameUI ui) {
@@ -313,6 +313,8 @@ public class formMenu extends javax.swing.JFrame {
         jButton19 .setVerticalTextPosition(SwingConstants.BOTTOM);
         jButton19.setHorizontalTextPosition(SwingConstants.LEFT);
         projectDetailFrame = new javax.swing.JInternalFrame();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jPanel9 = new javax.swing.JPanel();
         btsaveProject = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         taskName1 = new javax.swing.JTextField();
@@ -320,7 +322,7 @@ public class formMenu extends javax.swing.JFrame {
         projectDescription = new javax.swing.JTextPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        prjStatus = new javax.swing.JComboBox();
         jLabel23 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel24 = new javax.swing.JLabel();
@@ -341,6 +343,8 @@ public class formMenu extends javax.swing.JFrame {
         }catch (Exception ex) {}
         jButton16 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
+        jLabel35 = new javax.swing.JLabel();
+        txLocation = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -395,6 +399,34 @@ public class formMenu extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jComboBox5 = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        txLocation1 = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        txLocation2 = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        txLocation3 = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        txLocation4 = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        txLocation5 = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        txLocation6 = new javax.swing.JTextField();
+        jLabel51 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
         financeFrame = new javax.swing.JInternalFrame();
         userFrame.getContentPane().setBackground(Color.WHITE);
@@ -448,7 +480,7 @@ public class formMenu extends javax.swing.JFrame {
             }
         };
         tbAccounts = new javax.swing.JTable(tmTabelAccounts);
-        tbAccounts.setAutoResizeMode(tbProduct.AUTO_RESIZE_OFF);
+        tbAccounts.setAutoResizeMode(tbAccounts.AUTO_RESIZE_OFF);
         tc=tbAccounts.getColumn("id");
         tc.setMinWidth(0);
         tc.setWidth(0);
@@ -456,14 +488,15 @@ public class formMenu extends javax.swing.JFrame {
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         tbAccounts.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         tc=tbAccounts.getColumn("ACC#");
-        tc.setMinWidth(97);
+        tc.setMinWidth(110);
         tc=tbAccounts.getColumn("ACCOUNT NAME");
-        tc.setMinWidth(355);
+        tc.setMinWidth(365);
         tbAccounts.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         tc=tbAccounts.getColumn("ACCOUNT GROUP");
-        tc.setMinWidth(300);
+        tc.setMinWidth(317);
         tc=tbAccounts.getColumn(" ");
-        tc.setMinWidth(50);
+        tc.setMinWidth(35);
+        tc.setMaxWidth(35);
         tc.setCellRenderer(new ButtonsRendererAccounts());
         tc.setCellEditor(new ButtonsEditorAccounts(tbAccounts));
         tbAccounts.setRowHeight(35);
@@ -477,6 +510,20 @@ public class formMenu extends javax.swing.JFrame {
         lbPageCountAccounts = new javax.swing.JLabel();
         btNextAccounts = new javax.swing.JButton();
         btLastAccounts = new javax.swing.JButton();
+        transactionsFrame = new javax.swing.JInternalFrame();
+        userFrame.getContentPane().setBackground(Color.WHITE);
+        jLabel33 = new javax.swing.JLabel();
+        countTransactions = new javax.swing.JLabel();
+        searchProduct2 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        scrolltbAccounts1 = new javax.swing.JScrollPane();
+        tbTransactions = new javax.swing.JTable();
+        btFirstTransactions = new javax.swing.JButton();
+        btPreviousTransactions = new javax.swing.JButton();
+        txPageTransactions = new javax.swing.JTextField();
+        lbPageCountTransactions = new javax.swing.JLabel();
+        btNextTransactions = new javax.swing.JButton();
+        btLastTransactions = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -1487,6 +1534,15 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     projectDetailFrame.setVisible(false);
     projectDetailFrame.getContentPane().setLayout(null);
 
+    jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    jScrollPane7.setFocusCycleRoot(true);
+    jScrollPane7.setFocusTraversalPolicyProvider(true);
+
+    jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel9.setAutoscrolls(true);
+    jPanel9.setPreferredSize(new java.awt.Dimension(700, 1200));
+    jPanel9.setLayout(null);
+
     btsaveProject.setBackground(new java.awt.Color(0, 0, 0));
     btsaveProject.setForeground(new java.awt.Color(255, 255, 255));
     btsaveProject.setText("Save");
@@ -1499,8 +1555,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             btsaveProjectActionPerformed(evt);
         }
     });
-    projectDetailFrame.getContentPane().add(btsaveProject);
-    btsaveProject.setBounds(680, 10, 80, 30);
+    jPanel9.add(btsaveProject);
+    btsaveProject.setBounds(670, 10, 70, 30);
 
     jButton13.setBackground(new java.awt.Color(204, 204, 204));
     jButton13.setText("Cancel");
@@ -1513,8 +1569,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton13ActionPerformed(evt);
         }
     });
-    projectDetailFrame.getContentPane().add(jButton13);
-    jButton13.setBounds(770, 10, 80, 30);
+    jPanel9.add(jButton13);
+    jButton13.setBounds(750, 10, 80, 30);
 
     taskName1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     taskName1.setText("TASK NAME");
@@ -1527,8 +1583,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             taskName1FocusLost(evt);
         }
     });
-    projectDetailFrame.getContentPane().add(taskName1);
-    taskName1.setBounds(10, 10, 660, 30);
+    jPanel9.add(taskName1);
+    taskName1.setBounds(10, 10, 650, 30);
 
     projectDescription.setForeground(new java.awt.Color(204, 204, 204));
     projectDescription.setText("Description");
@@ -1542,21 +1598,21 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     jScrollPane4.setViewportView(projectDescription);
 
-    projectDetailFrame.getContentPane().add(jScrollPane4);
-    jScrollPane4.setBounds(10, 50, 660, 120);
+    jPanel9.add(jScrollPane4);
+    jScrollPane4.setBounds(10, 50, 650, 120);
 
     jPanel4.setForeground(new java.awt.Color(204, 204, 204));
     jPanel4.setLayout(null);
 
     jLabel22.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel22.setText("Status");
+    jLabel22.setText("Location");
     jPanel4.add(jLabel22);
-    jLabel22.setBounds(10, 170, 160, 30);
+    jLabel22.setBounds(10, 210, 160, 30);
 
-    jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    jPanel4.add(jComboBox1);
-    jComboBox1.setBounds(110, 170, 230, 30);
+    prjStatus.setBackground(new java.awt.Color(255, 255, 255));
+    prjStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<html><font color=#F52887>Pending</font></html>", "<html><font color=orange>In Process</font></html>", "<html><font color=green>Finished</font></html>" }));
+    jPanel4.add(prjStatus);
+    prjStatus.setBounds(110, 170, 230, 30);
 
     jLabel23.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel23.setText("Leader");
@@ -1614,8 +1670,21 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel4.add(jComboBox3);
     jComboBox3.setBounds(110, 50, 230, 30);
 
-    projectDetailFrame.getContentPane().add(jPanel4);
-    jPanel4.setBounds(10, 190, 460, 210);
+    jLabel35.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel35.setText("Status");
+    jPanel4.add(jLabel35);
+    jLabel35.setBounds(10, 170, 160, 30);
+
+    txLocation.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocationKeyReleased(evt);
+        }
+    });
+    jPanel4.add(txLocation);
+    txLocation.setBounds(110, 210, 230, 30);
+
+    jPanel9.add(jPanel4);
+    jPanel4.setBounds(10, 190, 440, 260);
 
     jPanel5.setLayout(null);
 
@@ -1632,7 +1701,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jScrollPane5.setViewportView(tbProductInProjects);
 
     jPanel5.add(jScrollPane5);
-    jScrollPane5.setBounds(10, 40, 430, 170);
+    jScrollPane5.setBounds(10, 40, 410, 170);
     jScrollPane5.setBorder(null);
     jScrollPane5.setBorder(BorderFactory.createEmptyBorder());
 
@@ -1640,6 +1709,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel5.add(jComboBox4);
     jComboBox4.setBounds(10, 220, 200, 25);
 
+    jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     jTextField1.setText("0");
     jPanel5.add(jTextField1);
     jTextField1.setBounds(220, 220, 100, 25);
@@ -1651,10 +1721,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton2.setBorderPainted(false);
     jButton2.setFocusPainted(false);
     jPanel5.add(jButton2);
-    jButton2.setBounds(330, 220, 110, 25);
+    jButton2.setBounds(330, 220, 90, 25);
 
-    projectDetailFrame.getContentPane().add(jPanel5);
-    jPanel5.setBounds(10, 410, 460, 260);
+    jPanel9.add(jPanel5);
+    jPanel5.setBounds(10, 460, 440, 260);
 
     jPanel6.setLayout(null);
 
@@ -1665,8 +1735,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel6.add(jProgressBar1);
     jProgressBar1.setBounds(10, 40, 350, 20);
 
-    projectDetailFrame.getContentPane().add(jPanel6);
-    jPanel6.setBounds(480, 190, 370, 80);
+    jPanel9.add(jPanel6);
+    jPanel6.setBounds(460, 190, 370, 80);
 
     jPanel7.setLayout(null);
 
@@ -1695,8 +1765,187 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel7.add(jButton5);
     jButton5.setBounds(260, 200, 100, 25);
 
-    projectDetailFrame.getContentPane().add(jPanel7);
-    jPanel7.setBounds(480, 280, 370, 240);
+    jPanel9.add(jPanel7);
+    jPanel7.setBounds(460, 280, 370, 240);
+
+    jPanel10.setLayout(null);
+
+    jLabel36.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel36.setText("Allocated Budget");
+    jPanel10.add(jLabel36);
+    jLabel36.setBounds(10, 10, 280, 30);
+
+    txLocation1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation1KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation1);
+    txLocation1.setBounds(180, 50, 200, 30);
+
+    jLabel37.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel37.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel37.setText(" Rp.");
+    jLabel37.setOpaque(true);
+    jPanel10.add(jLabel37);
+    jLabel37.setBounds(150, 50, 40, 30);
+
+    jLabel38.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel38.setText("Material");
+    jPanel10.add(jLabel38);
+    jLabel38.setBounds(10, 50, 120, 30);
+
+    jLabel39.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel39.setText("Peralatan");
+    jPanel10.add(jLabel39);
+    jLabel39.setBounds(10, 90, 120, 30);
+
+    txLocation2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation2.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation2KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation2);
+    txLocation2.setBounds(180, 90, 200, 30);
+
+    jLabel40.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel40.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel40.setText(" Rp.");
+    jLabel40.setOpaque(true);
+    jPanel10.add(jLabel40);
+    jLabel40.setBounds(150, 90, 40, 30);
+
+    txLocation3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation3.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation3KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation3);
+    txLocation3.setBounds(180, 130, 200, 30);
+
+    jLabel41.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel41.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel41.setText(" Rp.");
+    jLabel41.setOpaque(true);
+    jPanel10.add(jLabel41);
+    jLabel41.setBounds(150, 130, 40, 30);
+
+    jLabel42.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel42.setText("Tenaga Kerja");
+    jPanel10.add(jLabel42);
+    jLabel42.setBounds(10, 130, 120, 30);
+
+    jLabel43.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel43.setText("Overhead Cost");
+    jPanel10.add(jLabel43);
+    jLabel43.setBounds(10, 170, 120, 30);
+
+    txLocation4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation4.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation4KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation4);
+    txLocation4.setBounds(180, 170, 200, 30);
+
+    jLabel44.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel44.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel44.setText(" Rp.");
+    jLabel44.setOpaque(true);
+    jPanel10.add(jLabel44);
+    jLabel44.setBounds(150, 170, 40, 30);
+
+    jLabel45.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel45.setText("Total");
+    jLabel45.setOpaque(true);
+    jPanel10.add(jLabel45);
+    jLabel45.setBounds(180, 260, 200, 30);
+
+    txLocation5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation5.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation5KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation5);
+    txLocation5.setBounds(180, 210, 200, 30);
+    jPanel10.add(jSeparator2);
+    jSeparator2.setBounds(10, 340, 400, 10);
+
+    jLabel46.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel46.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel46.setText(" Rp.");
+    jLabel46.setOpaque(true);
+    jPanel10.add(jLabel46);
+    jLabel46.setBounds(150, 260, 50, 30);
+
+    jLabel47.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel47.setText("Management Cost");
+    jPanel10.add(jLabel47);
+    jLabel47.setBounds(10, 210, 120, 30);
+
+    jLabel48.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel48.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel48.setText(" Rp.");
+    jLabel48.setOpaque(true);
+    jPanel10.add(jLabel48);
+    jLabel48.setBounds(150, 210, 40, 30);
+
+    jLabel49.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel49.setText("Total");
+    jPanel10.add(jLabel49);
+    jLabel49.setBounds(10, 260, 120, 30);
+
+    jLabel50.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel50.setText("PPN");
+    jPanel10.add(jLabel50);
+    jLabel50.setBounds(10, 300, 120, 30);
+
+    txLocation6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txLocation6.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txLocation6KeyReleased(evt);
+        }
+    });
+    jPanel10.add(txLocation6);
+    txLocation6.setBounds(150, 300, 200, 30);
+
+    jLabel51.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel51.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel51.setText("% ");
+    jLabel51.setOpaque(true);
+    jPanel10.add(jLabel51);
+    jLabel51.setBounds(340, 300, 40, 30);
+    jPanel10.add(jSeparator3);
+    jSeparator3.setBounds(10, 252, 410, 10);
+
+    jLabel52.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel52.setText("Grand Total");
+    jPanel10.add(jLabel52);
+    jLabel52.setBounds(10, 350, 120, 30);
+
+    jLabel54.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel54.setText("grand Total");
+    jLabel54.setOpaque(true);
+    jPanel10.add(jLabel54);
+    jLabel54.setBounds(180, 350, 200, 30);
+
+    jLabel53.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel53.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel53.setText(" Rp.");
+    jLabel53.setOpaque(true);
+    jPanel10.add(jLabel53);
+    jLabel53.setBounds(150, 350, 50, 30);
+
+    jPanel9.add(jPanel10);
+    jPanel10.setBounds(10, 730, 440, 390);
 
     jButton17.setBackground(new java.awt.Color(255, 0, 51));
     jButton17.setForeground(new java.awt.Color(255, 255, 255));
@@ -1704,8 +1953,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton17.setBorder(null);
     jButton17.setBorderPainted(false);
     jButton17.setFocusPainted(false);
-    projectDetailFrame.getContentPane().add(jButton17);
-    jButton17.setBounds(490, 530, 350, 25);
+    jPanel9.add(jButton17);
+    jButton17.setBounds(460, 530, 350, 25);
+
+    jScrollPane7.setViewportView(jPanel9);
+
+    projectDetailFrame.getContentPane().add(jScrollPane7);
+    jScrollPane7.setBounds(0, 0, 860, 720);
 
     projectDetailFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(projectDetailFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1813,7 +2067,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton20.setBounds(410, 10, 70, 25);
 
     accountsFrame.getContentPane().add(jPanel8);
-    jPanel8.setBounds(340, 80, 490, 45);
+    jPanel8.setBounds(350, 100, 490, 45);
+
+    scrolltbAccounts.setBorder(null);
 
     tbAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1828,7 +2084,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     scrolltbAccounts.setViewportView(tbAccounts);
 
     accountsFrame.getContentPane().add(scrolltbAccounts);
-    scrolltbAccounts.setBounds(10, 140, 830, 470);
+    scrolltbAccounts.setBounds(10, 160, 830, 442);
 
     btFirstAccounts.setBackground(new java.awt.Color(0, 0, 0));
     btFirstAccounts.setForeground(new java.awt.Color(255, 255, 255));
@@ -1913,6 +2169,143 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     accountsFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(accountsFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+    transactionsFrame.setBackground(new java.awt.Color(255, 255, 255));
+    transactionsFrame.setBorder(null);
+    transactionsFrame.setVisible(false);
+    transactionsFrame.getContentPane().setLayout(null);
+
+    jLabel33.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    jLabel33.setText("TRANSACTIONS");
+    transactionsFrame.getContentPane().add(jLabel33);
+    jLabel33.setBounds(10, 10, 350, 40);
+
+    countTransactions.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    countTransactions.setText("100 Transactions");
+    transactionsFrame.getContentPane().add(countTransactions);
+    countTransactions.setBounds(10, 50, 180, 20);
+
+    searchProduct2.setText("Search");
+    searchProduct2.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            searchProduct2FocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            searchProduct2FocusLost(evt);
+        }
+    });
+    searchProduct2.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            searchProduct2KeyReleased(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(searchProduct2);
+    searchProduct2.setBounds(690, 10, 140, 30);
+
+    jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
+    transactionsFrame.getContentPane().add(jLabel34);
+    jLabel34.setBounds(670, 10, 30, 30);
+
+    scrolltbAccounts1.setBorder(null);
+
+    tbTransactions.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            tbTransactionsMouseClicked(evt);
+        }
+    });
+    tbTransactions.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbTransactionsKeyReleased(evt);
+        }
+    });
+    scrolltbAccounts1.setViewportView(tbTransactions);
+
+    transactionsFrame.getContentPane().add(scrolltbAccounts1);
+    scrolltbAccounts1.setBounds(10, 140, 830, 470);
+
+    btFirstTransactions.setBackground(new java.awt.Color(0, 0, 0));
+    btFirstTransactions.setForeground(new java.awt.Color(255, 255, 255));
+    btFirstTransactions.setText("<<");
+    btFirstTransactions.setBorder(null);
+    btFirstTransactions.setBorderPainted(false);
+    btFirstTransactions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btFirstTransactions.setFocusPainted(false);
+    btFirstTransactions.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btFirstTransactionsActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(btFirstTransactions);
+    btFirstTransactions.setBounds(10, 620, 60, 30);
+
+    btPreviousTransactions.setBackground(new java.awt.Color(0, 0, 0));
+    btPreviousTransactions.setForeground(new java.awt.Color(255, 255, 255));
+    btPreviousTransactions.setText("<");
+    btPreviousTransactions.setBorder(null);
+    btPreviousTransactions.setBorderPainted(false);
+    btPreviousTransactions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btPreviousTransactions.setFocusPainted(false);
+    btPreviousTransactions.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btPreviousTransactionsActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(btPreviousTransactions);
+    btPreviousTransactions.setBounds(80, 620, 60, 30);
+
+    txPageTransactions.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+    txPageTransactions.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txPageTransactions.setText("0");
+    txPageTransactions.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txPageTransactionsFocusLost(evt);
+        }
+    });
+    txPageTransactions.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txPageTransactionsKeyReleased(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(txPageTransactions);
+    txPageTransactions.setBounds(150, 620, 60, 30);
+
+    lbPageCountTransactions.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbPageCountTransactions.setText("of 10000");
+    transactionsFrame.getContentPane().add(lbPageCountTransactions);
+    lbPageCountTransactions.setBounds(220, 620, 70, 30);
+
+    btNextTransactions.setBackground(new java.awt.Color(0, 0, 0));
+    btNextTransactions.setForeground(new java.awt.Color(255, 255, 255));
+    btNextTransactions.setText(">");
+    btNextTransactions.setBorder(null);
+    btNextTransactions.setBorderPainted(false);
+    btNextTransactions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btNextTransactions.setFocusPainted(false);
+    btNextTransactions.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btNextTransactionsActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(btNextTransactions);
+    btNextTransactions.setBounds(300, 620, 60, 30);
+
+    btLastTransactions.setBackground(new java.awt.Color(0, 0, 0));
+    btLastTransactions.setForeground(new java.awt.Color(255, 255, 255));
+    btLastTransactions.setText(">>");
+    btLastTransactions.setBorder(null);
+    btLastTransactions.setBorderPainted(false);
+    btLastTransactions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btLastTransactions.setFocusPainted(false);
+    btLastTransactions.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btLastTransactionsActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(btLastTransactions);
+    btLastTransactions.setBounds(370, 620, 60, 30);
+
+    transactionsFrame.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(transactionsFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     panelMenu1.add(jDesktopPane1);
     jDesktopPane1.setBounds(160, 50, 860, 720);
@@ -2008,7 +2401,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton1ActionPerformed(null);
         } else if (btLeftUSer.getText().equalsIgnoreCase("TRANSACTIONS"))
         {
-            
+            closeAllInternalFrame();
+            transactionsFrame.setVisible(true);
         }
     }//GEN-LAST:event_btLeftUSerActionPerformed
 
@@ -2412,6 +2806,38 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewUser();
         }
     }//GEN-LAST:event_txPageKeyReleased
+    public void deleteAccounts(JTable table) {
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                int rowTable[] = table.getSelectedRows();
+                for (int x = 0; x < rowTable.length; x++) {
+                    if (x > 0) {
+                        qry += ",";
+                    }
+                    qry += table.getValueAt(rowTable[x], 0).toString();
+                }
+                qry = "delete from accounts where id in (" + qry + ");";
+                if (fc.isDebugging) {
+                    System.out.println(" qry delete accounts = " + qry);
+                }
+                st.executeUpdate(qry);
+                st.close();
+                cn.close();
+                viewAccounts();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in delete Accounts " + ex.getMessage());
+                }
+            }
+        }
+    }
+    
     public void dropDataProduct(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Inventory?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3256,26 +3682,72 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_searchProduct1KeyReleased
 
     private void accNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accNameKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode()==evt.VK_ENTER) {
+            if (acc.getText().length()>0&&acc.getText().length()>0) {
+                jButton20ActionPerformed(null);
+            }
+        }
     }//GEN-LAST:event_accNameKeyReleased
 
     private void accKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode()==evt.VK_ENTER) {
+            accName.requestFocus();
+        }
     }//GEN-LAST:event_accKeyReleased
 
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+    private boolean isACCExist(String idUnique) {
+        boolean getBack=false;
         common.functionCommon fc = new common.functionCommon();
         try {
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 Statement st = cn.createStatement();
-                String qry ="insert into accounts (unique_id,name) "
-                        + "values ('"+acc.getText()+"','"+accName.getText()+"')";
-                st.executeUpdate(qry);
+                String qry ="select count(*) as total from accounts where unique_id = '"+idUnique+"' ";
+                ResultSet rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    if (rs.getInt("total")>0)
+                        getBack = true;
+                }
                 cn.close();
                 viewAccounts();
         } catch (Exception ex) {
             if (fc.isDebugging)
                 System.out.println(" error in add acconts "+ex.getMessage());
+        }
+        return getBack;
+    }
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        if (acc.getText().length()<1
+                ||acc.getText().equalsIgnoreCase("ACC#")) {
+            acc.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Enter Account ID", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+        } else if (accName.getText().length()<1
+                ||acc.getText().equalsIgnoreCase("Account Name")) {
+            accName.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Enter Account Name", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+        } else {        
+            if (isACCExist(acc.getText())) {
+                javax.swing.JOptionPane.showConfirmDialog(null, "Account id already exist", "Information",
+                            javax.swing.JOptionPane.PLAIN_MESSAGE);
+            } else {
+                common.functionCommon fc = new common.functionCommon();
+                try {
+                        Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                        Statement st = cn.createStatement();
+                        String qry ="insert into accounts (unique_id,name) "
+                                + "values ('"+acc.getText()+"','"+accName.getText()+"')";
+                        st.executeUpdate(qry);
+                        cn.close();
+                        accName.setText("");                
+                        acc.requestFocus();
+                        acc.setText("");
+                        viewAccounts();
+                } catch (Exception ex) {
+                    if (fc.isDebugging)
+                        System.out.println(" error in add acconts "+ex.getMessage());
+                }
+            }
         }
     }//GEN-LAST:event_jButton20ActionPerformed
 
@@ -3313,7 +3785,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_tbAccountsMouseClicked
 
     private void tbAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAccountsKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode()==evt.VK_DELETE) {
+            deleteAccounts(tbAccounts);
+        }
     }//GEN-LAST:event_tbAccountsKeyReleased
 
     private void btFirstAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstAccountsActionPerformed
@@ -3360,6 +3834,78 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         txPageAccounts.setText(String.valueOf(lastPageAccounts));
         viewAccounts();
     }//GEN-LAST:event_btLastAccountsActionPerformed
+
+    private void searchProduct2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct2FocusGained
+
+    private void searchProduct2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct2FocusLost
+
+    private void searchProduct2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProduct2KeyReleased
+
+    private void tbTransactionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTransactionsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbTransactionsMouseClicked
+
+    private void tbTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbTransactionsKeyReleased
+
+    private void btFirstTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btFirstTransactionsActionPerformed
+
+    private void btPreviousTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPreviousTransactionsActionPerformed
+
+    private void txPageTransactionsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageTransactionsFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageTransactionsFocusLost
+
+    private void txPageTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageTransactionsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageTransactionsKeyReleased
+
+    private void btNextTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btNextTransactionsActionPerformed
+
+    private void btLastTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLastTransactionsActionPerformed
+
+    private void txLocationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocationKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocationKeyReleased
+
+    private void txLocation1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation1KeyReleased
+
+    private void txLocation2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation2KeyReleased
+
+    private void txLocation3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation3KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation3KeyReleased
+
+    private void txLocation4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation4KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation4KeyReleased
+
+    private void txLocation5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation5KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation5KeyReleased
+
+    private void txLocation6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocation6KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txLocation6KeyReleased
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
@@ -3372,22 +3918,27 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton btFirst;
     private javax.swing.JButton btFirstAccounts;
     private javax.swing.JButton btFirstProduct;
+    private javax.swing.JButton btFirstTransactions;
     private javax.swing.JButton btLast;
     private javax.swing.JButton btLastAccounts;
     private javax.swing.JButton btLastProductLast;
+    private javax.swing.JButton btLastTransactions;
     private javax.swing.JButton btLeftRoles;
     private javax.swing.JButton btLeftUSer;
     private javax.swing.JButton btNext;
     private javax.swing.JButton btNextAccounts;
     private javax.swing.JButton btNextProduct;
+    private javax.swing.JButton btNextTransactions;
     private javax.swing.JButton btPrevious;
     private javax.swing.JButton btPreviousAccounts;
     private javax.swing.JButton btPreviousProduct;
+    private javax.swing.JButton btPreviousTransactions;
     private javax.swing.JButton btsaveProject;
     private javax.swing.JComboBox cbCategory;
     private javax.swing.JComboBox cbRoles;
     private javax.swing.JTextField companyName;
     private javax.swing.JLabel countAccounts;
+    private javax.swing.JLabel countTransactions;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private javax.swing.JComboBox filterProduct;
@@ -3413,7 +3964,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -3445,8 +3995,30 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3456,6 +4028,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3463,6 +4036,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -3470,7 +4044,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbCountPage;
@@ -3480,22 +4057,28 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     public javax.swing.JLabel lbFirstname;
     private javax.swing.JLabel lbPageCountAccounts;
     private javax.swing.JLabel lbPageCountProduct;
+    private javax.swing.JLabel lbPageCountTransactions;
     private javax.swing.JPopupMenu menuPop;
     private panelLayout.panelMenu panelMenu1;
     private javax.swing.JTextField phone;
+    private javax.swing.JComboBox prjStatus;
     private javax.swing.JInternalFrame productEditFrame;
     private javax.swing.JInternalFrame productsFrame;
     private javax.swing.JTextPane projectDescription;
     private javax.swing.JInternalFrame projectDetailFrame;
     private javax.swing.JInternalFrame projectFrame;
     private javax.swing.JScrollPane scrolltbAccounts;
+    private javax.swing.JScrollPane scrolltbAccounts1;
     private javax.swing.JTextField searchProduct;
     private javax.swing.JTextField searchProduct1;
+    private javax.swing.JTextField searchProduct2;
     private javax.swing.JTextField taskName1;
     private javax.swing.JTable tbAccounts;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbProductInProjects;
+    private javax.swing.JTable tbTransactions;
     private javax.swing.JTable tbUser;
+    private javax.swing.JInternalFrame transactionsFrame;
     private javax.swing.JTextPane txDescription;
     private javax.swing.JFormattedTextField txDuedate;
     private javax.swing.JTextField txEmail;
@@ -3503,11 +4086,19 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextField txInUserName;
     private javax.swing.JTextField txItemName;
     private javax.swing.JTextField txLAstNAme;
+    private javax.swing.JTextField txLocation;
+    private javax.swing.JTextField txLocation1;
+    private javax.swing.JTextField txLocation2;
+    private javax.swing.JTextField txLocation3;
+    private javax.swing.JTextField txLocation4;
+    private javax.swing.JTextField txLocation5;
+    private javax.swing.JTextField txLocation6;
     private javax.swing.JPasswordField txPAss1;
     private javax.swing.JPasswordField txPAss2;
     private javax.swing.JTextField txPage;
     private javax.swing.JTextField txPageAccounts;
     private javax.swing.JTextField txPageProduct;
+    private javax.swing.JTextField txPageTransactions;
     private javax.swing.JTextField txPrice;
     private javax.swing.JTextField txProductsID;
     private javax.swing.JTextField txQTY;
@@ -3649,11 +4240,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }
 
     public void viewAccounts() {
-        int limit = 15;
+        int limit = 12;
         String qry = "", orderBy = "", Condition = "";
         
 
-        int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
+        int positionNow = (Integer.valueOf(txPageAccounts.getText()) - 1);
         common.functionCommon fc = new common.functionCommon();
         if (positionNow == 0) {
             btPreviousAccounts.setEnabled(false);
@@ -3662,7 +4253,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             btPreviousAccounts.setEnabled(true);
             btFirstAccounts.setEnabled(true);
         }
-        orderBy = " order by name asc";
+        orderBy = " order by unique_id asc";
         int total = 0;
 
         try {
@@ -3679,12 +4270,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageAccounts++;
                     }
-
+           
                     if ((lastPageAccounts - 1) <= positionNow) {
                         btNextAccounts.setEnabled(false);
                         btLastAccounts.setEnabled(false);
-                        txPageAccounts.setText(String.valueOf(lastPageProducts));
-                        positionNow = lastPageAccounts - 1;
+                        txPageAccounts.setText(String.valueOf(lastPageAccounts));
+                        positionNow = lastPageAccounts - 1;                        
                     } else {
                         if (positionNow < 0) {
                             positionNow = 0;
@@ -3709,9 +4300,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     txPageAccounts.setText("0");
                 }
             }
+            
             int positionNOW2 = positionNow * limit;
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
-            qry = "select id,unique_id,name from accounts" + limiTation;
+            qry = "select id,unique_id,name from accounts" +orderBy + limiTation;
             if (fc.isDebugging) {
                 System.out.println(" qry = " + qry);
             }
@@ -3734,6 +4326,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             lbPageCountAccounts.setText(" of " + lastPageAccounts);
             st.close();
             cn.close();
+            
         } catch (Exception ex) {
             if (fc.isDebugging) {
                 System.out.println("Error in viewAccounts " + ex.getMessage());
@@ -3916,6 +4509,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         projectDetailFrame.setVisible(false);
         financeFrame.setVisible(false);
         accountsFrame.setVisible(false);
+        transactionsFrame.setVisible(false);
     }
 
     void POPUpMenuUsuallycommand() {
@@ -3961,7 +4555,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
         public ButtonsRendererAccounts() {
             super();
-            setName("Table.cellRenderer");
+            setName("Table.cellRendererAccounts");
         }
 
         @Override
@@ -4147,7 +4741,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }
 
-    class ButtonsEditorAccounts extends ButtonsPanel implements TableCellEditor {
+    class ButtonsEditorAccounts extends ButtonsPanelAccounts implements TableCellEditor {
 
         public ButtonsEditorAccounts(final JTable table) {
             super();
@@ -4166,7 +4760,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    prepareEditProduct(table);
+                    deleteAccounts(table);
                 }
             });
 
