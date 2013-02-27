@@ -23,6 +23,7 @@ import java.util.EventObject;
 import java.util.StringTokenizer;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -396,7 +397,51 @@ public class formMenu extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        final String columnPeopleinProject[] = {"id", "peopleName", "ACTION"};
+        tmTabelPeopleInProject = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnPeopleinProject.length;
+            }
+
+            public int getRowCount() {
+                return vectorPeopleInProject.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnPeopleinProject[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                if (column1 == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbPeopleinProject = new javax.swing.JTable(tmTabelPeopleInProject);
+        tbPeopleinProject.setAutoResizeMode(tbProduct.AUTO_RESIZE_OFF);
+        //tbPeopleinProject.setTableHeader(null);
+        //tbPeopleinProject.setShowGrid(false);
+
+        tc = tbPeopleinProject.getColumn("peopleName");
+        tc.setCellEditor(new labelEditorPeople(tbPeopleinProject));
+        tc.setCellRenderer(new lbRenderPeople());
+        tbProduct.setRowHeight(35);
         jComboBox5 = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
@@ -1745,7 +1790,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel7.add(jLabel29);
     jLabel29.setBounds(10, 10, 320, 22);
 
-    jScrollPane6.setViewportView(jTable2);
+    jScrollPane6.setViewportView(tbPeopleinProject);
 
     jScrollPane6.setBorder(null);
     jScrollPane6.setBorder(BorderFactory.createEmptyBorder());
@@ -4048,7 +4093,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbCountPage;
     private javax.swing.JLabel lbCountProductTable;
@@ -4074,6 +4118,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextField searchProduct2;
     private javax.swing.JTextField taskName1;
     private javax.swing.JTable tbAccounts;
+    private javax.swing.JTable tbPeopleinProject;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbProductInProjects;
     private javax.swing.JTable tbTransactions;
@@ -4119,6 +4164,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     java.util.Vector vectorProducts = new java.util.Vector();
     javax.swing.table.TableModel tmTableProductsInProject;
     java.util.Vector vectorProductsInProject = new java.util.Vector();
+    javax.swing.table.TableModel tmTabelPeopleInProject;
+    java.util.Vector vectorPeopleInProject = new java.util.Vector();
     javax.swing.table.TableModel tmTabelAccounts;
     java.util.Vector vectorAccounts = new java.util.Vector();
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -4496,6 +4543,22 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             vectorProductsInProject.addElement(rowData);
         }
         tbProductInProjects.tableChanged(new javax.swing.event.TableModelEvent(tmTableProductsInProject));
+        
+        vectorPeopleInProject = new java.util.Vector();
+        for (int i = 0; i < 3; i++) {
+            rowData = new java.util.Vector();
+            rowData.addElement("id");
+            rowData.addElement("dfdfd");
+            rowData.addElement("X");
+            vectorPeopleInProject.addElement(rowData);
+        }
+        rowData = new java.util.Vector();
+            rowData.addElement("id");
+            rowData.addElement("mereka");
+            rowData.addElement("X");
+            vectorPeopleInProject.addElement(rowData);
+        tbPeopleinProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelPeopleInProject));
+        
     }
 
     void closeAllInternalFrame() {
@@ -4548,6 +4611,32 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 add(b);
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
+        }
+    }
+    
+    class labelPeople extends JPanel {
+        public JLabel lbPeopleName = new JLabel();
+        public labelPeople() {
+            super();
+            JLabel lbIcon = new JLabel();
+            lbIcon.setIcon(new ImageIcon(getClass().getResource("/img/userIcon.png")));
+            add(lbIcon); 
+            add(lbPeopleName);
+        }
+    }
+    
+    class lbRenderPeople extends labelPeople implements TableCellRenderer {
+
+        public lbRenderPeople() {
+            super();
+            setName("Table.cellRenderPeople");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+            lbPeopleName.setText(table.getValueAt(row, column).toString());
+            return this;
         }
     }
     
@@ -4765,6 +4854,60 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             });
 
 
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+    
+    class labelEditorPeople extends lbRenderPeople implements TableCellEditor {
+
+        public labelEditorPeople(final JTable table) {
+            super();
         }
 
         @Override
