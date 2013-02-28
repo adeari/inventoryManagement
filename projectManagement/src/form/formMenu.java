@@ -20,13 +20,18 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.EventObject;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -34,12 +39,14 @@ import javax.swing.UIManager;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.plaf.InternalFrameUI;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -325,7 +332,7 @@ public class formMenu extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         prjStatus = new javax.swing.JComboBox();
         jLabel23 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbLeaderinProject = new javax.swing.JComboBox();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -343,7 +350,7 @@ public class formMenu extends javax.swing.JFrame {
             txStartProject.setFormatterFactory(new DefaultFormatterFactory(maskingdate));
         }catch (Exception ex) {}
         jButton16 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox();
+        cbClientinProject = new javax.swing.JComboBox();
         jLabel35 = new javax.swing.JLabel();
         txLocation = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -386,9 +393,23 @@ public class formMenu extends javax.swing.JFrame {
             }
         };
         tbProductInProjects = new javax.swing.JTable(tmTableProductsInProject);
+
+        tbProductInProjects.setAutoResizeMode(tbProductInProjects.AUTO_RESIZE_OFF);
+        tc=tbProductInProjects.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tc=tbProductInProjects.getColumn("product");
+        tc.setMinWidth(385);
+        tc=tbProductInProjects.getColumn("ACTION");
+        tc.setCellRenderer(new ButtonsRendererbtXDelete());
+        tc.setCellEditor(new ButtonsEditorXDelete(tbProductInProjects));
+        tc.setMinWidth(25);
+        tc.setWidth(25);
+        tc.setMaxWidth(25);
         tbProductInProjects.setTableHeader(null);
         tbProductInProjects.setShowGrid(false);
-        jComboBox4 = new javax.swing.JComboBox();
+        cbProductsInProject = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -434,15 +455,23 @@ public class formMenu extends javax.swing.JFrame {
             }
         };
         tbPeopleinProject = new javax.swing.JTable(tmTabelPeopleInProject);
-        tbPeopleinProject.setAutoResizeMode(tbProduct.AUTO_RESIZE_OFF);
-        //tbPeopleinProject.setTableHeader(null);
-        //tbPeopleinProject.setShowGrid(false);
+        tbPeopleinProject.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);
 
-        tc = tbPeopleinProject.getColumn("peopleName");
-        tc.setCellEditor(new labelEditorPeople(tbPeopleinProject));
-        tc.setCellRenderer(new lbRenderPeople());
-        tbProduct.setRowHeight(35);
-        jComboBox5 = new javax.swing.JComboBox();
+        tc=tbPeopleinProject.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tc=tbPeopleinProject.getColumn("peopleName");
+        tc.setMinWidth(325);
+        tc=tbPeopleinProject.getColumn("ACTION");
+        tc.setCellRenderer(new ButtonsRendererbtXDelete());
+        tc.setCellEditor(new ButtonsEditorXDelete(tbPeopleinProject));
+        tc.setMinWidth(25);
+        tc.setWidth(25);
+        tc.setMaxWidth(25);
+        tbPeopleinProject.setTableHeader(null);
+        tbPeopleinProject.setShowGrid(false);
+        cbPeopleInProject = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
@@ -1585,7 +1614,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     jPanel9.setBackground(new java.awt.Color(255, 255, 255));
     jPanel9.setAutoscrolls(true);
-    jPanel9.setPreferredSize(new java.awt.Dimension(700, 1200));
+    jPanel9.setPreferredSize(new java.awt.Dimension(700, 1550));
     jPanel9.setLayout(null);
 
     btsaveProject.setBackground(new java.awt.Color(0, 0, 0));
@@ -1664,10 +1693,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel4.add(jLabel23);
     jLabel23.setBounds(10, 10, 160, 30);
 
-    jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-    jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    jPanel4.add(jComboBox2);
-    jComboBox2.setBounds(110, 10, 230, 30);
+    cbLeaderinProject.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel4.add(cbLeaderinProject);
+    cbLeaderinProject.setBounds(110, 10, 230, 30);
 
     jLabel24.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel24.setText("Client");
@@ -1710,10 +1738,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel4.add(jButton16);
     jButton16.setBounds(310, 130, 30, 30);
 
-    jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
-    jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    jPanel4.add(jComboBox3);
-    jComboBox3.setBounds(110, 50, 230, 30);
+    cbClientinProject.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel4.add(cbClientinProject);
+    cbClientinProject.setBounds(110, 50, 230, 30);
 
     jLabel35.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel35.setText("Status");
@@ -1743,21 +1770,22 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     tbProductInProjects.setBackground(new java.awt.Color(238, 238, 238));
     tbProductInProjects.setOpaque(false);
+    tbProductInProjects.setRowHeight(30);
     jScrollPane5.setViewportView(tbProductInProjects);
 
     jPanel5.add(jScrollPane5);
-    jScrollPane5.setBounds(10, 40, 410, 170);
+    jScrollPane5.setBounds(10, 40, 410, 100);
     jScrollPane5.setBorder(null);
     jScrollPane5.setBorder(BorderFactory.createEmptyBorder());
 
-    jComboBox4.setBackground(new java.awt.Color(255, 255, 255));
-    jPanel5.add(jComboBox4);
-    jComboBox4.setBounds(10, 220, 200, 25);
+    cbProductsInProject.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel5.add(cbProductsInProject);
+    cbProductsInProject.setBounds(10, 150, 200, 25);
 
     jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     jTextField1.setText("0");
     jPanel5.add(jTextField1);
-    jTextField1.setBounds(220, 220, 100, 25);
+    jTextField1.setBounds(220, 150, 100, 25);
 
     jButton2.setBackground(new java.awt.Color(0, 0, 0));
     jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -1766,10 +1794,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton2.setBorderPainted(false);
     jButton2.setFocusPainted(false);
     jPanel5.add(jButton2);
-    jButton2.setBounds(330, 220, 90, 25);
+    jButton2.setBounds(330, 150, 90, 25);
 
     jPanel9.add(jPanel5);
-    jPanel5.setBounds(10, 460, 440, 260);
+    jPanel5.setBounds(10, 460, 440, 190);
 
     jPanel6.setLayout(null);
 
@@ -1790,6 +1818,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel7.add(jLabel29);
     jLabel29.setBounds(10, 10, 320, 22);
 
+    tbPeopleinProject.setBackground(new java.awt.Color(238, 238, 238));
+    tbPeopleinProject.setOpaque(false);
+    tbPeopleinProject.setRowHeight(30);
     jScrollPane6.setViewportView(tbPeopleinProject);
 
     jScrollPane6.setBorder(null);
@@ -1797,9 +1828,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel7.add(jScrollPane6);
     jScrollPane6.setBounds(10, 40, 350, 150);
 
-    jComboBox5.setBackground(new java.awt.Color(255, 255, 255));
-    jPanel7.add(jComboBox5);
-    jComboBox5.setBounds(10, 200, 240, 25);
+    cbPeopleInProject.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel7.add(cbPeopleInProject);
+    cbPeopleInProject.setBounds(10, 200, 240, 25);
 
     jButton5.setBackground(new java.awt.Color(0, 0, 0));
     jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -1990,7 +2021,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel53.setBounds(150, 350, 50, 30);
 
     jPanel9.add(jPanel10);
-    jPanel10.setBounds(10, 730, 440, 390);
+    jPanel10.setBounds(10, 660, 440, 390);
 
     jButton17.setBackground(new java.awt.Color(255, 0, 51));
     jButton17.setForeground(new java.awt.Color(255, 255, 255));
@@ -2004,7 +2035,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jScrollPane7.setViewportView(jPanel9);
 
     projectDetailFrame.getContentPane().add(jScrollPane7);
-    jScrollPane7.setBounds(0, 0, 860, 720);
+    jScrollPane7.setBounds(0, 0, 860, 1150);
 
     projectDetailFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(projectDetailFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -3380,7 +3411,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_searchProductFocusLost
 
     private void btsaveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProjectActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btsaveProjectActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -3980,6 +4011,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton btPreviousTransactions;
     private javax.swing.JButton btsaveProject;
     private javax.swing.JComboBox cbCategory;
+    private javax.swing.JComboBox cbClientinProject;
+    private javax.swing.JComboBox cbLeaderinProject;
+    private javax.swing.JComboBox cbPeopleInProject;
+    private javax.swing.JComboBox cbProductsInProject;
     private javax.swing.JComboBox cbRoles;
     private javax.swing.JTextField companyName;
     private javax.swing.JLabel countAccounts;
@@ -4009,10 +4044,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4174,6 +4205,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     int lastPageProducts = 0;
     int lastPageAccounts = 0;
     boolean showMenuUser = false;
+    Map leaderMap = new LinkedHashMap();
+    Map clientMap = new LinkedHashMap();
+    Map productMap = new LinkedHashMap();
+    Map peopleInProjectMap = new LinkedHashMap();
     
     public void viewProducts() {
         int limit = 15;
@@ -4538,8 +4573,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         for (int i = 0; i < 3; i++) {
             rowData = new java.util.Vector();
             rowData.addElement("id");
-            rowData.addElement("barang");
-            rowData.addElement("X");
+            rowData.addElement("<html>ssdwwewer<font color=#6D7B8D> - eeet</font></html>");
+            rowData.addElement("");
             vectorProductsInProject.addElement(rowData);
         }
         tbProductInProjects.tableChanged(new javax.swing.event.TableModelEvent(tmTableProductsInProject));
@@ -4559,6 +4594,85 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             vectorPeopleInProject.addElement(rowData);
         tbPeopleinProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelPeopleInProject));
         
+        
+        // get Data Leader getData Leader and client and products 
+        common.functionCommon fc = new common.functionCommon();
+        try {
+            String qry = "select id,first_name,last_name from user "
+                    + "where first_name is not null and first_name<>'' "
+                    + "and last_name is not null and last_name<>'' "
+                    + "order by first_name";
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            leaderMap = new LinkedHashMap();
+            clientMap = new LinkedHashMap();
+            productMap = new LinkedHashMap();
+            peopleInProjectMap = new LinkedHashMap();
+            cbLeaderinProject.addItem(addJcomboBoxItemWithDuplicate("Please Select",cbLeaderinProject));
+            leaderMap.put(cbLeaderinProject.getItemCount() -1 , "");
+            cbLeaderinProject.setSelectedIndex(0);
+            cbClientinProject.addItem(addJcomboBoxItemWithDuplicate("Please Select",cbClientinProject));
+            clientMap.put(cbClientinProject.getItemCount() -1 , "");
+            cbClientinProject.setSelectedIndex(0);
+            cbPeopleInProject.addItem(addJcomboBoxItemWithDuplicate("Please Select",cbPeopleInProject));
+            peopleInProjectMap.put(cbPeopleInProject.getItemCount() -1 , "");
+            cbPeopleInProject.setSelectedIndex(0);
+            while (rs.next()) {
+                cbLeaderinProject.addItem(addJcomboBoxItemWithDuplicate(
+                        rs.getString("first_name")+" "
+                        +rs.getString("last_name")
+                        ,cbLeaderinProject));
+                leaderMap.put(cbLeaderinProject.getItemCount() -1 , rs.getInt("id"));
+                
+                cbClientinProject.addItem(addJcomboBoxItemWithDuplicate(
+                        rs.getString("first_name")+" "
+                        +rs.getString("last_name")
+                        ,cbClientinProject));
+                clientMap.put(cbClientinProject.getItemCount() -1 , rs.getInt("id"));
+                
+                cbPeopleInProject.addItem(addJcomboBoxItemWithDuplicate(
+                        rs.getString("first_name")+" "
+                        +rs.getString("last_name")
+                        ,cbPeopleInProject));
+                peopleInProjectMap.put(cbPeopleInProject.getItemCount() -1 , rs.getInt("id"));
+            }
+            
+            qry = "select id,name from inventories order by name";
+            rs = st.executeQuery(qry);
+            cbProductsInProject.addItem(addJcomboBoxItemWithDuplicate("Please Select",cbProductsInProject));
+            productMap.put(cbProductsInProject.getItemCount() -1 , "");
+            cbProductsInProject.setSelectedIndex(0);
+            while (rs.next()) {
+                cbProductsInProject.addItem(addJcomboBoxItemWithDuplicate(
+                        rs.getString("name")
+                        ,cbProductsInProject));
+                productMap.put(cbProductsInProject.getItemCount() -1 , rs.getInt("id"));
+            }
+            
+            
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("error in getIdROlesFromNAme " + ex.getMessage());
+            }
+        }
+        //end getData Leader and client and products        
+    }
+    
+    public String addJcomboBoxItemWithDuplicate(String text,JComboBox jcb) {
+        String getBack=text;
+        boolean exist = true;
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jcb.getModel();
+        while (exist) {
+            if(model.getIndexOf(getBack) == -1 ) {
+                exist = false;
+            } else {
+                getBack+=" ";
+            }
+        }
+        return getBack;
     }
 
     void closeAllInternalFrame() {
@@ -4614,6 +4728,23 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }
     
+    class BTXDelete extends JPanel {
+
+        public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
+
+        public BTXDelete() {
+            super();
+            setOpaque(true);
+            for (JButton b : buttons) {
+                b.setFocusable(false);
+                b.setRolloverEnabled(false);
+                b.setPreferredSize(new Dimension(22, 22));
+                add(b);
+            }
+            buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconX.png")));
+        }
+    }
+    
     class labelPeople extends JPanel {
         public JLabel lbPeopleName = new JLabel();
         public labelPeople() {
@@ -4643,6 +4774,20 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     class ButtonsRendererAccounts extends ButtonsPanelAccounts implements TableCellRenderer {
 
         public ButtonsRendererAccounts() {
+            super();
+            setName("Table.cellRendererAccounts");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+            return this;
+        }
+    }
+    
+    class ButtonsRendererbtXDelete extends BTXDelete implements TableCellRenderer {
+
+        public ButtonsRendererbtXDelete() {
             super();
             setName("Table.cellRendererAccounts");
         }
@@ -4829,10 +4974,84 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorAccounts extends ButtonsPanelAccounts implements TableCellEditor {
 
         public ButtonsEditorAccounts(final JTable table) {
+            super();
+            MouseListener ml = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    ButtonModel m = ((JButton) e.getSource()).getModel();
+                    if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
+                        setBackground(table.getBackground());
+                    }
+
+                    table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
+                }
+            };
+            buttons.get(0).addMouseListener(ml);
+
+            buttons.get(0).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteAccounts(table);
+                }
+            });
+
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+
+    class ButtonsEditorXDelete extends ButtonsRendererbtXDelete implements TableCellEditor {
+
+        public ButtonsEditorXDelete(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
@@ -4957,4 +5176,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
+    
+    
+    
 }
