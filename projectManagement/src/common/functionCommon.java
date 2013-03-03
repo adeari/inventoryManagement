@@ -6,6 +6,7 @@ package common;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.swing.JTextField;
 
 /**
  *
@@ -158,5 +159,22 @@ public class functionCommon {
     public String viewDatefromSQL(String columnName,String asView) {
         String getBack="to_char("+columnName+",'DD MON YYYY') AS "+asView;
         return getBack;
+    }
+    
+    public void setNumericPointinTextField(JTextField txx, java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode()!=evt.VK_ENTER) {
+        try {
+                Integer.valueOf(txx.getText().replace(".", ""));
+                if (txx.getText().charAt(0) == '0'
+                        && txx.getText().length() > 1) {
+                    txx.setText(
+                            String.valueOf(txx.getText().charAt(1)));
+                }
+                txx.setText(digitNumber(
+                        txx.getText().replace(".", "")));
+            } catch (Exception ex) {
+                txx.setText("0");
+            }
+        }
     }
 }

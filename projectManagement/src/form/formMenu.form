@@ -1885,19 +1885,20 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="taskName1">
+                        <Component class="javax.swing.JTextField" name="txProjectNAme">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Dialog" size="12" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="TASK NAME"/>
+                            <Property name="text" type="java.lang.String" value="PROJECT NAME"/>
                             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="projectDescription"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="taskName1FocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="taskName1FocusLost"/>
+                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txProjectNAmeFocusGained"/>
+                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txProjectNAmeFocusLost"/>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txProjectNAmeKeyReleased"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1905,32 +1906,6 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-                          <AuxValues>
-                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                          </AuxValues>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="50" width="650" height="120"/>
-                            </Constraint>
-                          </Constraints>
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                          <SubComponents>
-                            <Component class="javax.swing.JTextPane" name="projectDescription">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Description"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="projectDescriptionFocusGained"/>
-                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="projectDescriptionFocusLost"/>
-                              </Events>
-                            </Component>
-                          </SubComponents>
-                        </Container>
                         <Container class="javax.swing.JPanel" name="jPanel4">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2046,7 +2021,13 @@
                             <Component class="javax.swing.JFormattedTextField" name="txStartProject">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="__/__/____"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="txDuedate"/>
+                                </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txStartProjectKeyReleased"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try {&#xa;MaskFormatter maskingdate= new MaskFormatter(&quot;##/##/####&quot;);&#xa;maskingdate.setPlaceholderCharacter(&apos;_&apos;);&#xa;txStartProject.setFormatterFactory(new DefaultFormatterFactory(maskingdate));&#xa;}catch (Exception ex) {}"/>
                               </AuxValues>
@@ -2074,9 +2055,12 @@
                             <Component class="javax.swing.JFormattedTextField" name="txDuedate">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="__/__/____"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="prjStatus"/>
+                                </Property>
                               </Properties>
                               <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try {&#xa;MaskFormatter maskingdate= new MaskFormatter(&quot;##/##/####&quot;);&#xa;maskingdate.setPlaceholderCharacter(&apos;_&apos;);&#xa;txStartProject.setFormatterFactory(new DefaultFormatterFactory(maskingdate));&#xa;}catch (Exception ex) {}"/>
+                                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try {&#xa;MaskFormatter maskingdate= new MaskFormatter(&quot;##/##/####&quot;);&#xa;maskingdate.setPlaceholderCharacter(&apos;_&apos;);&#xa;txDuedate.setFormatterFactory(new DefaultFormatterFactory(maskingdate));&#xa;}catch (Exception ex) {}"/>
                               </AuxValues>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2165,6 +2149,7 @@
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="null"/>
                                 </Property>
+                                <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                                 <Property name="opaque" type="boolean" value="false"/>
                               </Properties>
                               <AuxValues>
@@ -2187,6 +2172,9 @@
                                     <Property name="opaque" type="boolean" value="false"/>
                                     <Property name="rowHeight" type="int" value="30"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbProductInProjectsKeyReleased"/>
+                                  </Events>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(tmTableProductsInProject);"/>
                                     <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="&#xa;&#xa;tbProductInProjects.setAutoResizeMode(tbProductInProjects.AUTO_RESIZE_OFF);&#xa;tc=tbProductInProjects.getColumn(&quot;id&quot;);&#xa;tc.setMinWidth(0);&#xa;tc.setWidth(0);&#xa;tc.setMaxWidth(0);&#xa;tc=tbProductInProjects.getColumn(&quot;product&quot;);&#xa;tc.setMinWidth(365);&#xa;tc=tbProductInProjects.getColumn(&quot;ACTION&quot;);&#xa;tc.setCellRenderer(new ButtonsRendererbtXDelete());&#xa;tc.setCellEditor(new ButtonsEditorXDelete(tbProductInProjects));&#xa;tc.setMinWidth(25);&#xa;tc.setWidth(25);&#xa;tc.setMaxWidth(25);&#xa;tbProductInProjects.setTableHeader(null);&#xa;tbProductInProjects.setShowGrid(false);"/>
@@ -2305,6 +2293,9 @@
                               </Constraints>
                             </Component>
                             <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+                              <Properties>
+                                <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+                              </Properties>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="jScrollPane6.setBorder(null);&#xa;jScrollPane6.setBorder(BorderFactory.createEmptyBorder());"/>
                                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -2325,9 +2316,12 @@
                                     <Property name="opaque" type="boolean" value="false"/>
                                     <Property name="rowHeight" type="int" value="30"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbPeopleinProjectKeyReleased"/>
+                                  </Events>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(tmTabelPeopleInProject);"/>
-                                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tbPeopleinProject.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);&#xa;&#xa;tc=tbPeopleinProject.getColumn(&quot;id&quot;);&#xa;tc.setMinWidth(0);&#xa;tc.setWidth(0);&#xa;tc.setMaxWidth(0);&#xa;tc=tbPeopleinProject.getColumn(&quot;peopleName&quot;);&#xa;tc.setMinWidth(325);&#xa;tc=tbPeopleinProject.getColumn(&quot;ACTION&quot;);&#xa;tc.setCellRenderer(new ButtonsRendererbtXDelete());&#xa;tc.setCellEditor(new ButtonsEditorXDelete(tbPeopleinProject));&#xa;tc.setMinWidth(25);&#xa;tc.setWidth(25);&#xa;tc.setMaxWidth(25);&#xa;tbPeopleinProject.setTableHeader(null);&#xa;tbPeopleinProject.setShowGrid(false);"/>
+                                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tbPeopleinProject.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);&#xa;tc=tbPeopleinProject.getColumn(&quot;id&quot;);&#xa;tc.setMinWidth(0);&#xa;tc.setWidth(0);&#xa;tc.setMaxWidth(0);&#xa;tc=tbPeopleinProject.getColumn(&quot;peopleName&quot;);&#xa;tc.setMinWidth(307);&#xa;tc.setCellRenderer(new lbRenderPeople());&#xa;tc=tbPeopleinProject.getColumn(&quot;ACTION&quot;);&#xa;tc.setCellRenderer(new ButtonsRendererbtXDelete());&#xa;tc.setCellEditor(new ButtonsEditorXDeletePeopleInProject(tbPeopleinProject));&#xa;tc.setMinWidth(25);&#xa;tc.setWidth(25);&#xa;tc.setMaxWidth(25);&#xa;tbPeopleinProject.setTableHeader(null);&#xa;tbPeopleinProject.setShowGrid(false);"/>
                                     <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="        final String columnPeopleinProject[] = {&quot;id&quot;, &quot;peopleName&quot;, &quot;ACTION&quot;};&#xd;&#xa;        tmTabelPeopleInProject = new javax.swing.table.AbstractTableModel() {&#xd;&#xa;            public int getColumnCount() {&#xd;&#xa;                return columnPeopleinProject.length;&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public int getRowCount() {&#xd;&#xa;                return vectorPeopleInProject.size();&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public Object getValueAt(int row1, int column1) {&#xd;&#xa;                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);&#xd;&#xa;                return rowTMP.elementAt(column1);&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public String getColumnName(int column1) {&#xd;&#xa;                return columnPeopleinProject[column1];&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public boolean isCellEditable(int row1, int column1) {&#xd;&#xa;                if (column1 == 2) {&#xd;&#xa;                    return true;&#xd;&#xa;                } else {&#xd;&#xa;                    return false;&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public void setValueAt(Object obj, int row1, int column1) {&#xd;&#xa;                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);&#xd;&#xa;                rowTMP.setElementAt(obj, column1);&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            public Class getColumnClass(int c) {&#xd;&#xa;                return getValueAt(0, c).getClass();&#xd;&#xa;            }&#xd;&#xa;        };"/>
                                   </AuxValues>
                                 </Component>
@@ -2360,6 +2354,9 @@
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="260" y="200" width="100" height="25"/>
@@ -2392,12 +2389,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation1">
+                            <Component class="javax.swing.JTextField" name="txMaterial">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation1KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txMaterialKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2448,12 +2445,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation2">
+                            <Component class="javax.swing.JTextField" name="txPeralatan">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation2KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txPeralatanKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2478,12 +2475,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation3">
+                            <Component class="javax.swing.JTextField" name="txTenagaKErja">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation3KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txTenagaKErjaKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2534,12 +2531,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation4">
+                            <Component class="javax.swing.JTextField" name="txOverHEadeCost">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation4KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txOverHEadeCostKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2564,13 +2561,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel45">
+                            <Component class="javax.swing.JLabel" name="lbTotal">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Dialog" size="12" style="0"/>
                                 </Property>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
-                                <Property name="text" type="java.lang.String" value="Total"/>
                                 <Property name="opaque" type="boolean" value="true"/>
                               </Properties>
                               <Constraints>
@@ -2579,12 +2575,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation5">
+                            <Component class="javax.swing.JTextField" name="txManagementCost">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation5KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txManagementCostKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2672,12 +2668,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txLocation6">
+                            <Component class="javax.swing.JTextField" name="txPPN">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txLocation6KeyReleased"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txPPNKeyReleased"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2723,13 +2719,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel54">
+                            <Component class="javax.swing.JLabel" name="lbGrandTotal">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Dialog" size="12" style="0"/>
                                 </Property>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
-                                <Property name="text" type="java.lang.String" value="grand Total"/>
                                 <Property name="opaque" type="boolean" value="true"/>
                               </Properties>
                               <Constraints>
@@ -2778,6 +2773,29 @@
                             </Constraint>
                           </Constraints>
                         </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="10" y="50" width="650" height="120"/>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="panelLayout.txAreaDescription" name="projectDescription">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="projectDescriptionFocusGained"/>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="projectDescriptionFocusLost"/>
+                              </Events>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
