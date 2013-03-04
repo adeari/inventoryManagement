@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -309,8 +310,6 @@ public class formMenu extends javax.swing.JFrame {
         txSKU = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txQTY = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        cbCategory = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txDescription = new javax.swing.JTextPane();
@@ -1502,7 +1501,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel17.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel17.setText("Description");
     productEditFrame.getContentPane().add(jLabel17);
-    jLabel17.setBounds(10, 270, 160, 25);
+    jLabel17.setBounds(10, 230, 160, 25);
 
     txQTY.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -1511,20 +1510,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     productEditFrame.getContentPane().add(txQTY);
     txQTY.setBounds(110, 190, 250, 25);
-
-    jLabel18.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel18.setText("Category");
-    productEditFrame.getContentPane().add(jLabel18);
-    jLabel18.setBounds(10, 230, 160, 25);
-
-    cbCategory.setBackground(new java.awt.Color(255, 255, 255));
-    cbCategory.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            cbCategoryKeyReleased(evt);
-        }
-    });
-    productEditFrame.getContentPane().add(cbCategory);
-    cbCategory.setBounds(110, 230, 250, 24);
 
     jLabel19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel19.setText("Qty.");
@@ -1539,12 +1524,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jScrollPane3.setViewportView(txDescription);
 
     productEditFrame.getContentPane().add(jScrollPane3);
-    jScrollPane3.setBounds(110, 270, 250, 120);
+    jScrollPane3.setBounds(110, 230, 250, 120);
 
     jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel20.setText("Price");
     productEditFrame.getContentPane().add(jLabel20);
-    jLabel20.setBounds(10, 400, 160, 25);
+    jLabel20.setBounds(10, 360, 160, 25);
 
     txPrice.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -1552,7 +1537,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productEditFrame.getContentPane().add(txPrice);
-    txPrice.setBounds(110, 400, 250, 25);
+    txPrice.setBounds(110, 360, 250, 25);
 
     jButton10.setBackground(new java.awt.Color(0, 0, 0));
     jButton10.setForeground(new java.awt.Color(255, 255, 255));
@@ -1567,7 +1552,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productEditFrame.getContentPane().add(jButton10);
-    jButton10.setBounds(10, 440, 90, 30);
+    jButton10.setBounds(10, 410, 90, 30);
 
     jButton11.setBackground(new java.awt.Color(204, 204, 204));
     jButton11.setText("Cancel");
@@ -1581,7 +1566,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productEditFrame.getContentPane().add(jButton11);
-    jButton11.setBounds(120, 440, 94, 30);
+    jButton11.setBounds(110, 410, 94, 30);
 
     jButton19.setBackground(new java.awt.Color(0, 0, 0));
     jButton19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -2918,8 +2903,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewUser();
         }
     }//GEN-LAST:event_txPageKeyReleased
-    
-    public void  deletePeopleInProject (JTable table) {
+
+    public void deletePeopleInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this People?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
                 javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
@@ -2951,8 +2936,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
-    public void  deleteProductInProject (JTable table) {
+
+    public void deleteProductInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this products?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
                 javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
@@ -2984,7 +2969,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void deleteAccounts(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3033,7 +3018,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
-                qry = "delete from inventories where id in (" + qry + ");";
+                String itemIDLISt = qry;
+                
+                
+                
+                qry = "delete from items where id in (" + qry + ");";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete inventory = " + qry);
                 }
@@ -3157,8 +3146,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         txProductsID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
         LabelAddProducts.setText("EDIT PRODUCT");
         String qry = "select a.name,a.description,a.sku,a.quantity,"
-                + "b.name as category,a.price from inventories a "
-                + " left join inventory_categories b on a.category_id=b.id "
+                + "c.price_in from items a "
+                + " inner join inventories b on a.id=b.item_id "
+                + " inner join inventory_prices c on b.id=c.inventory_id "
                 + " where a.id=" + txProductsID.getText();
 
         common.functionCommon fc = new common.functionCommon();
@@ -3173,9 +3163,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 txItemName.setText(rs.getString("name"));
                 txSKU.setText(rs.getString("sku"));
                 txQTY.setText(fc.digitNumber(rs.getString("quantity")));
-                cbCategory.setSelectedItem(rs.getString("category"));
                 txDescription.setText(rs.getString("description"));
-                txPrice.setText(fc.digitNumber(rs.getString("price")));
+                txPrice.setText(fc.digitNumber(rs.getString("price_in")));
             }
             st.close();
             cn.close();
@@ -3219,29 +3208,28 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         jButton19.setVisible(false);
         productEditFrame.setVisible(true);
         LabelAddProducts.setText("ADD PRODUCT");
-        common.functionCommon fc = new common.functionCommon();
-        cbCategory.removeAllItems();
-        try {
-            String qry = "select id,name from inventory_categories order by name ";
-            if (role_id != 0) {
-                qry += " where id!=0";
-            }
-            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(qry);
-            cbRoles.removeAllItems();
-            while (rs.next()) {
-                cbCategory.addItem(rs.getString("name"));
-            }
-            st.close();
-            cn.close();
-        } catch (Exception ex) {
-            if (fc.isDebugging) {
-                System.out.println("error in jButton6ActionPerformed " + ex.getMessage());
-            }
-        }
+//        common.functionCommon fc = new common.functionCommon();
+//        cbCategory.removeAllItems();
+//        try {
+//            String qry = "select id,name from inventory_categories order by name ";
+//            if (role_id != 0) {
+//                qry += " where id!=0";
+//            }
+//            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+//            Statement st = cn.createStatement();
+//            ResultSet rs = st.executeQuery(qry);
+//            cbRoles.removeAllItems();
+//            while (rs.next()) {
+//                cbCategory.addItem(rs.getString("name"));
+//            }
+//            st.close();
+//            cn.close();
+//        } catch (Exception ex) {
+//            if (fc.isDebugging) {
+//                System.out.println("error in jButton6ActionPerformed " + ex.getMessage());
+//            }
+//        }
         clearProductEditForm();
-        cbCategory.setSelectedItem("single");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tbProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductMouseClicked
@@ -3305,7 +3293,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txQTYKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
-            cbCategory.requestFocus();
+            txDescription.requestFocus();
         } else {
             try {
                 Integer.valueOf(txQTY.getText().replace(".", ""));
@@ -3318,12 +3306,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txQTYKeyReleased
-
-    private void cbCategoryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbCategoryKeyReleased
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-            txDescription.requestFocus();
-        }
-    }//GEN-LAST:event_cbCategoryKeyReleased
 
     private void txPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPriceKeyReleased
         common.functionCommon fc = new common.functionCommon();
@@ -3367,7 +3349,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
         try {
-            String qry = "select id from inventories where name='" + str + "'";
+            String qry = "select id from items where name='" + str + "'";
             if (idTable.length() > 0) {
                 qry += " and id != " + idTable;
             }
@@ -3445,31 +3427,70 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
                 String qry = "";
                 if (txProductsID.getText().length() < 1) {
-                    qry = "insert into inventories (name"
-                            + ",description,quantity,sku,price"
-                            + ",created_at,modified_at,category_id) values ('" + txItemName.getText() + "'"
-                            + ",'" + txDescription.getText() + "'"
-                            + "," + qtyThis + ""
-                            + ",'" + txSKU.getText() + "'"
-                            + "," + priceThis + ""
-                            + ",now(),now()"
-                            + "," + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ");";
+//                    qry = "insert into inventories (name"
+//                            + ",description,quantity,sku,price"
+//                            + ",created_at,modified_at,category_id) values ('" + txItemName.getText() + "'"
+//                            + ",'" + txDescription.getText() + "'"
+//                            + "," + qtyThis + ""
+//                            + ",'" + txSKU.getText() + "'"
+//                            + "," + priceThis + ""
+//                            + ",now(),now()"
+//                            + "," + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ");";
+                    
+                    qry = "insert into items (name"
+                            + ",description,quantity,sku"
+                            + ",created_at,modified_at) values (?,?,?,?,now(),now())";
+                    PreparedStatement psInsert = cn.prepareStatement(qry);
+                    psInsert.setString(1, txItemName.getText());
+                    psInsert.setString(2, txDescription.getText());
+                    psInsert.setInt(3, qtyThis);
+                    psInsert.setString(4, txSKU.getText());
+                    psInsert.executeUpdate();
+                    PreparedStatement psIdentity = cn.prepareStatement("CALL IDENTITY()");
+                    ResultSet result = psIdentity.executeQuery();
+                    result.next();
+                    int item_ID = result.getInt(1);
+                    psInsert.close();
+                    psIdentity.close();
+                    result.close();
+                    
+                    qry = "insert into inventories (item_id"
+                            + ",stock_in,stock_out"
+                            + ",created_at,modified_at) values (?,0,0,now(),now())";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, item_ID);
+                    psInsert.executeUpdate();
+                    psIdentity = cn.prepareStatement("CALL IDENTITY()");
+                    result = psIdentity.executeQuery();
+                    result.next();
+                    int inventory_id = result.getInt(1);
+                    psInsert.close();
+                    psIdentity.close();
+                    result.close();
+                    
+                    qry = "insert into inventory_prices (inventory_id"
+                            + ",price_in,price_out) values (?,?,0)";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, inventory_id);
+                    psInsert.setInt(2, priceThis);
+                    psInsert.executeUpdate();
+                    psInsert.close();
                 } else {
-                    qry = "update inventories set name='" + txItemName.getText() + "'"
+                    qry = "update items set name='" + txItemName.getText() + "'"
                             + ",description= '" + txDescription.getText() + "' "
-                            + ",quantity= " + qtyThis + ""
-                            + ",sku ='" + txSKU.getText() + "'"
-                            + ",price=" + priceThis + ""
-                            + ",modified_at=now()"
-                            + ",category_id= " + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ""
+                            + ",quantity= " + qtyThis + ""                           
+                            + ",modified_at=now() "
+                            //+ ",category_id= " + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ""
                             + "  where id = " + txProductsID.getText();
+                    st.executeUpdate(qry);
+                    
+                    st.close();
                 }
                 if (fc.isDebugging) {
                     System.out.println(" qry = " + qry);
                 }
-                st.executeUpdate(qry);
 
-                st.close();
+                
                 cn.close();
 
             } catch (Exception ex) {
@@ -3527,8 +3548,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void txProjectNAmeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProjectNAmeFocusGained
-        if (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME"))
+        if (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME")) {
             txProjectNAme.setText("");
+        }
         txProjectNAme.selectAll();
     }//GEN-LAST:event_txProjectNAmeFocusGained
 
@@ -4058,44 +4080,50 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void txMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaterialKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txMaterial,evt);
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        fc.setNumericPointinTextField(txMaterial, evt);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txPeralatan.requestFocus();
+        }
     }//GEN-LAST:event_txMaterialKeyReleased
 
     private void txPeralatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPeralatanKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txPeralatan,evt);
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        fc.setNumericPointinTextField(txPeralatan, evt);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txTenagaKErja.requestFocus();
+        }
     }//GEN-LAST:event_txPeralatanKeyReleased
 
     private void txTenagaKErjaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenagaKErjaKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txTenagaKErja,evt);
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        fc.setNumericPointinTextField(txTenagaKErja, evt);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txOverHEadeCost.requestFocus();
+        }
     }//GEN-LAST:event_txTenagaKErjaKeyReleased
 
     private void txOverHEadeCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txOverHEadeCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txOverHEadeCost,evt);
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        fc.setNumericPointinTextField(txOverHEadeCost, evt);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txManagementCost.requestFocus();
+        }
     }//GEN-LAST:event_txOverHEadeCostKeyReleased
 
     private void txManagementCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txManagementCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txManagementCost,evt);
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        fc.setNumericPointinTextField(txManagementCost, evt);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txPPN.requestFocus();
+        }
     }//GEN-LAST:event_txManagementCostKeyReleased
 
     private void txPPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPPNKeyReleased
         common.functionCommon fc = new common.functionCommon();
-        fc.setNumericPointinTextField(txPPN,evt);
-        if (Integer.valueOf(txPPN.getText().replace(".", ""))>100)
+        fc.setNumericPointinTextField(txPPN, evt);
+        if (Integer.valueOf(txPPN.getText().replace(".", "")) > 100) {
             txPPN.setText("100");
+        }
     }//GEN-LAST:event_txPPNKeyReleased
 
     private void txQTYProductsinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectKeyReleased
@@ -4133,7 +4161,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData = new java.util.Vector();
                 rowData.addElement(rs.getInt("id_people"));
                 rowData.addElement("<html>" + rs.getString("people_name")
-                        +"<font color=#6D7B8D> - Programmer</font></html>");
+                        + "<font color=#6D7B8D> - Programmer</font></html>");
                 rowData.addElement("");
                 vectorPeopleInProject.addElement(rowData);
             }
@@ -4146,7 +4174,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     private void refreshTableProductInProject() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -4174,7 +4202,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     void refreshcbProductsInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbProductsInProject.removeAllItems();
@@ -4182,7 +4210,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
             String qry = "select id,name from inventories where "
-                    + "id not in (select id from cache_products_in_project where user_id="+userID+") "
+                    + "id not in (select id from cache_products_in_project where user_id=" + userID + ") "
                     + "order by name";
             ResultSet rs = st.executeQuery(qry);
             cbProductsInProject.addItem(addJcomboBoxItemWithDuplicate("Select Product", cbProductsInProject));
@@ -4201,7 +4229,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     void refreshcbPeopleInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbPeopleInProject.removeAllItems();
@@ -4231,53 +4259,53 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean canSave = true;
-        if (canSave&&productMap.get(cbProductsInProject.getSelectedIndex()).toString().length()<1) {
+        if (canSave && productMap.get(cbProductsInProject.getSelectedIndex()).toString().length() < 1) {
             canSave = false;
             cbProductsInProject.requestFocus();
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter product", "Information",
-                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
-        if (canSave&&txQTYProductsinProject.getText().length()<1) {
+        if (canSave && txQTYProductsinProject.getText().length() < 1) {
             canSave = false;
             txQTYProductsinProject.requestFocus();
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter quantity", "Information",
-                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
         } else if (canSave) {
-            if (Integer.valueOf(txQTYProductsinProject.getText().replace(".", ""))<1) {
+            if (Integer.valueOf(txQTYProductsinProject.getText().replace(".", "")) < 1) {
                 canSave = false;
-            txQTYProductsinProject.requestFocus();
-            javax.swing.JOptionPane.showConfirmDialog(null, "Quantity is 0", "Information",
+                txQTYProductsinProject.requestFocus();
+                javax.swing.JOptionPane.showConfirmDialog(null, "Quantity is 0", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
         }
-        
+
         if (canSave) {
-        common.functionCommon fc = new common.functionCommon();
-        try {
-            String qry = "insert into cache_products_in_project (id,user_id,name,qty) values ("
-                    + productMap.get(cbProductsInProject.getSelectedIndex()) + ","
-                    + String.valueOf(userID)
-                    + ",'" + cbProductsInProject.getSelectedItem() + "',"
-                    + txQTYProductsinProject.getText().replace(".", "") + ");";
-            if (fc.isDebugging) {
-                System.out.println("jButton2ActionPerformed qry  " + qry);
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "insert into cache_products_in_project (id,user_id,name,qty) values ("
+                        + productMap.get(cbProductsInProject.getSelectedIndex()) + ","
+                        + String.valueOf(userID)
+                        + ",'" + cbProductsInProject.getSelectedItem() + "',"
+                        + txQTYProductsinProject.getText().replace(".", "") + ");";
+                if (fc.isDebugging) {
+                    System.out.println("jButton2ActionPerformed qry  " + qry);
+                }
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                st.executeUpdate(qry);
+                st.close();
+                cn.close();
+                refreshcbProductsInProject();
+                refreshTableProductInProject();
+                txQTYProductsinProject.setText("0");
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in jButton2ActionPerformed " + ex.getMessage());
+                }
             }
-            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-            Statement st = cn.createStatement();
-            st.executeUpdate(qry);
-            st.close();
-            cn.close();
-            refreshcbProductsInProject();
-            refreshTableProductInProject();
-            txQTYProductsinProject.setText("0");
-        } catch (Exception ex) {
-            if (fc.isDebugging) {
-                System.out.println(" error in jButton2ActionPerformed " + ex.getMessage());
-            }
-        }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -4287,62 +4315,68 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         if (cbPeopleInProject.getSelectedItem().equals("Select People")) {
             canSave = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Select People", "Information",
-                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
         if (canSave) {
-        try {
-            String qry = "insert into cache_people_in_project (id_people,id_user,people_name) values ("
-                    + peopleInProjectMap.get(cbPeopleInProject.getSelectedIndex()) + ","
-                    + String.valueOf(userID)
-                    + ",'" + cbPeopleInProject.getSelectedItem() + "');";
-            if (fc.isDebugging) {
-                System.out.println("jButton5ActionPerformed qry  " + qry);
+            try {
+                String qry = "insert into cache_people_in_project (id_people,id_user,people_name) values ("
+                        + peopleInProjectMap.get(cbPeopleInProject.getSelectedIndex()) + ","
+                        + String.valueOf(userID)
+                        + ",'" + cbPeopleInProject.getSelectedItem() + "');";
+                if (fc.isDebugging) {
+                    System.out.println("jButton5ActionPerformed qry  " + qry);
+                }
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                st.executeUpdate(qry);
+                st.close();
+                cn.close();
+                refreshTablePeopleINProject();
+                refreshcbPeopleInProject();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in jButton2ActionPerformed " + ex.getMessage());
+                }
             }
-            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-            Statement st = cn.createStatement();
-            st.executeUpdate(qry);
-            st.close();
-            cn.close();
-            refreshTablePeopleINProject();
-            refreshcbPeopleInProject();
-        } catch (Exception ex) {
-            if (fc.isDebugging) {
-                System.out.println(" error in jButton2ActionPerformed " + ex.getMessage());
-            }
-        }}
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void projectDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusGained
-        if (projectDescription.getText().equalsIgnoreCase("Description"))
+        if (projectDescription.getText().equalsIgnoreCase("Description")) {
             projectDescription.setText("");
+        }
         projectDescription.selectAll();
     }//GEN-LAST:event_projectDescriptionFocusGained
 
     private void projectDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusLost
-        if (projectDescription.getText().length()<1)
+        if (projectDescription.getText().length() < 1) {
             projectDescription.setText("Description");
+        }
     }//GEN-LAST:event_projectDescriptionFocusLost
 
     private void txStartProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txStartProjectKeyReleased
-        if (evt.getKeyCode() == evt.VK_ENTER)
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txDuedate.requestFocus();
+        }
     }//GEN-LAST:event_txStartProjectKeyReleased
 
     private void txProjectNAmeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProjectNAmeKeyReleased
-        if (evt.getKeyCode()== evt.VK_ENTER)
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             projectDescription.requestFocus();
+        }
     }//GEN-LAST:event_txProjectNAmeKeyReleased
 
     private void tbPeopleinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPeopleinProjectKeyReleased
-        if (evt.getKeyCode()==evt.VK_DELETE)
+        if (evt.getKeyCode() == evt.VK_DELETE) {
             deletePeopleInProject(tbPeopleinProject);
+        }
     }//GEN-LAST:event_tbPeopleinProjectKeyReleased
 
     private void tbProductInProjectsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductInProjectsKeyReleased
-        if (evt.getKeyCode()==evt.VK_DELETE)
+        if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteProductInProject(tbProductInProjects);
+        }
     }//GEN-LAST:event_tbProductInProjectsKeyReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -4370,7 +4404,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton btPreviousProduct;
     private javax.swing.JButton btPreviousTransactions;
     private javax.swing.JButton btsaveProject;
-    private javax.swing.JComboBox cbCategory;
     private javax.swing.JComboBox cbClientinProject;
     private javax.swing.JComboBox cbLeaderinProject;
     private javax.swing.JComboBox cbPeopleInProject;
@@ -4414,7 +4447,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -4600,8 +4632,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         int total = 0;
 
         try {
-            qry = "select count(*) as totalCount from inventories a "
-                    + " left join inventory_categories b on a.category_id=b.id " + Condition;
+            qry = "select count(*) as totalCount from inventories a " + Condition;
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(qry);
@@ -4648,8 +4679,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select a.id,a.name,a.description,a.sku,a.quantity,"
                     + fc.viewDatefromSQL("a.modified_at", "modified_at")
-                    + " from inventories a "
-                    + " left join inventory_categories b on a.category_id=b.id  " + Condition
+                    + " from items a " + Condition
                     + " " + limiTation;
             if (fc.isDebugging) {
                 System.out.println(" qry = " + qry);
@@ -4944,7 +4974,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         lbTotal.setText("0");
         txPPN.setText("0");
         lbGrandTotal.setText("0");
-        
+
         java.util.Vector rowData = null;
         // get Data Leader getData Leader and client
         common.functionCommon fc = new common.functionCommon();
@@ -5385,9 +5415,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
-    
-class ButtonsEditorXDeletePeopleInProject extends ButtonsRendererbtXDelete implements TableCellEditor {
+
+    class ButtonsEditorXDeletePeopleInProject extends ButtonsRendererbtXDelete implements TableCellEditor {
 
         public ButtonsEditorXDeletePeopleInProject(final JTable table) {
             super();
@@ -5459,7 +5488,7 @@ class ButtonsEditorXDeletePeopleInProject extends ButtonsRendererbtXDelete imple
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
-    }            
+    }
 
     class ButtonsEditorXDelete extends ButtonsRendererbtXDelete implements TableCellEditor {
 
