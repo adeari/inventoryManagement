@@ -318,8 +318,6 @@ public class formMenu extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
-        jButton19 .setVerticalTextPosition(SwingConstants.BOTTOM);
-        jButton19.setHorizontalTextPosition(SwingConstants.LEFT);
         projectDetailFrame = new javax.swing.JInternalFrame();
         jScrollPane7 = new javax.swing.JScrollPane();
         jPanel9 = new javax.swing.JPanel();
@@ -756,7 +754,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     menuPop.add(jMenuItem3);
 
+    ProductPopMenu.setBackground(new java.awt.Color(0, 0, 0));
     ProductPopMenu.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    ProductPopMenu.setForeground(new java.awt.Color(255, 255, 255));
     ProductPopMenu.setBorder(null);
     ProductPopMenu.setBorderPainted(false);
     ProductPopMenu.setPreferredSize(new java.awt.Dimension(80, 30));
@@ -1577,14 +1577,26 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton19.setBorderPainted(false);
     jButton19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jButton19.setFocusPainted(false);
-    jButton19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            jButton19MouseExited(evt);
+        }
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            jButton19MouseEntered(evt);
+        }
+    });
+    jButton19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        public void mouseMoved(java.awt.event.MouseEvent evt) {
+            jButton19MouseMoved(evt);
+        }
+    });
     jButton19.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButton19ActionPerformed(evt);
         }
     });
     productEditFrame.getContentPane().add(jButton19);
-    jButton19.setBounds(670, 20, 80, 30);
+    jButton19.setBounds(400, 10, 84, 30);
 
     productEditFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(productEditFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -3019,10 +3031,17 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
                 String itemIDLISt = qry;
+                qry = "delete from inventory_prices where inventory_id in "
+                        + "(select id from inventories where item_id in "
+                        + "(select id from items where id in (" + itemIDLISt + ")))";
+                System.out.println("qry 1 "+qry);
+                st.executeUpdate(qry);
+                qry = "delete from inventories where item_id in "
+                        + "(select id from items where id in (" + itemIDLISt + "))";
+                System.out.println("qry 2 "+qry);
+                st.executeUpdate(qry);
                 
-                
-                
-                qry = "delete from items where id in (" + qry + ");";
+                qry = "delete from items where id in (" + itemIDLISt + ");";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete inventory = " + qry);
                 }
@@ -3427,16 +3446,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
                 String qry = "";
                 if (txProductsID.getText().length() < 1) {
-//                    qry = "insert into inventories (name"
-//                            + ",description,quantity,sku,price"
-//                            + ",created_at,modified_at,category_id) values ('" + txItemName.getText() + "'"
-//                            + ",'" + txDescription.getText() + "'"
-//                            + "," + qtyThis + ""
-//                            + ",'" + txSKU.getText() + "'"
-//                            + "," + priceThis + ""
-//                            + ",now(),now()"
-//                            + "," + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ");";
-                    
                     qry = "insert into items (name"
                             + ",description,quantity,sku"
                             + ",created_at,modified_at) values (?,?,?,?,now(),now())";
@@ -3476,12 +3485,18 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.executeUpdate();
                     psInsert.close();
                 } else {
-                    qry = "update items set name='" + txItemName.getText() + "'"
+                    qry = "update items set name='" + txItemName.getText() + "' "
                             + ",description= '" + txDescription.getText() + "' "
                             + ",quantity= " + qtyThis + ""                           
                             + ",modified_at=now() "
+                            + ",sku='"+txSKU.getText()+"' "
                             //+ ",category_id= " + getIdCategoryItemFromName(cbCategory.getSelectedItem().toString()) + ""
                             + "  where id = " + txProductsID.getText();
+                    st.executeUpdate(qry);
+                    qry = "update inventories set modified_at = now() where item_id= "+txProductsID.getText();
+                    st.executeUpdate(qry);
+                    qry = "update inventory_prices set price_in = "+priceThis+" "
+                            + " where inventory_id in (select id from inventories where item_id= "+txProductsID.getText()+")";
                     st.executeUpdate(qry);
                     
                     st.close();
@@ -3660,7 +3675,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        ProductPopMenu.show(jButton19, 0, 31);
+        ProductPopMenu.show(jButton19, 0, 30);
+        showMenuProduct = true;
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -4377,6 +4393,34 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             deleteProductInProject(tbProductInProjects);
         }
     }//GEN-LAST:event_tbProductInProjectsKeyReleased
+
+    private void jButton19MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseExited
+        System.out.println("exited x = "+evt.getPoint().x+" y = "+evt.getPoint().y);
+        if (showMenuProduct) System.out.println(" masih show product");
+        if ((showMenuProduct && evt.getPoint().y < 0)
+                || (showMenuProduct
+                && (evt.getPoint().x < 0 || evt.getPoint().x > 83))) {
+            System.out.println(" kosng");
+            ProductPopMenu.setVisible(false);
+            showMenuProduct = false;
+        }
+    }//GEN-LAST:event_jButton19MouseExited
+
+    private void jButton19MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseEntered
+        if (!showMenuProduct) {
+            ProductPopMenu.show(jButton19, 0, 30);
+            showMenuProduct = true;
+        }
+    }//GEN-LAST:event_jButton19MouseEntered
+
+    private void jButton19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseMoved
+        System.out.println("moved x = "+evt.getPoint().x+" y = "+evt.getPoint().y);
+        if (!showMenuProduct) {
+            ProductPopMenu.show(jButton19, 0, 30);
+            showMenuProduct = true;
+        }
+    }//GEN-LAST:event_jButton19MouseMoved
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -4596,7 +4640,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     int lastPageUSer = 0;
     int lastPageProducts = 0;
     int lastPageAccounts = 0;
-    boolean showMenuUser = false;
+    boolean showMenuUser = false,showMenuProduct;
     Map leaderMap = new LinkedHashMap();
     Map clientMap = new LinkedHashMap();
     Map productMap = new LinkedHashMap();
@@ -5055,6 +5099,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     void POPUpMenuUsuallycommand() {
         showMenuUser = false;
+        showMenuProduct = false;
     }
 
     class ButtonsPanel extends JPanel {
