@@ -177,4 +177,17 @@ public class functionCommon {
             }
         }
     }
+    
+    public String getStatusProject(int id) {
+        String getBack="";
+        switch(id) {
+            case 0 : getBack="<html><font color=#F52887>Pending</font></html>";
+                break;
+            case 1 : getBack="<html><font color=orange>In Process</font></html>";
+                break;
+            case 2 : getBack="<html><font color=green>Finished</font></html>";
+                break;
+        }
+        return getBack;
+    }
 }
