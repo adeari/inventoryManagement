@@ -206,13 +206,9 @@ public class functionCommon {
     
     public int getIndexComboBox(Map copyMap  ,String seachText) {
         int getBack =-1 ;
-        System.out.println(" copyMap = "+copyMap.values().toString());
-        System.out.println(" copyMap = "+copyMap.toString());
         int mapSize = copyMap.size(),i=1;
-        System.out.println(" copyMap = "+copyMap.toString());
         boolean notFound = true;
         while (i<mapSize&&notFound) {
-            System.out.println(" map = "+i+" = "+copyMap.get(i));
             if (copyMap.get(i).toString().equalsIgnoreCase(seachText)) {
                 notFound = false;
             } else {
