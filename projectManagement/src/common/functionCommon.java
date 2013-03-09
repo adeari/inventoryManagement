@@ -4,6 +4,7 @@
  */
 package common;
 
+import java.util.Map;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.JTextField;
@@ -188,6 +189,37 @@ public class functionCommon {
             case 2 : getBack="<html><font color=green>Finished</font></html>";
                 break;
         }
+        return getBack;
+    }
+    
+    public int getStatusProjectIndex(String tex) {
+        int i=-1;
+        if (tex.toLowerCase().equalsIgnoreCase("pending")) {
+            i=0;
+        } if (tex.toLowerCase().equalsIgnoreCase("in process")) {
+            i=1;
+        } if (tex.toLowerCase().equalsIgnoreCase("finished")) {
+            i=2;
+        }
+        return i;
+    }
+    
+    public int getIndexComboBox(Map copyMap  ,String seachText) {
+        int getBack =-1 ;
+        System.out.println(" copyMap = "+copyMap.values().toString());
+        System.out.println(" copyMap = "+copyMap.toString());
+        int mapSize = copyMap.size(),i=1;
+        System.out.println(" copyMap = "+copyMap.toString());
+        boolean notFound = true;
+        while (i<mapSize&&notFound) {
+            System.out.println(" map = "+i+" = "+copyMap.get(i));
+            if (copyMap.get(i).toString().equalsIgnoreCase(seachText)) {
+                notFound = false;
+            } else {
+                i++;
+            }
+        }
+        getBack = i;
         return getBack;
     }
 }

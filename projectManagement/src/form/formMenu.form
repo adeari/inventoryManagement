@@ -151,9 +151,12 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[80, 30]"/>
+          <Dimension value="[84, 30]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ProductPopMenuMouseExited"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
@@ -561,6 +564,10 @@
                   </Constraints>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                    <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="140" width="830" height="470"/>
@@ -1218,6 +1225,10 @@
                   </Constraints>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                    <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="140" width="830" height="470"/>
@@ -1233,7 +1244,7 @@
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(tmTabelProject);"/>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tbProject.setAutoResizeMode(tbProject.AUTO_RESIZE_OFF);&#xa;tc=tbProject.getColumn(&quot;id&quot;);&#xa;tc.setMinWidth(0);&#xa;tc.setWidth(0);&#xa;tc.setMaxWidth(0);&#xa;tc=tbProject.getColumn(&quot;TITLE&quot;);&#xa;tc.setMinWidth(185);&#xa;tc=tbProject.getColumn(&quot;LEADER&quot;);&#xa;tc.setMinWidth(179);&#xa;centerRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;tbProject.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;CLIENT&quot;);&#xa;tc.setMinWidth(178);&#xa;tbProject.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;STATUS&quot;);&#xa;tc.setMinWidth(105);&#xa;tbProject.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;START ON&quot;);&#xa;tc.setMinWidth(105);&#xa;tbProject.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;ACTION&quot;);&#xa;tc.setMinWidth(50);&#xa;tc.setCellRenderer(new ButtonsRenderer());&#xa;tc.setCellEditor(new ButtonsEditorProducts(tbProject));&#xa;tbProject.setRowHeight(35);&#xa;&#xa;tbProject.getTableHeader().getColumnModel().getColumn(1)&#xa;   .setHeaderRenderer(new common.HeaderRenderer(tbProject, JLabel.LEFT));&#xa;&#xa;for (int i=2;i&lt;tbProject.getColumnCount();i++)&#xa;tbProject.getTableHeader().getColumnModel().getColumn(i)&#xa;   .setHeaderRenderer(new common.HeaderRenderer(tbProject, JLabel.CENTER));&#xa;"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tbProject.setAutoResizeMode(tbProject.AUTO_RESIZE_OFF);&#xa;tc=tbProject.getColumn(&quot;id&quot;);&#xa;tc.setMinWidth(0);&#xa;tc.setWidth(0);&#xa;tc.setMaxWidth(0);&#xa;tc=tbProject.getColumn(&quot;TITLE&quot;);&#xa;tc.setMinWidth(185);&#xa;tc=tbProject.getColumn(&quot;LEADER&quot;);&#xa;tc.setMinWidth(179);&#xa;centerRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;tbProject.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;CLIENT&quot;);&#xa;tc.setMinWidth(178);&#xa;tbProject.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;STATUS&quot;);&#xa;tc.setMinWidth(105);&#xa;tbProject.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;START ON&quot;);&#xa;tc.setMinWidth(105);&#xa;tbProject.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );&#xa;tc=tbProject.getColumn(&quot;ACTION&quot;);&#xa;tc.setMinWidth(50);&#xa;tc.setCellRenderer(new ButtonsRenderer());&#xa;tc.setCellEditor(new ButtonsEditorProjects(tbProject));&#xa;tbProject.setRowHeight(35);&#xa;&#xa;tbProject.getTableHeader().getColumnModel().getColumn(1)&#xa;   .setHeaderRenderer(new common.HeaderRenderer(tbProject, JLabel.LEFT));&#xa;&#xa;for (int i=2;i&lt;tbProject.getColumnCount();i++)&#xa;tbProject.getTableHeader().getColumnModel().getColumn(i)&#xa;   .setHeaderRenderer(new common.HeaderRenderer(tbProject, JLabel.CENTER));&#xa;"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="        final String columnProject[] = {&quot;id&quot;, &quot;TITLE&quot;, &quot;LEADER&quot;, &quot;CLIENT&quot;, &quot;START ON&quot;, &quot;STATUS&quot;,&quot;ACTION&quot;};&#xa;        tmTabelProject = new javax.swing.table.AbstractTableModel() {&#xa;            public int getColumnCount() {&#xa;                return columnProject.length;&#xa;            }&#xa;&#xa;            public int getRowCount() {&#xa;                return vectorProject.size();&#xa;            }&#xa;&#xa;            public Object getValueAt(int row1, int column1) {&#xa;                java.util.Vector rowTMP = (java.util.Vector) vectorProject.elementAt(row1);&#xa;                return rowTMP.elementAt(column1);&#xa;            }&#xa;&#xa;            public String getColumnName(int column1) {&#xa;                return columnProject[column1];&#xa;            }&#xa;&#xa;            public boolean isCellEditable(int row1, int column1) {&#xa;                if (column1 == 6) {&#xa;                    return true;&#xa;                } else {&#xa;                    return false;&#xa;                }&#xa;&#xa;            }&#xa;&#xa;            public void setValueAt(Object obj, int row1, int column1) {&#xa;                java.util.Vector rowTMP = (java.util.Vector) vectorProject.elementAt(row1);&#xa;                rowTMP.setElementAt(obj, column1);&#xa;            }&#xa;&#xa;            public Class getColumnClass(int c) {&#xa;                return getValueAt(0, c).getClass();&#xa;            }&#xa;        };&#xa;"/>
                       </AuxValues>
                     </Component>
@@ -1557,6 +1568,10 @@
                   </Constraints>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                    <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="140" width="830" height="470"/>
@@ -2391,6 +2406,7 @@
                                 <Property name="text" type="java.lang.String" value="0"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txQTYProductsinProjectFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txQTYProductsinProjectKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2584,6 +2600,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txMaterialFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txMaterialKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2640,6 +2657,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txPeralatanFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txPeralatanKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2670,6 +2688,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txTenagaKErjaFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txTenagaKErjaKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2726,6 +2745,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txOverHEadeCostFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txOverHEadeCostKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2770,6 +2790,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txManagementCostFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txManagementCostKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2863,6 +2884,7 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txPPNFocusGained"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txPPNKeyReleased"/>
                               </Events>
                               <Constraints>
@@ -2990,6 +3012,20 @@
                     </Container>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JTextField" name="txProjectid">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="jTextField1"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="txProjectid.setVisible(false);"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JInternalFrame" name="financeFrame">
@@ -3187,6 +3223,8 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                    <Property name="verticalScrollBarPolicy" type="int" value="21"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

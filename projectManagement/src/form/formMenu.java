@@ -281,7 +281,7 @@ public class formMenu extends javax.swing.JFrame {
         tc=tbProject.getColumn("ACTION");
         tc.setMinWidth(50);
         tc.setCellRenderer(new ButtonsRenderer());
-        tc.setCellEditor(new ButtonsEditorProducts(tbProject));
+        tc.setCellEditor(new ButtonsEditorProjects(tbProject));
         tbProject.setRowHeight(35);
 
         tbProject.getTableHeader().getColumnModel().getColumn(1)
@@ -580,6 +580,8 @@ public class formMenu extends javax.swing.JFrame {
         jButton17 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         projectDescription = new panelLayout.txAreaDescription();
+        txProjectid = new javax.swing.JTextField();
+        txProjectid.setVisible(false);
         financeFrame = new javax.swing.JInternalFrame();
         userFrame.getContentPane().setBackground(Color.WHITE);
         jLabel30 = new javax.swing.JLabel();
@@ -839,7 +841,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     ProductPopMenu.setForeground(new java.awt.Color(255, 255, 255));
     ProductPopMenu.setBorder(null);
     ProductPopMenu.setBorderPainted(false);
-    ProductPopMenu.setPreferredSize(new java.awt.Dimension(80, 30));
+    ProductPopMenu.setPreferredSize(new java.awt.Dimension(84, 30));
+    ProductPopMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            ProductPopMenuMouseExited(evt);
+        }
+    });
 
     jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
     jMenuItem4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1060,6 +1067,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
     userFrame.getContentPane().add(jLabel3);
     jLabel3.setBounds(680, 100, 30, 30);
+
+    jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
     tbUser.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1381,6 +1391,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     projectFrame.getContentPane().add(jButton14);
     jButton14.setBounds(720, 20, 120, 30);
 
+    jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
     tbProject.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             tbProjectMouseClicked(evt);
@@ -1563,6 +1576,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
     productsFrame.getContentPane().add(jLabel14);
     jLabel14.setBounds(680, 100, 30, 30);
+
+    jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
     tbProduct.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1988,6 +2004,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     txQTYProductsinProject.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     txQTYProductsinProject.setText("0");
+    txQTYProductsinProject.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txQTYProductsinProjectFocusGained(evt);
+        }
+    });
     txQTYProductsinProject.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txQTYProductsinProjectKeyReleased(evt);
@@ -2078,6 +2099,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel36.setBounds(10, 10, 280, 30);
 
     txMaterial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txMaterial.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txMaterialFocusGained(evt);
+        }
+    });
     txMaterial.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txMaterialKeyReleased(evt);
@@ -2104,6 +2130,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel39.setBounds(10, 90, 120, 30);
 
     txPeralatan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txPeralatan.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txPeralatanFocusGained(evt);
+        }
+    });
     txPeralatan.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txPeralatanKeyReleased(evt);
@@ -2120,6 +2151,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel40.setBounds(150, 90, 40, 30);
 
     txTenagaKErja.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txTenagaKErja.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txTenagaKErjaFocusGained(evt);
+        }
+    });
     txTenagaKErja.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txTenagaKErjaKeyReleased(evt);
@@ -2146,6 +2182,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel43.setBounds(10, 170, 120, 30);
 
     txOverHEadeCost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txOverHEadeCost.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txOverHEadeCostFocusGained(evt);
+        }
+    });
     txOverHEadeCost.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txOverHEadeCostKeyReleased(evt);
@@ -2168,6 +2209,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     lbTotal.setBounds(180, 260, 200, 30);
 
     txManagementCost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txManagementCost.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txManagementCostFocusGained(evt);
+        }
+    });
     txManagementCost.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txManagementCostKeyReleased(evt);
@@ -2208,6 +2254,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel50.setBounds(10, 300, 120, 30);
 
     txPPN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txPPN.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txPPNFocusGained(evt);
+        }
+    });
     txPPN.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txPPNKeyReleased(evt);
@@ -2274,6 +2325,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     projectDetailFrame.getContentPane().add(jScrollPane7);
     jScrollPane7.setBounds(0, 0, 860, 1150);
+
+    txProjectid.setEditable(false);
+    txProjectid.setText("jTextField1");
+    projectDetailFrame.getContentPane().add(txProjectid);
+    txProjectid.setBounds(0, 0, 70, 19);
 
     projectDetailFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(projectDetailFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2384,6 +2440,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel8.setBounds(350, 100, 490, 45);
 
     scrolltbAccounts.setBorder(null);
+    scrolltbAccounts.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    scrolltbAccounts.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
     tbAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3362,6 +3420,37 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         txInUserName.setEditable(false);
     }
+    
+    
+    
+    public void prepareEditProjects (JTable table) {
+        closeAllInternalFrame();
+        projectDetailFrame.setVisible(true);
+        txProjectid.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+        common.functionCommon fc = new common.functionCommon();
+        getDataClientAndLEader();
+        try {
+            String qry = "select title,description,location"
+                    + ",leader_id,client_id,status,starts_on"
+                    + ",due_date "
+                    + " from projects where id = "+txProjectid.getText();
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                txProjectNAme.setText(rs.getString("title"));
+                projectDescription.setText(rs.getString("description"));
+                cbLeaderinProject.setSelectedIndex(fc.getIndexComboBox(leaderMap  ,rs.getString("leader_id")));
+                cbClientinProject.setSelectedIndex(fc.getIndexComboBox(clientMap  ,rs.getString("client_id")));
+                txLocation.setText(rs.getString("location"));
+                prjStatus.setSelectedIndex(rs.getInt("status"));
+            }
+        } catch (Exception ex) {
+            if (fc.isDebugging)
+                System.out.println(" weeoorror in prepareEditProjects "+ex.getMessage());
+        }
+        
+    }
 
     public void prepareEditProduct(JTable table) {
         jButton9ActionPerformed(null);
@@ -3425,6 +3514,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         txDescription.setText("");
         txPrice.setText("0");
         txInUserName.setEditable(true);
+        txProductsID.setText("");;
     }
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         closeAllInternalFrame();
@@ -3889,8 +3979,26 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 String qry = "";
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 Statement st = cn.createStatement();
-                qry = "delete from inventories where id =" + txProductsID.getText();
+                
+                qry = "delete from inventory_prices where inventory_id in "
+                        + "(select id from inventories where item_id in "
+                        + "(select id from items where id in (" + txProductsID.getText() + ")))";
+                System.out.println("qry 1 " + qry);
                 st.executeUpdate(qry);
+                qry = "delete from inventories where item_id in "
+                        + "(select id from items where id in (" + txProductsID.getText() + "))";
+                System.out.println("qry 2 " + qry);
+                st.executeUpdate(qry);
+
+                qry = "delete from items where id in (" + txProductsID.getText() + ");";
+                if (fc.isDebugging) {
+                    System.out.println(" qry delete inventory = " + qry);
+                }
+                st.executeUpdate(qry);
+                
+                
+                
+                
                 st.close();
                 cn.close();
                 jButton11ActionPerformed(null);
@@ -4294,10 +4402,25 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txLocationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocationKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txLocationKeyReleased
-
+    void countGrandTotalAndTotal() {
+        int total = 0;
+        total+=Integer.valueOf(txMaterial.getText().replace(".", ""));
+        total+=Integer.valueOf(txPeralatan.getText().replace(".", ""));
+        total+=Integer.valueOf(txTenagaKErja.getText().replace(".", ""));
+        total+=Integer.valueOf(txOverHEadeCost.getText().replace(".", ""));
+        total+=Integer.valueOf(txManagementCost.getText().replace(".", ""));
+        common.functionCommon fc = new common.functionCommon();
+        lbTotal.setText(fc.digitNumber(String.valueOf(total)));
+        int countDiscount = total *(Integer.valueOf(txPPN.getText()))/100;
+        System.out.println("countDiscount = "+countDiscount);
+        total-=countDiscount;
+        System.out.println("total = "+total);
+        lbGrandTotal.setText(fc.digitNumber(String.valueOf(total)));
+    }
     private void txMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaterialKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txMaterial, evt);
+        countGrandTotalAndTotal();
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txPeralatan.requestFocus();
         }
@@ -4306,6 +4429,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txPeralatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPeralatanKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPeralatan, evt);
+        countGrandTotalAndTotal();
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txTenagaKErja.requestFocus();
         }
@@ -4314,6 +4438,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txTenagaKErjaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenagaKErjaKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txTenagaKErja, evt);
+        countGrandTotalAndTotal();
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txOverHEadeCost.requestFocus();
         }
@@ -4322,6 +4447,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txOverHEadeCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txOverHEadeCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txOverHEadeCost, evt);
+        countGrandTotalAndTotal();
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txManagementCost.requestFocus();
         }
@@ -4338,6 +4464,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txPPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPPNKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPPN, evt);
+        countGrandTotalAndTotal();
         if (Integer.valueOf(txPPN.getText().replace(".", "")) > 100) {
             txPPN.setText("100");
         }
@@ -4708,6 +4835,103 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             st.close();
             result.close();
             
+            //insert transactions
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'Material','Material project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txMaterial.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 0);
+            psInsert.executeUpdate();
+            psInsert.close();
+            
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'Peralatan','Peralatan project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txPeralatan.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 1);
+            psInsert.executeUpdate();
+            psInsert.close();
+            
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'Tenaga kerja','Tenaga kerja project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txTenagaKErja.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 2);
+            psInsert.executeUpdate();
+            psInsert.close();
+            
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'Overheat Cost','Overheat Cost project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txOverHEadeCost.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 3);
+            psInsert.executeUpdate();
+            psInsert.close();
+            
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'Management Cost','Management Cost project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txManagementCost.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 4);
+            psInsert.executeUpdate();
+            psInsert.close();
+            
+            qry = "insert into transactions (title,description,"
+                    + "value,created_at,modified_at,"
+                    + "created_by,project_id,account_id"
+                    + ") values ("
+                    + "'PPN','PPN project',"
+                    + "?,now(),now(),"
+                    + "?,?,?"
+                    + ");";
+            psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, Integer.valueOf(txPPN.getText().replace(".", "")));
+            psInsert.setInt(2, userID);
+            psInsert.setInt(3, projectID);
+            psInsert.setInt(4, 5);
+            psInsert.executeUpdate();
+            psInsert.close();
+            //end insert transactions
             
         } catch (Exception ex) {
             System.out.println(" error in btsaveProjectActionPerformed = " + ex.getMessage());
@@ -4715,7 +4939,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btsaveProjectActionPerformed
 
     private void tbProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProjectMouseClicked
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            prepareEditProjects(tbProject);
+        }
     }//GEN-LAST:event_tbProjectMouseClicked
 
     private void tbProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProjectKeyReleased
@@ -4785,6 +5011,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProjects();
         }
     }//GEN-LAST:event_searchProjectKeyReleased
+
+    private void txMaterialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txMaterialFocusGained
+        txMaterial.selectAll();
+    }//GEN-LAST:event_txMaterialFocusGained
+
+    private void txPeralatanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPeralatanFocusGained
+        txPeralatan.selectAll();
+    }//GEN-LAST:event_txPeralatanFocusGained
+
+    private void txTenagaKErjaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txTenagaKErjaFocusGained
+        txTenagaKErja.selectAll();
+    }//GEN-LAST:event_txTenagaKErjaFocusGained
+
+    private void txOverHEadeCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txOverHEadeCostFocusGained
+        txOverHEadeCost.selectAll();
+    }//GEN-LAST:event_txOverHEadeCostFocusGained
+
+    private void txManagementCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txManagementCostFocusGained
+        txManagementCost.selectAll();
+    }//GEN-LAST:event_txManagementCostFocusGained
+
+    private void txPPNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPPNFocusGained
+        txPPN.selectAll();
+    }//GEN-LAST:event_txPPNFocusGained
+
+    private void txQTYProductsinProjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectFocusGained
+        txQTYProductsinProject.selectAll();
+    }//GEN-LAST:event_txQTYProductsinProjectFocusGained
+
+    private void ProductPopMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductPopMenuMouseExited
+        System.out.println(" x = "+evt.getX()+" y = "+evt.getY());
+        if ((showMenuProduct && (evt.getX() < 0 || evt.getX() >= 80))
+                || (showMenuProduct && (evt.getY() < 0 || evt.getY() >= 30))) {
+            ProductPopMenu.setVisible(false);
+            showMenuProduct = false;
+        }
+    }//GEN-LAST:event_ProductPopMenuMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
@@ -4987,6 +5250,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextField txPrice;
     private javax.swing.JTextField txProductsID;
     private javax.swing.JTextField txProjectNAme;
+    private javax.swing.JTextField txProjectid;
     private javax.swing.JTextField txQTY;
     private javax.swing.JTextField txQTYProductsinProject;
     private javax.swing.JTextField txSKU;
@@ -5027,20 +5291,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     
     
     public void viewProjects() {
+        common.functionCommon fc = new common.functionCommon();
         int limit = 15;
         String qry = "", orderBy = "", Condition = "";
         if (searchProject.getText().length() > 0) {
-            if (filterProject.toString().equalsIgnoreCase("TITLE")) {
+            if (filterProject.getSelectedItem().toString().equalsIgnoreCase("TITLE")) {
                 Condition = " where a.title like '%" + searchProject.getText() + "%'";
-            } 
+            } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("LEADER")) {
+                Condition = " where b.first_name like '%" + searchProject.getText() + "%' "
+                        + " or b.last_name like '%" + searchProject.getText() + "%'  ";
+            } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("CLIENT")) {
+                Condition = " where c.first_name like '%" + searchProject.getText() + "%' "
+                        + " or c.last_name like '%" + searchProject.getText() + "%'  ";
+            } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("START ON")) {
+                Condition = " where lower(to_char(a.starts_on,'DD MON YYYY'))  =lower('" + searchProject.getText() + "') ";
+            } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("STATUS")) {
+                Condition = " where a.status  ='" + fc.getStatusProjectIndex(searchProject.getText()) + "' ";
+            }
             
         }
-        Condition ="";
-
 
 
         int positionNow = (Integer.valueOf(txPageProject.getText()) - 1);
-        common.functionCommon fc = new common.functionCommon();
+        
         if (positionNow == 0) {
             btPreviousProject.setEnabled(false);
             btFirstProject.setEnabled(false);
@@ -5492,31 +5765,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
-    void viewProjectDetailEmpty() {
-        txProjectNAme.setText("PROJECT NAME");
-        projectDescription.setText("Description");
-        cbLeaderinProject.removeAllItems();
-        cbClientinProject.removeAllItems();
-        Date dt = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        txStartProject.setText(sdf.format(dt));
-        txDuedate.setText(sdf.format(dt));
-        txLocation.setText("");
-        cbProductsInProject.removeAllItems();
-        txMaterial.setText("0");
-        txPeralatan.setText("0");
-        txTenagaKErja.setText("0");
-        txOverHEadeCost.setText("0");
-        txManagementCost.setText("0");
-        lbTotal.setText("0");
-        txPPN.setText("0");
-        lbGrandTotal.setText("0");
-
-        java.util.Vector rowData = null;
+    
+    void getDataClientAndLEader() {
         // get Data Leader getData Leader and client
         common.functionCommon fc = new common.functionCommon();
         try {
+            cbLeaderinProject.removeAllItems();
+            cbClientinProject.removeAllItems();
             String qry = "select id,first_name,last_name from user "
                     + "where first_name is not null and first_name<>'' "
                     + "and last_name is not null and last_name<>'' "
@@ -5557,6 +5812,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
         //end getData Leader and client
+    }
+
+    void viewProjectDetailEmpty() {
+        txProjectid.setText("");
+        txProjectNAme.setText("PROJECT NAME");
+        projectDescription.setText("Description");
+        Date dt = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        txStartProject.setText(sdf.format(dt));
+        txDuedate.setText(sdf.format(dt));
+        txLocation.setText("");
+        cbProductsInProject.removeAllItems();
+        txMaterial.setText("0");
+        txPeralatan.setText("0");
+        txTenagaKErja.setText("0");
+        txOverHEadeCost.setText("0");
+        txManagementCost.setText("0");
+        lbTotal.setText("0");
+        txPPN.setText("0");
+        lbGrandTotal.setText("0");
+
+        getDataClientAndLEader();
+        
         refreshTableProductInProject();
         refreshcbProductsInProject();
         refreshTablePeopleINProject();
@@ -5821,6 +6099,87 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditProduct(table);
+                }
+            });
+
+            buttons.get(1).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dropDataProduct(table);
+                }
+            });
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+    
+    class ButtonsEditorProjects extends ButtonsPanel implements TableCellEditor {
+
+        public ButtonsEditorProjects(final JTable table) {
+            super();
+            MouseListener ml = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    ButtonModel m = ((JButton) e.getSource()).getModel();
+                    if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
+                        setBackground(table.getBackground());
+                    }
+
+                    table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
+                }
+            };
+            buttons.get(0).addMouseListener(ml);
+            buttons.get(1).addMouseListener(ml);
+
+            buttons.get(0).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prepareEditProjects(table);
                 }
             });
 
