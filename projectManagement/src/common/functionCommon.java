@@ -4,6 +4,8 @@
  */
 package common;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -159,6 +161,13 @@ public class functionCommon {
     
     public String viewDatefromSQL(String columnName,String asView) {
         String getBack="to_char("+columnName+",'DD MON YYYY') AS "+asView;
+        return getBack;
+    }
+    
+    public String convertDateToString(Date dt) {
+        String getBack="";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        getBack = sdf.format(dt);
         return getBack;
     }
     
