@@ -61,7 +61,7 @@ public class formMenu extends javax.swing.JFrame {
      */
     public int userID;
     public int role_id;
-    
+
     public formMenu() {
         initComponents();
         settingInternalFrame(userFrame.getUI());
@@ -74,7 +74,7 @@ public class formMenu extends javax.swing.JFrame {
         settingInternalFrame(accountsFrame.getUI());
         settingInternalFrame(transactionsFrame.getUI());
     }
-    
+
     void settingInternalFrame(InternalFrameUI ui) {
         if (ui instanceof BasicInternalFrameUI) {
             BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
@@ -577,9 +577,10 @@ public class formMenu extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         lbGrandTotal = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
-        jButton17 = new javax.swing.JButton();
+        btDelProject = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         projectDescription = new panelLayout.txAreaDescription();
+        btPreviewProject = new javax.swing.JButton();
         txProjectid = new javax.swing.JTextField();
         txProjectid.setVisible(false);
         financeFrame = new javax.swing.JInternalFrame();
@@ -1893,6 +1894,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     prjStatus.setBackground(new java.awt.Color(255, 255, 255));
     prjStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<html><font color=#F52887>Pending</font></html>", "<html><font color=orange>In Process</font></html>", "<html><font color=green>Finished</font></html>" }));
+    prjStatus.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            prjStatusItemStateChanged(evt);
+        }
+    });
     jPanel4.add(prjStatus);
     prjStatus.setBounds(110, 170, 230, 30);
 
@@ -2299,14 +2305,19 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel9.add(jPanel10);
     jPanel10.setBounds(10, 660, 440, 390);
 
-    jButton17.setBackground(new java.awt.Color(255, 0, 51));
-    jButton17.setForeground(new java.awt.Color(255, 255, 255));
-    jButton17.setText("Delete This Project");
-    jButton17.setBorder(null);
-    jButton17.setBorderPainted(false);
-    jButton17.setFocusPainted(false);
-    jPanel9.add(jButton17);
-    jButton17.setBounds(460, 530, 350, 25);
+    btDelProject.setBackground(new java.awt.Color(180, 37, 77));
+    btDelProject.setForeground(new java.awt.Color(255, 255, 255));
+    btDelProject.setText("Delete This Project");
+    btDelProject.setBorder(null);
+    btDelProject.setBorderPainted(false);
+    btDelProject.setFocusPainted(false);
+    btDelProject.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btDelProjectActionPerformed(evt);
+        }
+    });
+    jPanel9.add(btDelProject);
+    btDelProject.setBounds(460, 530, 370, 25);
 
     projectDescription.setColumns(20);
     projectDescription.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -2321,6 +2332,21 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     jPanel9.add(jScrollPane8);
     jScrollPane8.setBounds(10, 50, 650, 120);
+
+    btPreviewProject.setBackground(new java.awt.Color(57, 181, 74));
+    btPreviewProject.setForeground(new java.awt.Color(255, 255, 255));
+    btPreviewProject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btReportProject.png"))); // NOI18N
+    btPreviewProject.setText("View Project Report");
+    btPreviewProject.setBorder(null);
+    btPreviewProject.setBorderPainted(false);
+    btPreviewProject.setFocusPainted(false);
+    btPreviewProject.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btPreviewProjectActionPerformed(evt);
+        }
+    });
+    jPanel9.add(btPreviewProject);
+    btPreviewProject.setBounds(460, 570, 370, 25);
 
     jScrollPane7.setViewportView(jPanel9);
 
@@ -2755,7 +2781,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -2767,7 +2793,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         userFrame.setVisible(true);
         viewUser();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void btLeftUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftUSerActionPerformed
         if (btLeftUSer.getText().equalsIgnoreCase("USERS")) {
             jButton1ActionPerformed(null);
@@ -2776,7 +2802,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             transactionsFrame.setVisible(true);
         }
     }//GEN-LAST:event_btLeftUSerActionPerformed
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -2784,7 +2810,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         projectFrame.setVisible(true);
         viewProjects();
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
     void clearAddUSerFrame() {
         txInUserName.setEditable(true);
         txuserID.setText("");
@@ -2799,7 +2825,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         companyName.setText("");
         cbRoles.setSelectedItem("team");
     }
-    
+
     int getIdROlesFromNAme(String str) {
         int getBack = 100;
         common.functionCommon fc = new common.functionCommon();
@@ -2854,7 +2880,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         // end add roles options
         clearAddUSerFrame();
     }//GEN-LAST:event_jButton6ActionPerformed
-    
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (btLeftUSer.isVisible()) {
             jButton1ActionPerformed(null);
@@ -2862,7 +2888,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             closeAllInternalFrame();
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-    
+
     boolean isEmailExistonEdit(String mail, String userID) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -2885,7 +2911,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     boolean isEmailExist(String mail) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -2908,7 +2934,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     boolean isUserNameExist(String str) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -2931,7 +2957,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String qry = "";
         boolean canAccess = true;
@@ -2961,20 +2987,20 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
             if (txEmail.getText().length() > 0 && canAccess) {
-                
+
                 if (!fc.isValidEmailAddress(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                     javax.swing.JOptionPane.showConfirmDialog(null, "Email not valid", "Information",
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
-                
+
                 if (isEmailExist(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                 }
             }
-            
+
             if (txInUserName.getText().length() > 0 && canAccess) {
                 if (isUserNameExist(txInUserName.getText())) {
                     txInUserName.requestFocus();
@@ -2982,8 +3008,8 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             }
             if (canAccess) {
-                
-                
+
+
                 String EnkripPAssword = fc.MD5(pass1);
                 try {
                     if (txuserID.getText().length() < 1) {
@@ -3000,16 +3026,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                                 + "," + getIdROlesFromNAme(cbRoles.getSelectedItem().toString()) + ""
                                 + ",now(),now());";
                     }
-                    
+
                     if (fc.isDebugging) {
                         System.out.println(" qry = " + qry);
                     }
                     Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                     Statement st = cn.createStatement();
                     st.executeUpdate(qry);
-                    
-                    
-                    
+
+
+
                     st.close();
                     cn.close();
                 } catch (Exception ex) {
@@ -3042,7 +3068,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
             }
-            
+
             if (txEmail.getText().length() > 0 && canAccess) {
                 if (!fc.isValidEmailAddress(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
@@ -3050,13 +3076,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     javax.swing.JOptionPane.showConfirmDialog(null, "Email not valid", "Information",
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
-                
+
                 if (isEmailExistonEdit(txEmail.getText(), txuserID.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                 }
             }
-            
+
             if (canAccess) {
                 try {
                     qry = "update user set email='" + txEmail.getText() + "',"
@@ -3083,88 +3109,88 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                 }
             }
-            
+
             if (fc.isDebugging) {
                 System.out.println(" update user " + qry);
             }
             //end check password 
         }
     }//GEN-LAST:event_jButton8ActionPerformed
-    
+
     private void txFirstNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txFirstNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txLAstNAme.requestFocus();
         }
     }//GEN-LAST:event_txFirstNameKeyReleased
-    
+
     private void txLAstNAmeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLAstNAmeKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             cbRoles.requestFocus();
         }
     }//GEN-LAST:event_txLAstNAmeKeyReleased
-    
+
     private void cbRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbRolesKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txEmail.requestFocus();
         }
     }//GEN-LAST:event_cbRolesKeyReleased
-    
+
     private void phoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             address.requestFocus();
         }
     }//GEN-LAST:event_phoneKeyReleased
-    
+
     private void addressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             companyName.requestFocus();
         }
     }//GEN-LAST:event_addressKeyReleased
-    
+
     private void txInUserNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txInUserNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txPAss1.requestFocus();
         }
     }//GEN-LAST:event_txInUserNameKeyReleased
-    
+
     private void txPAss1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPAss1KeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txPAss2.requestFocus();
         }
     }//GEN-LAST:event_txPAss1KeyReleased
-    
+
     private void txPAss2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPAss2KeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txFirstName.requestFocus();
         }
     }//GEN-LAST:event_txPAss2KeyReleased
-    
+
     private void txEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txEmailKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             phone.requestFocus();
         }
     }//GEN-LAST:event_txEmailKeyReleased
-    
+
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
         txPage.setText(String.valueOf(Integer.valueOf(txPage.getText()) + 1));
         viewUser();
     }//GEN-LAST:event_btNextActionPerformed
-    
+
     private void btPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousActionPerformed
         txPage.setText(String.valueOf(Integer.valueOf(txPage.getText()) - 1));
         viewUser();
     }//GEN-LAST:event_btPreviousActionPerformed
-    
+
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
         txPage.setText("1");
         viewUser();
     }//GEN-LAST:event_btFirstActionPerformed
-    
+
     private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
         txPage.setText(String.valueOf(lastPageUSer));
         viewUser();
     }//GEN-LAST:event_btLastActionPerformed
-    
+
     private void txPageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPage.getText().length() > 0) {
@@ -3178,7 +3204,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewUser();
         }
     }//GEN-LAST:event_txPageKeyReleased
-    
+
     public void deletePeopleInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this People?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3211,7 +3237,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void deleteProductInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this products?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3244,7 +3270,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void deleteAccounts(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3276,7 +3302,44 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
+    public void dropDataProject(JTable table) {
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Project?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                int rowTable[] = table.getSelectedRows();
+                for (int x = 0; x < rowTable.length; x++) {
+                    if (x > 0) {
+                        qry += ",";
+                    }
+                    qry += table.getValueAt(rowTable[x], 0).toString();
+                }
+                String projectIDLISt = qry;
+                qry = "delete from assignments where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from item_project where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from transactions where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from projects where id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+
+                st.close();
+                cn.close();
+                viewProjects();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in dropDataProject " + ex.getMessage());
+                }
+            }
+        }
+    }
+
     public void dropDataProduct(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Inventory?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -3297,17 +3360,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 qry = "delete from inventory_prices where inventory_id in "
                         + "(select id from inventories where item_id in "
                         + "(select id from items where id in (" + itemIDLISt + ")))";
-                System.out.println("qry 1 " + qry);
                 st.executeUpdate(qry);
                 qry = "delete from inventories where item_id in "
                         + "(select id from items where id in (" + itemIDLISt + "))";
-                System.out.println("qry 2 " + qry);
                 st.executeUpdate(qry);
-                
+
                 qry = "delete from items where id in (" + itemIDLISt + ");";
-                if (fc.isDebugging) {
-                    System.out.println(" qry delete inventory = " + qry);
-                }
                 st.executeUpdate(qry);
                 st.close();
                 cn.close();
@@ -3319,7 +3377,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public boolean OnlySuperAdminCandeleteAdmin(int roleSelected, JTable table) {
         boolean getBack = true;
         common.functionCommon fc = new common.functionCommon();
@@ -3353,7 +3411,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     public void dropDataUSer(JTable table) {
         if (OnlySuperAdminCandeleteAdmin(role_id, table)) {
             if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this user?", "Question",
@@ -3387,7 +3445,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void prepareEditUSer(String userEditted) {
         jButton6ActionPerformed(null);
         txuserID.setText(String.valueOf(userEditted));
@@ -3421,10 +3479,15 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         txInUserName.setEditable(false);
     }
-    
+
     public void prepareEditProjects(JTable table) {
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
+        btPreviewProject.setVisible(false);
+        prjStatus.removeAllItems();
+        prjStatus.addItem("<html><font color=#F52887>Pending</font></html>");
+        prjStatus.addItem("<html><font color=orange>In Process</font></html>");
+        prjStatus.addItem("<html><font color=green>Finished</font></html>");
         txProjectid.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
         common.functionCommon fc = new common.functionCommon();
         getDataClientAndLEader();
@@ -3442,10 +3505,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 cbLeaderinProject.setSelectedIndex(fc.getIndexComboBox(leaderMap, rs.getString("leader_id")));
                 cbClientinProject.setSelectedIndex(fc.getIndexComboBox(clientMap, rs.getString("client_id")));
                 txLocation.setText(rs.getString("location"));
-                prjStatus.setSelectedIndex(rs.getInt("status"));
+                prjStatus.setSelectedIndex(rs.getInt("status"));                    
                 txStartProject.setText(fc.convertDateToString(rs.getDate("starts_on")));
                 txDuedate.setText(fc.convertDateToString(rs.getDate("due_date")));
             }
+            prjStatusItemStateChanged(null);
 
             //view items in project 
             qry = "select a.item_id,a.inventory_qty,b.name "
@@ -3543,8 +3607,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         refreshTablePeopleINProject();
         refreshcbPeopleInProject();
         countGrandTotalAndTotal();
+        btDelProject.setVisible(true);
     }
-    
+
     public void prepareEditProduct(JTable table) {
         jButton9ActionPerformed(null);
         jButton19.setVisible(true);
@@ -3555,7 +3620,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 + " inner join inventories b on a.id=b.item_id "
                 + " inner join inventory_prices c on b.id=c.inventory_id "
                 + " where a.id=" + txProductsID.getText();
-        
+
         common.functionCommon fc = new common.functionCommon();
         if (fc.isDebugging) {
             System.out.println(" qry = " + qry);
@@ -3585,13 +3650,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             prepareEditUSer(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
         }
     }//GEN-LAST:event_tbUserMouseClicked
-    
+
     private void tbUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             dropDataUSer(tbUser);
         }
     }//GEN-LAST:event_tbUserKeyReleased
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -3599,7 +3664,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         productsFrame.setVisible(true);
         viewProducts();
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     void clearProductEditForm() {
         txItemName.setText("");
         txSKU.setText("");
@@ -3637,29 +3702,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 //        }
         clearProductEditForm();
     }//GEN-LAST:event_jButton9ActionPerformed
-    
+
     private void tbProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductMouseClicked
         if (evt.getClickCount() == 2) {
             prepareEditProduct(tbProduct);
         }
     }//GEN-LAST:event_tbProductMouseClicked
-    
+
     private void tbProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             dropDataProduct(tbProduct);
         }
     }//GEN-LAST:event_tbProductKeyReleased
-    
+
     private void btFirstProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstProductActionPerformed
         txPageProduct.setText("1");
         viewProducts();
     }//GEN-LAST:event_btFirstProductActionPerformed
-    
+
     private void btPreviousProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousProductActionPerformed
         txPageProduct.setText(String.valueOf(Integer.valueOf(txPageProduct.getText()) - 1));
         viewProducts();
     }//GEN-LAST:event_btPreviousProductActionPerformed
-    
+
     private void txPageProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageProductKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageProduct.getText().length() > 0) {
@@ -3673,29 +3738,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProducts();
         }
     }//GEN-LAST:event_txPageProductKeyReleased
-    
+
     private void btNextProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextProductActionPerformed
         txPageProduct.setText(String.valueOf(Integer.valueOf(txPageProduct.getText()) + 1));
         viewProducts();
     }//GEN-LAST:event_btNextProductActionPerformed
-    
+
     private void btLastProductLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastProductLastActionPerformed
         txPageProduct.setText(String.valueOf(lastPageProducts));
         viewProducts();
     }//GEN-LAST:event_btLastProductLastActionPerformed
-    
+
     private void txItemNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txItemNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txSKU.requestFocus();
         }
     }//GEN-LAST:event_txItemNameKeyReleased
-    
+
     private void txSKUKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSKUKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txQTY.requestFocus();
         }
     }//GEN-LAST:event_txSKUKeyReleased
-    
+
     private void txQTYKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -3712,7 +3777,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txQTYKeyReleased
-    
+
     private void txPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPriceKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -3729,7 +3794,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txPriceKeyReleased
-    
+
     int getIdCategoryItemFromName(String str) {
         int getBack = 100;
         common.functionCommon fc = new common.functionCommon();
@@ -3750,7 +3815,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     boolean isItemAlreadyExist(String str, String idTable) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -3774,7 +3839,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         boolean canAccess = true;
@@ -3783,25 +3848,25 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Item", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-            
+
         } else if (txSKU.getText().length() < 1) {
             txSKU.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter SKU", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-            
+
         } else if (txQTY.getText().length() < 1 && canAccess) {
             txQTY.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Quantity", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-            
+
         } else if (txPrice.getText().length() < 1 && canAccess) {
             txPrice.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Price", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-            
+
         }
         if (canAccess && txItemName.getText().length() > 0 && txProductsID.getText().length() < 1) {
             if (isItemAlreadyExist(txItemName.getText(), "")) {
@@ -3849,7 +3914,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.close();
                     psIdentity.close();
                     result.close();
-                    
+
                     qry = "insert into inventories (item_id"
                             + ",stock_in,stock_out"
                             + ",created_at,modified_at) values (?,0,0,now(),now())";
@@ -3863,7 +3928,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.close();
                     psIdentity.close();
                     result.close();
-                    
+
                     qry = "insert into inventory_prices (inventory_id"
                             + ",price_in,price_out) values (?,?,0)";
                     psInsert = cn.prepareStatement(qry);
@@ -3885,16 +3950,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     qry = "update inventory_prices set price_in = " + priceThis + " "
                             + " where inventory_id in (select id from inventories where item_id= " + txProductsID.getText() + ")";
                     st.executeUpdate(qry);
-                    
+
                     st.close();
                 }
                 if (fc.isDebugging) {
                     System.out.println(" qry = " + qry);
                 }
-                
-                
+
+
                 cn.close();
-                
+
             } catch (Exception ex) {
                 System.out.println(" error in jButton10ActionPerformed " + ex.getMessage());
             }
@@ -3903,20 +3968,20 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
-    
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         closeAllInternalFrame();
         productsFrame.setVisible(true);
         viewProducts();
     }//GEN-LAST:event_jButton11ActionPerformed
-    
+
     private void txDescriptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionKeyReleased
         if (evt.getKeyCode() == evt.VK_TAB) {
             txPrice.requestFocus();
             txDescription.setText(txDescription.getText().substring(0, (txDescription.getText().length() - 1)));
         }
     }//GEN-LAST:event_txDescriptionKeyReleased
-    
+
     private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPageProduct.getText()) > 1) {
@@ -3925,34 +3990,34 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProducts();
         }
     }//GEN-LAST:event_searchProductKeyReleased
-    
+
     private void searchProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusGained
         searchProduct.selectAll();
     }//GEN-LAST:event_searchProductFocusGained
-    
+
     private void searchProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusLost
         if (searchProduct.getText().length() < 1) {
             searchProduct.setText("Search");
         }
     }//GEN-LAST:event_searchProductFocusLost
-    
+
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         jButton3ActionPerformed(null);
     }//GEN-LAST:event_jButton13ActionPerformed
-    
+
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
         viewProjectDetailEmpty();
     }//GEN-LAST:event_jButton14ActionPerformed
-    
+
     private void txProjectNAmeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProjectNAmeFocusGained
         if (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME")) {
             txProjectNAme.setText("");
         }
         txProjectNAme.selectAll();
     }//GEN-LAST:event_txProjectNAmeFocusGained
-    
+
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -3966,13 +4031,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         dateChooserDialog1.showDialog(null, true);
     }//GEN-LAST:event_jButton15ActionPerformed
-    
+
     private void dateChooserDialog1OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog1OnSelectionChange
         if (dateChooserDialog1.getSelectedDate() != null) {
             txStartProject.setText(sdf.format(dateChooserDialog1.getSelectedDate().getTime()));
         }
     }//GEN-LAST:event_dateChooserDialog1OnSelectionChange
-    
+
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -3986,13 +4051,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         dateChooserDialog2.showDialog(null, true);
     }//GEN-LAST:event_jButton16ActionPerformed
-    
+
     private void dateChooserDialog2OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog2OnSelectionChange
         if (dateChooserDialog2.getSelectedDate() != null) {
             txDuedate.setText(sdf.format(dateChooserDialog2.getSelectedDate().getTime()));
         }
     }//GEN-LAST:event_dateChooserDialog2OnSelectionChange
-    
+
     private void txSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSearchKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPage.getText()) > 1) {
@@ -4001,7 +4066,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewUser();
         }
     }//GEN-LAST:event_txSearchKeyReleased
-    
+
     private void txPageFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageFocusLost
         if (txPage.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -4012,7 +4077,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPage.setText("1");
         }
     }//GEN-LAST:event_txPageFocusLost
-    
+
     private void txPageProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageProductFocusLost
         if (txPageProduct.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -4023,46 +4088,46 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPageProduct.setText("1");
         }
     }//GEN-LAST:event_txPageProductFocusLost
-    
+
     private void txSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusGained
         txSearch.selectAll();
     }//GEN-LAST:event_txSearchFocusGained
-    
+
     private void txSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusLost
         if (txSearch.getText().length() < 1) {
             txSearch.setText("Search");
         }
     }//GEN-LAST:event_txSearchFocusLost
-    
+
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         menuPop.show(jButton18, -80, 50);
         showMenuUser = true;
     }//GEN-LAST:event_jButton18ActionPerformed
-    
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         POPUpMenuUsuallycommand();
         prepareEditUSer(String.valueOf(userID));
         btLeftUSer.setVisible(false);
         btLeftRoles.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         POPUpMenuUsuallycommand();
         loginForm lf = new loginForm();
         lf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-    
+
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         POPUpMenuUsuallycommand();
         formWindowClosing(null);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-    
+
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         ProductPopMenu.show(jButton19, 0, 30);
         showMenuProduct = true;
     }//GEN-LAST:event_jButton19ActionPerformed
-    
+
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Inventory?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -4072,7 +4137,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 String qry = "";
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 Statement st = cn.createStatement();
-                
+
                 qry = "delete from inventory_prices where inventory_id in "
                         + "(select id from inventories where item_id in "
                         + "(select id from items where id in (" + txProductsID.getText() + ")))";
@@ -4082,16 +4147,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         + "(select id from items where id in (" + txProductsID.getText() + "))";
                 System.out.println("qry 2 " + qry);
                 st.executeUpdate(qry);
-                
+
                 qry = "delete from items where id in (" + txProductsID.getText() + ");";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete inventory = " + qry);
                 }
                 st.executeUpdate(qry);
-                
-                
-                
-                
+
+
+
+
                 st.close();
                 cn.close();
                 jButton11ActionPerformed(null);
@@ -4103,13 +4168,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-    
+
     private void txProjectNAmeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProjectNAmeFocusLost
         if (txProjectNAme.getText().length() < 1) {
             txProjectNAme.setText("PROJECT NAME");
         }
     }//GEN-LAST:event_txProjectNAmeFocusLost
-    
+
     private void lbFirstnameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseExited
         if ((showMenuUser && evt.getPoint().y < 0)
                 || (showMenuUser
@@ -4118,7 +4183,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuUser = false;
         }
     }//GEN-LAST:event_lbFirstnameMouseExited
-    
+
     private void menuPopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPopMouseExited
         if ((showMenuUser && (evt.getX() < 0 || evt.getX() > 99))
                 || (showMenuUser && (evt.getY() < 0 || evt.getY() > 59))) {
@@ -4126,19 +4191,19 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuUser = false;
         }
     }//GEN-LAST:event_menuPopMouseExited
-    
+
     private void lbFirstnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseClicked
         menuPop.show(jButton18, -80, 50);
         showMenuUser = true;
     }//GEN-LAST:event_lbFirstnameMouseClicked
-    
+
     private void jButton18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseMoved
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_jButton18MouseMoved
-    
+
     private void jButton18MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseExited
         if ((showMenuUser && evt.getY() < 0)
                 || (showMenuUser
@@ -4147,7 +4212,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuUser = false;
         }
     }//GEN-LAST:event_jButton18MouseExited
-    
+
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -4158,16 +4223,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         btLeftRoles.setVisible(true);
         btLeftRoles.setText("ACCOUNTS");
     }//GEN-LAST:event_jButton12ActionPerformed
-    
+
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
             jButton4.setOpaque(false);
             jButton4.setForeground(Color.WHITE);
         }
-        
+
     }//GEN-LAST:event_jButton4MouseExited
-    
+
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
@@ -4176,7 +4241,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton4.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton4MouseEntered
-    
+
     void disableALlButtonHeader() {
         jButton4.setOpaque(false);
         jButton4.setForeground(Color.WHITE);
@@ -4187,29 +4252,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         jButton1.setOpaque(false);
         jButton1.setForeground(Color.WHITE);
     }
-    
+
     void disableButtonLeft() {
         btLeftRoles.setBackground(new java.awt.Color(192, 192, 192));
     }
-    
+
     private void lbFirstnameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseEntered
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_lbFirstnameMouseEntered
-    
+
     private void jButton18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseEntered
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_jButton18MouseEntered
-    
+
     private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
         lbFirstnameMouseClicked(null);
     }//GEN-LAST:event_jButton18MouseClicked
-    
+
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
         if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(true);
@@ -4217,14 +4282,14 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton3.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton3MouseEntered
-    
+
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
         if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(false);
             jButton3.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton3MouseExited
-    
+
     private void jButton12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseEntered
         if (!financeFrame.isVisible()
                 && !accountsFrame.isVisible()) {
@@ -4233,7 +4298,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton12.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton12MouseEntered
-    
+
     private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
         if (!financeFrame.isVisible()
                 && !accountsFrame.isVisible()) {
@@ -4241,7 +4306,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton12.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton12MouseExited
-    
+
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(true);
@@ -4249,16 +4314,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             jButton1.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton1MouseEntered
-    
+
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(false);
             jButton1.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton1MouseExited
-    
+
     private void btLeftRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftRolesActionPerformed
-        
+
         if (btLeftRoles.getText().equalsIgnoreCase("ACCOUNTS")) {
             disableButtonLeft();
             btLeftRolesMouseEntered(null);
@@ -4266,31 +4331,31 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewAccounts();
         }
     }//GEN-LAST:event_btLeftRolesActionPerformed
-    
+
     private void btLeftRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseEntered
         if (!accountsFrame.isVisible()) {
             btLeftRoles.setBackground(new java.awt.Color(153, 153, 255));
         }
     }//GEN-LAST:event_btLeftRolesMouseEntered
-    
+
     private void btLeftRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseExited
         if (!accountsFrame.isVisible()) {
             btLeftRoles.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_btLeftRolesMouseExited
-    
+
     private void searchProduct1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1FocusGained
-    
+
     private void searchProduct1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1FocusLost
-    
+
     private void searchProduct1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1KeyReleased
-    
+
     private void accNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (acc.getText().length() > 0 && acc.getText().length() > 0) {
@@ -4298,13 +4363,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_accNameKeyReleased
-    
+
     private void accKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             accName.requestFocus();
         }
     }//GEN-LAST:event_accKeyReleased
-    
+
     private boolean isACCExist(String idUnique) {
         boolean getBack = false;
         common.functionCommon fc = new common.functionCommon();
@@ -4363,56 +4428,56 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_jButton20ActionPerformed
-    
+
     private void accFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusGained
         if (acc.getText().equalsIgnoreCase("ACC#")) {
             acc.setText("");
             acc.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_accFocusGained
-    
+
     private void accFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusLost
         if (acc.getText().length() < 1) {
             acc.setText("ACC#");
             acc.setForeground(new java.awt.Color(204, 204, 204));
         }
     }//GEN-LAST:event_accFocusLost
-    
+
     private void accNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusGained
         if (accName.getText().equalsIgnoreCase("Account Name")) {
             accName.setText("");
             accName.setForeground(Color.BLACK);
         }
-        
+
     }//GEN-LAST:event_accNameFocusGained
-    
+
     private void accNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusLost
         if (accName.getText().length() < 1) {
             accName.setText("Account Name");
             accName.setForeground(new java.awt.Color(204, 204, 204));
         }
     }//GEN-LAST:event_accNameFocusLost
-    
+
     private void tbAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAccountsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbAccountsMouseClicked
-    
+
     private void tbAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAccountsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteAccounts(tbAccounts);
         }
     }//GEN-LAST:event_tbAccountsKeyReleased
-    
+
     private void btFirstAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstAccountsActionPerformed
         txPageAccounts.setText("1");
         viewAccounts();
     }//GEN-LAST:event_btFirstAccountsActionPerformed
-    
+
     private void btPreviousAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) - 1));
         viewAccounts();
     }//GEN-LAST:event_btPreviousAccountsActionPerformed
-    
+
     private void txPageAccountsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageAccountsFocusLost
         if (txPageAccounts.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -4423,7 +4488,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPageAccounts.setText("1");
         }
     }//GEN-LAST:event_txPageAccountsFocusLost
-    
+
     private void txPageAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageAccountsKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageAccounts.getText().length() > 0) {
@@ -4437,61 +4502,61 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewAccounts();
         }
     }//GEN-LAST:event_txPageAccountsKeyReleased
-    
+
     private void btNextAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) + 1));
         viewAccounts();
     }//GEN-LAST:event_btNextAccountsActionPerformed
-    
+
     private void btLastAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(lastPageAccounts));
         viewAccounts();
     }//GEN-LAST:event_btLastAccountsActionPerformed
-    
+
     private void searchProduct2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct2FocusGained
-    
+
     private void searchProduct2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct2FocusLost
-    
+
     private void searchProduct2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct2KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct2KeyReleased
-    
+
     private void tbTransactionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTransactionsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbTransactionsMouseClicked
-    
+
     private void tbTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionsKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tbTransactionsKeyReleased
-    
+
     private void btFirstTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstTransactionsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btFirstTransactionsActionPerformed
-    
+
     private void btPreviousTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousTransactionsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btPreviousTransactionsActionPerformed
-    
+
     private void txPageTransactionsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageTransactionsFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txPageTransactionsFocusLost
-    
+
     private void txPageTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageTransactionsKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txPageTransactionsKeyReleased
-    
+
     private void btNextTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextTransactionsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btNextTransactionsActionPerformed
-    
+
     private void btLastTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastTransactionsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btLastTransactionsActionPerformed
-    
+
     private void txLocationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLocationKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txLocationKeyReleased
@@ -4505,9 +4570,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         common.functionCommon fc = new common.functionCommon();
         lbTotal.setText(fc.digitNumber(String.valueOf(total)));
         int countDiscount = total * (Integer.valueOf(txPPN.getText())) / 100;
-        System.out.println("countDiscount = " + countDiscount);
         total -= countDiscount;
-        System.out.println("total = " + total);
         lbGrandTotal.setText(fc.digitNumber(String.valueOf(total)));
     }
     private void txMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaterialKeyReleased
@@ -4518,7 +4581,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPeralatan.requestFocus();
         }
     }//GEN-LAST:event_txMaterialKeyReleased
-    
+
     private void txPeralatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPeralatanKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPeralatan, evt);
@@ -4527,7 +4590,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txTenagaKErja.requestFocus();
         }
     }//GEN-LAST:event_txPeralatanKeyReleased
-    
+
     private void txTenagaKErjaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenagaKErjaKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txTenagaKErja, evt);
@@ -4536,7 +4599,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txOverHEadeCost.requestFocus();
         }
     }//GEN-LAST:event_txTenagaKErjaKeyReleased
-    
+
     private void txOverHEadeCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txOverHEadeCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txOverHEadeCost, evt);
@@ -4545,7 +4608,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txManagementCost.requestFocus();
         }
     }//GEN-LAST:event_txOverHEadeCostKeyReleased
-    
+
     private void txManagementCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txManagementCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txManagementCost, evt);
@@ -4553,7 +4616,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPPN.requestFocus();
         }
     }//GEN-LAST:event_txManagementCostKeyReleased
-    
+
     private void txPPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPPNKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPPN, evt);
@@ -4562,7 +4625,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPPN.setText("100");
         }
     }//GEN-LAST:event_txPPNKeyReleased
-    
+
     private void txQTYProductsinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -4582,7 +4645,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txQTYProductsinProjectKeyReleased
-    
+
     void refreshTablePeopleINProject() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -4611,7 +4674,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     private void refreshTableProductInProject() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -4639,7 +4702,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     void refreshcbProductsInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbProductsInProject.removeAllItems();
@@ -4666,7 +4729,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     void refreshcbPeopleInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbPeopleInProject.removeAllItems();
@@ -4696,7 +4759,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean canSave = true;
         if (canSave && productMap.get(cbProductsInProject.getSelectedIndex()).toString().length() < 1) {
@@ -4718,7 +4781,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
         }
-        
+
         if (canSave) {
             common.functionCommon fc = new common.functionCommon();
             try {
@@ -4745,7 +4808,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         boolean canSave = true;
@@ -4777,44 +4840,44 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
     private void projectDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusGained
         if (projectDescription.getText().equalsIgnoreCase("Description")) {
             projectDescription.setText("");
         }
         projectDescription.selectAll();
     }//GEN-LAST:event_projectDescriptionFocusGained
-    
+
     private void projectDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusLost
         if (projectDescription.getText().length() < 1) {
             projectDescription.setText("Description");
         }
     }//GEN-LAST:event_projectDescriptionFocusLost
-    
+
     private void txStartProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txStartProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txDuedate.requestFocus();
         }
     }//GEN-LAST:event_txStartProjectKeyReleased
-    
+
     private void txProjectNAmeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProjectNAmeKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             projectDescription.requestFocus();
         }
     }//GEN-LAST:event_txProjectNAmeKeyReleased
-    
+
     private void tbPeopleinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPeopleinProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deletePeopleInProject(tbPeopleinProject);
         }
     }//GEN-LAST:event_tbPeopleinProjectKeyReleased
-    
+
     private void tbProductInProjectsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductInProjectsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteProductInProject(tbProductInProjects);
         }
     }//GEN-LAST:event_tbProductInProjectsKeyReleased
-    
+
     private void jButton19MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseExited
         System.out.println("exited x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
         if (showMenuProduct) {
@@ -4828,14 +4891,14 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuProduct = false;
         }
     }//GEN-LAST:event_jButton19MouseExited
-    
+
     private void jButton19MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseEntered
         if (!showMenuProduct) {
             ProductPopMenu.show(jButton19, 0, 30);
             showMenuProduct = true;
         }
     }//GEN-LAST:event_jButton19MouseEntered
-    
+
     private void jButton19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseMoved
         System.out.println("moved x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
         if (!showMenuProduct) {
@@ -4843,11 +4906,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuProduct = true;
         }
     }//GEN-LAST:event_jButton19MouseMoved
-    
+
     public boolean isHasItemswhenEdit(int itemID, int projectID) {
         boolean getBack = false;
         try {
-            String qry = "select count(*) as total from item_project where project_id = " + projectID+" and item_id="+itemID;
+            String qry = "select count(*) as total from item_project where project_id = " + projectID + " and item_id=" + itemID;
             common.functionCommon fc = new common.functionCommon();
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
@@ -4863,64 +4926,271 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
-    private void btsaveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProjectActionPerformed
-        
+
+    public boolean isHasPeoplewhenEdit(int peopleID, int projectID) {
+        boolean getBack = false;
         try {
+            String qry = "select count(*) as total from "
+                    + " assignments where project_id = " + projectID + " and user_id=" + peopleID;
             common.functionCommon fc = new common.functionCommon();
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-            String qry = "";
-            PreparedStatement psInsert = null;
-            if (txProjectid.getText().length() > 0) {
-                qry = "update projects set "
-                        + " client_id=?"
-                        + " ,title=?"
-                        + " ,description=?"
-                        + " ,leader_id=?"
-                        + " ,status=?"
-                        + " ,starts_on=?"
-                        + " ,due_date=?"
-                        + " ,modified_at=now()"
-                        + " ,created_by=?"
-                        + " ,location=?"
-                        + " where id = " + txProjectid.getText();
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(clientMap.get(cbClientinProject.getSelectedIndex()).toString()));
-                psInsert.setString(2, txProjectNAme.getText());
-                psInsert.setString(3, projectDescription.getText());
-                psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
-                psInsert.setInt(5, prjStatus.getSelectedIndex());
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                
-                java.util.Date dt = sdf.parse(txStartProject.getText());
-                java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
-                psInsert.setTimestamp(6, dts);
-                
-                
-                dt = sdf.parse(txDuedate.getText());
-                dts = new java.sql.Timestamp(dt.getTime());
-                psInsert.setTimestamp(7, dts);
-                
-                psInsert.setInt(8, userID);
-                psInsert.setString(9, txLocation.getText());
-                psInsert.executeUpdate();
-                
-                int projectID = Integer.valueOf(txProjectid.getText());
-                
-                qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
-                Statement st = cn.createStatement();
-                ResultSet result = st.executeQuery(qry);
-                while (result.next()) {
-                    if (isHasItemswhenEdit(result.getInt("id"), projectID)) {
-                        qry = "update item_project set inventory_qty = ?,modified_at=now(),created_by=?  where project_id =? and item_id=?";
-                        psInsert = cn.prepareStatement(qry);                        
-                        psInsert.setInt(1, result.getInt("qty"));
-                        psInsert.setInt(2, userID);
-                        psInsert.setInt(3, projectID);
-                        psInsert.setInt(4, result.getInt("id"));
-                        psInsert.executeUpdate();
-                        psInsert.close();
-                    } else {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                if (rs.getInt("total") > 0) {
+                    getBack = true;
+                }
+            }
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+        }
+        return getBack;
+    }
+
+    private void btsaveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProjectActionPerformed
+        boolean canSave = true;
+        if (canSave && (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME") 
+                || txProjectNAme.getText().length()<1
+                )) {
+            canSave = false;
+            txProjectNAme.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Enter Project Name", "Information",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+        }
+
+        if (canSave && (projectDescription.getText().equalsIgnoreCase("Description")
+                ||projectDescription.getText().length()<1
+                )) {
+            canSave = false;
+            projectDescription.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Enter Project Description", "Information",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+        }
+
+        if (canSave && leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString().length() < 1) {
+            canSave = false;
+            cbLeaderinProject.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Select Leader", "Information",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+        }
+
+        if (canSave && clientMap.get(cbClientinProject.getSelectedIndex()).toString().length() < 1) {
+            canSave = false;
+            cbClientinProject.requestFocus();
+            javax.swing.JOptionPane.showConfirmDialog(null, "Select Client", "Information",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+        }
+        if (canSave) {
+            try {
+                common.functionCommon fc = new common.functionCommon();
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                String qry = "";
+                PreparedStatement psInsert = null;
+                if (txProjectid.getText().length() > 0) {
+                    qry = "update projects set "
+                            + " client_id=?"
+                            + " ,title=?"
+                            + " ,description=?"
+                            + " ,leader_id=?"
+                            + " ,status=?"
+                            + " ,starts_on=?"
+                            + " ,due_date=?"
+                            + " ,modified_at=now()"
+                            + " ,created_by=?"
+                            + " ,location=?"
+                            + " where id = " + txProjectid.getText();
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(clientMap.get(cbClientinProject.getSelectedIndex()).toString()));
+                    psInsert.setString(2, txProjectNAme.getText());
+                    psInsert.setString(3, projectDescription.getText());
+                    psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
+                    psInsert.setInt(5, prjStatus.getSelectedIndex());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                    java.util.Date dt = sdf.parse(txStartProject.getText());
+                    java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
+                    psInsert.setTimestamp(6, dts);
+
+
+                    dt = sdf.parse(txDuedate.getText());
+                    dts = new java.sql.Timestamp(dt.getTime());
+                    psInsert.setTimestamp(7, dts);
+
+                    psInsert.setInt(8, userID);
+                    psInsert.setString(9, txLocation.getText());
+                    psInsert.executeUpdate();
+
+                    int projectID = Integer.valueOf(txProjectid.getText());
+
+                    qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
+                    Statement st = cn.createStatement();
+                    ResultSet result = st.executeQuery(qry);
+                    while (result.next()) {
+                        if (isHasItemswhenEdit(result.getInt("id"), projectID)) {
+                            qry = "update item_project set inventory_qty = ?,modified_at=now(),created_by=?  where project_id =? and item_id=?";
+                            psInsert = cn.prepareStatement(qry);
+                            psInsert.setInt(1, result.getInt("qty"));
+                            psInsert.setInt(2, userID);
+                            psInsert.setInt(3, projectID);
+                            psInsert.setInt(4, result.getInt("id"));
+                            psInsert.executeUpdate();
+                            psInsert.close();
+                        } else {
+                            qry = "insert into item_project ("
+                                    + "project_id,type,item_id,inventory_qty"
+                                    + ",created_at,modified_at"
+                                    + ",created_by) values ("
+                                    + "?,?,?,?"
+                                    + ",now(),now()"
+                                    + ",?"
+                                    + ")";
+                            psInsert = cn.prepareStatement(qry);
+                            psInsert.setInt(1, projectID);
+                            psInsert.setString(2, "a");
+                            psInsert.setInt(3, result.getInt("id"));
+                            psInsert.setInt(4, result.getInt("qty"));
+                            psInsert.setInt(5, userID);
+                            psInsert.executeUpdate();
+                            psInsert.close();
+                        }
+                    }
+                    st.close();
+                    result.close();
+
+
+
+                    qry = "select * from cache_people_in_project where id_user=" + String.valueOf(userID);
+                    st = cn.createStatement();
+                    result = st.executeQuery(qry);
+                    while (result.next()) {
+                        if (!isHasPeoplewhenEdit(result.getInt("id_people"), projectID)) {
+                            qry = "insert into assignments (user_id,project_id) "
+                                    + " values (?,?)";
+                            psInsert = cn.prepareStatement(qry);
+                            psInsert.setInt(1, result.getInt("id_people"));
+                            psInsert.setInt(2, projectID);
+                            psInsert.executeUpdate();
+                            psInsert.close();
+                        }
+                    }
+                    st.close();
+                    result.close();
+
+                    //save allocated transactions
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txMaterial.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 0);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txPeralatan.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 1);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txTenagaKErja.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 2);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txOverHEadeCost.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 3);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txManagementCost.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 4);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "update transactions set "
+                            + " value=?,created_by=?,modified_at=now() "
+                            + " where project_id=? and account_id=?;";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txPPN.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 5);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+                    //end save allocated transactions
+
+                } else {
+                    qry = "insert into projects (client_id,title"
+                            + ",description,leader_id,status"
+                            + ",starts_on,due_date,created_at,modified_at"
+                            + ", created_by,location"
+                            + ") "
+                            + " values (?,?"
+                            + ",?,?,?"
+                            + ",?,?,now(),now()"
+                            + ",?,?"
+                            + ");";
+                    if (fc.isDebugging) {
+                        System.out.println(qry);
+                    }
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(clientMap.get(cbClientinProject.getSelectedIndex()).toString()));
+                    psInsert.setString(2, txProjectNAme.getText());
+                    psInsert.setString(3, projectDescription.getText());
+                    psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
+                    psInsert.setInt(5, prjStatus.getSelectedIndex());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                    java.util.Date dt = sdf.parse(txStartProject.getText());
+                    java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
+                    psInsert.setTimestamp(6, dts);
+
+
+                    dt = sdf.parse(txDuedate.getText());
+                    dts = new java.sql.Timestamp(dt.getTime());
+                    psInsert.setTimestamp(7, dts);
+
+                    psInsert.setInt(8, userID);
+                    psInsert.setString(9, txLocation.getText());
+                    psInsert.executeUpdate();
+                    PreparedStatement psIdentity = cn.prepareStatement("CALL IDENTITY()");
+                    ResultSet result = psIdentity.executeQuery();
+                    result.next();
+                    int projectID = result.getInt(1);
+                    psInsert.close();
+                    psIdentity.close();
+                    result.close();
+
+                    qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
+                    Statement st = cn.createStatement();
+                    result = st.executeQuery(qry);
+                    while (result.next()) {
                         qry = "insert into item_project ("
                                 + "project_id,type,item_id,inventory_qty"
                                 + ",created_at,modified_at"
@@ -4938,218 +5208,153 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         psInsert.executeUpdate();
                         psInsert.close();
                     }
-                    
-                }
-                
-                qry = "select ";
-                
-            } else {
-                qry = "insert into projects (client_id,title"
-                        + ",description,leader_id,status"
-                        + ",starts_on,due_date,created_at,modified_at"
-                        + ", created_by,location"
-                        + ") "
-                        + " values (?,?"
-                        + ",?,?,?"
-                        + ",?,?,now(),now()"
-                        + ",?,?"
-                        + ");";
-                if (fc.isDebugging) {
-                    System.out.println(qry);
-                }
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(clientMap.get(cbClientinProject.getSelectedIndex()).toString()));
-                psInsert.setString(2, txProjectNAme.getText());
-                psInsert.setString(3, projectDescription.getText());
-                psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
-                psInsert.setInt(5, prjStatus.getSelectedIndex());
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                
-                java.util.Date dt = sdf.parse(txStartProject.getText());
-                java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
-                psInsert.setTimestamp(6, dts);
-                
-                
-                dt = sdf.parse(txDuedate.getText());
-                dts = new java.sql.Timestamp(dt.getTime());
-                psInsert.setTimestamp(7, dts);
-                
-                psInsert.setInt(8, userID);
-                psInsert.setString(9, txLocation.getText());
-                psInsert.executeUpdate();
-                PreparedStatement psIdentity = cn.prepareStatement("CALL IDENTITY()");
-                ResultSet result = psIdentity.executeQuery();
-                result.next();
-                int projectID = result.getInt(1);
-                psInsert.close();
-                psIdentity.close();
-                result.close();
-                
-                qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
-                Statement st = cn.createStatement();
-                result = st.executeQuery(qry);
-                while (result.next()) {
-                    qry = "insert into item_project ("
-                            + "project_id,type,item_id,inventory_qty"
-                            + ",created_at,modified_at"
-                            + ",created_by) values ("
-                            + "?,?,?,?"
-                            + ",now(),now()"
-                            + ",?"
-                            + ")";
+                    st.close();
+                    result.close();
+
+                    qry = "select * from cache_people_in_project where id_user=" + String.valueOf(userID);
+                    st = cn.createStatement();
+                    result = st.executeQuery(qry);
+                    while (result.next()) {
+                        qry = "insert into assignments (user_id,project_id) "
+                                + " values (?,?)";
+                        psInsert = cn.prepareStatement(qry);
+                        psInsert.setInt(1, result.getInt("id_people"));
+                        psInsert.setInt(2, projectID);
+                        psInsert.executeUpdate();
+                        psInsert.close();
+                    }
+                    st.close();
+                    result.close();
+
+                    //insert transactions
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'Material','Material project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
                     psInsert = cn.prepareStatement(qry);
-                    psInsert.setInt(1, projectID);
-                    psInsert.setString(2, "a");
-                    psInsert.setInt(3, result.getInt("id"));
-                    psInsert.setInt(4, result.getInt("qty"));
-                    psInsert.setInt(5, userID);
+                    psInsert.setInt(1, Integer.valueOf(txMaterial.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 0);
                     psInsert.executeUpdate();
                     psInsert.close();
-                }
-                st.close();
-                result.close();
-                
-                qry = "select * from cache_people_in_project where id_user=" + String.valueOf(userID);
-                st = cn.createStatement();
-                result = st.executeQuery(qry);
-                while (result.next()) {
-                    qry = "insert into assignments (user_id,project_id) "
-                            + " values (?,?)";
+
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'Peralatan','Peralatan project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
                     psInsert = cn.prepareStatement(qry);
-                    psInsert.setInt(1, result.getInt("id_people"));
-                    psInsert.setInt(2, projectID);
+                    psInsert.setInt(1, Integer.valueOf(txPeralatan.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 1);
                     psInsert.executeUpdate();
                     psInsert.close();
+
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'Tenaga kerja','Tenaga kerja project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txTenagaKErja.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 2);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'Overheat Cost','Overheat Cost project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txOverHEadeCost.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 3);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'Management Cost','Management Cost project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txManagementCost.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 4);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+
+                    qry = "insert into transactions (title,description,"
+                            + "value,created_at,modified_at,"
+                            + "created_by,project_id,account_id"
+                            + ") values ("
+                            + "'PPN','PPN project',"
+                            + "?,now(),now(),"
+                            + "?,?,?"
+                            + ");";
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.setInt(1, Integer.valueOf(txPPN.getText().replace(".", "")));
+                    psInsert.setInt(2, userID);
+                    psInsert.setInt(3, projectID);
+                    psInsert.setInt(4, 5);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+                    //end insert transactions
+
+
                 }
-                st.close();
-                result.close();
-
-                //insert transactions
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'Material','Material project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txMaterial.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 0);
-                psInsert.executeUpdate();
-                psInsert.close();
-                
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'Peralatan','Peralatan project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txPeralatan.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 1);
-                psInsert.executeUpdate();
-                psInsert.close();
-                
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'Tenaga kerja','Tenaga kerja project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txTenagaKErja.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 2);
-                psInsert.executeUpdate();
-                psInsert.close();
-                
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'Overheat Cost','Overheat Cost project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txOverHEadeCost.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 3);
-                psInsert.executeUpdate();
-                psInsert.close();
-                
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'Management Cost','Management Cost project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txManagementCost.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 4);
-                psInsert.executeUpdate();
-                psInsert.close();
-                
-                qry = "insert into transactions (title,description,"
-                        + "value,created_at,modified_at,"
-                        + "created_by,project_id,account_id"
-                        + ") values ("
-                        + "'PPN','PPN project',"
-                        + "?,now(),now(),"
-                        + "?,?,?"
-                        + ");";
-                psInsert = cn.prepareStatement(qry);
-                psInsert.setInt(1, Integer.valueOf(txPPN.getText().replace(".", "")));
-                psInsert.setInt(2, userID);
-                psInsert.setInt(3, projectID);
-                psInsert.setInt(4, 5);
-                psInsert.executeUpdate();
-                psInsert.close();
-                //end insert transactions
-
-                
+                cn.close();
+            } catch (Exception ex) {
+                System.out.println(" error in btsaveProjectActionPerformed = " + ex.getMessage());
             }
-            cn.close();
-        } catch (Exception ex) {
-            System.out.println(" error in btsaveProjectActionPerformed = " + ex.getMessage());
         }
     }//GEN-LAST:event_btsaveProjectActionPerformed
-    
+
     private void tbProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProjectMouseClicked
         if (evt.getClickCount() == 2) {
             prepareEditProjects(tbProject);
         }
     }//GEN-LAST:event_tbProjectMouseClicked
-    
+
     private void tbProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProjectKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == evt.VK_DELETE) {
+            dropDataProject(tbProject);
+        }
     }//GEN-LAST:event_tbProjectKeyReleased
-    
+
     private void btLastProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastProjectActionPerformed
         txPageProject.setText(String.valueOf(lastPageProjects));
         viewProjects();
     }//GEN-LAST:event_btLastProjectActionPerformed
-    
+
     private void btNextProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextProjectActionPerformed
         txPageProject.setText(String.valueOf(Integer.valueOf(txPageProject.getText()) + 1));
         viewProjects();
     }//GEN-LAST:event_btNextProjectActionPerformed
-    
+
     private void txPageProjectFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageProjectFocusLost
         if (txPageProject.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -5160,7 +5365,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             txPageProject.setText("1");
         }
     }//GEN-LAST:event_txPageProjectFocusLost
-    
+
     private void txPageProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageProject.getText().length() > 0) {
@@ -5174,27 +5379,27 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProjects();
         }
     }//GEN-LAST:event_txPageProjectKeyReleased
-    
+
     private void btPreviousProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousProjectActionPerformed
         txPageProject.setText(String.valueOf(Integer.valueOf(txPageProject.getText()) - 1));
         viewProjects();
     }//GEN-LAST:event_btPreviousProjectActionPerformed
-    
+
     private void btFirstProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstProjectActionPerformed
         txPageProject.setText("1");
         viewProjects();
     }//GEN-LAST:event_btFirstProjectActionPerformed
-    
+
     private void searchProjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProjectFocusGained
         searchProject.selectAll();
     }//GEN-LAST:event_searchProjectFocusGained
-    
+
     private void searchProjectFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProjectFocusLost
         if (searchProject.getText().length() < 1) {
             searchProject.setText("Search");
         }
     }//GEN-LAST:event_searchProjectFocusLost
-    
+
     private void searchProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPageProject.getText()) > 1) {
@@ -5203,35 +5408,35 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProjects();
         }
     }//GEN-LAST:event_searchProjectKeyReleased
-    
+
     private void txMaterialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txMaterialFocusGained
         txMaterial.selectAll();
     }//GEN-LAST:event_txMaterialFocusGained
-    
+
     private void txPeralatanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPeralatanFocusGained
         txPeralatan.selectAll();
     }//GEN-LAST:event_txPeralatanFocusGained
-    
+
     private void txTenagaKErjaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txTenagaKErjaFocusGained
         txTenagaKErja.selectAll();
     }//GEN-LAST:event_txTenagaKErjaFocusGained
-    
+
     private void txOverHEadeCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txOverHEadeCostFocusGained
         txOverHEadeCost.selectAll();
     }//GEN-LAST:event_txOverHEadeCostFocusGained
-    
+
     private void txManagementCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txManagementCostFocusGained
         txManagementCost.selectAll();
     }//GEN-LAST:event_txManagementCostFocusGained
-    
+
     private void txPPNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPPNFocusGained
         txPPN.selectAll();
     }//GEN-LAST:event_txPPNFocusGained
-    
+
     private void txQTYProductsinProjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectFocusGained
         txQTYProductsinProject.selectAll();
     }//GEN-LAST:event_txQTYProductsinProjectFocusGained
-    
+
     private void ProductPopMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductPopMenuMouseExited
         System.out.println(" x = " + evt.getX() + " y = " + evt.getY());
         if ((showMenuProduct && (evt.getX() < 0 || evt.getX() >= 80))
@@ -5240,6 +5445,50 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             showMenuProduct = false;
         }
     }//GEN-LAST:event_ProductPopMenuMouseExited
+
+    private void btDelProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelProjectActionPerformed
+
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Project?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                String projectIDLISt = txProjectid.getText();
+                qry = "delete from assignments where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from item_project where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from transactions where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+                qry = "delete from projects where id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
+
+                st.close();
+                cn.close();
+                jButton3ActionPerformed(null);
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in dropDataProject " + ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btDelProjectActionPerformed
+
+    private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPreviewProjectActionPerformed
+
+    private void prjStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prjStatusItemStateChanged
+        if (prjStatus.getSelectedIndex()==2&&
+                txProjectid.getText().length()>0)
+            btPreviewProject.setVisible(true);
+        else
+            btPreviewProject.setVisible(false);
+    }//GEN-LAST:event_prjStatusItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -5248,6 +5497,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextField accName;
     private javax.swing.JInternalFrame accountsFrame;
     private javax.swing.JTextField address;
+    private javax.swing.JButton btDelProject;
     private javax.swing.JButton btFirst;
     private javax.swing.JButton btFirstAccounts;
     private javax.swing.JButton btFirstProduct;
@@ -5265,6 +5515,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton btNextProduct;
     private javax.swing.JButton btNextProject;
     private javax.swing.JButton btNextTransactions;
+    private javax.swing.JButton btPreviewProject;
     private javax.swing.JButton btPrevious;
     private javax.swing.JButton btPreviousAccounts;
     private javax.swing.JButton btPreviousProduct;
@@ -5293,7 +5544,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
@@ -5479,7 +5729,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     Map clientMap = new LinkedHashMap();
     Map productMap = new LinkedHashMap();
     Map peopleInProjectMap = new LinkedHashMap();
-    
+
     public void viewProjects() {
         common.functionCommon fc = new common.functionCommon();
         int limit = 13;
@@ -5498,12 +5748,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("STATUS")) {
                 Condition = " where a.status  ='" + fc.getStatusProjectIndex(searchProject.getText()) + "' ";
             }
-            
+
         }
-        
-        
+
+
         int positionNow = (Integer.valueOf(txPageProject.getText()) - 1);
-        
+
         if (positionNow == 0) {
             btPreviousProject.setEnabled(false);
             btFirstProject.setEnabled(false);
@@ -5513,7 +5763,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         orderBy = " order by name asc";
         int total = 0;
-        
+
         try {
             qry = "select count(*) as totalCount from projects a "
                     + " left join user b on a.leader_id = b.id "
@@ -5525,12 +5775,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 total = rs.getInt("totalCount");
                 lbCountProjectTable.setText(rs.getString("totalCount") + " Projects");
                 if (total > 0) {
-                    
+
                     lastPageProjects = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageProjects++;
                     }
-                    
+
                     if ((lastPageProjects - 1) <= positionNow) {
                         btNextProject.setEnabled(false);
                         btLastProject.setEnabled(false);
@@ -5576,10 +5826,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorProject = new java.util.Vector();
-            
+
             while (rs.next()) {
                 rowData = new java.util.Vector();
-                
+
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>" + rs.getString("description") + "</html>");
                 rowData.addElement(rs.getString("leaderf") + " " + rs.getString("leaderl"));
@@ -5588,7 +5838,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData.addElement(fc.getStatusProject(rs.getInt("status")));
                 rowData.addElement("");
                 vectorProject.addElement(rowData);
-                
+
             }
             tbProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelProject));
             lbPageCountProject.setText(" of " + lastPageProjects);
@@ -5600,7 +5850,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void viewProducts() {
         int limit = 13;
         String qry = "", orderBy = "", Condition = "";
@@ -5615,9 +5865,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 Condition = " where b.name = '" + searchProduct.getText() + "'";
             }
         }
-        
-        
-        
+
+
+
         int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
         common.functionCommon fc = new common.functionCommon();
         if (positionNow == 0) {
@@ -5629,7 +5879,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         orderBy = " order by name asc";
         int total = 0;
-        
+
         try {
             qry = "select count(*) as totalCount from inventories a " + Condition;
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
@@ -5639,12 +5889,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 total = rs.getInt("totalCount");
                 lbCountProductTable.setText(rs.getString("totalCount") + " Products");
                 if (total > 0) {
-                    
+
                     lastPageProducts = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageProducts++;
                     }
-                    
+
                     if ((lastPageProducts - 1) <= positionNow) {
                         btNextProduct.setEnabled(false);
                         btLastProductLast.setEnabled(false);
@@ -5686,10 +5936,10 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorProducts = new java.util.Vector();
-            
+
             while (rs.next()) {
                 rowData = new java.util.Vector();
-                
+
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement("<html><strong>" + rs.getString("name") + "</strong><br>" + rs.getString("description") + "</html>");
                 rowData.addElement(rs.getString("sku"));
@@ -5697,7 +5947,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData.addElement(rs.getString("modified_at"));
                 rowData.addElement("");
                 vectorProducts.addElement(rowData);
-                
+
             }
             tbProduct.tableChanged(new javax.swing.event.TableModelEvent(tmTabelProducts));
             lbPageCountProduct.setText(" of " + lastPageProducts);
@@ -5709,12 +5959,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     public void viewAccounts() {
         int limit = 12;
         String qry = "", orderBy = "", Condition = "";
-        
-        
+
+
         int positionNow = (Integer.valueOf(txPageAccounts.getText()) - 1);
         common.functionCommon fc = new common.functionCommon();
         if (positionNow == 0) {
@@ -5726,7 +5976,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         orderBy = " order by unique_id asc";
         int total = 0;
-        
+
         try {
             qry = "select count(*) as totalCount from accounts";
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
@@ -5736,12 +5986,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 total = rs.getInt("totalCount");
                 countAccounts.setText(rs.getString("totalCount") + " Accounts");
                 if (total > 0) {
-                    
+
                     lastPageAccounts = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageAccounts++;
                     }
-                    
+
                     if ((lastPageAccounts - 1) <= positionNow) {
                         btNextAccounts.setEnabled(false);
                         btLastAccounts.setEnabled(false);
@@ -5771,7 +6021,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     txPageAccounts.setText("0");
                 }
             }
-            
+
             int positionNOW2 = positionNow * limit;
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select id,unique_id,name from accounts" + orderBy + limiTation;
@@ -5781,35 +6031,35 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorAccounts = new java.util.Vector();
-            
+
             while (rs.next()) {
                 rowData = new java.util.Vector();
-                
+
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(rs.getString("unique_id"));
                 rowData.addElement(rs.getString("name"));
                 rowData.addElement("P/L");
                 rowData.addElement("P/L");
                 vectorAccounts.addElement(rowData);
-                
+
             }
             tbAccounts.tableChanged(new javax.swing.event.TableModelEvent(tmTabelAccounts));
             lbPageCountAccounts.setText(" of " + lastPageAccounts);
             st.close();
             cn.close();
-            
+
         } catch (Exception ex) {
             if (fc.isDebugging) {
                 System.out.println("Error in viewAccounts " + ex.getMessage());
             }
         }
     }
-    
+
     public void viewUser() {
         int limit = 15;
         common.functionCommon fc = new common.functionCommon();
         String qry = "", orderBy = "", Condition = "";
-        
+
         Condition = " where a.id<>" + userID + " ";
         if (role_id != 0) {
             Condition += " and a.roles_id<>0 ";
@@ -5817,7 +6067,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         if (role_id != 1 && role_id != 0) {
             Condition += " and a.roles_id<>1 ";
         }
-        
+
         if (txSearch.getText().length() > 0) {
             if (filterSearch.getSelectedItem().toString().equalsIgnoreCase("Name")) {
                 StringTokenizer st = new StringTokenizer(txSearch.getText(), " ");
@@ -5844,13 +6094,13 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 Condition += " and a.company_name like '%" + txSearch.getText() + "%' ";
             }
         }
-        
-        
-        
-        
+
+
+
+
         int positionNow = (Integer.valueOf(txPage.getText()) - 1);
-        
-        
+
+
         if (positionNow == 0) {
             btPrevious.setEnabled(false);
             btFirst.setEnabled(false);
@@ -5858,11 +6108,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             btPrevious.setEnabled(true);
             btFirst.setEnabled(true);
         }
-        
+
         orderBy = " order by name asc";
         int total = 0;
-        
-        
+
+
         try {
             qry = "select count(*) as totalCount from user a "
                     + " left join roles b on a.roles_id=b.id " + Condition;
@@ -5873,12 +6123,12 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 total = rs.getInt("totalCount");
                 lbCountUser.setText(rs.getString("totalCount") + " Users");
                 if (total > 0) {
-                    
+
                     lastPageUSer = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageUSer++;
                     }
-                    
+
                     if ((lastPageUSer - 1) <= positionNow) {
                         btNext.setEnabled(false);
                         btLast.setEnabled(false);
@@ -5935,7 +6185,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         nameUser += rs.getString("last_name");
                     }
                 }
-                
+
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(nameUser);
                 rowData.addElement(rs.getString("roles"));
@@ -5943,7 +6193,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData.addElement(rs.getString("company_name"));
                 rowData.addElement("");
                 vectorUser.addElement(rowData);
-                
+
             }
             tbUser.tableChanged(new javax.swing.event.TableModelEvent(tmTabelUser));
             lbCountPage.setText(" of " + lastPageUSer);
@@ -5955,7 +6205,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-    
+
     void getDataClientAndLEader() {
         // get Data Leader getData Leader and client
         common.functionCommon fc = new common.functionCommon();
@@ -5984,7 +6234,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                         rs.getString("first_name") + " "
                         + rs.getString("last_name"), cbLeaderinProject));
                 leaderMap.put(cbLeaderinProject.getItemCount() - 1, rs.getInt("id"));
-                
+
                 cbClientinProject.addItem(addJcomboBoxItemWithDuplicate(
                         rs.getString("first_name") + " "
                         + rs.getString("last_name"), cbClientinProject));
@@ -6003,7 +6253,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         //end getData Leader and client
     }
-    
+
     void viewProjectDetailEmpty() {
         txProjectid.setText("");
         txProjectNAme.setText("PROJECT NAME");
@@ -6022,15 +6272,20 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         lbTotal.setText("0");
         txPPN.setText("0");
         lbGrandTotal.setText("0");
-        
+        btDelProject.setVisible(false);
+        btPreviewProject.setVisible(false);
+
         getDataClientAndLEader();
-        
+
         refreshTableProductInProject();
         refreshcbProductsInProject();
         refreshTablePeopleINProject();
         refreshcbPeopleInProject();
+        prjStatus.removeAllItems();
+        prjStatus.addItem("<html><font color=#F52887>Pending</font></html>");
+        prjStatus.addItem("<html><font color=orange>In Process</font></html>");
     }
-    
+
     public String addJcomboBoxItemWithDuplicate(String text, JComboBox jcb) {
         String getBack = text;
         boolean exist = true;
@@ -6044,7 +6299,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-    
+
     void closeAllInternalFrame() {
         btLeftUSer.setVisible(false);
         btLeftRoles.setVisible(false);
@@ -6058,16 +6313,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         accountsFrame.setVisible(false);
         transactionsFrame.setVisible(false);
     }
-    
+
     void POPUpMenuUsuallycommand() {
         showMenuUser = false;
         showMenuProduct = false;
     }
-    
+
     class ButtonsPanel extends JPanel {
-        
+
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""), new JButton(""));
-        
+
         public ButtonsPanel() {
             super();
             setOpaque(true);
@@ -6081,11 +6336,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             buttons.get(1).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
         }
     }
-    
+
     class ButtonsPanelAccounts extends JPanel {
-        
+
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
-        
+
         public ButtonsPanelAccounts() {
             super();
             setOpaque(true);
@@ -6098,11 +6353,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
         }
     }
-    
+
     class BTXDelete extends JPanel {
-        
+
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
-        
+
         public BTXDelete() {
             super();
             setOpaque(true);
@@ -6115,11 +6370,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconX.png")));
         }
     }
-    
+
     class labelPeople extends JPanel {
-        
+
         public JLabel lbPeopleName = new JLabel();
-        
+
         public labelPeople() {
             super();
             setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -6129,14 +6384,14 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             add(lbPeopleName);
         }
     }
-    
+
     class lbRenderPeople extends labelPeople implements TableCellRenderer {
-        
+
         public lbRenderPeople() {
             super();
             setName("Table.cellRenderPeople");
         }
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
@@ -6144,54 +6399,54 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             return this;
         }
     }
-    
+
     class ButtonsRendererAccounts extends ButtonsPanelAccounts implements TableCellRenderer {
-        
+
         public ButtonsRendererAccounts() {
             super();
             setName("Table.cellRendererAccounts");
         }
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-    
+
     class ButtonsRendererbtXDelete extends BTXDelete implements TableCellRenderer {
-        
+
         public ButtonsRendererbtXDelete() {
             super();
             setName("Table.cellRendererAccounts");
         }
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-    
+
     class ButtonsRenderer extends ButtonsPanel implements TableCellRenderer {
-        
+
         public ButtonsRenderer() {
             super();
             setName("Table.cellRenderer");
         }
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-    
+
     class ButtonsEditor extends ButtonsPanel implements TableCellEditor {
-        
+
         public ButtonsEditor(final JTable table) {
             super();
-            
+
             MouseListener ml = new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     ButtonModel m = ((JButton) e.getSource()).getModel();
@@ -6203,29 +6458,29 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             };
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditUSer(table.getValueAt(table.getSelectedRow(), 0).toString());
                 }
             });
-            
+
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dropDataUSer(table);
                 }
             });
-            
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6233,43 +6488,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
+
     class ButtonsEditorProducts extends ButtonsPanel implements TableCellEditor {
-        
+
         public ButtonsEditorProducts(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -6278,35 +6533,35 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-                    
+
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditProduct(table);
                 }
             });
-            
+
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    dropDataProduct(table);
+                    dropDataProject(table);
                 }
             });
-            
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6314,43 +6569,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
+
     class ButtonsEditorProjects extends ButtonsPanel implements TableCellEditor {
-        
+
         public ButtonsEditorProjects(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -6359,35 +6614,35 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-                    
+
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditProjects(table);
                 }
             });
-            
+
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    dropDataProduct(table);
+                    dropDataProject(table);
                 }
             });
-            
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6395,43 +6650,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
+
     class ButtonsEditorAccounts extends ButtonsPanelAccounts implements TableCellEditor {
-        
+
         public ButtonsEditorAccounts(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -6440,28 +6695,28 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-                    
+
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteAccounts(table);
                 }
             });
-            
-            
+
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6469,43 +6724,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
+
     class ButtonsEditorXDeletePeopleInProject extends ButtonsRendererbtXDelete implements TableCellEditor {
-        
+
         public ButtonsEditorXDeletePeopleInProject(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -6514,28 +6769,28 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-                    
+
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deletePeopleInProject(table);
                 }
             });
-            
-            
+
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6543,43 +6798,43 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-    
+
     class ButtonsEditorXDelete extends ButtonsRendererbtXDelete implements TableCellEditor {
-        
+
         public ButtonsEditorXDelete(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -6588,28 +6843,28 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-                    
+
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-            
+
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteProductInProject(table);
                 }
             });
-            
-            
+
+
         }
-        
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-        
+
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -6617,36 +6872,36 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-        
+
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-        
+
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-        
+
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-        
+
         @Override
         public void cancelCellEditing() {
         }
-        
+
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-        
+
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-        
+
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
