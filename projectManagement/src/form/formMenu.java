@@ -766,7 +766,7 @@ public class formMenu extends javax.swing.JFrame {
         jButton21 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
         cbAccountListTransaction = new javax.swing.JComboBox();
-        cbPrjectListTransaction = new javax.swing.JComboBox();
+        cbProjectListTransaction = new javax.swing.JComboBox();
         jButton23 = new javax.swing.JButton();
         txDateTransation = new javax.swing.JFormattedTextField();
         try {
@@ -2950,9 +2950,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionEditFrame.getContentPane().add(cbAccountListTransaction);
     cbAccountListTransaction.setBounds(140, 110, 250, 30);
 
-    cbPrjectListTransaction.setBackground(new java.awt.Color(255, 255, 255));
-    transactionEditFrame.getContentPane().add(cbPrjectListTransaction);
-    cbPrjectListTransaction.setBounds(140, 150, 250, 30);
+    cbProjectListTransaction.setBackground(new java.awt.Color(255, 255, 255));
+    transactionEditFrame.getContentPane().add(cbProjectListTransaction);
+    cbProjectListTransaction.setBounds(140, 150, 250, 30);
 
     jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/JDateChooserIcon.gif"))); // NOI18N
     jButton23.addActionListener(new java.awt.event.ActionListener() {
@@ -3104,19 +3104,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         btLeftRoles.setText("ACCOUNTS");
     }
     
-    void PrepareTransactionsFrame() {
+    JComboBox addItemProject(JComboBox comboChoose) {
         common.functionCommon fc = new common.functionCommon();
-        cbProjectFilter.removeAllItems();
         try {
             String qry = "select id,title from projects";
-            cbProjectFilter.addItem(addJcomboBoxItemWithDuplicate("PROJECT NAME", cbProjectFilter));
-            projectFilterMap.put(cbProjectFilter.getItemCount() - 1, "");
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(qry);
             while (rs.next()) {
-                cbProjectFilter.addItem(addJcomboBoxItemWithDuplicate(rs.getString("title"), cbProjectFilter));
-            projectFilterMap.put(cbProjectFilter.getItemCount() - 1, rs.getInt("id"));
+                comboChoose.addItem(addJcomboBoxItemWithDuplicate(rs.getString("title"), comboChoose));
+                projectFilterMap.put(comboChoose.getItemCount() - 1, rs.getInt("id"));
             }
             rs.close();
             st.close();
@@ -3125,6 +3122,14 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
             if (fc.isDebugging)
                 System.out.println(" error in PrepareTransactionsFrame "+ex.getMessage());
         }
+        return comboChoose;
+    }
+    
+    void PrepareTransactionsFrame() {
+        cbProjectFilter.removeAllItems();
+        cbProjectFilter.addItem(addJcomboBoxItemWithDuplicate("PROJECT NAME", cbProjectFilter));
+        projectFilterMap.put(cbProjectFilter.getItemCount() - 1, "");
+        cbProjectFilter = addItemProject(cbProjectFilter);
         viewTransactions();
         
     }
@@ -5850,12 +5855,44 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }//GEN-LAST:event_btLeftUSerMouseExited
 
+    void addItemsforAccountsInTransaction() {
+        common.functionCommon fc =  new common.functionCommon();
+        try {
+            String qry ="select id,unique_id,name from accounts order by id";
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            while (rs.next()) {
+                cbAccountListTransaction.addItem(addJcomboBoxItemWithDuplicate("("+rs.getString("unique_id")+") - "+rs.getString("name"), cbAccountListTransaction));
+                accountsListMap.put(cbAccountListTransaction.getItemCount() - 1, rs.getInt("id"));
+            }
+            rs.close();
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging)
+                System.out.println(" tek prepareaddTransaction "+ex.getMessage());
+        }
+    }
+    
+    void prepareaddTransaction() {
+        cbAccountListTransaction.removeAllItems();
+        cbAccountListTransaction.addItem("Select Account");
+        accountsListMap.put(cbAccountListTransaction.getItemCount() - 1, "");
+        addItemsforAccountsInTransaction();
+        cbProjectListTransaction.removeAllItems();
+        cbProjectListTransaction.addItem(addJcomboBoxItemWithDuplicate("Select Project", cbProjectListTransaction));
+        projectFilterMap.put(cbProjectListTransaction.getItemCount() - 1, "");
+        cbProjectListTransaction = addItemProject(cbProjectListTransaction);
+    }
+    
     private void btAddTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddTransactionActionPerformed
         closeAllInternalFrame();
         prePAreforFinanceTABButton();
         btLeftUSerMouseEntered(null);
         transactionEditFrame.setVisible(true);
         lbAddTransaction.setText("ADD TRANSACTION");
+        prepareaddTransaction();
     }//GEN-LAST:event_btAddTransactionActionPerformed
 
     private void txDescriptionTransactionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionTransactionKeyReleased
@@ -5871,7 +5908,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         try {
-            
+            String sql ="insert into transactions (title";
         } catch (Exception ex) {}
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -5946,9 +5983,9 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JComboBox cbLeaderinProject;
     private javax.swing.JComboBox cbMonthFilter;
     private javax.swing.JComboBox cbPeopleInProject;
-    private javax.swing.JComboBox cbPrjectListTransaction;
     private javax.swing.JComboBox cbProductsInProject;
     private javax.swing.JComboBox cbProjectFilter;
+    private javax.swing.JComboBox cbProjectListTransaction;
     private javax.swing.JComboBox cbRoles;
     private javax.swing.JComboBox cbYearFilter;
     private javax.swing.JTextField companyName;
@@ -6177,6 +6214,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     Map productMap = new LinkedHashMap();  
     Map peopleInProjectMap = new LinkedHashMap();
     Map projectFilterMap = new LinkedHashMap();
+    Map accountsListMap = new LinkedHashMap();
 
     public void viewTransactions() {
         common.functionCommon fc = new common.functionCommon();
