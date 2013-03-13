@@ -164,6 +164,11 @@ public class functionCommon {
         return getBack;
     }
     
+    public String viewDatefromSQL1(String columnName,String asView) {
+        String getBack="to_char("+columnName+",'DD/MM/YYYY') AS "+asView;
+        return getBack;
+    }
+    
     public String convertDateToString(Date dt) {
         String getBack="";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

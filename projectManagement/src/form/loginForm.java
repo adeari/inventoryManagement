@@ -5,15 +5,13 @@
 package form;
 
 import common.functionCommon;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.border.Border;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -181,6 +179,10 @@ public class loginForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.GRAY));
+        UIManager.put("ComboBox.selectionForeground", new ColorUIResource(Color.WHITE));
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
