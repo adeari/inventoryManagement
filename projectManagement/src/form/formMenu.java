@@ -90,6 +90,7 @@ public class formMenu extends javax.swing.JFrame {
 
         dateChooserDialog1 = new datechooser.beans.DateChooserDialog();
         dateChooserDialog2 = new datechooser.beans.DateChooserDialog();
+        dateChooserDialog3 = new datechooser.beans.DateChooserDialog();
         menuPop = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -593,7 +594,7 @@ public class formMenu extends javax.swing.JFrame {
         acc = new javax.swing.JTextField();
         jButton20 = new javax.swing.JButton();
         scrolltbAccounts = new javax.swing.JScrollPane();
-        final String columnAccounts[] = {"id","ACC#", "ACCOUNT NAME", "ACCOUNT GROUP", " "};
+        final String columnAccounts[] = {"id","ACC#", "ACCOUNT NAME",  " "};
         tmTabelAccounts = new javax.swing.table.AbstractTableModel() {
             public int getColumnCount() {
                 return columnAccounts.length;
@@ -613,7 +614,7 @@ public class formMenu extends javax.swing.JFrame {
             }
 
             public boolean isCellEditable(int row1, int column1) {
-                if (column1 == 4) {
+                if (column1 == 3) {
                     return true;
                 } else {
                     return false;
@@ -641,10 +642,7 @@ public class formMenu extends javax.swing.JFrame {
         tc=tbAccounts.getColumn("ACC#");
         tc.setMinWidth(110);
         tc=tbAccounts.getColumn("ACCOUNT NAME");
-        tc.setMinWidth(365);
-        tbAccounts.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
-        tc=tbAccounts.getColumn("ACCOUNT GROUP");
-        tc.setMinWidth(317);
+        tc.setMinWidth(683);
         tc=tbAccounts.getColumn(" ");
         tc.setMinWidth(35);
         tc.setMaxWidth(35);
@@ -728,7 +726,7 @@ public class formMenu extends javax.swing.JFrame {
         tc.setMinWidth(35);
         tc.setMaxWidth(35);
         tc.setCellRenderer(new ButtonsRendererAccounts());
-        tc.setCellEditor(new ButtonsEditorAccounts(tbAccounts));
+        tc.setCellEditor(new ButtonsEditorTransactions(tbTransactions));
         tbTransactions.setRowHeight(35);
 
         for (int i=1;i<tbTransactions.getColumnCount();i++)
@@ -874,6 +872,54 @@ dateChooserDialog2.setBehavior(datechooser.model.multiple.MultyModelBehavior.SEL
 dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
     public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
         dateChooserDialog2OnSelectionChange(evt);
+    }
+    });
+
+    dateChooserDialog3.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
+        new datechooser.view.appearance.ViewAppearance("custom",
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(51, 51, 51),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(51, 51, 51),
+                new java.awt.Color(0, 0, 255),
+                true,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(0, 0, 255),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(128, 128, 128),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(51, 51, 51),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Arial", java.awt.Font.BOLD, 25),
+                new java.awt.Color(51, 51, 51),
+                new java.awt.Color(255, 0, 0),
+                false,
+                false,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            (datechooser.view.BackRenderer)null,
+            false,
+            true)));
+dateChooserDialog3.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_SINGLE);
+dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+    public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+        dateChooserDialog3OnSelectionChange(evt);
     }
     });
 
@@ -1845,11 +1891,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     productEditFrame.getContentPane().add(jLabel19);
     jLabel19.setBounds(10, 190, 160, 25);
 
-    txDescription.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            txDescriptionKeyReleased(evt);
-        }
-    });
     jScrollPane3.setViewportView(txDescription);
 
     productEditFrame.getContentPane().add(jScrollPane3);
@@ -2572,11 +2613,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     scrolltbAccounts.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     scrolltbAccounts.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-    tbAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tbAccountsMouseClicked(evt);
-        }
-    });
     tbAccounts.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             tbAccountsKeyReleased(evt);
@@ -2855,7 +2891,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionEditFrame.getContentPane().add(lbAddTransaction);
     lbAddTransaction.setBounds(10, 10, 400, 40);
     transactionEditFrame.getContentPane().add(txTransactionID);
-    txTransactionID.setBounds(490, 20, 80, 19);
+    txTransactionID.setBounds(490, 110, 80, 19);
 
     jLabel45.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel45.setText("Account #");
@@ -2944,7 +2980,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     transactionEditFrame.getContentPane().add(jButton22);
-    jButton22.setBounds(400, 10, 84, 30);
+    jButton22.setBounds(440, 10, 84, 30);
 
     cbAccountListTransaction.setBackground(new java.awt.Color(255, 255, 255));
     transactionEditFrame.getContentPane().add(cbAccountListTransaction);
@@ -2964,6 +3000,11 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     jButton23.setBounds(360, 190, 30, 30);
 
     txDateTransation.setText("__/__/____");
+    txDateTransation.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            txDateTransationActionPerformed(evt);
+        }
+    });
     txDateTransation.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
             txDateTransationKeyReleased(evt);
@@ -2980,11 +3021,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionEditFrame.getContentPane().add(transactionName);
     transactionName.setBounds(140, 230, 250, 30);
 
-    txDescriptionTransaction.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            txDescriptionTransactionKeyReleased(evt);
-        }
-    });
     jScrollPane9.setViewportView(txDescriptionTransaction);
 
     transactionEditFrame.getContentPane().add(jScrollPane9);
@@ -4320,13 +4356,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         viewProducts();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void txDescriptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionKeyReleased
-        if (evt.getKeyCode() == evt.VK_TAB) {
-            txPrice.requestFocus();
-            txDescription.setText(txDescription.getText().substring(0, (txDescription.getText().length() - 1)));
-        }
-    }//GEN-LAST:event_txDescriptionKeyReleased
-
     private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPageProduct.getText()) > 1) {
@@ -4799,10 +4828,6 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }//GEN-LAST:event_accNameFocusLost
 
-    private void tbAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAccountsMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbAccountsMouseClicked
-
     private void tbAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAccountsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteAccounts(tbAccounts);
@@ -4866,12 +4891,69 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct2KeyReleased
 
+    public void prepareEditTransactions(JTable table) {
+        common.functionCommon fc = new common.functionCommon();
+        closeAllInternalFrame();
+        prePAreforFinanceTABButton();
+        btLeftUSerMouseEntered(null);
+        transactionEditFrame.setVisible(true);
+        lbAddTransaction.setText("EDIT TRANSACTION");
+        cbAccountListTransaction.removeAllItems();
+        addItemsforAccountsInTransaction();
+        txTransactionID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+        try {
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            String qry ="select title,description,value,account_id,project_id where id="+txTransactionID.getText();
+            Statement st = cn.createStatement();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging)
+                System.out.println(" error prepareEditTransactions "+ex.getMessage());
+        }
+    }
+    
     private void tbTransactionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTransactionsMouseClicked
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            prepareEditTransactions(tbTransactions);
+        }
     }//GEN-LAST:event_tbTransactionsMouseClicked
 
+    public void deleteTransaction(JTable table) {
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                int rowTable[] = table.getSelectedRows();
+                for (int x = 0; x < rowTable.length; x++) {
+                    if (x > 0) {
+                        qry += ",";
+                    }
+                    qry += table.getValueAt(rowTable[x], 0).toString();
+                }
+                qry = "delete from transactions where id in (" + qry + ");";
+                if (fc.isDebugging) {
+                    System.out.println(" qry delete transaction = " + qry);
+                }
+                st.executeUpdate(qry);
+                st.close();
+                cn.close();
+                viewTransactions();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in delete Transaction " + ex.getMessage());
+                }
+            }
+        }
+    }
+    
     private void tbTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionsKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode()==evt.VK_DELETE) {
+            deleteTransaction(tbTransactions);
+        }
     }//GEN-LAST:event_tbTransactionsKeyReleased
 
     private void btFirstTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstTransactionsActionPerformed
@@ -5893,22 +5975,44 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
         transactionEditFrame.setVisible(true);
         lbAddTransaction.setText("ADD TRANSACTION");
         prepareaddTransaction();
+        txDateTransation.setText(sdf.format(new Date()));
     }//GEN-LAST:event_btAddTransactionActionPerformed
 
-    private void txDescriptionTransactionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionTransactionKeyReleased
-        if (evt.getKeyCode() == evt.VK_TAB) {
-            txTransactionValue.requestFocus();
-            txDescriptionTransaction.setText(txDescription.getText().substring(0, (txDescriptionTransaction.getText().length() - 1)));
-        }
-    }//GEN-LAST:event_txDescriptionTransactionKeyReleased
-
     private void txTransactionValueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTransactionValueKeyReleased
-        // TODO add your handling code here:
+        common.functionCommon fc = new common.functionCommon();
+        
+            try {
+                Integer.valueOf(txTransactionValue.getText().replace(".", ""));
+                if (txTransactionValue.getText().charAt(0) == '0' && txTransactionValue.getText().length() > 1) {
+                    txTransactionValue.setText(String.valueOf(txTransactionValue.getText().charAt(1)));
+                }
+                txTransactionValue.setText(fc.digitNumber(txTransactionValue.getText().replace(".", "")));
+            } catch (Exception ex) {
+                txTransactionValue.setText("0");
+            }
     }//GEN-LAST:event_txTransactionValueKeyReleased
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        common.functionCommon fc = new common.functionCommon();
         try {
-            String sql ="insert into transactions (title";
+            String qry ="insert into transactions (title,"
+                    + "description,value,created_at,modified_at,created_by,account_id"
+                    + ",project_id) values (?,"
+                    + "?,?,now(),now(),?,?"
+                    + ",?);";
+           Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+           PreparedStatement psInsert = cn.prepareStatement(qry);
+           psInsert.setString(1, transactionName.getText());
+           psInsert.setString(2, txDescriptionTransaction.getText());
+           psInsert.setInt(3, Integer.valueOf(txTransactionValue.getText().replace(".", "")));
+           psInsert.setInt(4, userID);
+           psInsert.setInt(5,  Integer.valueOf(accountsListMap.get(cbAccountListTransaction.getSelectedIndex()).toString()));
+           psInsert.setInt(6,  Integer.valueOf(projectFilterMap.get(cbProjectListTransaction.getSelectedIndex()).toString()));
+           psInsert.executeUpdate();
+           psInsert.close();
+           
+           
+           cn.close();
         } catch (Exception ex) {}
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -5933,7 +6037,17 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
+        common.functionCommon fc = new common.functionCommon();
+        try {
+            Date dateNow = (Date) sdf.parse(txDateTransation.getText());
+            dateChooserDialog3.setSelection(new datechooser.model.multiple.PeriodSet(new datechooser.model.multiple.Period(new java.util.GregorianCalendar((1900 + dateNow.getYear()), dateNow.getMonth(), dateNow.getDate()),
+                    new java.util.GregorianCalendar((1900 + dateNow.getYear()), dateNow.getMonth(), dateNow.getDate()))));
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("error in jButton15ActionPerformed " + ex.getMessage());
+            }
+        }
+        dateChooserDialog3.showDialog(null, true);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void txDateTransationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDateTransationKeyReleased
@@ -5943,6 +6057,16 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private void transactionNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_transactionNameKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_transactionNameKeyReleased
+
+    private void dateChooserDialog3OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog3OnSelectionChange
+        if (dateChooserDialog3.getSelectedDate() != null) {
+            txDateTransation.setText(sdf.format(dateChooserDialog3.getSelectedDate().getTime()));
+        }
+    }//GEN-LAST:event_dateChooserDialog3OnSelectionChange
+
+    private void txDateTransationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDateTransationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txDateTransationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
@@ -5993,6 +6117,7 @@ dateChooserDialog2.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel countTransactions;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
+    private datechooser.beans.DateChooserDialog dateChooserDialog3;
     private javax.swing.JComboBox filterProduct;
     private javax.swing.JComboBox filterProject;
     private javax.swing.JComboBox filterSearch;
@@ -6305,7 +6430,7 @@ int nomber = positionNOW2;
                 rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>" 
                         + rs.getString("unique_id") + " - "+ rs.getString("name") + "</html>");
                 
-                rowData.addElement(rs.getString("value") );
+                rowData.addElement(fc.digitNumber(rs.getString("value") ));
                 rowData.addElement("");
                 vectorTransactions.addElement(rowData);
 
@@ -6629,8 +6754,7 @@ int nomber = positionNOW2;
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(rs.getString("unique_id"));
                 rowData.addElement(rs.getString("name"));
-                rowData.addElement("P/L");
-                rowData.addElement("P/L");
+                rowData.addElement("");
                 vectorAccounts.addElement(rowData);
 
             }
@@ -7276,6 +7400,80 @@ int nomber = positionNOW2;
         }
     }
 
+    class ButtonsEditorTransactions extends ButtonsPanelAccounts implements TableCellEditor {
+
+        public ButtonsEditorTransactions(final JTable table) {
+            super();
+            MouseListener ml = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    ButtonModel m = ((JButton) e.getSource()).getModel();
+                    if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
+                        setBackground(table.getBackground());
+                    }
+
+                    table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
+                }
+            };
+            buttons.get(0).addMouseListener(ml);
+
+            buttons.get(0).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteTransaction(table);
+                }
+            });
+
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+    
     class ButtonsEditorAccounts extends ButtonsPanelAccounts implements TableCellEditor {
 
         public ButtonsEditorAccounts(final JTable table) {
