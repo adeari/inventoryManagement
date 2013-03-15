@@ -1011,14 +1011,26 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     ProductPopMenu.add(jMenuItem4);
 
+    transactionsPopUp.setBackground(new java.awt.Color(0, 0, 0));
+    transactionsPopUp.setForeground(new java.awt.Color(255, 255, 255));
     transactionsPopUp.setBorder(null);
     transactionsPopUp.setBorderPainted(false);
     transactionsPopUp.setPreferredSize(new java.awt.Dimension(84, 30));
+    transactionsPopUp.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            transactionsPopUpMouseExited(evt);
+        }
+    });
 
     jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
     jMenuItem5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jMenuItem5.setForeground(new java.awt.Color(0, 0, 0));
     jMenuItem5.setText("Delete");
+    jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem5ActionPerformed(evt);
+        }
+    });
     transactionsPopUp.add(jMenuItem5);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -4999,6 +5011,32 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
+    
+    public void deleteTransaction(String idTransactions) {
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                
+                qry = "delete from transactions where id in (" + idTransactions + ");";
+                if (fc.isDebugging) {
+                    System.out.println(" qry delete transaction = " + qry);
+                }
+                st.executeUpdate(qry);
+                st.close();
+                cn.close();
+                viewTransactions();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in delete Transaction " + ex.getMessage());
+                }
+            }
+        }
+    }
 
     private void tbTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
@@ -5370,14 +5408,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_tbProductInProjectsKeyReleased
 
     private void jButton19MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseExited
-        System.out.println("exited x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
-        if (showMenuProduct) {
-            System.out.println(" masih show product");
-        }
         if ((showMenuProduct && evt.getPoint().y < 0)
                 || (showMenuProduct
                 && (evt.getPoint().x < 0 || evt.getPoint().x > 83))) {
-            System.out.println(" kosng");
             ProductPopMenu.setVisible(false);
             showMenuProduct = false;
         }
@@ -5391,7 +5424,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton19MouseEntered
 
     private void jButton19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseMoved
-        System.out.println("moved x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
+        
         if (!showMenuProduct) {
             ProductPopMenu.show(jButton19, 0, 30);
             showMenuProduct = true;
@@ -5925,7 +5958,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_txQTYProductsinProjectFocusGained
 
     private void ProductPopMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductPopMenuMouseExited
-        System.out.println(" x = " + evt.getX() + " y = " + evt.getY());
+        
         if ((showMenuProduct && (evt.getX() < 0 || evt.getX() >= 80))
                 || (showMenuProduct && (evt.getY() < 0 || evt.getY() >= 30))) {
             ProductPopMenu.setVisible(false);
@@ -5965,7 +5998,21 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btDelProjectActionPerformed
 
     private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
-        // TODO add your handling code here:
+        java.util.Map parameter = new java.util.HashMap();
+        parameter.put("parameter", 0);
+        common.functionCommon fc = new common.functionCommon();
+            try {
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
+                       fc.getPath()+"/reportJXML/reportProjects.jasper", parameter, cn);
+                net.sf.jasperreports.view.JasperViewer jasperViewer = new net.sf.jasperreports.view.JasperViewer(jasperPrint, false);
+                jasperViewer.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
+                jasperViewer.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+                jasperViewer.setTitle("Project report");
+                jasperViewer.setVisible(true);
+            } catch (Exception ex) {
+            if (fc.isDebugging) System.out.println(" error "+ex.getMessage());
+            }
     }//GEN-LAST:event_btPreviewProjectActionPerformed
 
     private void prjStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prjStatusItemStateChanged
@@ -6105,22 +6152,36 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void btActionTransactionsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseExited
-        // TODO add your handling code here:
+        System.out.println("exited x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
+        if (showMenuTransactions) {
+            System.out.println(" masih show tr");
+        }
+        if ((showMenuTransactions && evt.getPoint().y < 0)
+                || (showMenuTransactions
+                && (evt.getPoint().x < 0 || evt.getPoint().x > 83))) {
+            System.out.println(" kosng");
+            transactionsPopUp .setVisible(false);
+            showMenuTransactions = false;
+        }
     }//GEN-LAST:event_btActionTransactionsMouseExited
 
     private void btActionTransactionsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseEntered
         if (!showMenuTransactions) {
-            transactionsPopUp.show(btActionTransactions, 0, 25);
+            transactionsPopUp.show(btActionTransactions, 0, 30);
             showMenuTransactions = true;
         }
     }//GEN-LAST:event_btActionTransactionsMouseEntered
 
     private void btActionTransactionsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseMoved
-        // TODO add your handling code here:
+        if (!showMenuTransactions) {
+            transactionsPopUp.show(btActionTransactions, 0, 30);
+            showMenuTransactions = true;
+        }
     }//GEN-LAST:event_btActionTransactionsMouseMoved
 
     private void btActionTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActionTransactionsActionPerformed
-        // TODO add your handling code here:
+        transactionsPopUp.show(btActionTransactions, 0, 30);
+        showMenuTransactions = true;
     }//GEN-LAST:event_btActionTransactionsActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
@@ -6197,6 +6258,19 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             cbLeaderinProject.requestFocus();
         }
     }//GEN-LAST:event_projectDescriptionKeyPressed
+
+    private void transactionsPopUpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionsPopUpMouseExited
+if ((showMenuTransactions && (evt.getX() < 0 || evt.getX() >= 80))
+                || (showMenuTransactions && (evt.getY() < 0 || evt.getY() >= 30))) {
+            transactionsPopUp.setVisible(false);
+            showMenuTransactions = false;
+        }
+    }//GEN-LAST:event_transactionsPopUpMouseExited
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        deleteTransaction(txTransactionID.getText());
+        jButton21ActionPerformed(null);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
