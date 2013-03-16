@@ -5681,7 +5681,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.executeUpdate();
                     psInsert.close();
                     //end save allocated transactions
-
+                    
+                    if (prjStatus.getSelectedIndex()==2) {
+                    qry ="update projects set completed_on=now() where id = " + txProjectid.getText();
+                    psInsert = cn.prepareStatement(qry);
+                    psInsert.executeUpdate();
+                    psInsert.close();
+                    }
+                    
                 } else {
                     qry = "insert into projects (client_id,title"
                             + ",description,leader_id,status"
@@ -6014,9 +6021,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btDelProjectActionPerformed
 
     private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
-        java.util.Map parameter = new java.util.HashMap();
-        parameter.put("parameter", 0);
         common.functionCommon fc = new common.functionCommon();
+        java.util.Map parameter = new java.util.HashMap();
+        parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
+        parameter.put("SUBREPORT_DIR", fc.getPath()+"/reportJXML/");
+        System.out.println("pri id  = "+txProjectid.getText());
+        
         try {
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(

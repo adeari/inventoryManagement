@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProjects" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dda4b52-274c-4014-abfd-5ba443139d24">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="47"/>
 	<parameter name="projectID" class="java.lang.Integer" isForPrompting="false">
-		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/apps/raymon/InventoryApps/reportJXML/"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select title,description,client_id,leader_id,
@@ -18,17 +21,36 @@ where id=$P{projectID}]]>
 	<field name="STARTS_ON" class="java.sql.Timestamp"/>
 	<field name="DUE_DATE" class="java.sql.Timestamp"/>
 	<field name="COMPLETED_ON" class="java.sql.Timestamp"/>
+	<variable name="CLIENT_ID_SUM" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CLIENT_ID}]]></variableExpression>
+	</variable>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<textField>
-				<reportElement uuid="86c88221-d852-4c22-9b17-8c0b4252d30a" x="0" y="0" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="86c88221-d852-4c22-9b17-8c0b4252d30a" x="0" y="0" width="572" height="20"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{TITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1c8142d0-a3a4-43ea-9402-4c6e2bdc823e" x="0" y="24" width="572" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="65" splitType="Stretch"/>
+		<band height="65" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" x="0" y="0" width="200" height="65" backcolor="#999999"/>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpProductInproject.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</detail>
 	<pageFooter>
 		<band height="20" splitType="Stretch"/>
