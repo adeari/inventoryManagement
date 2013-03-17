@@ -6026,9 +6026,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
         parameter.put("SUBREPORT_DIR", fc.getPath()+"/reportJXML/");
         parameter.put("iconPeople", fc.getPath()+"/reportJXML/userIcon.png");
-        parameter.put("iconPeople", fc.getPath()+"/reportJXML/userIcon.png");
-        System.out.println("pri id  = "+txProjectid.getText());
-        
+        parameter.put("iconBudget", fc.getPath()+"/reportJXML/iconTransactions.jpg");
         try {
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(

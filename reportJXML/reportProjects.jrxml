@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProjects" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dda4b52-274c-4014-abfd-5ba443139d24">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="93"/>
+	<property name="ireport.x" value="240"/>
+	<property name="ireport.y" value="215"/>
 	<parameter name="projectID" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
 	</parameter>
@@ -12,21 +12,31 @@
 	<parameter name="iconBudget" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/iconTransactions.jpg"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="iconPeople" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/userIcon.png"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[select title,description,client_id,leader_id,
-starts_on,due_date,completed_on from projects
-where id=$P{projectID}]]>
+		<![CDATA[select a.title,a.description,b.first_name as leaderfirst,
+b.last_name as leaderlast, c.first_name as clientfirst,
+c.last_name as clientlast,
+a.starts_on,a.due_date,a.completed_on,
+a.status,a.location
+from projects a
+left join user b on a.leader_id=b.id
+left join user c on a.client_id=c.id
+where a.id=$P{projectID}]]>
 	</queryString>
 	<field name="TITLE" class="java.lang.String"/>
 	<field name="DESCRIPTION" class="java.lang.String"/>
-	<field name="CLIENT_ID" class="java.lang.Integer"/>
-	<field name="LEADER_ID" class="java.lang.Integer"/>
+	<field name="LEADERFIRST" class="java.lang.String"/>
+	<field name="LEADERLAST" class="java.lang.String"/>
+	<field name="CLIENTFIRST" class="java.lang.String"/>
+	<field name="CLIENTLAST" class="java.lang.String"/>
 	<field name="STARTS_ON" class="java.sql.Timestamp"/>
 	<field name="DUE_DATE" class="java.sql.Timestamp"/>
 	<field name="COMPLETED_ON" class="java.sql.Timestamp"/>
-	<variable name="CLIENT_ID_SUM" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{CLIENT_ID}]]></variableExpression>
-	</variable>
+	<field name="STATUS" class="java.lang.Integer"/>
+	<field name="LOCATION" class="java.lang.String"/>
 	<title>
 		<band height="70" splitType="Stretch">
 			<textField>
@@ -55,6 +65,9 @@ where id=$P{projectID}]]>
 			</subreport>
 			<subreport>
 				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToTallestObject" x="291" y="0" width="281" height="18" backcolor="#999999"/>
+				<subreportParameter name="iconPeople">
+					<subreportParameterExpression><![CDATA[$P{iconPeople}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -62,25 +75,117 @@ where id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpPeopleInproject.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="50">
+		<band height="126">
+			<subreport>
+				<reportElement uuid="19f6c12f-62a0-4254-a2de-7911dc0fdf70" stretchType="RelativeToTallestObject" x="0" y="0" width="195" height="18" backcolor="#999999"/>
+				<subreportParameter name="iconBudget">
+					<subreportParameterExpression><![CDATA[$P{iconBudget}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpAllocatedBudget.jasper"]]></subreportExpression>
+			</subreport>
 			<rectangle>
-				<reportElement uuid="6f2d9849-61e5-4e8c-8cec-175c92f2f3b2" stretchType="RelativeToTallestObject" x="0" y="0" width="195" height="45" backcolor="#CCCCCC"/>
+				<reportElement uuid="73c3f1d1-23a5-4b30-b4df-3607491f7195" stretchType="RelativeToTallestObject" x="197" y="0" width="191" height="18" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="85f47cce-aee4-41fa-86dc-4c5a205ab913" x="390" y="0" width="182" height="126" backcolor="#CCCCCC"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="2f7f3a3b-9e0e-4314-ba87-b94036eec5b0" stretchType="RelativeToTallestObject" x="18" y="1" width="167" height="14"/>
-				<textElement/>
-				<text><![CDATA[Allocated Budget]]></text>
+				<reportElement uuid="b88c665a-0f78-4d89-8b47-1d168b8784ee" x="390" y="0" width="181" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Project Information]]></text>
 			</staticText>
-			<image>
-				<reportElement uuid="58c0683a-4c20-4224-8edb-a6183d9284fd" stretchType="RelativeToTallestObject" x="2" y="2" width="14" height="14"/>
-				<imageExpression><![CDATA[$P{iconBudget}]]></imageExpression>
-			</image>
+			<staticText>
+				<reportElement uuid="ee1f8025-980b-49be-bbff-773b5c9c8c82" x="390" y="18" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Leader]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="934414ac-2dc0-4a6e-8030-c9805a9d1d92" x="451" y="18" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LEADERFIRST}+" "+$F{LEADERLAST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="48ca5833-72c5-4ef8-a29f-c175b6e1b533" x="390" y="33" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Cient]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6830f0f2-d7f8-4e5b-8fda-75aabd891889" x="451" y="33" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLIENTFIRST}+" "+$F{CLIENTLAST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c0e6ed8b-7710-4716-9f13-e4b4e7c91a3e" x="390" y="48" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Start on]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="9ce6d83a-5a9f-45e5-b367-2295cde4ed3e" x="451" y="48" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{STARTS_ON}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0d16b420-09cd-4aa3-8ff0-d4b2deb3988b" x="390" y="63" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Due date]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="b263024d-42d3-49b2-ae6a-685083b8b3d4" x="451" y="63" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DUE_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d6c8354a-8d3e-4c5e-b7c5-9def7dfc8996" x="390" y="78" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="40db1197-9921-41d7-9faf-ed9aafffd193" x="451" y="78" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="553abcc5-0eaf-4ab7-9f62-046a0c31f89c" x="390" y="93" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Location]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b3203eba-1038-43a2-83fe-016f5ebd380d" x="451" y="93" width="120" height="33"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LOCATION}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="20" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7ba80faa-abd8-41a8-a7d5-3d3a1a1f9b15" x="451" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="dbb7459e-a460-4356-a97d-4af54f6b841a" x="531" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 </jasperReport>
