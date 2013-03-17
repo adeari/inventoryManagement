@@ -2012,8 +2012,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     projectDetailFrame.getContentPane().setLayout(null);
 
     jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    jScrollPane7.setFocusCycleRoot(true);
-    jScrollPane7.setFocusTraversalPolicyProvider(true);
+    jScrollPane7.setAutoscrolls(true);
+    jScrollPane7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
     jPanel9.setBackground(new java.awt.Color(255, 255, 255));
     jPanel9.setAutoscrolls(true);
@@ -6025,6 +6025,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         java.util.Map parameter = new java.util.HashMap();
         parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
         parameter.put("SUBREPORT_DIR", fc.getPath()+"/reportJXML/");
+        parameter.put("iconPeople", fc.getPath()+"/reportJXML/userIcon.png");
+        parameter.put("iconPeople", fc.getPath()+"/reportJXML/userIcon.png");
         System.out.println("pri id  = "+txProjectid.getText());
         
         try {

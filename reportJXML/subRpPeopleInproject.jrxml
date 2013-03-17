@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRpProductInproject" language="groovy" pageWidth="288" pageHeight="842" columnWidth="288" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c2dbc1ae-925f-4fe8-b259-a682f97a8cf7">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="projectID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+	</parameter>
+	<parameter name="iconPeople" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/userIcon.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.first_name,b.last_name
+from assignments a
+left join user b on a.user_id=b.id
+where a.project_id=$P{projectID}]]>
+	</queryString>
+	<field name="FIRST_NAME" class="java.lang.String"/>
+	<field name="LAST_NAME" class="java.lang.String"/>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="0" y="0" width="288" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[People on this Project]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement uuid="10fdff92-6ac6-481f-956c-c94bab742b1a" x="20" y="0" width="268" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{FIRST_NAME} +" - "+ $F{LAST_NAME}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="18e4c586-af7d-4b67-a000-02e8a396a470" x="4" y="0" width="16" height="15"/>
+				<imageExpression><![CDATA[$P{iconPeople}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

@@ -2,12 +2,15 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProjects" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dda4b52-274c-4014-abfd-5ba443139d24">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="47"/>
+	<property name="ireport.y" value="93"/>
 	<parameter name="projectID" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/media/apps/raymon/InventoryApps/reportJXML/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="iconBudget" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/iconTransactions.jpg"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select title,description,client_id,leader_id,
@@ -41,15 +44,40 @@ where id=$P{projectID}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="65" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<subreport>
-				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" x="0" y="0" width="200" height="65" backcolor="#999999"/>
+				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" x="0" y="0" width="290" height="18" backcolor="#999999"/>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpProductInproject.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToTallestObject" x="291" y="0" width="281" height="18" backcolor="#999999"/>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpPeopleInproject.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<rectangle>
+				<reportElement uuid="6f2d9849-61e5-4e8c-8cec-175c92f2f3b2" stretchType="RelativeToTallestObject" x="0" y="0" width="195" height="45" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="2f7f3a3b-9e0e-4314-ba87-b94036eec5b0" stretchType="RelativeToTallestObject" x="18" y="1" width="167" height="14"/>
+				<textElement/>
+				<text><![CDATA[Allocated Budget]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="58c0683a-4c20-4224-8edb-a6183d9284fd" stretchType="RelativeToTallestObject" x="2" y="2" width="14" height="14"/>
+				<imageExpression><![CDATA[$P{iconBudget}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<pageFooter>
