@@ -490,7 +490,9 @@ public class formMenu extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progressBarProject = new javax.swing.JProgressBar();
+        txProgressPrecent = new javax.swing.JTextField();
+        jLabel59 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -2225,8 +2227,30 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel28.setText("Project Progress");
     jPanel6.add(jLabel28);
     jLabel28.setBounds(10, 10, 230, 22);
-    jPanel6.add(jProgressBar1);
-    jProgressBar1.setBounds(10, 40, 350, 20);
+    jPanel6.add(progressBarProject);
+    progressBarProject.setBounds(10, 40, 350, 20);
+
+    txProgressPrecent.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txProgressPrecent.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txProgressPrecentFocusGained(evt);
+        }
+    });
+    txProgressPrecent.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txProgressPrecentKeyReleased(evt);
+        }
+    });
+    jPanel6.add(txProgressPrecent);
+    txProgressPrecent.setBounds(190, 6, 90, 30);
+
+    jLabel59.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel59.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel59.setText("% ");
+    jLabel59.setOpaque(true);
+    jPanel6.add(jLabel59);
+    jLabel59.setBounds(260, 6, 50, 30);
 
     jPanel9.add(jPanel6);
     jPanel6.setBounds(460, 190, 370, 80);
@@ -3773,6 +3797,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 st.executeUpdate(qry);
                 qry = "delete from transactions where project_id in (" + projectIDLISt + ");";
                 st.executeUpdate(qry);
+                qry = "delete from project_metas where project_id in (" + projectIDLISt + ");";
+                st.executeUpdate(qry);
                 qry = "delete from projects where id in (" + projectIDLISt + ");";
                 st.executeUpdate(qry);
 
@@ -3936,6 +3962,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         prjStatus.addItem("<html><font color=orange>In Process</font></html>");
         prjStatus.addItem("<html><font color=green>Finished</font></html>");
         txProjectid.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+        txProgressPrecent.setText("0");
+        progressBarProject.setValue(0);
         common.functionCommon fc = new common.functionCommon();
         getDataClientAndLEader();
         try {
@@ -3957,6 +3985,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 txDuedate.setText(fc.convertDateToString(rs.getDate("due_date")));
             }
             prjStatusItemStateChanged(null);
+            qry = "select valueData from project_metas where keyData='progress' and project_id=" + txProjectid.getText();
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                txProgressPrecent.setText(rs.getString("valueData"));
+                progressBarProject.setValue(rs.getInt("valueData"));
+            }
 
             //view items in project 
             qry = "select a.item_id,a.inventory_qty,b.name "
@@ -5559,6 +5593,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.executeUpdate();
 
                     int projectID = Integer.valueOf(txProjectid.getText());
+                    
+                    addProjectMetas(projectID,"progress",txProgressPrecent.getText());
 
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
@@ -5681,14 +5717,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.executeUpdate();
                     psInsert.close();
                     //end save allocated transactions
-                    
-                    if (prjStatus.getSelectedIndex()==2) {
-                    qry ="update projects set completed_on=now() where id = " + txProjectid.getText();
-                    psInsert = cn.prepareStatement(qry);
-                    psInsert.executeUpdate();
-                    psInsert.close();
+
+                    if (prjStatus.getSelectedIndex() == 2) {
+                        qry = "update projects set completed_on=now() where id = " + txProjectid.getText();
+                        psInsert = cn.prepareStatement(qry);
+                        psInsert.executeUpdate();
+                        psInsert.close();
                     }
-                    
+
                 } else {
                     qry = "insert into projects (client_id,title"
                             + ",description,leader_id,status"
@@ -5729,6 +5765,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.close();
                     psIdentity.close();
                     result.close();
+
+addProjectMetas(projectID,"progress",txProgressPrecent.getText());
 
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
@@ -5876,6 +5914,41 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }//GEN-LAST:event_btsaveProjectActionPerformed
 
+    void addProjectMetas(int projectID, String keyData, String valueData) {
+        String qry = "";
+        common.functionCommon cf = new common.functionCommon();
+
+        try {
+            Connection cn = DriverManager.getConnection(cf.connection, cf.userName, cf.passWord);
+            qry = "select valueData from project_metas where project_id=? and keyData=?";
+            PreparedStatement psInsert = cn.prepareStatement(qry);
+            psInsert.setInt(1, projectID);
+            psInsert.setString(2, keyData);
+            ResultSet rs = psInsert.executeQuery();
+            if (rs.next()) {
+                qry = "update project_metas set valueData=? where keyData='progress' and project_id=?";
+                psInsert = cn.prepareStatement(qry);
+                psInsert.setString(1, txProgressPrecent.getText());
+                psInsert.setInt(2, projectID);
+                psInsert.executeUpdate();
+            } else {
+                qry = "insert into  project_metas (project_id,keyData,valueData) values(?,?,?);";
+                psInsert = cn.prepareStatement(qry);
+                psInsert = cn.prepareStatement(qry);
+                psInsert.setInt(1, projectID);
+                psInsert.setString(2, keyData);
+                psInsert.setString(3, valueData);
+                psInsert.executeUpdate();
+
+            }
+            psInsert.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (cf.isDebugging) {
+                System.out.println(" error in addProjectMetas " + ex.getMessage());
+            }
+        }
+    }
     private void tbProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProjectMouseClicked
         if (evt.getClickCount() == 2) {
             prepareEditProjects(tbProject);
@@ -6024,9 +6097,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         common.functionCommon fc = new common.functionCommon();
         java.util.Map parameter = new java.util.HashMap();
         parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
-        parameter.put("SUBREPORT_DIR", fc.getPath()+"/reportJXML/");
-        parameter.put("iconPeople", fc.getPath()+"/reportJXML/userIcon.png");
-        parameter.put("iconBudget", fc.getPath()+"/reportJXML/iconTransactions.jpg");
+        parameter.put("SUBREPORT_DIR", fc.getPath() + "/reportJXML/");
+        parameter.put("iconPeople", fc.getPath() + "/reportJXML/userIcon.png");
+        parameter.put("iconBudget", fc.getPath() + "/reportJXML/iconTransactions.jpg");
+        parameter.put("iconTransactionsOf", fc.getPath() + "/reportJXML/transactionOfIcon.jpg");
         try {
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
@@ -6311,6 +6385,21 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void cbYearFilterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbYearFilterItemStateChanged
         cbProjectFilterItemStateChanged(null);
     }//GEN-LAST:event_cbYearFilterItemStateChanged
+
+    private void txProgressPrecentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProgressPrecentKeyReleased
+        common.functionCommon fc = new common.functionCommon();
+        fc.setNumericPointinTextField(txProgressPrecent, evt);
+        if (Integer.valueOf(txProgressPrecent.getText().replace(".", "")) > 100) {
+            txProgressPrecent.setText("100");
+        }
+        int percent = Integer.valueOf(txProgressPrecent.getText());
+        progressBarProject.setValue(percent);
+    }//GEN-LAST:event_txProgressPrecentKeyReleased
+
+    private void txProgressPrecentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProgressPrecentFocusGained
+        txProgressPrecent.selectAll();
+    }//GEN-LAST:event_txProgressPrecentFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -6443,6 +6532,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -6462,7 +6552,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -6493,6 +6582,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JComboBox prjStatus;
     private javax.swing.JInternalFrame productEditFrame;
     private javax.swing.JInternalFrame productsFrame;
+    private javax.swing.JProgressBar progressBarProject;
     private panelLayout.txAreaDescription projectDescription;
     private javax.swing.JInternalFrame projectDetailFrame;
     private javax.swing.JInternalFrame projectFrame;
@@ -6537,6 +6627,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTextField txPeralatan;
     private javax.swing.JTextField txPrice;
     private javax.swing.JTextField txProductsID;
+    private javax.swing.JTextField txProgressPrecent;
     private javax.swing.JTextField txProjectNAme;
     private javax.swing.JTextField txProjectid;
     private javax.swing.JTextField txQTY;
@@ -6600,14 +6691,16 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         } catch (Exception ex) {
         }
-        
+
         try {
             if (cbMonthFilter.getSelectedIndex() > 0) {
                 if (Condition.length() > 0) {
                     Condition += " and ";
                 }
                 String monthSelected = String.valueOf(cbMonthFilter.getSelectedIndex());
-                if (monthSelected.length()<2) monthSelected="0"+monthSelected;
+                if (monthSelected.length() < 2) {
+                    monthSelected = "0" + monthSelected;
+                }
                 Condition += " to_char(a.modified_at,'MM') = '" + monthSelected + "' ";
             }
         } catch (Exception ex) {
@@ -7270,6 +7363,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         lbGrandTotal.setText("0");
         btDelProject.setVisible(false);
         btPreviewProject.setVisible(false);
+        txProgressPrecent.setText("0");
+        progressBarProject.setValue(0);
 
         getDataClientAndLEader();
 

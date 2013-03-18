@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRpProjectInfo" language="groovy" pageWidth="288" pageHeight="842" columnWidth="288" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c2dbc1ae-925f-4fe8-b259-a682f97a8cf7">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="projectID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.title,a.description,b.first_name as leaderfirst,
+b.last_name as leaderlast, c.first_name as clientfirst,
+c.last_name as clientlast,
+a.starts_on,a.due_date,a.completed_on,
+a.status,a.location
+from projects a
+left join user b on a.leader_id=b.id
+left join user c on a.client_id=c.id
+where a.id=$P{projectID}]]>
+	</queryString>
+	<field name="TITLE" class="java.lang.String"/>
+	<field name="DESCRIPTION" class="java.lang.String"/>
+	<field name="LEADERFIRST" class="java.lang.String"/>
+	<field name="LEADERLAST" class="java.lang.String"/>
+	<field name="CLIENTFIRST" class="java.lang.String"/>
+	<field name="CLIENTLAST" class="java.lang.String"/>
+	<field name="STARTS_ON" class="java.sql.Timestamp"/>
+	<field name="DUE_DATE" class="java.sql.Timestamp"/>
+	<field name="COMPLETED_ON" class="java.sql.Timestamp"/>
+	<field name="STATUS" class="java.lang.Integer"/>
+	<field name="LOCATION" class="java.lang.String"/>
+	<title>
+		<band height="126" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="85f47cce-aee4-41fa-86dc-4c5a205ab913" stretchType="RelativeToBandHeight" x="0" y="0" width="182" height="126" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement uuid="40db1197-9921-41d7-9faf-ed9aafffd193" x="61" y="78" width="120" height="15" forecolor="#00CC00"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[( ($F{STATUS}==2) ? "Finished" : "" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ee1f8025-980b-49be-bbff-773b5c9c8c82" x="0" y="18" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Leader]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="b263024d-42d3-49b2-ae6a-685083b8b3d4" x="61" y="63" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DUE_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d6c8354a-8d3e-4c5e-b7c5-9def7dfc8996" x="0" y="78" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d16b420-09cd-4aa3-8ff0-d4b2deb3988b" x="0" y="63" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Due date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="553abcc5-0eaf-4ab7-9f62-046a0c31f89c" x="0" y="93" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Location]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="9ce6d83a-5a9f-45e5-b367-2295cde4ed3e" x="61" y="48" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{STARTS_ON}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3203eba-1038-43a2-83fe-016f5ebd380d" x="61" y="93" width="120" height="33"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LOCATION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="934414ac-2dc0-4a6e-8030-c9805a9d1d92" x="61" y="18" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LEADERFIRST}+" "+$F{LEADERLAST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="48ca5833-72c5-4ef8-a29f-c175b6e1b533" x="0" y="33" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Cient]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c0e6ed8b-7710-4716-9f13-e4b4e7c91a3e" x="0" y="48" width="61" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[Start on]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6830f0f2-d7f8-4e5b-8fda-75aabd891889" x="61" y="33" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLIENTFIRST}+" "+$F{CLIENTLAST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b88c665a-0f78-4d89-8b47-1d168b8784ee" x="0" y="0" width="181" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Project Information]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

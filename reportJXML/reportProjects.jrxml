@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProjects" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dda4b52-274c-4014-abfd-5ba443139d24">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="240"/>
-	<property name="ireport.y" value="215"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="25"/>
 	<parameter name="projectID" class="java.lang.Integer" isForPrompting="false">
-		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/media/apps/raymon/InventoryApps/reportJXML/"]]></defaultValueExpression>
@@ -14,6 +14,9 @@
 	</parameter>
 	<parameter name="iconPeople" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/userIcon.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="iconTransactionsOf" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/apps/raymon/InventoryApps/reportJXML/transactionOfIcon.jpg"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select a.title,a.description,b.first_name as leaderfirst,
@@ -54,7 +57,7 @@ where a.id=$P{projectID}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="18">
 			<subreport>
 				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" x="0" y="0" width="290" height="18" backcolor="#999999"/>
 				<subreportParameter name="projectID">
@@ -75,7 +78,7 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpPeopleInproject.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="126">
+		<band height="18">
 			<subreport>
 				<reportElement uuid="19f6c12f-62a0-4254-a2de-7911dc0fdf70" stretchType="RelativeToTallestObject" x="0" y="0" width="195" height="18" backcolor="#999999"/>
 				<subreportParameter name="iconBudget">
@@ -87,91 +90,38 @@ where a.id=$P{projectID}]]>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpAllocatedBudget.jasper"]]></subreportExpression>
 			</subreport>
-			<rectangle>
-				<reportElement uuid="73c3f1d1-23a5-4b30-b4df-3607491f7195" stretchType="RelativeToTallestObject" x="197" y="0" width="191" height="18" backcolor="#CCCCCC"/>
-				<graphicElement>
-					<pen lineWidth="0.0"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle>
-				<reportElement uuid="85f47cce-aee4-41fa-86dc-4c5a205ab913" x="390" y="0" width="182" height="126" backcolor="#CCCCCC"/>
-				<graphicElement>
-					<pen lineWidth="0.0"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement uuid="b88c665a-0f78-4d89-8b47-1d168b8784ee" x="390" y="0" width="181" height="16"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Project Information]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="ee1f8025-980b-49be-bbff-773b5c9c8c82" x="390" y="18" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Leader]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="934414ac-2dc0-4a6e-8030-c9805a9d1d92" x="451" y="18" width="120" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{LEADERFIRST}+" "+$F{LEADERLAST}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="48ca5833-72c5-4ef8-a29f-c175b6e1b533" x="390" y="33" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Cient]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="6830f0f2-d7f8-4e5b-8fda-75aabd891889" x="451" y="33" width="120" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{CLIENTFIRST}+" "+$F{CLIENTLAST}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="c0e6ed8b-7710-4716-9f13-e4b4e7c91a3e" x="390" y="48" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Start on]]></text>
-			</staticText>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement uuid="9ce6d83a-5a9f-45e5-b367-2295cde4ed3e" x="451" y="48" width="120" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{STARTS_ON}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="0d16b420-09cd-4aa3-8ff0-d4b2deb3988b" x="390" y="63" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Due date]]></text>
-			</staticText>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement uuid="b263024d-42d3-49b2-ae6a-685083b8b3d4" x="451" y="63" width="120" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{DUE_DATE}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="d6c8354a-8d3e-4c5e-b7c5-9def7dfc8996" x="390" y="78" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Status]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="40db1197-9921-41d7-9faf-ed9aafffd193" x="451" y="78" width="120" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="553abcc5-0eaf-4ab7-9f62-046a0c31f89c" x="390" y="93" width="61" height="15"/>
-				<box leftPadding="2"/>
-				<textElement/>
-				<text><![CDATA[Location]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="b3203eba-1038-43a2-83fe-016f5ebd380d" x="451" y="93" width="120" height="33"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{LOCATION}]]></textFieldExpression>
-			</textField>
+			<subreport>
+				<reportElement uuid="15037392-2c8e-4232-a63f-015b37e62ab4" stretchType="RelativeToTallestObject" x="197" y="0" width="191" height="18" backcolor="#999999"/>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iconTransactionsOf">
+					<subreportParameterExpression><![CDATA[$P{iconTransactionsOf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpActualBudget.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="b4fec06b-e07c-46d1-a3ed-cf267abb936f" stretchType="RelativeToTallestObject" x="390" y="0" width="182" height="18" backcolor="#999999"/>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpprojectInfo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="18">
+			<subreport>
+				<reportElement uuid="e0230e8c-9e01-47a5-9357-b259e0514908" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="18" backcolor="#999999"/>
+				<subreportParameter name="projectID">
+					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iconTransactionsOf">
+					<subreportParameterExpression><![CDATA[$P{iconTransactionsOf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpTransactionsOf.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>

@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
 	</parameter>
 	<parameter name="iconPeople" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/media/apps/raymon/reportJXML/userIcon.png"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select b.first_name,b.last_name

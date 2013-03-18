@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRpProductInproject" language="groovy" pageWidth="381" pageHeight="842" columnWidth="381" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c2dbc1ae-925f-4fe8-b259-a682f97a8cf7">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="projectID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
+	</parameter>
+	<parameter name="iconTransactionsOf" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.id,a.title,c.title as projecttitle,a.modified_at,a.value,b.unique_id,b.name   from transactions a left join accounts b on a.account_id = b.id  left join projects c on a.project_id=c.id
+where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="TITLE" class="java.lang.String"/>
+	<field name="PROJECTTITLE" class="java.lang.String"/>
+	<field name="MODIFIED_AT" class="java.sql.Timestamp"/>
+	<field name="VALUE" class="java.lang.Integer"/>
+	<field name="UNIQUE_ID" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<title>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="fa41de47-8206-4a23-b201-7db0880d271e" stretchType="RelativeToTallestObject" x="0" y="0" width="387" height="31" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="13" y="0" width="374" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transactions for this project]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="58c0683a-4c20-4224-8edb-a6183d9284fd" stretchType="RelativeToTallestObject" x="2" y="3" width="9" height="9"/>
+				<imageExpression><![CDATA[$P{iconTransactionsOf}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d9c01817-e506-437f-9a9e-10517666025f" x="0" y="16" width="23" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[NO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dad694d6-616c-4228-83fc-cc404c805049" x="23" y="16" width="60" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98e93113-c724-4fc3-a72a-4c9c676a5048" x="83" y="16" width="235" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[TRANSACTIONS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2480333e-f92e-422f-a439-976d7fe144d5" x="319" y="16" width="68" height="15"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<text><![CDATA[VALUE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="29">
+			<rectangle>
+				<reportElement uuid="21305d70-a1be-4dbd-a108-e67312154304" stretchType="RelativeToTallestObject" x="0" y="0" width="387" height="29" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement uuid="953c7aa9-b158-49fe-89ec-1de796de4d82" x="83" y="1" width="235" height="13"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4e760fcd-18e0-49cc-86aa-5b672ad43cbc" x="0" y="1" width="23" height="13"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement uuid="f7d1b022-f5ed-451f-af1e-d64ff9d9ba32" x="23" y="1" width="60" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{MODIFIED_AT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="1ea446f5-fff4-48d2-a64b-739842a1093c" x="333" y="1" width="54" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VALUE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1fe933c0-3286-4ae5-bfbf-214c5778ce5e" x="319" y="2" width="26" height="12"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Rp]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="206c025c-6eba-442d-a7aa-090f187934ca" x="22" y="-16" width="1" height="45"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="e2760ef8-7ce4-46e1-bbc1-6d030529ada3" x="83" y="-15" width="1" height="44"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="1303920a-0509-4d08-a640-7a38c0e328a0" x="5" y="0" width="373" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="745c1cfb-368f-4cec-bb71-f73203947733" x="318" y="-15" width="1" height="44"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="24717db2-24eb-47df-ac67-c0c64f6a45d5" x="85" y="14" width="233" height="13"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{UNIQUE_ID} + " - " + $F{PROJECTTITLE} + " - "+$F{NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
