@@ -70,6 +70,7 @@ public class formMenu extends javax.swing.JFrame {
         settingInternalFrame(accountsFrame.getUI());
         settingInternalFrame(transactionsFrame.getUI());
         settingInternalFrame(transactionEditFrame.getUI());
+        settingInternalFrame(projectPreview.getUI());
     }
 
     void settingInternalFrame(InternalFrameUI ui) {
@@ -781,6 +782,197 @@ public class formMenu extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         txDescriptionTransaction = new javax.swing.JTextPane();
         txTransactionValue = new javax.swing.JTextField();
+        projectPreview = new javax.swing.JInternalFrame();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jPanel11 = new javax.swing.JPanel();
+        btsaveProject1 = new javax.swing.JButton();
+        Print = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
+        jLabel91 = new javax.swing.JLabel();
+        jLabel92 = new javax.swing.JLabel();
+        jLabel93 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel66 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tmTableProductsInProject = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnProductInProject.length;
+            }
+
+            public int getRowCount() {
+                return vectorProductsInProject.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorProductsInProject.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnProductInProject[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                if (column1 == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorProductsInProject.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbProductInProjects1 = new javax.swing.JTable(tmTableProductsInProject);
+
+        tbProductInProjects1.setAutoResizeMode(tbProductInProjects.AUTO_RESIZE_OFF);
+        tc=tbProductInProjects1.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tc=tbProductInProjects1.getColumn("product");
+        tc.setMinWidth(490);
+        tc=tbProductInProjects1.getColumn("ACTION");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tbProductInProjects1.setTableHeader(null);
+        tbProductInProjects1.setShowGrid(false);
+        jPanel14 = new javax.swing.JPanel();
+        jLabel67 = new javax.swing.JLabel();
+        progressBarProject1 = new javax.swing.JProgressBar();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel69 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+
+        tmTabelPeopleInProject = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnPeopleinProject.length;
+            }
+
+            public int getRowCount() {
+                return vectorPeopleInProject.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnPeopleinProject[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                if (column1 == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbPeopleinProject1 = new javax.swing.JTable(tmTabelPeopleInProject);
+        tbPeopleinProject1.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);
+        tc=tbPeopleinProject1.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tc=tbPeopleinProject1.getColumn("peopleName");
+        tc.setMinWidth(270);
+        tc.setCellRenderer(new lbRenderPeople());
+        tc=tbPeopleinProject1.getColumn("ACTION");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tbPeopleinProject1.setTableHeader(null);
+        tbPeopleinProject1.setShowGrid(false);
+        jPanel16 = new javax.swing.JPanel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        jLabel77 = new javax.swing.JLabel();
+        jLabel78 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        jLabel83 = new javax.swing.JLabel();
+        jLabel84 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel85 = new javax.swing.JLabel();
+        lbGrandTotal1 = new javax.swing.JLabel();
+        lbTotal2 = new javax.swing.JLabel();
+        jLabel86 = new javax.swing.JLabel();
+        lbTotal3 = new javax.swing.JLabel();
+        lbTotal4 = new javax.swing.JLabel();
+        lbTotal5 = new javax.swing.JLabel();
+        lbTotal6 = new javax.swing.JLabel();
+        lbTotal7 = new javax.swing.JLabel();
+        lbTotal9 = new javax.swing.JLabel();
+        lbTotal8 = new javax.swing.JLabel();
+        jLabel95 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel87 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel96 = new javax.swing.JLabel();
+        jLabel97 = new javax.swing.JLabel();
+        jLabel98 = new javax.swing.JLabel();
+        jLabel99 = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
+        jLabel101 = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
+        jLabel104 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel105 = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
+        jLabel108 = new javax.swing.JLabel();
+        jLabel109 = new javax.swing.JLabel();
+        jLabel110 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel111 = new javax.swing.JLabel();
+        lbGrandTotal2 = new javax.swing.JLabel();
+        lbTotal10 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
+        lbTotal11 = new javax.swing.JLabel();
+        lbTotal12 = new javax.swing.JLabel();
+        lbTotal13 = new javax.swing.JLabel();
+        lbTotal14 = new javax.swing.JLabel();
+        lbTotal15 = new javax.swing.JLabel();
+        lbTotal16 = new javax.swing.JLabel();
+        lbTotal17 = new javax.swing.JLabel();
+        jLabel113 = new javax.swing.JLabel();
         jButton18 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -3126,6 +3318,530 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionEditFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(transactionEditFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+    projectPreview.setBackground(new java.awt.Color(255, 255, 255));
+    projectPreview.setBorder(null);
+    projectPreview.setVisible(false);
+    projectPreview.getContentPane().setLayout(null);
+
+    jScrollPane10.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    jScrollPane10.setAutoscrolls(true);
+    jScrollPane10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+    jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel11.setAutoscrolls(true);
+    jPanel11.setPreferredSize(new java.awt.Dimension(700, 1550));
+    jPanel11.setLayout(null);
+
+    btsaveProject1.setBackground(new java.awt.Color(0, 0, 0));
+    btsaveProject1.setForeground(new java.awt.Color(255, 255, 255));
+    btsaveProject1.setText("Send to Email");
+    btsaveProject1.setBorder(null);
+    btsaveProject1.setBorderPainted(false);
+    btsaveProject1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btsaveProject1.setFocusPainted(false);
+    btsaveProject1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btsaveProject1ActionPerformed(evt);
+        }
+    });
+    jPanel11.add(btsaveProject1);
+    btsaveProject1.setBounds(600, 10, 120, 30);
+
+    Print.setBackground(new java.awt.Color(204, 204, 204));
+    Print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPrint.jpg"))); // NOI18N
+    Print.setText("Print");
+    Print.setBorder(null);
+    Print.setBorderPainted(false);
+    Print.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    Print.setFocusPainted(false);
+    Print.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            PrintActionPerformed(evt);
+        }
+    });
+    jPanel11.add(Print);
+    Print.setBounds(730, 10, 100, 30);
+
+    jPanel12.setForeground(new java.awt.Color(204, 204, 204));
+    jPanel12.setLayout(null);
+
+    jLabel60.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel60.setText("Location");
+    jPanel12.add(jLabel60);
+    jLabel60.setBounds(10, 260, 160, 30);
+
+    jLabel61.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel61.setText("Leader");
+    jPanel12.add(jLabel61);
+    jLabel61.setBounds(80, 260, 200, 30);
+
+    jLabel62.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel62.setText("Client");
+    jPanel12.add(jLabel62);
+    jLabel62.setBounds(10, 100, 160, 30);
+
+    jLabel63.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel63.setText("Start on");
+    jPanel12.add(jLabel63);
+    jLabel63.setBounds(10, 140, 160, 30);
+
+    jLabel64.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel64.setText("Due date");
+    jPanel12.add(jLabel64);
+    jLabel64.setBounds(10, 180, 160, 30);
+
+    jLabel65.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel65.setText("Status");
+    jPanel12.add(jLabel65);
+    jLabel65.setBounds(10, 220, 160, 30);
+
+    jLabel88.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel88.setText("Leader");
+    jPanel12.add(jLabel88);
+    jLabel88.setBounds(10, 60, 160, 30);
+
+    jLabel89.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel89.setText("Leader");
+    jPanel12.add(jLabel89);
+    jLabel89.setBounds(80, 60, 200, 30);
+
+    jLabel90.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel90.setText("Leader");
+    jPanel12.add(jLabel90);
+    jLabel90.setBounds(80, 100, 200, 30);
+
+    jLabel91.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel91.setText("Leader");
+    jPanel12.add(jLabel91);
+    jLabel91.setBounds(80, 140, 200, 30);
+
+    jLabel92.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel92.setText("Leader");
+    jPanel12.add(jLabel92);
+    jLabel92.setBounds(80, 180, 200, 30);
+
+    jLabel93.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel93.setText("Leader");
+    jPanel12.add(jLabel93);
+    jLabel93.setBounds(80, 220, 200, 30);
+
+    jLabel94.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel94.setText("Project Information");
+    jPanel12.add(jLabel94);
+    jLabel94.setBounds(10, 10, 270, 22);
+
+    jPanel11.add(jPanel12);
+    jPanel12.setBounds(540, 430, 290, 330);
+
+    jPanel13.setLayout(null);
+
+    jLabel66.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel66.setText("Products on this project");
+    jPanel13.add(jLabel66);
+    jLabel66.setBounds(10, 10, 280, 30);
+
+    jScrollPane11.setBorder(null);
+    jScrollPane11.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+    jScrollPane11.setOpaque(false);
+    jScrollPane11.setWheelScrollingEnabled(false);
+
+    tbProductInProjects1.setBackground(new java.awt.Color(238, 238, 238));
+    tbProductInProjects1.setRowHeight(30);
+    tbProductInProjects1.setShowHorizontalLines(false);
+    tbProductInProjects1.setShowVerticalLines(false);
+    tbProductInProjects1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbProductInProjects1KeyReleased(evt);
+        }
+    });
+    jScrollPane11.setViewportView(tbProductInProjects1);
+
+    jPanel13.add(jScrollPane11);
+    jScrollPane11.setBounds(10, 40, 490, 100);
+    jScrollPane5.setBorder(null);
+    jScrollPane5.setBorder(BorderFactory.createEmptyBorder());
+
+    jPanel11.add(jPanel13);
+    jPanel13.setBounds(10, 120, 520, 160);
+
+    jPanel14.setLayout(null);
+
+    jLabel67.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel67.setText("Project Progress");
+    jPanel14.add(jLabel67);
+    jLabel67.setBounds(10, 10, 230, 22);
+    jPanel14.add(progressBarProject1);
+    progressBarProject1.setBounds(10, 40, 270, 20);
+
+    jPanel11.add(jPanel14);
+    jPanel14.setBounds(540, 120, 290, 80);
+
+    jPanel15.setLayout(null);
+
+    jLabel69.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel69.setText("People on This Project");
+    jPanel15.add(jLabel69);
+    jLabel69.setBounds(10, 10, 270, 22);
+
+    jScrollPane12.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane12.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+    tbPeopleinProject1.setBackground(new java.awt.Color(238, 238, 238));
+    tbPeopleinProject1.setOpaque(false);
+    tbPeopleinProject1.setRowHeight(30);
+    tbPeopleinProject1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbPeopleinProject1KeyReleased(evt);
+        }
+    });
+    jScrollPane12.setViewportView(tbPeopleinProject1);
+
+    jScrollPane6.setBorder(null);
+    jScrollPane6.setBorder(BorderFactory.createEmptyBorder());
+    jPanel15.add(jScrollPane12);
+    jScrollPane12.setBounds(10, 40, 270, 150);
+
+    jPanel11.add(jPanel15);
+    jPanel15.setBounds(540, 210, 290, 210);
+
+    jPanel16.setLayout(null);
+
+    jLabel70.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel70.setText("Actual Budget");
+    jPanel16.add(jLabel70);
+    jLabel70.setBounds(40, 10, 210, 30);
+
+    jLabel71.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel71.setText(" Rp.");
+    jLabel71.setOpaque(true);
+    jPanel16.add(jLabel71);
+    jLabel71.setBounds(150, 50, 40, 30);
+
+    jLabel72.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel72.setText("Material");
+    jPanel16.add(jLabel72);
+    jLabel72.setBounds(10, 50, 120, 30);
+
+    jLabel73.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel73.setText("Peralatan");
+    jPanel16.add(jLabel73);
+    jLabel73.setBounds(10, 90, 120, 30);
+
+    jLabel74.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel74.setText(" Rp.");
+    jLabel74.setOpaque(true);
+    jPanel16.add(jLabel74);
+    jLabel74.setBounds(150, 90, 40, 30);
+
+    jLabel75.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel75.setText(" Rp.");
+    jLabel75.setOpaque(true);
+    jPanel16.add(jLabel75);
+    jLabel75.setBounds(150, 130, 40, 30);
+
+    jLabel76.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel76.setText("Tenaga Kerja");
+    jPanel16.add(jLabel76);
+    jLabel76.setBounds(10, 130, 120, 30);
+
+    jLabel77.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel77.setText("Overhead Cost");
+    jPanel16.add(jLabel77);
+    jLabel77.setBounds(10, 170, 120, 30);
+
+    jLabel78.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel78.setText(" Rp.");
+    jLabel78.setOpaque(true);
+    jPanel16.add(jLabel78);
+    jLabel78.setBounds(150, 170, 40, 30);
+    jPanel16.add(jSeparator4);
+    jSeparator4.setBounds(10, 340, 240, 10);
+
+    jLabel79.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel79.setText(" Rp.");
+    jLabel79.setOpaque(true);
+    jPanel16.add(jLabel79);
+    jLabel79.setBounds(150, 260, 50, 30);
+
+    jLabel80.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel80.setText("Management Cost");
+    jPanel16.add(jLabel80);
+    jLabel80.setBounds(10, 210, 120, 30);
+
+    jLabel81.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel81.setText(" Rp.");
+    jLabel81.setOpaque(true);
+    jPanel16.add(jLabel81);
+    jLabel81.setBounds(150, 210, 40, 30);
+
+    jLabel82.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel82.setText("Total");
+    jPanel16.add(jLabel82);
+    jLabel82.setBounds(10, 260, 120, 30);
+
+    jLabel83.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel83.setText("PPN");
+    jPanel16.add(jLabel83);
+    jLabel83.setBounds(10, 300, 120, 30);
+
+    jLabel84.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel84.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel84.setText("% ");
+    jLabel84.setOpaque(true);
+    jPanel16.add(jLabel84);
+    jLabel84.setBounds(190, 290, 20, 30);
+    jPanel16.add(jSeparator5);
+    jSeparator5.setBounds(10, 252, 240, 10);
+
+    jLabel85.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel85.setText("Grand Total");
+    jPanel16.add(jLabel85);
+    jLabel85.setBounds(10, 350, 120, 30);
+
+    lbGrandTotal1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbGrandTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbGrandTotal1.setOpaque(true);
+    jPanel16.add(lbGrandTotal1);
+    lbGrandTotal1.setBounds(180, 350, 70, 30);
+
+    lbTotal2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal2.setOpaque(true);
+    jPanel16.add(lbTotal2);
+    lbTotal2.setBounds(180, 260, 70, 30);
+
+    jLabel86.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel86.setText(" Rp.");
+    jLabel86.setOpaque(true);
+    jPanel16.add(jLabel86);
+    jLabel86.setBounds(150, 350, 50, 30);
+
+    lbTotal3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal3.setOpaque(true);
+    jPanel16.add(lbTotal3);
+    lbTotal3.setBounds(180, 50, 70, 30);
+
+    lbTotal4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal4.setOpaque(true);
+    jPanel16.add(lbTotal4);
+    lbTotal4.setBounds(180, 90, 70, 30);
+
+    lbTotal5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal5.setOpaque(true);
+    jPanel16.add(lbTotal5);
+    lbTotal5.setBounds(180, 130, 70, 30);
+
+    lbTotal6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal6.setOpaque(true);
+    jPanel16.add(lbTotal6);
+    lbTotal6.setBounds(180, 170, 70, 30);
+
+    lbTotal7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal7.setOpaque(true);
+    jPanel16.add(lbTotal7);
+    lbTotal7.setBounds(180, 210, 70, 30);
+
+    lbTotal9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal9.setOpaque(true);
+    jPanel16.add(lbTotal9);
+    lbTotal9.setBounds(150, 290, 40, 30);
+
+    lbTotal8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal8.setOpaque(true);
+    jPanel16.add(lbTotal8);
+    lbTotal8.setBounds(180, 260, 70, 30);
+
+    jLabel95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconTransactions.jpg"))); // NOI18N
+    jPanel16.add(jLabel95);
+    jLabel95.setBounds(10, 10, 20, 30);
+
+    jPanel11.add(jPanel16);
+    jPanel16.setBounds(270, 290, 260, 390);
+
+    jLabel68.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel68.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+    jPanel11.add(jLabel68);
+    jLabel68.setBounds(10, 40, 580, 70);
+    jPanel11.add(jLabel87);
+    jLabel87.setBounds(10, 10, 580, 30);
+
+    jPanel17.setLayout(null);
+
+    jLabel96.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel96.setText("Allocated Budget");
+    jPanel17.add(jLabel96);
+    jLabel96.setBounds(40, 10, 210, 30);
+
+    jLabel97.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel97.setText(" Rp.");
+    jLabel97.setOpaque(true);
+    jPanel17.add(jLabel97);
+    jLabel97.setBounds(150, 50, 40, 30);
+
+    jLabel98.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel98.setText("Material");
+    jPanel17.add(jLabel98);
+    jLabel98.setBounds(10, 50, 120, 30);
+
+    jLabel99.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel99.setText("Peralatan");
+    jPanel17.add(jLabel99);
+    jLabel99.setBounds(10, 90, 120, 30);
+
+    jLabel100.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel100.setText(" Rp.");
+    jLabel100.setOpaque(true);
+    jPanel17.add(jLabel100);
+    jLabel100.setBounds(150, 90, 40, 30);
+
+    jLabel101.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel101.setText(" Rp.");
+    jLabel101.setOpaque(true);
+    jPanel17.add(jLabel101);
+    jLabel101.setBounds(150, 130, 40, 30);
+
+    jLabel102.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel102.setText("Tenaga Kerja");
+    jPanel17.add(jLabel102);
+    jLabel102.setBounds(10, 130, 120, 30);
+
+    jLabel103.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel103.setText("Overhead Cost");
+    jPanel17.add(jLabel103);
+    jLabel103.setBounds(10, 170, 120, 30);
+
+    jLabel104.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel104.setText(" Rp.");
+    jLabel104.setOpaque(true);
+    jPanel17.add(jLabel104);
+    jLabel104.setBounds(150, 170, 40, 30);
+    jPanel17.add(jSeparator6);
+    jSeparator6.setBounds(10, 340, 230, 10);
+
+    jLabel105.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel105.setText(" Rp.");
+    jLabel105.setOpaque(true);
+    jPanel17.add(jLabel105);
+    jLabel105.setBounds(150, 260, 50, 30);
+
+    jLabel106.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel106.setText("Management Cost");
+    jPanel17.add(jLabel106);
+    jLabel106.setBounds(10, 210, 120, 30);
+
+    jLabel107.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel107.setText(" Rp.");
+    jLabel107.setOpaque(true);
+    jPanel17.add(jLabel107);
+    jLabel107.setBounds(150, 210, 40, 30);
+
+    jLabel108.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel108.setText("Total");
+    jPanel17.add(jLabel108);
+    jLabel108.setBounds(10, 260, 120, 30);
+
+    jLabel109.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel109.setText("PPN");
+    jPanel17.add(jLabel109);
+    jLabel109.setBounds(10, 300, 120, 30);
+
+    jLabel110.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel110.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabel110.setText("% ");
+    jLabel110.setOpaque(true);
+    jPanel17.add(jLabel110);
+    jLabel110.setBounds(190, 290, 20, 30);
+    jPanel17.add(jSeparator7);
+    jSeparator7.setBounds(10, 252, 230, 10);
+
+    jLabel111.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel111.setText("Grand Total");
+    jPanel17.add(jLabel111);
+    jLabel111.setBounds(10, 350, 120, 30);
+
+    lbGrandTotal2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbGrandTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbGrandTotal2.setOpaque(true);
+    jPanel17.add(lbGrandTotal2);
+    lbGrandTotal2.setBounds(180, 350, 70, 30);
+
+    lbTotal10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal10.setOpaque(true);
+    jPanel17.add(lbTotal10);
+    lbTotal10.setBounds(180, 260, 70, 30);
+
+    jLabel112.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel112.setText(" Rp.");
+    jLabel112.setOpaque(true);
+    jPanel17.add(jLabel112);
+    jLabel112.setBounds(150, 350, 50, 30);
+
+    lbTotal11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal11.setOpaque(true);
+    jPanel17.add(lbTotal11);
+    lbTotal11.setBounds(180, 50, 70, 30);
+
+    lbTotal12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal12.setOpaque(true);
+    jPanel17.add(lbTotal12);
+    lbTotal12.setBounds(180, 90, 70, 30);
+
+    lbTotal13.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal13.setOpaque(true);
+    jPanel17.add(lbTotal13);
+    lbTotal13.setBounds(180, 130, 70, 30);
+
+    lbTotal14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal14.setOpaque(true);
+    jPanel17.add(lbTotal14);
+    lbTotal14.setBounds(180, 170, 70, 30);
+
+    lbTotal15.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal15.setOpaque(true);
+    jPanel17.add(lbTotal15);
+    lbTotal15.setBounds(180, 210, 70, 30);
+
+    lbTotal16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal16.setOpaque(true);
+    jPanel17.add(lbTotal16);
+    lbTotal16.setBounds(150, 290, 40, 30);
+
+    lbTotal17.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal17.setOpaque(true);
+    jPanel17.add(lbTotal17);
+    lbTotal17.setBounds(180, 260, 70, 30);
+
+    jLabel113.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconTransactions.jpg"))); // NOI18N
+    jPanel17.add(jLabel113);
+    jLabel113.setBounds(10, 10, 20, 30);
+
+    jPanel11.add(jPanel17);
+    jPanel17.setBounds(10, 290, 250, 390);
+
+    jScrollPane10.setViewportView(jPanel11);
+
+    projectPreview.getContentPane().add(jScrollPane10);
+    jScrollPane10.setBounds(0, 0, 860, 1150);
+
+    projectPreview.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(projectPreview, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
     panelMenu1.add(jDesktopPane1);
     jDesktopPane1.setBounds(160, 50, 860, 720);
 
@@ -3692,7 +4408,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
-                qry = "delete from cache_people_in_project where id_people in (" + qry + ");";
+                qry = "delete from cache_people_in_project where id_people in (" + qry + ") and id_user="+userID+";";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete accounts = " + qry);
                 }
@@ -3725,7 +4441,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
-                qry = "delete from cache_products_in_project where id in (" + qry + ");";
+                qry = "delete from cache_products_in_project where id in (" + qry + ") and user_id="+userID+";";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete accounts = " + qry);
                 }
@@ -3953,6 +4669,161 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         txInUserName.setEditable(false);
     }
 
+    public void previewPrint() {
+        jLabel87.setText("");
+                jLabel68.setText("");
+                jLabel89.setText("");
+                jLabel90.setText("");
+                jLabel91.setText("");
+                jLabel92.setText("");
+                jLabel93.setText("");
+                jLabel61.setText("");
+                progressBarProject1.setValue(0);
+                tbProductInProjects1.removeAll();
+                
+                lbTotal3.setText("0");
+                lbTotal4.setText("0");
+                lbTotal5.setText("0");
+                lbTotal6.setText("0");
+                lbTotal7.setText("0");
+                lbTotal2.setText("0");
+                lbTotal9.setText("0");
+                lbGrandTotal1.setText("0");
+        try {
+            common.functionCommon fc = new common.functionCommon();
+            String qry = "select a.title,a.description,a.location"
+                    + ",b.first_name as first_nameleader,b.last_name as last_nameleader"
+                    + ",c.first_name as first_nameclient,c.last_name as last_nameclient"
+                    + ",a.status,"+fc.viewDatefromSQL1("a.starts_on","starts_on1")+"  "
+                    + ","+fc.viewDatefromSQL1("a.due_date","due_date1")+" "
+                    + " from projects a "
+                    + " left join user b on a.leader_id=b.id"
+                    + " left join user c on a.client_id=c.id"
+                    + " where a.id = " + txProjectid.getText();
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                jLabel87.setText(rs.getString("title"));
+                jLabel68.setText(rs.getString("description"));
+                jLabel89.setText(rs.getString("first_nameleader")+" "+rs.getString("last_nameleader"));
+                jLabel90.setText(rs.getString("first_nameclient")+" "+rs.getString("last_nameclient"));
+                jLabel91.setText(rs.getString("starts_on1"));
+                jLabel92.setText(rs.getString("due_date1"));
+                jLabel93.setText(fc.getStatusProject(rs.getInt("status")));
+                jLabel61.setText(rs.getString("location"));
+            }
+            
+            qry = "select valueData "
+                    + "from project_metas "
+                    + "where keyData='progress' and project_id="+txProjectid.getText();
+            st = cn.createStatement();
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                progressBarProject1.setValue(rs.getInt("valueData"));
+            }
+            
+            //view items in project 
+            qry = "select a.item_id,a.inventory_qty,b.name "
+                    + " from item_project a "
+                    + " left join items b on a.item_id=b.id "
+                    + " where a.project_id = " + txProjectid.getText();
+            st = cn.createStatement();
+            rs = st.executeQuery(qry);
+            java.util.Vector rowData = null;
+            vectorProductsInProject = new java.util.Vector();
+            while (rs.next()) {
+                rowData = new java.util.Vector();
+                rowData.addElement("");
+                rowData.addElement("  "+ rs.getString("name") + " - "
+                        + fc.digitNumber(rs.getString("inventory_qty")));
+                rowData.addElement("");
+                vectorProductsInProject.addElement(rowData);
+            }
+            tbProductInProjects1.tableChanged(new javax.swing.event.TableModelEvent(tmTableProductsInProject));
+            //end view items in project 
+            
+            qry = "select a.user_id,b.first_name,b.last_name "
+                    + " from assignments a "
+                    + " left join user b on a.user_id=b.id "
+                    + " where a.project_id = " + txProjectid.getText();
+            st = cn.createStatement();
+            rs = st.executeQuery(qry);
+            vectorPeopleInProject = new java.util.Vector();
+            while (rs.next()) {
+                rowData = new java.util.Vector();
+                rowData.addElement("");
+                rowData.addElement(" " + rs.getString("first_name")
+                        +" "+rs.getString("last_name")
+                        + " - Programmer");
+                rowData.addElement("");
+                vectorPeopleInProject.addElement(rowData);
+            }
+            tbPeopleinProject1.tableChanged(new javax.swing.event.TableModelEvent(tmTabelPeopleInProject));
+            
+            
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 0";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal3.setText(fc.digitNumber(rs.getString("value")));
+            }
+                
+                qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 1";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal4.setText(fc.digitNumber(rs.getString("value")));
+            }
+            
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 2";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal5.setText(fc.digitNumber(rs.getString("value")));
+            }
+            
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 3";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal6.setText(fc.digitNumber(rs.getString("value")));
+            }
+            
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 4";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal7.setText(fc.digitNumber(rs.getString("value")));
+            }
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+                    + " and account_id = 5";
+            rs = st.executeQuery(qry);
+            if (rs.next()) {
+                lbTotal9.setText(fc.digitNumber(rs.getString("value")));
+            }
+            int total = 0;
+        total += Integer.valueOf(lbTotal3.getText().replace(".", ""));
+        total += Integer.valueOf(lbTotal4.getText().replace(".", ""));
+        total += Integer.valueOf(lbTotal5.getText().replace(".", ""));
+        total += Integer.valueOf(lbTotal6.getText().replace(".", ""));
+        total += Integer.valueOf(lbTotal7.getText().replace(".", ""));
+        lbTotal2.setText(fc.digitNumber(String.valueOf(total)));
+        int countDiscount = total * (Integer.valueOf(txPPN.getText())) / 100;
+        total -= countDiscount;
+        lbGrandTotal1.setText(fc.digitNumber(String.valueOf(total)));
+                
+                
+            
+            rs.close();
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            System.out.println(" error previewPrint "+ex.getMessage());
+        }
+    }
+    
+    
     public void prepareEditProjects(JTable table) {
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
@@ -4016,9 +4887,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     + " from assignments a "
                     + " left join user b on a.user_id=b.id "
                     + " where a.project_id = " + txProjectid.getText();
-            if (fc.isDebugging) {
-                System.out.println(" qry =  " + qry);
-            }
             rs = st.executeQuery(qry);
             while (rs.next()) {
                 qry = "insert into cache_people_in_project (id_people,id_user,people_name) values (?,?,?)";
@@ -5317,7 +6185,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             String qry = qry = "select id,first_name,last_name from user "
                     + "where first_name is not null and first_name<>'' "
                     + "and last_name is not null and last_name<>'' "
-                    + " and id not in (select id_people from cache_people_in_project)"
+                    + " and id not in "
+                    + "(select id_people from cache_people_in_project where id_user="+userID+")"
                     + "order by first_name";
             ResultSet rs = st.executeQuery(qry);
             cbPeopleInProject.addItem(addJcomboBoxItemWithDuplicate("Select People", cbPeopleInProject));
@@ -6093,7 +6962,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
         }
     }//GEN-LAST:event_btDelProjectActionPerformed
 
-    private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
+    void printPreview() {
         common.functionCommon fc = new common.functionCommon();
         java.util.Map parameter = new java.util.HashMap();
         parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
@@ -6115,6 +6984,12 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
                 System.out.println(" error " + ex.getMessage());
             }
         }
+    }
+    
+    private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
+        closeAllInternalFrame();
+        projectPreview.setVisible(true);
+        previewPrint();
     }//GEN-LAST:event_btPreviewProjectActionPerformed
 
     private void prjStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prjStatusItemStateChanged
@@ -6400,9 +7275,26 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
         txProgressPrecent.selectAll();
     }//GEN-LAST:event_txProgressPrecentFocusGained
 
+    private void btsaveProject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProject1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btsaveProject1ActionPerformed
+
+    private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
+        printPreview();
+    }//GEN-LAST:event_PrintActionPerformed
+
+    private void tbPeopleinProject1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPeopleinProject1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbPeopleinProject1KeyReleased
+
+    private void tbProductInProjects1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductInProjects1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbProductInProjects1KeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
+    private javax.swing.JButton Print;
     private javax.swing.JPopupMenu ProductPopMenu;
     private javax.swing.JTextField acc;
     private javax.swing.JTextField accName;
@@ -6435,6 +7327,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JButton btPreviousProject;
     private javax.swing.JButton btPreviousTransactions;
     private javax.swing.JButton btsaveProject;
+    private javax.swing.JButton btsaveProject1;
     private javax.swing.JComboBox cbAccountListTransaction;
     private javax.swing.JComboBox cbClientinProject;
     private javax.swing.JComboBox cbLeaderinProject;
@@ -6480,7 +7373,21 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -6534,9 +7441,49 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -6544,6 +7491,13 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -6553,6 +7507,9 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -6564,6 +7521,10 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel lbAddTransaction;
     private javax.swing.JLabel lbCountPage;
     private javax.swing.JLabel lbCountProductTable;
@@ -6571,11 +7532,29 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JLabel lbCountUser;
     public javax.swing.JLabel lbFirstname;
     private javax.swing.JLabel lbGrandTotal;
+    private javax.swing.JLabel lbGrandTotal1;
+    private javax.swing.JLabel lbGrandTotal2;
     private javax.swing.JLabel lbPageCountAccounts;
     private javax.swing.JLabel lbPageCountProduct;
     private javax.swing.JLabel lbPageCountProject;
     private javax.swing.JLabel lbPageCountTransactions;
     private javax.swing.JLabel lbTotal;
+    private javax.swing.JLabel lbTotal10;
+    private javax.swing.JLabel lbTotal11;
+    private javax.swing.JLabel lbTotal12;
+    private javax.swing.JLabel lbTotal13;
+    private javax.swing.JLabel lbTotal14;
+    private javax.swing.JLabel lbTotal15;
+    private javax.swing.JLabel lbTotal16;
+    private javax.swing.JLabel lbTotal17;
+    private javax.swing.JLabel lbTotal2;
+    private javax.swing.JLabel lbTotal3;
+    private javax.swing.JLabel lbTotal4;
+    private javax.swing.JLabel lbTotal5;
+    private javax.swing.JLabel lbTotal6;
+    private javax.swing.JLabel lbTotal7;
+    private javax.swing.JLabel lbTotal8;
+    private javax.swing.JLabel lbTotal9;
     private javax.swing.JPopupMenu menuPop;
     private panelLayout.panelMenu panelMenu1;
     private javax.swing.JTextField phone;
@@ -6583,9 +7562,11 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JInternalFrame productEditFrame;
     private javax.swing.JInternalFrame productsFrame;
     private javax.swing.JProgressBar progressBarProject;
+    private javax.swing.JProgressBar progressBarProject1;
     private panelLayout.txAreaDescription projectDescription;
     private javax.swing.JInternalFrame projectDetailFrame;
     private javax.swing.JInternalFrame projectFrame;
+    private javax.swing.JInternalFrame projectPreview;
     private javax.swing.JScrollPane scrolltbAccounts;
     private javax.swing.JScrollPane scrolltbAccounts1;
     private javax.swing.JTextField searchProduct;
@@ -6594,8 +7575,10 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JTextField searchProject;
     private javax.swing.JTable tbAccounts;
     private javax.swing.JTable tbPeopleinProject;
+    private javax.swing.JTable tbPeopleinProject1;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbProductInProjects;
+    private javax.swing.JTable tbProductInProjects1;
     private javax.swing.JTable tbProject;
     private javax.swing.JTable tbTransactions;
     private javax.swing.JTable tbUser;
@@ -7404,6 +8387,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
         accountsFrame.setVisible(false);
         transactionsFrame.setVisible(false);
         transactionEditFrame.setVisible(false);
+        projectPreview.setVisible(false);
     }
 
     void POPUpMenuUsuallycommand() {
