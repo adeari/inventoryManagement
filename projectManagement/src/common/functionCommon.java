@@ -20,6 +20,10 @@ public class functionCommon {
     public String connection = "jdbc:hsqldb:file:" + getPath() + "/dataBase/inventory";
     public String userName = "inventory";
     public String passWord = "ert3456";
+    
+    public String emailUser = "priyangansiomay@gmail.com"
+            ,emailPass="q2w3e4r5t";
+    
     public boolean isDebugging = true;
     public static boolean isDevelop = true;
 

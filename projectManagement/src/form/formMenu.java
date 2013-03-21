@@ -24,7 +24,20 @@ import java.util.Date;
 import java.util.EventObject;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.StringTokenizer;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
@@ -3419,11 +3432,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     tbProductInProjects1.setRowHeight(30);
     tbProductInProjects1.setShowHorizontalLines(false);
     tbProductInProjects1.setShowVerticalLines(false);
-    tbProductInProjects1.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            tbProductInProjects1KeyReleased(evt);
-        }
-    });
     jScrollPane11.setViewportView(tbProductInProjects1);
 
     jPanel13.add(jScrollPane11);
@@ -3459,11 +3467,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     tbPeopleinProject1.setBackground(new java.awt.Color(238, 238, 238));
     tbPeopleinProject1.setOpaque(false);
     tbPeopleinProject1.setRowHeight(30);
-    tbPeopleinProject1.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            tbPeopleinProject1KeyReleased(evt);
-        }
-    });
     jScrollPane12.setViewportView(tbPeopleinProject1);
 
     jScrollPane6.setBorder(null);
@@ -3780,11 +3783,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jScrollPane13.setWheelScrollingEnabled(false);
 
     tbTransactionOfProject.setRowHeight(30);
-    tbTransactionOfProject.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            tbTransactionOfProjectKeyReleased(evt);
-        }
-    });
     jScrollPane13.setViewportView(tbTransactionOfProject);
 
     jPanel18.add(jScrollPane13);
@@ -4783,7 +4781,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             lbTotal11.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
-                        + "where unique_id like 'b-%' and a.project_id=" + txProjectid.getText() ;
+                        + "where unique_id like 'b-%' and a.project_id=" + txProjectid.getText();
                 rs = st.executeQuery(qry);
                 if (rs.next()) {
                     lbTotal11.setText(fc.digitNumber(rs.getString(1)));
@@ -4794,7 +4792,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             lbTotal12.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
-                        + "where unique_id like 'c-%' and a.project_id=" + txProjectid.getText() ;
+                        + "where unique_id like 'c-%' and a.project_id=" + txProjectid.getText();
                 rs = st.executeQuery(qry);
                 if (rs.next()) {
                     lbTotal12.setText(fc.digitNumber(rs.getString(1)));
@@ -4805,7 +4803,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             lbTotal13.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
-                        + "where unique_id like 'd-%' and a.project_id=" + txProjectid.getText() ;
+                        + "where unique_id like 'd-%' and a.project_id=" + txProjectid.getText();
                 rs = st.executeQuery(qry);
                 if (rs.next()) {
                     lbTotal13.setText(fc.digitNumber(rs.getString(1)));
@@ -4816,7 +4814,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             lbTotal14.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
-                        + "where unique_id like 'e-%' and a.project_id=" + txProjectid.getText() ;
+                        + "where unique_id like 'e-%' and a.project_id=" + txProjectid.getText();
                 rs = st.executeQuery(qry);
                 if (rs.next()) {
                     lbTotal14.setText(fc.digitNumber(rs.getString(1)));
@@ -4827,7 +4825,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             lbTotal15.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
-                        + "where unique_id like 'f-%' and a.project_id=" + txProjectid.getText() ;
+                        + "where unique_id like 'f-%' and a.project_id=" + txProjectid.getText();
                 rs = st.executeQuery(qry);
                 if (rs.next()) {
                     lbTotal15.setText(fc.digitNumber(rs.getString(1)));
@@ -4842,16 +4840,16 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             total += Integer.valueOf(lbTotal14.getText().replace(".", ""));
             total += Integer.valueOf(lbTotal15.getText().replace(".", ""));
             lbTotal10.setText(fc.digitNumber(String.valueOf(total)));
-            
-            
-            qry ="select a.id,a.title,c.title as projecttitle," 
+
+
+            qry = "select a.id,a.title,c.title as projecttitle,"
                     + fc.viewDatefromSQL1("a.modified_at", "modified_at") + ","
                     + "a.value,b.unique_id,b.name   "
                     + "from transactions a "
                     + "left join accounts b on a.account_id = b.id  "
                     + "left join projects c on a.project_id=c.id "
-                    + "where  a.project_id=" + txProjectid.getText() 
-                    +" and b.unique_id not like 'A-%'";
+                    + "where  a.project_id=" + txProjectid.getText()
+                    + " and b.unique_id not like 'A-%'";
             st = cn.createStatement();
             rs = st.executeQuery(qry);
             vectorTransactionOnProject = new java.util.Vector();
@@ -4866,10 +4864,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                         + rs.getString("name") + "</html>");
 
                 rowData.addElement(fc.digitNumber(rs.getString("value")));
-            vectorTransactionOnProject.addElement(rowData);
+                vectorTransactionOnProject.addElement(rowData);
             }
             tbTransactionOfProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelTransactiononProject));
-            
+
             rs.close();
             st.close();
             cn.close();
@@ -7328,26 +7326,107 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txProgressPrecentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProgressPrecentFocusGained
         txProgressPrecent.selectAll();
     }//GEN-LAST:event_txProgressPrecentFocusGained
-
+public String getEmailLEaderbyProjectID(String projectID) {
+    String getBack="",qry="";
+    try {
+            final common.functionCommon fc = new common.functionCommon();
+            qry="select email from user where id="
+                    + "(select leader_id from projects where id = "+projectID+")";
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                getBack = rs.getString("email");
+            }
+            
+    } catch (Exception ex) {
+        System.out.println(" erro in getEmailLEaderbyProjectID "+ex.getMessage());
+    }
+    return getBack;
+}
+    
     private void btsaveProject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProject1ActionPerformed
-        // TODO add your handling code here:
+        final common.functionCommon fc = new common.functionCommon();
+        try {
+            
+            
+            String from = "ade_ari_w0@yahoo.com", 
+                    to = getEmailLEaderbyProjectID(txProjectid.getText()), 
+                    fileAttachment = fc.getPath() + "/pdf/project_"+jLabel87.getText().replaceAll(" ", "_")+".pdf",
+                    fileName="project_"+jLabel87.getText().replaceAll(" ", "_")+".pdf";
+            
+            if (to.length()>0) {
+        java.util.Map parameter = new java.util.HashMap();
+        parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
+        parameter.put("SUBREPORT_DIR", fc.getPath() + "/reportJXML/");
+        parameter.put("iconPeople", fc.getPath() + "/reportJXML/userIcon.png");
+        parameter.put("iconBudget", fc.getPath() + "/reportJXML/iconTransactions.jpg");
+        parameter.put("iconTransactionsOf", fc.getPath() + "/reportJXML/transactionOfIcon.jpg");
+        
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
+                    fc.getPath() + "/reportJXML/reportProjects.jasper", parameter, cn);
+            net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(jasperPrint, fileAttachment);
+        
+            
+            
+
+            
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            Session session;
+            session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(fc.emailUser, fc.emailPass);
+                        }
+                    });
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+            message.setSubject("Report from Project "+jLabel87.getText());
+            message.setText("Read attachment");
+
+
+            MimeBodyPart messageBodyPart =
+                    new MimeBodyPart();
+            messageBodyPart.setText("Read Attachmanet");
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+
+
+            messageBodyPart = new MimeBodyPart();
+            DataSource source =
+                    new FileDataSource(fileAttachment);
+            messageBodyPart.setDataHandler(
+                    new DataHandler(source));
+            messageBodyPart.setFileName(fileName);
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+            Transport.send(message);
+            } else {
+                javax.swing.JOptionPane.showConfirmDialog(null, "Email recepient is empty", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+            }
+
+            if (fc.isDebugging)
+            System.out.println("Sent message successfully....");
+        } catch (Exception ex) {
+            if (fc.isDebugging)
+            System.out.println("error sendEmail " + ex.getMessage());
+        }
     }//GEN-LAST:event_btsaveProject1ActionPerformed
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
         printPreview();
     }//GEN-LAST:event_PrintActionPerformed
-
-    private void tbPeopleinProject1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPeopleinProject1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbPeopleinProject1KeyReleased
-
-    private void tbProductInProjects1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductInProjects1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbProductInProjects1KeyReleased
-
-    private void tbTransactionOfProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionOfProjectKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbTransactionOfProjectKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
@@ -7701,7 +7780,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     java.util.Vector vectorTransactions = new java.util.Vector();
     javax.swing.table.TableModel tmTabelTransactiononProject;
     java.util.Vector vectorTransactionOnProject = new java.util.Vector();
-    
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
     //end  Component
