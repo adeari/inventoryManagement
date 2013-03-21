@@ -804,41 +804,6 @@ public class formMenu extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        tmTableProductsInProject = new javax.swing.table.AbstractTableModel() {
-            public int getColumnCount() {
-                return columnProductInProject.length;
-            }
-
-            public int getRowCount() {
-                return vectorProductsInProject.size();
-            }
-
-            public Object getValueAt(int row1, int column1) {
-                java.util.Vector rowTMP = (java.util.Vector) vectorProductsInProject.elementAt(row1);
-                return rowTMP.elementAt(column1);
-            }
-
-            public String getColumnName(int column1) {
-                return columnProductInProject[column1];
-            }
-
-            public boolean isCellEditable(int row1, int column1) {
-                if (column1 == 2) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            public void setValueAt(Object obj, int row1, int column1) {
-                java.util.Vector rowTMP = (java.util.Vector) vectorProductsInProject.elementAt(row1);
-                rowTMP.setElementAt(obj, column1);
-            }
-
-            public Class getColumnClass(int c) {
-                return getValueAt(0, c).getClass();
-            }
-        };
         tbProductInProjects1 = new javax.swing.JTable(tmTableProductsInProject);
 
         tbProductInProjects1.setAutoResizeMode(tbProductInProjects.AUTO_RESIZE_OFF);
@@ -860,42 +825,6 @@ public class formMenu extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
-
-        tmTabelPeopleInProject = new javax.swing.table.AbstractTableModel() {
-            public int getColumnCount() {
-                return columnPeopleinProject.length;
-            }
-
-            public int getRowCount() {
-                return vectorPeopleInProject.size();
-            }
-
-            public Object getValueAt(int row1, int column1) {
-                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
-                return rowTMP.elementAt(column1);
-            }
-
-            public String getColumnName(int column1) {
-                return columnPeopleinProject[column1];
-            }
-
-            public boolean isCellEditable(int row1, int column1) {
-                if (column1 == 2) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            public void setValueAt(Object obj, int row1, int column1) {
-                java.util.Vector rowTMP = (java.util.Vector) vectorPeopleInProject.elementAt(row1);
-                rowTMP.setElementAt(obj, column1);
-            }
-
-            public Class getColumnClass(int c) {
-                return getValueAt(0, c).getClass();
-            }
-        };
         tbPeopleinProject1 = new javax.swing.JTable(tmTabelPeopleInProject);
         tbPeopleinProject1.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);
         tc=tbPeopleinProject1.getColumn("id");
@@ -915,6 +844,7 @@ public class formMenu extends javax.swing.JFrame {
         jLabel70 = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
+        lbTotal2 = new javax.swing.JLabel();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
@@ -931,7 +861,6 @@ public class formMenu extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jLabel85 = new javax.swing.JLabel();
         lbGrandTotal1 = new javax.swing.JLabel();
-        lbTotal2 = new javax.swing.JLabel();
         jLabel86 = new javax.swing.JLabel();
         lbTotal3 = new javax.swing.JLabel();
         lbTotal4 = new javax.swing.JLabel();
@@ -944,6 +873,7 @@ public class formMenu extends javax.swing.JFrame {
         jLabel68 = new javax.swing.JLabel();
         jLabel87 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
+        lbTotal10 = new javax.swing.JLabel();
         jLabel96 = new javax.swing.JLabel();
         jLabel97 = new javax.swing.JLabel();
         jLabel98 = new javax.swing.JLabel();
@@ -953,26 +883,65 @@ public class formMenu extends javax.swing.JFrame {
         jLabel102 = new javax.swing.JLabel();
         jLabel103 = new javax.swing.JLabel();
         jLabel104 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
         jLabel105 = new javax.swing.JLabel();
         jLabel106 = new javax.swing.JLabel();
         jLabel107 = new javax.swing.JLabel();
         jLabel108 = new javax.swing.JLabel();
-        jLabel109 = new javax.swing.JLabel();
-        jLabel110 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
-        jLabel111 = new javax.swing.JLabel();
-        lbGrandTotal2 = new javax.swing.JLabel();
-        lbTotal10 = new javax.swing.JLabel();
-        jLabel112 = new javax.swing.JLabel();
         lbTotal11 = new javax.swing.JLabel();
         lbTotal12 = new javax.swing.JLabel();
         lbTotal13 = new javax.swing.JLabel();
         lbTotal14 = new javax.swing.JLabel();
         lbTotal15 = new javax.swing.JLabel();
-        lbTotal16 = new javax.swing.JLabel();
         lbTotal17 = new javax.swing.JLabel();
         jLabel113 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel109 = new javax.swing.JLabel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        final String columnTransactionOfProject[] = {"NO","DATE", "TRANSACTION",  "VALUE"};
+        tmTabelTransactiononProject = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnTransactionOfProject.length;
+            }
+
+            public int getRowCount() {
+                return vectorTransactionOnProject.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorTransactionOnProject.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnTransactionOfProject[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                return false;
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorTransactionOnProject.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbTransactionOfProject = new javax.swing.JTable(tmTabelTransactiononProject);
+
+        tbTransactionOfProject.setAutoResizeMode(tbTransactionOfProject.AUTO_RESIZE_OFF);
+        tc=tbTransactionOfProject.getColumn("NO");
+        tc.setMinWidth(50);
+        tc=tbTransactionOfProject.getColumn("DATE");
+        tc.setMinWidth(100);
+        tc=tbTransactionOfProject.getColumn("TRANSACTION");
+        tc.setMinWidth(230);
+        tc=tbTransactionOfProject.getColumn("VALUE");
+        tc.setMinWidth(83);
+        jLabel114 = new javax.swing.JLabel();
         jButton18 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -3508,7 +3477,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel16.setLayout(null);
 
     jLabel70.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-    jLabel70.setText("Actual Budget");
+    jLabel70.setText("Allocated Budget");
     jPanel16.add(jLabel70);
     jLabel70.setBounds(40, 10, 210, 30);
 
@@ -3522,6 +3491,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel72.setText("Material");
     jPanel16.add(jLabel72);
     jLabel72.setBounds(10, 50, 120, 30);
+
+    lbTotal2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal2.setOpaque(true);
+    jPanel16.add(lbTotal2);
+    lbTotal2.setBounds(180, 260, 70, 30);
 
     jLabel73.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel73.setText("Peralatan");
@@ -3556,7 +3531,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jPanel16.add(jLabel78);
     jLabel78.setBounds(150, 170, 40, 30);
     jPanel16.add(jSeparator4);
-    jSeparator4.setBounds(10, 340, 240, 10);
+    jSeparator4.setBounds(10, 320, 240, 10);
 
     jLabel79.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel79.setText(" Rp.");
@@ -3583,7 +3558,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel83.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel83.setText("PPN");
     jPanel16.add(jLabel83);
-    jLabel83.setBounds(10, 300, 120, 30);
+    jLabel83.setBounds(10, 290, 120, 30);
 
     jLabel84.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel84.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -3597,25 +3572,19 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel85.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel85.setText("Grand Total");
     jPanel16.add(jLabel85);
-    jLabel85.setBounds(10, 350, 120, 30);
+    jLabel85.setBounds(10, 330, 120, 30);
 
     lbGrandTotal1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbGrandTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbGrandTotal1.setOpaque(true);
     jPanel16.add(lbGrandTotal1);
-    lbGrandTotal1.setBounds(180, 350, 70, 30);
-
-    lbTotal2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    lbTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    lbTotal2.setOpaque(true);
-    jPanel16.add(lbTotal2);
-    lbTotal2.setBounds(180, 260, 70, 30);
+    lbGrandTotal1.setBounds(180, 330, 70, 30);
 
     jLabel86.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel86.setText(" Rp.");
     jLabel86.setOpaque(true);
     jPanel16.add(jLabel86);
-    jLabel86.setBounds(150, 350, 50, 30);
+    jLabel86.setBounds(150, 330, 50, 30);
 
     lbTotal3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -3664,7 +3633,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel95.setBounds(10, 10, 20, 30);
 
     jPanel11.add(jPanel16);
-    jPanel16.setBounds(270, 290, 260, 390);
+    jPanel16.setBounds(10, 290, 260, 370);
 
     jLabel68.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel68.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -3675,8 +3644,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     jPanel17.setLayout(null);
 
+    lbTotal10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbTotal10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    lbTotal10.setOpaque(true);
+    jPanel17.add(lbTotal10);
+    lbTotal10.setBounds(180, 260, 60, 30);
+
     jLabel96.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-    jLabel96.setText("Allocated Budget");
+    jLabel96.setText("Actual Budget");
     jPanel17.add(jLabel96);
     jLabel96.setBounds(40, 10, 210, 30);
 
@@ -3723,8 +3698,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel104.setOpaque(true);
     jPanel17.add(jLabel104);
     jLabel104.setBounds(150, 170, 40, 30);
-    jPanel17.add(jSeparator6);
-    jSeparator6.setBounds(10, 340, 230, 10);
 
     jLabel105.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel105.setText(" Rp.");
@@ -3747,79 +3720,38 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel108.setText("Total");
     jPanel17.add(jLabel108);
     jLabel108.setBounds(10, 260, 120, 30);
-
-    jLabel109.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel109.setText("PPN");
-    jPanel17.add(jLabel109);
-    jLabel109.setBounds(10, 300, 120, 30);
-
-    jLabel110.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel110.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    jLabel110.setText("% ");
-    jLabel110.setOpaque(true);
-    jPanel17.add(jLabel110);
-    jLabel110.setBounds(190, 290, 20, 30);
     jPanel17.add(jSeparator7);
     jSeparator7.setBounds(10, 252, 230, 10);
-
-    jLabel111.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel111.setText("Grand Total");
-    jPanel17.add(jLabel111);
-    jLabel111.setBounds(10, 350, 120, 30);
-
-    lbGrandTotal2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    lbGrandTotal2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    lbGrandTotal2.setOpaque(true);
-    jPanel17.add(lbGrandTotal2);
-    lbGrandTotal2.setBounds(180, 350, 70, 30);
-
-    lbTotal10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    lbTotal10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    lbTotal10.setOpaque(true);
-    jPanel17.add(lbTotal10);
-    lbTotal10.setBounds(180, 260, 70, 30);
-
-    jLabel112.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jLabel112.setText(" Rp.");
-    jLabel112.setOpaque(true);
-    jPanel17.add(jLabel112);
-    jLabel112.setBounds(150, 350, 50, 30);
 
     lbTotal11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbTotal11.setOpaque(true);
     jPanel17.add(lbTotal11);
-    lbTotal11.setBounds(180, 50, 70, 30);
+    lbTotal11.setBounds(180, 50, 60, 30);
 
     lbTotal12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbTotal12.setOpaque(true);
     jPanel17.add(lbTotal12);
-    lbTotal12.setBounds(180, 90, 70, 30);
+    lbTotal12.setBounds(180, 90, 60, 30);
 
     lbTotal13.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbTotal13.setOpaque(true);
     jPanel17.add(lbTotal13);
-    lbTotal13.setBounds(180, 130, 70, 30);
+    lbTotal13.setBounds(180, 130, 60, 30);
 
     lbTotal14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbTotal14.setOpaque(true);
     jPanel17.add(lbTotal14);
-    lbTotal14.setBounds(180, 170, 70, 30);
+    lbTotal14.setBounds(180, 170, 60, 30);
 
     lbTotal15.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     lbTotal15.setOpaque(true);
     jPanel17.add(lbTotal15);
-    lbTotal15.setBounds(180, 210, 70, 30);
-
-    lbTotal16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    lbTotal16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    lbTotal16.setOpaque(true);
-    jPanel17.add(lbTotal16);
-    lbTotal16.setBounds(150, 290, 40, 30);
+    lbTotal15.setBounds(180, 210, 60, 30);
 
     lbTotal17.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbTotal17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -3832,7 +3764,40 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel113.setBounds(10, 10, 20, 30);
 
     jPanel11.add(jPanel17);
-    jPanel17.setBounds(10, 290, 250, 390);
+    jPanel17.setBounds(280, 290, 250, 370);
+
+    jPanel18.setLayout(null);
+
+    jLabel109.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    jLabel109.setText("Transaction for this project");
+    jPanel18.add(jLabel109);
+    jLabel109.setBounds(50, 10, 450, 30);
+
+    jScrollPane13.setBorder(null);
+    jScrollPane13.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane13.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+    jScrollPane13.setOpaque(false);
+    jScrollPane13.setWheelScrollingEnabled(false);
+
+    tbTransactionOfProject.setRowHeight(30);
+    tbTransactionOfProject.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbTransactionOfProjectKeyReleased(evt);
+        }
+    });
+    jScrollPane13.setViewportView(tbTransactionOfProject);
+
+    jPanel18.add(jScrollPane13);
+    jScrollPane13.setBounds(10, 40, 490, 310);
+    jScrollPane5.setBorder(null);
+    jScrollPane5.setBorder(BorderFactory.createEmptyBorder());
+
+    jLabel114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/transactionOfIcon.jpg"))); // NOI18N
+    jPanel18.add(jLabel114);
+    jLabel114.setBounds(10, 10, 20, 30);
+
+    jPanel11.add(jPanel18);
+    jPanel18.setBounds(10, 670, 520, 370);
 
     jScrollPane10.setViewportView(jPanel11);
 
@@ -4408,7 +4373,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
-                qry = "delete from cache_people_in_project where id_people in (" + qry + ") and id_user="+userID+";";
+                qry = "delete from cache_people_in_project where id_people in (" + qry + ") and id_user=" + userID + ";";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete accounts = " + qry);
                 }
@@ -4441,7 +4406,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                     qry += table.getValueAt(rowTable[x], 0).toString();
                 }
-                qry = "delete from cache_products_in_project where id in (" + qry + ") and user_id="+userID+";";
+                qry = "delete from cache_products_in_project where id in (" + qry + ") and user_id=" + userID + ";";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete accounts = " + qry);
                 }
@@ -4671,31 +4636,33 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     public void previewPrint() {
         jLabel87.setText("");
-                jLabel68.setText("");
-                jLabel89.setText("");
-                jLabel90.setText("");
-                jLabel91.setText("");
-                jLabel92.setText("");
-                jLabel93.setText("");
-                jLabel61.setText("");
-                progressBarProject1.setValue(0);
-                tbProductInProjects1.removeAll();
-                
-                lbTotal3.setText("0");
-                lbTotal4.setText("0");
-                lbTotal5.setText("0");
-                lbTotal6.setText("0");
-                lbTotal7.setText("0");
-                lbTotal2.setText("0");
-                lbTotal9.setText("0");
-                lbGrandTotal1.setText("0");
+        jLabel68.setText("");
+        jLabel89.setText("");
+        jLabel90.setText("");
+        jLabel91.setText("");
+        jLabel92.setText("");
+        jLabel93.setText("");
+        jLabel61.setText("");
+        progressBarProject1.setValue(0);
+        tbProductInProjects1.removeAll();
+        tbPeopleinProject1.removeAll();
+        tbTransactionOfProject.removeAll();
+
+        lbTotal3.setText("0");
+        lbTotal4.setText("0");
+        lbTotal5.setText("0");
+        lbTotal6.setText("0");
+        lbTotal7.setText("0");
+        lbTotal2.setText("0");
+        lbTotal9.setText("0");
+        lbGrandTotal1.setText("0");
         try {
             common.functionCommon fc = new common.functionCommon();
             String qry = "select a.title,a.description,a.location"
                     + ",b.first_name as first_nameleader,b.last_name as last_nameleader"
                     + ",c.first_name as first_nameclient,c.last_name as last_nameclient"
-                    + ",a.status,"+fc.viewDatefromSQL1("a.starts_on","starts_on1")+"  "
-                    + ","+fc.viewDatefromSQL1("a.due_date","due_date1")+" "
+                    + ",a.status," + fc.viewDatefromSQL1("a.starts_on", "starts_on1") + "  "
+                    + "," + fc.viewDatefromSQL1("a.due_date", "due_date1") + " "
                     + " from projects a "
                     + " left join user b on a.leader_id=b.id"
                     + " left join user c on a.client_id=c.id"
@@ -4706,23 +4673,23 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             if (rs.next()) {
                 jLabel87.setText(rs.getString("title"));
                 jLabel68.setText(rs.getString("description"));
-                jLabel89.setText(rs.getString("first_nameleader")+" "+rs.getString("last_nameleader"));
-                jLabel90.setText(rs.getString("first_nameclient")+" "+rs.getString("last_nameclient"));
+                jLabel89.setText(rs.getString("first_nameleader") + " " + rs.getString("last_nameleader"));
+                jLabel90.setText(rs.getString("first_nameclient") + " " + rs.getString("last_nameclient"));
                 jLabel91.setText(rs.getString("starts_on1"));
                 jLabel92.setText(rs.getString("due_date1"));
                 jLabel93.setText(fc.getStatusProject(rs.getInt("status")));
                 jLabel61.setText(rs.getString("location"));
             }
-            
+
             qry = "select valueData "
                     + "from project_metas "
-                    + "where keyData='progress' and project_id="+txProjectid.getText();
+                    + "where keyData='progress' and project_id=" + txProjectid.getText();
             st = cn.createStatement();
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 progressBarProject1.setValue(rs.getInt("valueData"));
             }
-            
+
             //view items in project 
             qry = "select a.item_id,a.inventory_qty,b.name "
                     + " from item_project a "
@@ -4735,14 +4702,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             while (rs.next()) {
                 rowData = new java.util.Vector();
                 rowData.addElement("");
-                rowData.addElement("  "+ rs.getString("name") + " - "
+                rowData.addElement("  " + rs.getString("name") + " - "
                         + fc.digitNumber(rs.getString("inventory_qty")));
                 rowData.addElement("");
                 vectorProductsInProject.addElement(rowData);
             }
             tbProductInProjects1.tableChanged(new javax.swing.event.TableModelEvent(tmTableProductsInProject));
             //end view items in project 
-            
+
             qry = "select a.user_id,b.first_name,b.last_name "
                     + " from assignments a "
                     + " left join user b on a.user_id=b.id "
@@ -4754,42 +4721,42 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData = new java.util.Vector();
                 rowData.addElement("");
                 rowData.addElement(" " + rs.getString("first_name")
-                        +" "+rs.getString("last_name")
+                        + " " + rs.getString("last_name")
                         + " - Programmer");
                 rowData.addElement("");
                 vectorPeopleInProject.addElement(rowData);
             }
             tbPeopleinProject1.tableChanged(new javax.swing.event.TableModelEvent(tmTabelPeopleInProject));
-            
-            
+
+
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 0";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal3.setText(fc.digitNumber(rs.getString("value")));
             }
-                
-                qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
+
+            qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 1";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal4.setText(fc.digitNumber(rs.getString("value")));
             }
-            
+
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 2";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal5.setText(fc.digitNumber(rs.getString("value")));
             }
-            
+
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 3";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal6.setText(fc.digitNumber(rs.getString("value")));
             }
-            
+
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 4";
             rs = st.executeQuery(qry);
@@ -4803,27 +4770,114 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 lbTotal9.setText(fc.digitNumber(rs.getString("value")));
             }
             int total = 0;
-        total += Integer.valueOf(lbTotal3.getText().replace(".", ""));
-        total += Integer.valueOf(lbTotal4.getText().replace(".", ""));
-        total += Integer.valueOf(lbTotal5.getText().replace(".", ""));
-        total += Integer.valueOf(lbTotal6.getText().replace(".", ""));
-        total += Integer.valueOf(lbTotal7.getText().replace(".", ""));
-        lbTotal2.setText(fc.digitNumber(String.valueOf(total)));
-        int countDiscount = total * (Integer.valueOf(txPPN.getText())) / 100;
-        total -= countDiscount;
-        lbGrandTotal1.setText(fc.digitNumber(String.valueOf(total)));
-                
-                
+            total += Integer.valueOf(lbTotal3.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal4.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal5.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal6.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal7.getText().replace(".", ""));
+            lbTotal2.setText(fc.digitNumber(String.valueOf(total)));
+            int countDiscount = total * (Integer.valueOf(txPPN.getText())) / 100;
+            total -= countDiscount;
+            lbGrandTotal1.setText(fc.digitNumber(String.valueOf(total)));
+
+            lbTotal11.setText("0");
+            try {
+                qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
+                        + "where unique_id like 'b-%' and a.project_id=" + txProjectid.getText() ;
+                rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    lbTotal11.setText(fc.digitNumber(rs.getString(1)));
+                }
+            } catch (Exception ex) {
+            }
+
+            lbTotal12.setText("0");
+            try {
+                qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
+                        + "where unique_id like 'c-%' and a.project_id=" + txProjectid.getText() ;
+                rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    lbTotal12.setText(fc.digitNumber(rs.getString(1)));
+                }
+            } catch (Exception ex) {
+            }
+
+            lbTotal13.setText("0");
+            try {
+                qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
+                        + "where unique_id like 'd-%' and a.project_id=" + txProjectid.getText() ;
+                rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    lbTotal13.setText(fc.digitNumber(rs.getString(1)));
+                }
+            } catch (Exception ex) {
+            }
+
+            lbTotal14.setText("0");
+            try {
+                qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
+                        + "where unique_id like 'e-%' and a.project_id=" + txProjectid.getText() ;
+                rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    lbTotal14.setText(fc.digitNumber(rs.getString(1)));
+                }
+            } catch (Exception ex) {
+            }
+
+            lbTotal15.setText("0");
+            try {
+                qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
+                        + "where unique_id like 'f-%' and a.project_id=" + txProjectid.getText() ;
+                rs = st.executeQuery(qry);
+                if (rs.next()) {
+                    lbTotal15.setText(fc.digitNumber(rs.getString(1)));
+                }
+            } catch (Exception ex) {
+            }
+
+            total = 0;
+            total += Integer.valueOf(lbTotal11.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal12.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal13.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal14.getText().replace(".", ""));
+            total += Integer.valueOf(lbTotal15.getText().replace(".", ""));
+            lbTotal10.setText(fc.digitNumber(String.valueOf(total)));
+            
+            
+            qry ="select a.id,a.title,c.title as projecttitle," 
+                    + fc.viewDatefromSQL1("a.modified_at", "modified_at") + ","
+                    + "a.value,b.unique_id,b.name   "
+                    + "from transactions a "
+                    + "left join accounts b on a.account_id = b.id  "
+                    + "left join projects c on a.project_id=c.id "
+                    + "where  a.project_id=" + txProjectid.getText() 
+                    +" and b.unique_id not like 'A-%'";
+            st = cn.createStatement();
+            rs = st.executeQuery(qry);
+            vectorTransactionOnProject = new java.util.Vector();
+            int i = 0;
+            while (rs.next()) {
+                i++;
+                rowData = new java.util.Vector();
+                rowData.addElement(i);
+                rowData.addElement(rs.getString("modified_at"));
+                rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>"
+                        + rs.getString("unique_id") + " - " + rs.getString("projecttitle") + " - "
+                        + rs.getString("name") + "</html>");
+
+                rowData.addElement(fc.digitNumber(rs.getString("value")));
+            vectorTransactionOnProject.addElement(rowData);
+            }
+            tbTransactionOfProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelTransactiononProject));
             
             rs.close();
             st.close();
             cn.close();
         } catch (Exception ex) {
-            System.out.println(" error previewPrint "+ex.getMessage());
+            System.out.println(" error previewPrint " + ex.getMessage());
         }
     }
-    
-    
+
     public void prepareEditProjects(JTable table) {
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
@@ -6186,7 +6240,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     + "where first_name is not null and first_name<>'' "
                     + "and last_name is not null and last_name<>'' "
                     + " and id not in "
-                    + "(select id_people from cache_people_in_project where id_user="+userID+")"
+                    + "(select id_people from cache_people_in_project where id_user=" + userID + ")"
                     + "order by first_name";
             ResultSet rs = st.executeQuery(qry);
             cbPeopleInProject.addItem(addJcomboBoxItemWithDuplicate("Select People", cbPeopleInProject));
@@ -6462,8 +6516,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.executeUpdate();
 
                     int projectID = Integer.valueOf(txProjectid.getText());
-                    
-                    addProjectMetas(projectID,"progress",txProgressPrecent.getText());
+
+                    addProjectMetas(projectID, "progress", txProgressPrecent.getText());
 
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
@@ -6635,7 +6689,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psIdentity.close();
                     result.close();
 
-addProjectMetas(projectID,"progress",txProgressPrecent.getText());
+                    addProjectMetas(projectID, "progress", txProgressPrecent.getText());
 
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
@@ -6985,7 +7039,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
             }
         }
     }
-    
+
     private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
         closeAllInternalFrame();
         projectPreview.setVisible(true);
@@ -7291,6 +7345,10 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
         // TODO add your handling code here:
     }//GEN-LAST:event_tbProductInProjects1KeyReleased
 
+    private void tbTransactionOfProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionOfProjectKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbTransactionOfProjectKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -7384,10 +7442,8 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel110;
-    private javax.swing.JLabel jLabel111;
-    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -7498,6 +7554,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -7510,6 +7567,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -7523,7 +7581,6 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel lbAddTransaction;
     private javax.swing.JLabel lbCountPage;
@@ -7533,7 +7590,6 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     public javax.swing.JLabel lbFirstname;
     private javax.swing.JLabel lbGrandTotal;
     private javax.swing.JLabel lbGrandTotal1;
-    private javax.swing.JLabel lbGrandTotal2;
     private javax.swing.JLabel lbPageCountAccounts;
     private javax.swing.JLabel lbPageCountProduct;
     private javax.swing.JLabel lbPageCountProject;
@@ -7545,7 +7601,6 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JLabel lbTotal13;
     private javax.swing.JLabel lbTotal14;
     private javax.swing.JLabel lbTotal15;
-    private javax.swing.JLabel lbTotal16;
     private javax.swing.JLabel lbTotal17;
     private javax.swing.JLabel lbTotal2;
     private javax.swing.JLabel lbTotal3;
@@ -7580,6 +7635,7 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     private javax.swing.JTable tbProductInProjects;
     private javax.swing.JTable tbProductInProjects1;
     private javax.swing.JTable tbProject;
+    private javax.swing.JTable tbTransactionOfProject;
     private javax.swing.JTable tbTransactions;
     private javax.swing.JTable tbUser;
     private javax.swing.JInternalFrame transactionEditFrame;
@@ -7643,6 +7699,9 @@ addProjectMetas(projectID,"progress",txProgressPrecent.getText());
     java.util.Vector vectorAccounts = new java.util.Vector();
     javax.swing.table.TableModel tmTabelTransactions;
     java.util.Vector vectorTransactions = new java.util.Vector();
+    javax.swing.table.TableModel tmTabelTransactiononProject;
+    java.util.Vector vectorTransactionOnProject = new java.util.Vector();
+    
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
     //end  Component

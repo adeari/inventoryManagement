@@ -12,16 +12,15 @@
 	<queryString>
 		<![CDATA[select x.id,
 (select sum(a.value) from transactions a
- left join accounts b on a.account_id=b.id where unique_id like 'b-%')
-as no1,
+ left join accounts b on a.account_id=b.id where unique_id like 'b-%' and a.project_id=x.project_id) as no1,
 (select sum(a.value) from transactions a
- left join accounts b on a.account_id=b.id where unique_id like 'c-%') as no2,
+ left join accounts b on a.account_id=b.id where unique_id like 'c-%' and a.project_id=x.project_id) as no2,
 (select sum(a.value) from transactions a
- left join accounts b on a.account_id=b.id where unique_id like 'd-%') as no3,
+ left join accounts b on a.account_id=b.id where unique_id like 'd-%' and a.project_id=x.project_id) as no3,
 (select sum(a.value) from transactions a
- left join accounts b on a.account_id=b.id where unique_id like 'e-%') as no4,
+ left join accounts b on a.account_id=b.id where unique_id like 'e-%' and a.project_id=x.project_id) as no4,
 (select sum(a.value) from transactions a
- left join accounts b on a.account_id=b.id where unique_id like 'f-%') as no5
+ left join accounts b on a.account_id=b.id where unique_id like 'f-%' and a.project_id=x.project_id) as no5
 from transactions x
 where x.project_id=$P{projectID}]]>
 	</queryString>
