@@ -42,10 +42,14 @@ public class loginForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Login to project management and inventory");
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+        });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -97,7 +101,7 @@ public class loginForm extends javax.swing.JFrame {
         jButton1.setBounds(330, 500, 110, 30);
 
         getContentPane().add(panelLogin1);
-        panelLogin1.setBounds(0, 0, 1020, 770);
+        panelLogin1.setBounds(0, 0, 1020, 760);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-1029)/2, (screenSize.height-799)/2, 1029, 799);
@@ -174,6 +178,16 @@ public class loginForm extends javax.swing.JFrame {
             jButton1ActionPerformed(null);
         }
     }//GEN-LAST:event_txPasswordKeyReleased
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        int Xposition = 0;
+     if (getWidth()-10>panelLogin1.getWidth())
+        Xposition=(getWidth()-10-panelLogin1.getWidth())/2;
+     int Yposition = 0;
+     if (getHeight()-10>panelLogin1.getHeight())
+        Yposition=(getHeight()-panelLogin1.getHeight())/2;
+     panelLogin1.setLocation(Xposition, Yposition);
+    }//GEN-LAST:event_formComponentResized
 
     /**
      * @param args the command line arguments

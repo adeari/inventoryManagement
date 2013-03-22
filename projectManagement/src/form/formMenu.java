@@ -116,12 +116,11 @@ public class formMenu extends javax.swing.JFrame {
         transactionsPopUp = new javax.swing.JPopupMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         panelMenu1 = new panelLayout.panelMenu();
+        jButton4x = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btLeftRoles = new javax.swing.JButton();
         btLeftRoles.setVisible(false);
-        jButton3 = new javax.swing.JButton();
         lbFirstname = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         btLeftUSer = new javax.swing.JButton();
         btLeftUSer.setVisible(false);
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -956,6 +955,7 @@ public class formMenu extends javax.swing.JFrame {
         tc.setMinWidth(83);
         jLabel114 = new javax.swing.JLabel();
         jButton18 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
         dateChooserDialog1.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
@@ -1211,18 +1211,47 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionsPopUp.add(jMenuItem5);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-    setTitle("Project mangement and inventory");
-    setResizable(false);
+    setTitle("Project mangement & inventory");
     addWindowListener(new java.awt.event.WindowAdapter() {
         public void windowClosing(java.awt.event.WindowEvent evt) {
             formWindowClosing(evt);
+        }
+    });
+    addComponentListener(new java.awt.event.ComponentAdapter() {
+        public void componentResized(java.awt.event.ComponentEvent evt) {
+            formComponentResized(evt);
         }
     });
     getContentPane().setLayout(null);
 
     panelMenu1.setLayout(null);
 
-    jButton1.setBackground(new java.awt.Color(0, 0, 0));
+    jButton4x.setBackground(new java.awt.Color(38, 46, 64));
+    jButton4x.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jButton4x.setForeground(new java.awt.Color(255, 255, 255));
+    jButton4x.setText("INVENTORY");
+    jButton4x.setBorder(null);
+    jButton4x.setBorderPainted(false);
+    jButton4x.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    jButton4x.setFocusPainted(false);
+    jButton4x.setOpaque(false);
+    jButton4x.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            jButton4xMouseExited(evt);
+        }
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            jButton4xMouseEntered(evt);
+        }
+    });
+    jButton4x.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton4xActionPerformed(evt);
+        }
+    });
+    panelMenu1.add(jButton4x);
+    jButton4x.setBounds(130, 0, 120, 48);
+
+    jButton1.setBackground(new java.awt.Color(38, 46, 64));
     jButton1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jButton1.setForeground(new java.awt.Color(255, 255, 255));
     jButton1.setText("USERS");
@@ -1245,15 +1274,16 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     panelMenu1.add(jButton1);
-    jButton1.setBounds(450, 10, 90, 30);
+    jButton1.setBounds(450, 0, 90, 48);
 
-    btLeftRoles.setBackground(new java.awt.Color(192, 192, 192));
+    btLeftRoles.setBackground(new java.awt.Color(216, 216, 216));
     btLeftRoles.setForeground(new java.awt.Color(0, 0, 0));
     btLeftRoles.setText("ROLES");
     btLeftRoles.setBorder(null);
     btLeftRoles.setBorderPainted(false);
     btLeftRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     btLeftRoles.setFocusPainted(false);
+    btLeftRoles.setOpaque(false);
     btLeftRoles.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseExited(java.awt.event.MouseEvent evt) {
             btLeftRolesMouseExited(evt);
@@ -1269,31 +1299,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     panelMenu1.add(btLeftRoles);
     btLeftRoles.setBounds(0, 110, 160, 30);
-
-    jButton3.setBackground(new java.awt.Color(0, 0, 0));
-    jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jButton3.setForeground(new java.awt.Color(255, 255, 255));
-    jButton3.setText("PROJECT MANAGEMENT");
-    jButton3.setBorder(null);
-    jButton3.setBorderPainted(false);
-    jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    jButton3.setFocusPainted(false);
-    jButton3.setOpaque(false);
-    jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            jButton3MouseExited(evt);
-        }
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            jButton3MouseEntered(evt);
-        }
-    });
-    jButton3.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton3ActionPerformed(evt);
-        }
-    });
-    panelMenu1.add(jButton3);
-    jButton3.setBounds(260, 10, 170, 30);
 
     lbFirstname.setBackground(new java.awt.Color(0, 0, 0));
     lbFirstname.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1316,38 +1321,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     panelMenu1.add(lbFirstname);
     lbFirstname.setBounds(840, 0, 150, 50);
 
-    jButton4.setBackground(new java.awt.Color(0, 0, 0));
-    jButton4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jButton4.setForeground(new java.awt.Color(255, 255, 255));
-    jButton4.setText("INVENTORY");
-    jButton4.setBorder(null);
-    jButton4.setBorderPainted(false);
-    jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    jButton4.setFocusPainted(false);
-    jButton4.setOpaque(false);
-    jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseExited(java.awt.event.MouseEvent evt) {
-            jButton4MouseExited(evt);
-        }
-        public void mouseEntered(java.awt.event.MouseEvent evt) {
-            jButton4MouseEntered(evt);
-        }
-    });
-    jButton4.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton4ActionPerformed(evt);
-        }
-    });
-    panelMenu1.add(jButton4);
-    jButton4.setBounds(130, 10, 120, 30);
-
-    btLeftUSer.setBackground(new java.awt.Color(192, 192, 192));
+    btLeftUSer.setBackground(new java.awt.Color(216, 216, 216));
     btLeftUSer.setForeground(new java.awt.Color(0, 0, 0));
     btLeftUSer.setText("USERS");
     btLeftUSer.setBorder(null);
     btLeftUSer.setBorderPainted(false);
     btLeftUSer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     btLeftUSer.setFocusPainted(false);
+    btLeftUSer.setOpaque(false);
     btLeftUSer.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseExited(java.awt.event.MouseEvent evt) {
             btLeftUSerMouseExited(evt);
@@ -1363,8 +1344,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     panelMenu1.add(btLeftUSer);
     btLeftUSer.setBounds(0, 70, 160, 30);
-
-    jDesktopPane1.setOpaque(false);
 
     userFrame.setBackground(new java.awt.Color(255, 255, 255));
     userFrame.setBorder(null);
@@ -3841,7 +3820,32 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     panelMenu1.add(jButton18);
     jButton18.setBounds(990, 0, 20, 50);
 
-    jButton12.setBackground(new java.awt.Color(0, 0, 0));
+    jButton3.setBackground(new java.awt.Color(38, 46, 64));
+    jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jButton3.setForeground(new java.awt.Color(255, 255, 255));
+    jButton3.setText("PROJECT MANAGEMENT");
+    jButton3.setBorder(null);
+    jButton3.setBorderPainted(false);
+    jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    jButton3.setFocusPainted(false);
+    jButton3.setOpaque(false);
+    jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            jButton3MouseExited(evt);
+        }
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            jButton3MouseEntered(evt);
+        }
+    });
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton3ActionPerformed(evt);
+        }
+    });
+    panelMenu1.add(jButton3);
+    jButton3.setBounds(260, 0, 170, 48);
+
+    jButton12.setBackground(new java.awt.Color(38, 46, 64));
     jButton12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jButton12.setForeground(new java.awt.Color(255, 255, 255));
     jButton12.setText("FINANCE");
@@ -3864,10 +3868,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     panelMenu1.add(jButton12);
-    jButton12.setBounds(560, 10, 90, 30);
+    jButton12.setBounds(560, 0, 90, 48);
 
     getContentPane().add(panelMenu1);
-    panelMenu1.setBounds(0, 0, 1020, 770);
+    panelMenu1.setBounds(0, 0, 1020, 760);
 
     java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     setBounds((screenSize.width-1030)/2, (screenSize.height-800)/2, 1030, 800);
@@ -3954,11 +3958,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btLeftUSerActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      btLeftUSer.setVisible(true);
+        btLeftRoles.setVisible(true);
         closeAllInternalFrame();
         disableALlButtonHeader();
-        jButton3MouseEntered(null);
-        projectFrame.setVisible(true);
-        viewProjects();
+       jButton3MouseEntered(null);
+       projectFrame.setVisible(true);
+       viewProjects();
+        jButton4x.setOpaque(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     void clearAddUSerFrame() {
@@ -5058,13 +5065,15 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     }//GEN-LAST:event_tbUserKeyReleased
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton4xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4xActionPerformed
+        btLeftUSer.setVisible(true);
+        btLeftRoles.setVisible(true);
         closeAllInternalFrame();
         disableALlButtonHeader();
-        jButton4MouseEntered(null);
+        jButton4xMouseEntered(null);
         productsFrame.setVisible(true);
         viewProducts();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton4xActionPerformed
 
     void clearProductEditForm() {
         txItemName.setText("");
@@ -5609,43 +5618,35 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         prePAreforFinanceTABButton();
-        transactionsFrame.setVisible(true);
+        transactionsFrame.setVisible(true);  
         btLeftUSerMouseEntered(null);
         PrepareTransactionsFrame();
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
+    private void jButton4xMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseExited
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
-            jButton4.setOpaque(false);
-            jButton4.setForeground(Color.WHITE);
-        }
+           jButton4x.setOpaque(false);
+     }
+    }//GEN-LAST:event_jButton4xMouseExited
 
-    }//GEN-LAST:event_jButton4MouseExited
-
-    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+    private void jButton4xMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseEntered
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
-            jButton4.setOpaque(true);
-            jButton4.setBackground(Color.WHITE);
-            jButton4.setForeground(Color.BLACK);
+            jButton4x.setOpaque(true);
         }
-    }//GEN-LAST:event_jButton4MouseEntered
+    }//GEN-LAST:event_jButton4xMouseEntered
 
     void disableALlButtonHeader() {
-        jButton4.setOpaque(false);
-        jButton4.setForeground(Color.WHITE);
-        jButton3.setOpaque(false);
-        jButton3.setForeground(Color.WHITE);
+        jButton4x.setOpaque(false);
         jButton12.setOpaque(false);
-        jButton12.setForeground(Color.WHITE);
         jButton1.setOpaque(false);
-        jButton1.setForeground(Color.WHITE);
+        jButton3.setOpaque(false);
     }
 
     void disableButtonLeft() {
-        btLeftRoles.setBackground(new java.awt.Color(192, 192, 192));
-        btLeftUSer.setBackground(new java.awt.Color(192, 192, 192));
+        btLeftRoles.setOpaque(false);
+        btLeftUSer.setOpaque(false);
     }
 
     private void lbFirstnameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseEntered
@@ -5667,17 +5668,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton18MouseClicked
 
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
+       if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(true);
-            jButton3.setBackground(Color.WHITE);
-            jButton3.setForeground(Color.BLACK);
-        }
+       }
     }//GEN-LAST:event_jButton3MouseEntered
 
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
         if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(false);
-            jButton3.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton3MouseExited
 
@@ -5685,31 +5683,26 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         if (!financeFrame.isVisible()
                 && !accountsFrame.isVisible()) {
             jButton12.setOpaque(true);
-            jButton12.setBackground(Color.WHITE);
-            jButton12.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton12MouseEntered
 
     private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
-        if (!financeFrame.isVisible()
-                && !accountsFrame.isVisible()) {
+        if (!transactionsFrame.isVisible()
+                && !accountsFrame.isVisible()
+                &&!transactionEditFrame.isVisible()) {
             jButton12.setOpaque(false);
-            jButton12.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton12MouseExited
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(true);
-            jButton1.setBackground(Color.WHITE);
-            jButton1.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(false);
-            jButton1.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_jButton1MouseExited
 
@@ -5725,12 +5718,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void btLeftRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseEntered
 
-        btLeftRoles.setBackground(new java.awt.Color(153, 153, 255));
+        btLeftRoles.setOpaque(true);
     }//GEN-LAST:event_btLeftRolesMouseEntered
 
     private void btLeftRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseExited
         if (!accountsFrame.isVisible()) {
-            btLeftRoles.setBackground(new java.awt.Color(192, 192, 192));
+            btLeftRoles.setOpaque(false);
         }
     }//GEN-LAST:event_btLeftRolesMouseExited
 
@@ -7055,12 +7048,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void btLeftUSerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseEntered
 
-        btLeftUSer.setBackground(new java.awt.Color(153, 153, 255));
+        btLeftUSer.setOpaque(true);
     }//GEN-LAST:event_btLeftUSerMouseEntered
 
     private void btLeftUSerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseExited
         if (!transactionsFrame.isVisible() && !userFrame.isVisible()) {
-            btLeftUSer.setBackground(new java.awt.Color(192, 192, 192));
+            btLeftUSer.setOpaque(false);
         }
     }//GEN-LAST:event_btLeftUSerMouseExited
 
@@ -7428,6 +7421,17 @@ public String getEmailLEaderbyProjectID(String projectID) {
         printPreview();
     }//GEN-LAST:event_PrintActionPerformed
 
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+     
+     int Xposition = 0;
+     if (getWidth()-10>panelMenu1.getWidth())
+        Xposition=(getWidth()-10-panelMenu1.getWidth())/2;
+     int Yposition = 0;
+     if (getHeight()-10>panelMenu1.getHeight())
+        Yposition=(getHeight()-panelMenu1.getHeight())/2;
+     panelMenu1.setLocation(Xposition, Yposition);
+    }//GEN-LAST:event_formComponentResized
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddUSer;
@@ -7501,7 +7505,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton4x;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -8764,7 +8768,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    dropDataProject(table);
+                    dropDataProduct(table);
                 }
             });
 
