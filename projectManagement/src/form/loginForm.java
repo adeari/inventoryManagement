@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -194,8 +193,8 @@ public class loginForm extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         
-        UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.GRAY));
-        UIManager.put("ComboBox.selectionForeground", new ColorUIResource(Color.WHITE));
+        UIManager.put("ComboBox.selectionBackground", Color.GRAY);
+        UIManager.put("ComboBox.selectionForeground", Color.WHITE);
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -227,10 +226,13 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private panelLayout.panelLogin panelLogin1;
     private javax.swing.JTextField txEmail;
     private javax.swing.JPasswordField txPassword;
     // End of variables declaration//GEN-END:variables
+ 
 }

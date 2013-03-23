@@ -57,7 +57,6 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -84,6 +83,8 @@ public class formMenu extends javax.swing.JFrame {
         settingInternalFrame(transactionsFrame.getUI());
         settingInternalFrame(transactionEditFrame.getUI());
         settingInternalFrame(projectPreview.getUI());
+        settingInternalFrame(roleFrame.getUI());
+        settingInternalFrame(rolesEditFrame.getUI());
     }
 
     void settingInternalFrame(InternalFrameUI ui) {
@@ -115,6 +116,16 @@ public class formMenu extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         transactionsPopUp = new javax.swing.JPopupMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        popFilterUser = new javax.swing.JPopupMenu();
+        itMenuNAmeUSEr0 = new javax.swing.JMenuItem();
+        itMenuNAmeUSEr = new javax.swing.JMenuItem();
+        itMenuNAmeUSEr1 = new javax.swing.JMenuItem();
+        itMenuNAmeUSEr2 = new javax.swing.JMenuItem();
+        itMenuNAmeUSEr3 = new javax.swing.JMenuItem();
+        popFilterRoles = new javax.swing.JPopupMenu();
+        tpopRoles = new javax.swing.JMenuItem();
+        tpopRoles1 = new javax.swing.JMenuItem();
+        tpopRoles2 = new javax.swing.JMenuItem();
         panelMenu1 = new panelLayout.panelMenu();
         jButton4x = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -129,11 +140,10 @@ public class formMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbCountUser = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        filterSearch = new javax.swing.JComboBox();
         txSearch = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        final String columnUser[] = {"id", "NAME", "ROLE", "EMAL", "COMPANY NAME", "ACTION"};
+        final String columnUser[] = {"id", "NAME", "ROLE", "EMAIL", "COMPANY NAME", " "};
         tmTabelUser = new javax.swing.table.AbstractTableModel() {
             public int getColumnCount() {
                 return columnUser.length;
@@ -179,15 +189,16 @@ public class formMenu extends javax.swing.JFrame {
         tc.setMinWidth(215);
         tc=tbUser.getColumn("ROLE");
         tc.setMinWidth(117);
-        tc=tbUser.getColumn("EMAL");
+        tc=tbUser.getColumn("EMAIL");
         tc.setMinWidth(210);
         tc=tbUser.getColumn("COMPANY NAME");
         tc.setMinWidth(210);
-        tc=tbUser.getColumn("ACTION");
+        tc=tbUser.getColumn(" ");
         tc.setMinWidth(50);
         tc.setCellRenderer(new ButtonsRenderer());
         tc.setCellEditor(new ButtonsEditor(tbUser));
         tbUser.setRowHeight(30);
+        tbUser.setIntercellSpacing(new Dimension(10,1));
 
         for (int i=1;i<tbUser.getColumnCount();i++)
         tbUser.getTableHeader().getColumnModel().getColumn(i)
@@ -198,6 +209,8 @@ public class formMenu extends javax.swing.JFrame {
         btNext = new javax.swing.JButton();
         txPage = new javax.swing.JTextField();
         lbCountPage = new javax.swing.JLabel();
+        filterUser = new javax.swing.JButton();
+        filterUser1 = new javax.swing.JButton();
         userEditFrame = new javax.swing.JInternalFrame();
         userEditFrame.getContentPane().setBackground(Color.WHITE);
         LabelAddUSer = new javax.swing.JLabel();
@@ -954,6 +967,89 @@ public class formMenu extends javax.swing.JFrame {
         tc=tbTransactionOfProject.getColumn("VALUE");
         tc.setMinWidth(83);
         jLabel114 = new javax.swing.JLabel();
+        roleFrame = new javax.swing.JInternalFrame();
+        userFrame.getContentPane().setBackground(Color.WHITE);
+        jLabel110 = new javax.swing.JLabel();
+        lbCountRoles = new javax.swing.JLabel();
+        btAddRoles = new javax.swing.JButton();
+        txSearchRoles = new javax.swing.JTextField();
+        jLabel111 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        final String columnroles[] = {"id", "ROLE NAME", "DESCRIPTION", " "};
+        tmTabelRoles = new javax.swing.table.AbstractTableModel() {
+            public int getColumnCount() {
+                return columnroles.length;
+            }
+
+            public int getRowCount() {
+                return vectorRoles.size();
+            }
+
+            public Object getValueAt(int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorRoles.elementAt(row1);
+                return rowTMP.elementAt(column1);
+            }
+
+            public String getColumnName(int column1) {
+                return columnroles[column1];
+            }
+
+            public boolean isCellEditable(int row1, int column1) {
+                if (column1 == 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public void setValueAt(Object obj, int row1, int column1) {
+                java.util.Vector rowTMP = (java.util.Vector) vectorRoles.elementAt(row1);
+                rowTMP.setElementAt(obj, column1);
+            }
+
+            public Class getColumnClass(int c) {
+                return getValueAt(0, c).getClass();
+            }
+        };
+        tbRoles = new javax.swing.JTable(tmTabelRoles);
+        tbRoles.setAutoResizeMode(tbUser.AUTO_RESIZE_OFF);
+        tc=tbRoles.getColumn("id");
+        tc.setMinWidth(0);
+        tc.setWidth(0);
+        tc.setMaxWidth(0);
+        tc=tbRoles.getColumn("ROLE NAME");
+        tc.setMinWidth(370);
+        tc=tbRoles.getColumn("DESCRIPTION");
+        tc.setMinWidth(390);
+        tc=tbRoles.getColumn(" ");
+        tc.setMinWidth(50);
+        tc.setCellRenderer(new ButtonsRenderer());
+        tc.setCellEditor(new ButtonsEditorRoles(tbRoles));
+        tbRoles.setRowHeight(30);
+        tbRoles.setIntercellSpacing(new Dimension(10,1));
+
+        for (i=1;i<tbRoles.getColumnCount();i++)
+        tbRoles.getTableHeader().getColumnModel().getColumn(i)
+        .setHeaderRenderer(new common.HeaderRenderer(tbRoles, JLabel.CENTER));
+        btLastRole = new javax.swing.JButton();
+        btFirstRole = new javax.swing.JButton();
+        btPreviousRole = new javax.swing.JButton();
+        btNextRole = new javax.swing.JButton();
+        txPageRole = new javax.swing.JTextField();
+        lbCountPageRole = new javax.swing.JLabel();
+        filterRoles = new javax.swing.JButton();
+        filterRoles2 = new javax.swing.JButton();
+        rolesEditFrame = new javax.swing.JInternalFrame();
+        LabelAddRoles = new javax.swing.JLabel();
+        txroleID = new javax.swing.JTextField();
+        txroleID.setVisible(false);
+        jLabel112 = new javax.swing.JLabel();
+        txroleName = new javax.swing.JTextField();
+        jLabel115 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        txRoledescription = new javax.swing.JTextPane();
+        jButton22 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
@@ -1210,6 +1306,96 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     transactionsPopUp.add(jMenuItem5);
 
+    popFilterUser.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterUser.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popFilterUser.setForeground(new java.awt.Color(255, 255, 255));
+    popFilterUser.setOpaque(false);
+
+    itMenuNAmeUSEr0.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr0.setForeground(new java.awt.Color(255, 255, 255));
+    itMenuNAmeUSEr0.setText(" Filter");
+    itMenuNAmeUSEr0.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itMenuNAmeUSEr0ActionPerformed(evt);
+        }
+    });
+    popFilterUser.add(itMenuNAmeUSEr0);
+
+    itMenuNAmeUSEr.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr.setForeground(new java.awt.Color(255, 255, 255));
+    itMenuNAmeUSEr.setText(" NAME");
+    itMenuNAmeUSEr.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itMenuNAmeUSErActionPerformed(evt);
+        }
+    });
+    popFilterUser.add(itMenuNAmeUSEr);
+
+    itMenuNAmeUSEr1.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr1.setForeground(new java.awt.Color(255, 255, 255));
+    itMenuNAmeUSEr1.setText(" ROLE");
+    itMenuNAmeUSEr1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itMenuNAmeUSEr1ActionPerformed(evt);
+        }
+    });
+    popFilterUser.add(itMenuNAmeUSEr1);
+
+    itMenuNAmeUSEr2.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr2.setForeground(new java.awt.Color(255, 255, 255));
+    itMenuNAmeUSEr2.setText(" EMAIL");
+    itMenuNAmeUSEr2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itMenuNAmeUSEr2ActionPerformed(evt);
+        }
+    });
+    popFilterUser.add(itMenuNAmeUSEr2);
+
+    itMenuNAmeUSEr3.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr3.setForeground(new java.awt.Color(255, 255, 255));
+    itMenuNAmeUSEr3.setText(" COMPANY NAME");
+    itMenuNAmeUSEr3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itMenuNAmeUSEr3ActionPerformed(evt);
+        }
+    });
+    popFilterUser.add(itMenuNAmeUSEr3);
+
+    popFilterRoles.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popFilterRoles.setForeground(new java.awt.Color(255, 255, 255));
+    popFilterRoles.setOpaque(false);
+
+    tpopRoles.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles.setForeground(new java.awt.Color(255, 255, 255));
+    tpopRoles.setText(" Filter");
+    tpopRoles.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopRolesActionPerformed(evt);
+        }
+    });
+    popFilterRoles.add(tpopRoles);
+
+    tpopRoles1.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles1.setForeground(new java.awt.Color(255, 255, 255));
+    tpopRoles1.setText(" ROLE NAME");
+    tpopRoles1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopRoles1ActionPerformed(evt);
+        }
+    });
+    popFilterRoles.add(tpopRoles1);
+
+    tpopRoles2.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles2.setForeground(new java.awt.Color(255, 255, 255));
+    tpopRoles2.setText(" DESCRIPTION");
+    tpopRoles2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopRoles2ActionPerformed(evt);
+        }
+    });
+    popFilterRoles.add(tpopRoles2);
+
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Project mangement & inventory");
     addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1375,13 +1561,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     userFrame.getContentPane().add(jButton6);
     jButton6.setBounds(720, 20, 120, 30);
 
-    filterSearch.setBackground(new java.awt.Color(0, 0, 0));
-    filterSearch.setForeground(new java.awt.Color(255, 255, 255));
-    filterSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Filter", "Name", "Role", "Email", "Company" }));
-    userFrame.getContentPane().add(filterSearch);
-    filterSearch.setBounds(520, 90, 140, 30);
-
+    txSearch.setForeground(new java.awt.Color(204, 204, 204));
     txSearch.setText("Search");
+    txSearch.setBorder(null);
+    txSearch.setOpaque(false);
     txSearch.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusGained(java.awt.event.FocusEvent evt) {
             txSearchFocusGained(evt);
@@ -1396,11 +1579,11 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(txSearch);
-    txSearch.setBounds(700, 90, 140, 30);
+    txSearch.setBounds(720, 90, 100, 30);
 
-    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchButton.png"))); // NOI18N
     userFrame.getContentPane().add(jLabel3);
-    jLabel3.setBounds(680, 90, 30, 30);
+    jLabel3.setBounds(690, 80, 157, 50);
 
     jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1433,7 +1616,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(btLast);
-    btLast.setBounds(370, 620, 60, 30);
+    btLast.setBounds(320, 620, 60, 30);
 
     btFirst.setBackground(new java.awt.Color(0, 0, 0));
     btFirst.setForeground(new java.awt.Color(255, 255, 255));
@@ -1478,11 +1661,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(btNext);
-    btNext.setBounds(300, 620, 60, 30);
+    btNext.setBounds(250, 620, 60, 30);
 
     txPage.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     txPage.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     txPage.setText("0");
+    txPage.setBorder(null);
     txPage.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusLost(java.awt.event.FocusEvent evt) {
             txPageFocusLost(evt);
@@ -1494,12 +1678,47 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(txPage);
-    txPage.setBounds(150, 620, 60, 30);
+    txPage.setBounds(140, 620, 40, 30);
 
     lbCountPage.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbCountPage.setText("of 10000");
     userFrame.getContentPane().add(lbCountPage);
-    lbCountPage.setBounds(220, 620, 70, 30);
+    lbCountPage.setBounds(190, 620, 60, 30);
+
+    filterUser.setBackground(new java.awt.Color(19, 23, 32));
+    filterUser.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterUser.setForeground(new java.awt.Color(255, 255, 255));
+    filterUser.setText(" Filter");
+    filterUser.setBorder(null);
+    filterUser.setBorderPainted(false);
+    filterUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterUser.setFocusPainted(false);
+    filterUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    filterUser.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterUserActionPerformed(evt);
+        }
+    });
+    userFrame.getContentPane().add(filterUser);
+    filterUser.setBounds(560, 90, 100, 30);
+
+    filterUser1.setBackground(new java.awt.Color(19, 23, 32));
+    filterUser1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterUser1.setForeground(new java.awt.Color(255, 255, 255));
+    filterUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    filterUser1.setBorder(null);
+    filterUser1.setBorderPainted(false);
+    filterUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterUser1.setFocusPainted(false);
+    filterUser1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    filterUser1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    filterUser1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterUser1ActionPerformed(evt);
+        }
+    });
+    userFrame.getContentPane().add(filterUser1);
+    filterUser1.setBounds(660, 90, 20, 30);
 
     userFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(userFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2128,7 +2347,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productEditFrame.getContentPane().add(jButton11);
     jButton11.setBounds(110, 410, 94, 30);
 
-    jButton19.setBackground(new java.awt.Color(0, 0, 0));
+    jButton19.setBackground(new java.awt.Color(19, 23, 32));
     jButton19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jButton19.setForeground(new java.awt.Color(255, 255, 255));
     jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
@@ -3184,7 +3403,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionEditFrame.getContentPane().add(jButton21);
     jButton21.setBounds(110, 460, 94, 30);
 
-    btActionTransactions.setBackground(new java.awt.Color(0, 0, 0));
+    btActionTransactions.setBackground(new java.awt.Color(19, 23, 32));
     btActionTransactions.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     btActionTransactions.setForeground(new java.awt.Color(255, 255, 255));
     btActionTransactions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
@@ -3784,6 +4003,265 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     projectPreview.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(projectPreview, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+    roleFrame.setBackground(new java.awt.Color(255, 255, 255));
+    roleFrame.setBorder(null);
+    roleFrame.setVisible(false);
+    roleFrame.getContentPane().setLayout(null);
+
+    jLabel110.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    jLabel110.setText("ROLES");
+    roleFrame.getContentPane().add(jLabel110);
+    jLabel110.setBounds(10, 10, 350, 40);
+
+    lbCountRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbCountRoles.setText("100 Roles");
+    roleFrame.getContentPane().add(lbCountRoles);
+    lbCountRoles.setBounds(10, 50, 340, 20);
+
+    btAddRoles.setBackground(new java.awt.Color(0, 0, 0));
+    btAddRoles.setForeground(new java.awt.Color(255, 255, 255));
+    btAddRoles.setText("Add Role");
+    btAddRoles.setBorder(null);
+    btAddRoles.setBorderPainted(false);
+    btAddRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btAddRoles.setFocusPainted(false);
+    btAddRoles.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btAddRolesActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(btAddRoles);
+    btAddRoles.setBounds(720, 20, 120, 30);
+
+    txSearchRoles.setForeground(new java.awt.Color(204, 204, 204));
+    txSearchRoles.setText("Search");
+    txSearchRoles.setBorder(null);
+    txSearchRoles.setOpaque(false);
+    txSearchRoles.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txSearchRolesFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txSearchRolesFocusLost(evt);
+        }
+    });
+    txSearchRoles.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txSearchRolesKeyReleased(evt);
+        }
+    });
+    roleFrame.getContentPane().add(txSearchRoles);
+    txSearchRoles.setBounds(720, 90, 100, 30);
+
+    jLabel111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchButton.png"))); // NOI18N
+    roleFrame.getContentPane().add(jLabel111);
+    jLabel111.setBounds(690, 80, 157, 50);
+
+    jScrollPane14.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jScrollPane14.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+    tbRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            tbRolesMouseClicked(evt);
+        }
+    });
+    tbRoles.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tbRolesKeyReleased(evt);
+        }
+    });
+    jScrollPane14.setViewportView(tbRoles);
+
+    roleFrame.getContentPane().add(jScrollPane14);
+    jScrollPane14.setBounds(10, 130, 830, 473);
+
+    btLastRole.setBackground(new java.awt.Color(0, 0, 0));
+    btLastRole.setForeground(new java.awt.Color(255, 255, 255));
+    btLastRole.setText(">>");
+    btLastRole.setBorder(null);
+    btLastRole.setBorderPainted(false);
+    btLastRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btLastRole.setFocusPainted(false);
+    btLastRole.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btLastRoleActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(btLastRole);
+    btLastRole.setBounds(320, 620, 60, 30);
+
+    btFirstRole.setBackground(new java.awt.Color(0, 0, 0));
+    btFirstRole.setForeground(new java.awt.Color(255, 255, 255));
+    btFirstRole.setText("<<");
+    btFirstRole.setBorder(null);
+    btFirstRole.setBorderPainted(false);
+    btFirstRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btFirstRole.setFocusPainted(false);
+    btFirstRole.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btFirstRoleActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(btFirstRole);
+    btFirstRole.setBounds(10, 620, 60, 30);
+
+    btPreviousRole.setBackground(new java.awt.Color(0, 0, 0));
+    btPreviousRole.setForeground(new java.awt.Color(255, 255, 255));
+    btPreviousRole.setText("<");
+    btPreviousRole.setBorder(null);
+    btPreviousRole.setBorderPainted(false);
+    btPreviousRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btPreviousRole.setFocusPainted(false);
+    btPreviousRole.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btPreviousRoleActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(btPreviousRole);
+    btPreviousRole.setBounds(80, 620, 60, 30);
+
+    btNextRole.setBackground(new java.awt.Color(0, 0, 0));
+    btNextRole.setForeground(new java.awt.Color(255, 255, 255));
+    btNextRole.setText(">");
+    btNextRole.setBorder(null);
+    btNextRole.setBorderPainted(false);
+    btNextRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btNextRole.setFocusPainted(false);
+    btNextRole.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btNextRoleActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(btNextRole);
+    btNextRole.setBounds(250, 620, 60, 30);
+
+    txPageRole.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+    txPageRole.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+    txPageRole.setText("0");
+    txPageRole.setBorder(null);
+    txPageRole.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txPageRoleFocusLost(evt);
+        }
+    });
+    txPageRole.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txPageRoleKeyReleased(evt);
+        }
+    });
+    roleFrame.getContentPane().add(txPageRole);
+    txPageRole.setBounds(140, 620, 40, 30);
+
+    lbCountPageRole.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    lbCountPageRole.setText("of 10000");
+    roleFrame.getContentPane().add(lbCountPageRole);
+    lbCountPageRole.setBounds(190, 620, 60, 30);
+
+    filterRoles.setBackground(new java.awt.Color(19, 23, 32));
+    filterRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterRoles.setForeground(new java.awt.Color(255, 255, 255));
+    filterRoles.setText(" Filter");
+    filterRoles.setBorder(null);
+    filterRoles.setBorderPainted(false);
+    filterRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterRoles.setFocusPainted(false);
+    filterRoles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    filterRoles.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterRolesActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(filterRoles);
+    filterRoles.setBounds(560, 90, 100, 30);
+
+    filterRoles2.setBackground(new java.awt.Color(19, 23, 32));
+    filterRoles2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterRoles2.setForeground(new java.awt.Color(255, 255, 255));
+    filterRoles2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    filterRoles2.setBorder(null);
+    filterRoles2.setBorderPainted(false);
+    filterRoles2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterRoles2.setFocusPainted(false);
+    filterRoles2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    filterRoles2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    filterRoles2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterRoles2ActionPerformed(evt);
+        }
+    });
+    roleFrame.getContentPane().add(filterRoles2);
+    filterRoles2.setBounds(660, 90, 20, 30);
+
+    roleFrame.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(roleFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+    rolesEditFrame.setBackground(new java.awt.Color(255, 255, 255));
+    rolesEditFrame.setBorder(null);
+    rolesEditFrame.setVisible(false);
+    rolesEditFrame.getContentPane().setLayout(null);
+
+    LabelAddRoles.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    LabelAddRoles.setText("ADD ROLES");
+    rolesEditFrame.getContentPane().add(LabelAddRoles);
+    LabelAddRoles.setBounds(10, 10, 330, 40);
+    rolesEditFrame.getContentPane().add(txroleID);
+    txroleID.setBounds(230, 60, 80, 19);
+
+    jLabel112.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel112.setText("Name");
+    rolesEditFrame.getContentPane().add(jLabel112);
+    jLabel112.setBounds(10, 110, 160, 25);
+
+    txroleName.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txroleNameKeyReleased(evt);
+        }
+    });
+    rolesEditFrame.getContentPane().add(txroleName);
+    txroleName.setBounds(110, 110, 250, 25);
+
+    jLabel115.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel115.setText("Description");
+    rolesEditFrame.getContentPane().add(jLabel115);
+    jLabel115.setBounds(10, 150, 160, 25);
+
+    jScrollPane15.setViewportView(txRoledescription);
+
+    rolesEditFrame.getContentPane().add(jScrollPane15);
+    jScrollPane15.setBounds(110, 150, 250, 120);
+
+    jButton22.setBackground(new java.awt.Color(0, 0, 0));
+    jButton22.setForeground(new java.awt.Color(255, 255, 255));
+    jButton22.setText("Save");
+    jButton22.setBorder(null);
+    jButton22.setBorderPainted(false);
+    jButton22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    jButton22.setFocusPainted(false);
+    jButton22.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton22ActionPerformed(evt);
+        }
+    });
+    rolesEditFrame.getContentPane().add(jButton22);
+    jButton22.setBounds(10, 290, 90, 30);
+
+    jButton24.setBackground(new java.awt.Color(204, 204, 204));
+    jButton24.setText("Cancel");
+    jButton24.setBorder(null);
+    jButton24.setBorderPainted(false);
+    jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    jButton24.setFocusPainted(false);
+    jButton24.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton24ActionPerformed(evt);
+        }
+    });
+    rolesEditFrame.getContentPane().add(jButton24);
+    jButton24.setBounds(110, 290, 94, 30);
+
+    rolesEditFrame.setBounds(0, 0, 860, 720);
+    jDesktopPane1.add(rolesEditFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
     panelMenu1.add(jDesktopPane1);
     jDesktopPane1.setBounds(160, 50, 860, 720);
 
@@ -3958,13 +4436,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btLeftUSerActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      btLeftUSer.setVisible(true);
-        btLeftRoles.setVisible(true);
+
         closeAllInternalFrame();
         disableALlButtonHeader();
-       jButton3MouseEntered(null);
-       projectFrame.setVisible(true);
-       viewProjects();
+        jButton3MouseEntered(null);
+        projectFrame.setVisible(true);
+        viewProjects();
         jButton4x.setOpaque(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -4266,11 +4743,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     }
                 }
             }
+        }
 
-            if (fc.isDebugging) {
-                System.out.println(" update user " + qry);
-            }
-            //end check password 
+        if (canAccess) {
+            javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+            jButton7ActionPerformed(null);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -4536,6 +5014,37 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
+    
+    public void removeRole(JTable table) {
+        if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Role?", "Question",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
+            common.functionCommon fc = new common.functionCommon();
+            try {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                Statement st = cn.createStatement();
+                int rowTable[] = table.getSelectedRows();
+                for (int x = 0; x < rowTable.length; x++) {
+                    if (x > 0) {
+                        qry += ",";
+                    }
+                    qry += table.getValueAt(rowTable[x], 0).toString();
+                }
+                String itemIDLISt = qry;
+                qry = "delete from roles where id in (" + itemIDLISt + ")";
+                st.executeUpdate(qry);
+                
+                st.close();
+                cn.close();
+                viewRoles();
+            } catch (Exception ex) {
+                if (fc.isDebugging) {
+                    System.out.println(" error in delete roles " + ex.getMessage());
+                }
+            }
+        }
+    }
 
     public boolean OnlySuperAdminCandeleteAdmin(int roleSelected, JTable table) {
         boolean getBack = true;
@@ -4606,6 +5115,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }
 
     public void prepareEditUSer(String userEditted) {
+        txFirstName.requestFocus();
         jButton6ActionPerformed(null);
         txuserID.setText(String.valueOf(userEditted));
         LabelAddUSer.setText("EDIT USER");
@@ -5226,6 +5736,30 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         return getBack;
     }
 
+    boolean isRoleAlreadyExist(String str, String idTable) {
+        common.functionCommon fc = new common.functionCommon();
+        boolean getBack = false;
+        try {
+            String qry = "select id from roles where name='" + str + "'";
+            if (idTable.length() > 0) {
+                qry += " and id != " + idTable;
+            }
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                getBack = true;
+            }
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("error isRoleAlreadyExist " + ex.getMessage());
+            }
+        }
+        return getBack;
+    }
+
     boolean isItemAlreadyExist(String str, String idTable) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -5494,11 +6028,13 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void txSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusGained
         txSearch.selectAll();
+        txSearch.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSearchFocusGained
 
     private void txSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusLost
         if (txSearch.getText().length() < 1) {
             txSearch.setText("Search");
+            txSearch.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txSearchFocusLost
 
@@ -5618,7 +6154,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         prePAreforFinanceTABButton();
-        transactionsFrame.setVisible(true);  
+        transactionsFrame.setVisible(true);
         btLeftUSerMouseEntered(null);
         PrepareTransactionsFrame();
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -5626,8 +6162,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void jButton4xMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseExited
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
-           jButton4x.setOpaque(false);
-     }
+            jButton4x.setOpaque(false);
+        }
     }//GEN-LAST:event_jButton4xMouseExited
 
     private void jButton4xMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseEntered
@@ -5668,9 +6204,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton18MouseClicked
 
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-       if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
+        if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(true);
-       }
+        }
     }//GEN-LAST:event_jButton3MouseEntered
 
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
@@ -5689,7 +6225,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
         if (!transactionsFrame.isVisible()
                 && !accountsFrame.isVisible()
-                &&!transactionEditFrame.isVisible()) {
+                && !transactionEditFrame.isVisible()) {
             jButton12.setOpaque(false);
         }
     }//GEN-LAST:event_jButton12MouseExited
@@ -5713,6 +6249,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             btLeftRolesMouseEntered(null);
             accountsFrame.setVisible(true);
             viewAccounts();
+        } else if (btLeftRoles.getText().equalsIgnoreCase("ROLES")) {
+            prepareForUserButtonTAB();
+            disableButtonLeft();
+            btLeftRolesMouseEntered(null);
+            roleFrame.setVisible(true);
+            viewRoles();
         }
     }//GEN-LAST:event_btLeftRolesActionPerformed
 
@@ -5722,7 +6264,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btLeftRolesMouseEntered
 
     private void btLeftRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseExited
-        if (!accountsFrame.isVisible()) {
+        if (!accountsFrame.isVisible() && !roleFrame.isVisible()) {
             btLeftRoles.setOpaque(false);
         }
     }//GEN-LAST:event_btLeftRolesMouseExited
@@ -7049,6 +7591,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void btLeftUSerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseEntered
 
         btLeftUSer.setOpaque(true);
+
     }//GEN-LAST:event_btLeftUSerMouseEntered
 
     private void btLeftUSerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseExited
@@ -7319,101 +7862,103 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private void txProgressPrecentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProgressPrecentFocusGained
         txProgressPrecent.selectAll();
     }//GEN-LAST:event_txProgressPrecentFocusGained
-public String getEmailLEaderbyProjectID(String projectID) {
-    String getBack="",qry="";
-    try {
+    public String getEmailLEaderbyProjectID(String projectID) {
+        String getBack = "", qry = "";
+        try {
             final common.functionCommon fc = new common.functionCommon();
-            qry="select email from user where id="
-                    + "(select leader_id from projects where id = "+projectID+")";
+            qry = "select email from user where id="
+                    + "(select leader_id from projects where id = " + projectID + ")";
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(qry);
             if (rs.next()) {
                 getBack = rs.getString("email");
             }
-            
-    } catch (Exception ex) {
-        System.out.println(" erro in getEmailLEaderbyProjectID "+ex.getMessage());
+
+        } catch (Exception ex) {
+            System.out.println(" erro in getEmailLEaderbyProjectID " + ex.getMessage());
+        }
+        return getBack;
     }
-    return getBack;
-}
-    
+
     private void btsaveProject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProject1ActionPerformed
         final common.functionCommon fc = new common.functionCommon();
         try {
-            
-            
-            String from = "ade_ari_w0@yahoo.com", 
-                    to = getEmailLEaderbyProjectID(txProjectid.getText()), 
-                    fileAttachment = fc.getPath() + "/pdf/project_"+jLabel87.getText().replaceAll(" ", "_")+".pdf",
-                    fileName="project_"+jLabel87.getText().replaceAll(" ", "_")+".pdf";
-            
-            if (to.length()>0) {
-        java.util.Map parameter = new java.util.HashMap();
-        parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
-        parameter.put("SUBREPORT_DIR", fc.getPath() + "/reportJXML/");
-        parameter.put("iconPeople", fc.getPath() + "/reportJXML/userIcon.png");
-        parameter.put("iconBudget", fc.getPath() + "/reportJXML/iconTransactions.jpg");
-        parameter.put("iconTransactionsOf", fc.getPath() + "/reportJXML/transactionOfIcon.jpg");
-        
-            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-            net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
-                    fc.getPath() + "/reportJXML/reportProjects.jasper", parameter, cn);
-            net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(jasperPrint, fileAttachment);
-        
-            
-            
-
-            
-            Properties props = new Properties();
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.port", "587");
-
-            Session session;
-            session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(fc.emailUser, fc.emailPass);
-                        }
-                    });
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-            message.setSubject("Report from Project "+jLabel87.getText());
-            message.setText("Read attachment");
 
 
-            MimeBodyPart messageBodyPart =
-                    new MimeBodyPart();
-            messageBodyPart.setText("Read Attachmanet");
+            String from = "ade_ari_w0@yahoo.com",
+                    to = getEmailLEaderbyProjectID(txProjectid.getText()),
+                    fileAttachment = fc.getPath() + "/pdf/project_" + jLabel87.getText().replaceAll(" ", "_") + ".pdf",
+                    fileName = "project_" + jLabel87.getText().replaceAll(" ", "_") + ".pdf";
 
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(messageBodyPart);
+            if (to.length() > 0) {
+                java.util.Map parameter = new java.util.HashMap();
+                parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
+                parameter.put("SUBREPORT_DIR", fc.getPath() + "/reportJXML/");
+                parameter.put("iconPeople", fc.getPath() + "/reportJXML/userIcon.png");
+                parameter.put("iconBudget", fc.getPath() + "/reportJXML/iconTransactions.jpg");
+                parameter.put("iconTransactionsOf", fc.getPath() + "/reportJXML/transactionOfIcon.jpg");
+
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+                net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
+                        fc.getPath() + "/reportJXML/reportProjects.jasper", parameter, cn);
+                net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(jasperPrint, fileAttachment);
 
 
-            messageBodyPart = new MimeBodyPart();
-            DataSource source =
-                    new FileDataSource(fileAttachment);
-            messageBodyPart.setDataHandler(
-                    new DataHandler(source));
-            messageBodyPart.setFileName(fileName);
-            multipart.addBodyPart(messageBodyPart);
-            message.setContent(multipart);
-            Transport.send(message);
+
+
+
+                Properties props = new Properties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.port", "587");
+
+                Session session;
+                session = Session.getInstance(props,
+                        new javax.mail.Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(fc.emailUser, fc.emailPass);
+                            }
+                        });
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(from));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));
+                message.setSubject("Report from Project " + jLabel87.getText());
+                message.setText("Read attachment");
+
+
+                MimeBodyPart messageBodyPart =
+                        new MimeBodyPart();
+                messageBodyPart.setText("Read Attachmanet");
+
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(messageBodyPart);
+
+
+                messageBodyPart = new MimeBodyPart();
+                DataSource source =
+                        new FileDataSource(fileAttachment);
+                messageBodyPart.setDataHandler(
+                        new DataHandler(source));
+                messageBodyPart.setFileName(fileName);
+                multipart.addBodyPart(messageBodyPart);
+                message.setContent(multipart);
+                Transport.send(message);
             } else {
                 javax.swing.JOptionPane.showConfirmDialog(null, "Email recepient is empty", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
 
-            if (fc.isDebugging)
-            System.out.println("Sent message successfully....");
+            if (fc.isDebugging) {
+                System.out.println("Sent message successfully....");
+            }
         } catch (Exception ex) {
-            if (fc.isDebugging)
-            System.out.println("error sendEmail " + ex.getMessage());
+            if (fc.isDebugging) {
+                System.out.println("error sendEmail " + ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btsaveProject1ActionPerformed
 
@@ -7422,18 +7967,252 @@ public String getEmailLEaderbyProjectID(String projectID) {
     }//GEN-LAST:event_PrintActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-     
-     int Xposition = 0;
-     if (getWidth()-10>panelMenu1.getWidth())
-        Xposition=(getWidth()-10-panelMenu1.getWidth())/2;
-     int Yposition = 0;
-     if (getHeight()-10>panelMenu1.getHeight())
-        Yposition=(getHeight()-panelMenu1.getHeight())/2;
-     panelMenu1.setLocation(Xposition, Yposition);
+
+        int Xposition = 0;
+        if (getWidth() - 10 > panelMenu1.getWidth()) {
+            Xposition = (getWidth() - 10 - panelMenu1.getWidth()) / 2;
+        }
+        int Yposition = 0;
+        if (getHeight() - 10 > panelMenu1.getHeight()) {
+            Yposition = (getHeight() - panelMenu1.getHeight()) / 2;
+        }
+        panelMenu1.setLocation(Xposition, Yposition);
     }//GEN-LAST:event_formComponentResized
+
+    private void filterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUserActionPerformed
+
+        filterUser1ActionPerformed(evt);
+    }//GEN-LAST:event_filterUserActionPerformed
+
+    private void filterUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUser1ActionPerformed
+        popFilterUser.show(filterUser, 0, 29);
+    }//GEN-LAST:event_filterUser1ActionPerformed
+
+    private void itMenuNAmeUSErActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSErActionPerformed
+        filterUser.setText(itMenuNAmeUSEr.getText());
+        viewUser();
+    }//GEN-LAST:event_itMenuNAmeUSErActionPerformed
+
+    private void itMenuNAmeUSEr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr1ActionPerformed
+        filterUser.setText(itMenuNAmeUSEr1.getText());
+        viewUser();
+    }//GEN-LAST:event_itMenuNAmeUSEr1ActionPerformed
+
+    private void itMenuNAmeUSEr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr2ActionPerformed
+        filterUser.setText(itMenuNAmeUSEr2.getText());
+        viewUser();
+    }//GEN-LAST:event_itMenuNAmeUSEr2ActionPerformed
+
+    private void itMenuNAmeUSEr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr3ActionPerformed
+        filterUser.setText(itMenuNAmeUSEr3.getText());
+        viewUser();
+    }//GEN-LAST:event_itMenuNAmeUSEr3ActionPerformed
+
+    private void itMenuNAmeUSEr0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr0ActionPerformed
+        filterUser.setText(itMenuNAmeUSEr0.getText());
+        viewUser();
+    }//GEN-LAST:event_itMenuNAmeUSEr0ActionPerformed
+
+    private void btAddRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddRolesActionPerformed
+        rolesEditFrame.setVisible(true);
+        txroleID.setText("");
+        txroleName.setText("");
+        txRoledescription.setText("");
+        LabelAddRoles.setText("ADD ROLE");
+        txroleName.requestFocus();
+    }//GEN-LAST:event_btAddRolesActionPerformed
+
+    private void txSearchRolesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchRolesFocusGained
+        txSearchRoles.selectAll();
+        txSearchRoles.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txSearchRolesFocusGained
+
+    private void txSearchRolesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchRolesFocusLost
+        if (txSearchRoles.getText().length()<1) {
+            txSearchRoles.setText("Search");
+            txSearchRoles.setForeground(new Color(204,204,204));
+        }
+        
+    }//GEN-LAST:event_txSearchRolesFocusLost
+
+    private void txSearchRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSearchRolesKeyReleased
+        if (evt.getKeyCode()==evt.VK_ENTER) {
+            viewRoles();
+        }
+    }//GEN-LAST:event_txSearchRolesKeyReleased
+
+    void prepareEditRoles(JTable table) {
+        rolesEditFrame.setVisible(true);
+        txroleID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+        LabelAddRoles.setText("EDIT ROLE");
+        String qry = "select name,description from roles  "
+                + " where id=" + txroleID.getText();
+        txroleName.setText("");
+        txRoledescription .setText("");
+        txroleName.requestFocus();
+
+        common.functionCommon fc = new common.functionCommon();
+        if (fc.isDebugging) {
+            System.out.println(" qry = " + qry);
+        }
+        try {
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                txroleName.setText(rs.getString("name"));
+                txRoledescription.setText(rs.getString("description"));
+            }
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("error in prepareEditRoles " + ex.getMessage());
+            }
+        }
+        txInUserName.setEditable(false);
+    }
+    
+    private void tbRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRolesMouseClicked
+        if (evt.getClickCount() == 2) {
+            prepareEditRoles(tbRoles);
+        }
+    }//GEN-LAST:event_tbRolesMouseClicked
+
+    private void tbRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRolesKeyReleased
+        if (evt.getKeyCode()==evt.VK_DELETE) {
+            removeRole(tbRoles);
+        }
+    }//GEN-LAST:event_tbRolesKeyReleased
+
+    private void btLastRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastRoleActionPerformed
+        txPageRole.setText(String.valueOf(lastPageRoles));
+        viewRoles();
+    }//GEN-LAST:event_btLastRoleActionPerformed
+
+    private void btFirstRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstRoleActionPerformed
+        txPageRole.setText("1");
+        viewRoles();
+    }//GEN-LAST:event_btFirstRoleActionPerformed
+
+    private void btPreviousRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousRoleActionPerformed
+        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText())-1));
+        viewRoles();
+    }//GEN-LAST:event_btPreviousRoleActionPerformed
+
+    private void btNextRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextRoleActionPerformed
+        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText())+1));
+        viewRoles();
+    }//GEN-LAST:event_btNextRoleActionPerformed
+
+    private void txPageRoleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageRoleFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageRoleFocusLost
+
+    private void txPageRoleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageRoleKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPageRoleKeyReleased
+
+    private void filterRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterRolesActionPerformed
+        filterRoles2ActionPerformed(null);
+    }//GEN-LAST:event_filterRolesActionPerformed
+
+    private void filterRoles2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterRoles2ActionPerformed
+        popFilterRoles.show(filterRoles, 0, 29);
+    }//GEN-LAST:event_filterRoles2ActionPerformed
+
+    private void txroleNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txroleNameKeyReleased
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txRoledescription.requestFocus();
+        }
+    }//GEN-LAST:event_txroleNameKeyReleased
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        common.functionCommon fc = new common.functionCommon();
+        boolean canSave = true;
+        try {
+            if (canSave && txroleName.getText().length() < 1) {
+                canSave=false;
+                txroleName.requestFocus();
+                javax.swing.JOptionPane.showConfirmDialog(null, "Enter Role Name", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+            }
+
+            if (canSave && txroleName.getText().length() > 0) {
+                if (isRoleAlreadyExist(txroleName.getText(), txroleID.getText())) {
+                    canSave=false;
+                    txroleName.requestFocus();
+                    javax.swing.JOptionPane.showConfirmDialog(null, "Role Name already exist", "Information",
+                            javax.swing.JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+
+            if (canSave && txRoledescription.getText().length() < 1) {
+                txRoledescription.requestFocus();
+                canSave=false;
+                javax.swing.JOptionPane.showConfirmDialog(null, "Enter Description", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+            }
+
+            if (canSave) {
+                String qry = "";
+                Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+
+                if (txroleID.getText().length() < 1) {
+                    qry = "insert into roles (name,description) values (?,?)";
+
+                    PreparedStatement psInsert = cn.prepareStatement(qry);
+
+                    psInsert.setString(1, txroleName.getText());
+                    psInsert.setString(2, txRoledescription.getText());
+                    psInsert.executeUpdate();
+                    psInsert.close();
+                } else {
+                    qry = "update roles set name=?,description=? where id =" + txroleID.getText();
+
+                    PreparedStatement psInsert = cn.prepareStatement(qry);
+
+                    psInsert.setString(1, txroleName.getText());
+                    psInsert.setString(2, txRoledescription.getText());
+                    psInsert.executeUpdate();
+                    psInsert.close();
+                }
+
+                cn.close();
+                javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Information",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+                jButton24ActionPerformed(null);
+            }
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println(" error in jButton22ActionPerformed " + ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        rolesEditFrame.setVisible(false);
+        viewRoles();
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void tpopRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRolesActionPerformed
+        filterRoles.setText(tpopRoles.getText());
+        viewRoles();
+    }//GEN-LAST:event_tpopRolesActionPerformed
+
+    private void tpopRoles1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRoles1ActionPerformed
+        filterRoles.setText(tpopRoles1.getText());
+        viewRoles();
+    }//GEN-LAST:event_tpopRoles1ActionPerformed
+
+    private void tpopRoles2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRoles2ActionPerformed
+        filterRoles.setText(tpopRoles2.getText());
+        viewRoles();
+    }//GEN-LAST:event_tpopRoles2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
+    private javax.swing.JLabel LabelAddRoles;
     private javax.swing.JLabel LabelAddUSer;
     private javax.swing.JButton Print;
     private javax.swing.JPopupMenu ProductPopMenu;
@@ -7442,17 +8221,20 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JInternalFrame accountsFrame;
     private javax.swing.JTextField address;
     private javax.swing.JButton btActionTransactions;
+    private javax.swing.JButton btAddRoles;
     private javax.swing.JButton btAddTransaction;
     private javax.swing.JButton btDelProject;
     private javax.swing.JButton btFirst;
     private javax.swing.JButton btFirstAccounts;
     private javax.swing.JButton btFirstProduct;
     private javax.swing.JButton btFirstProject;
+    private javax.swing.JButton btFirstRole;
     private javax.swing.JButton btFirstTransactions;
     private javax.swing.JButton btLast;
     private javax.swing.JButton btLastAccounts;
     private javax.swing.JButton btLastProductLast;
     private javax.swing.JButton btLastProject;
+    private javax.swing.JButton btLastRole;
     private javax.swing.JButton btLastTransactions;
     private javax.swing.JButton btLeftRoles;
     private javax.swing.JButton btLeftUSer;
@@ -7460,12 +8242,14 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JButton btNextAccounts;
     private javax.swing.JButton btNextProduct;
     private javax.swing.JButton btNextProject;
+    private javax.swing.JButton btNextRole;
     private javax.swing.JButton btNextTransactions;
     private javax.swing.JButton btPreviewProject;
     private javax.swing.JButton btPrevious;
     private javax.swing.JButton btPreviousAccounts;
     private javax.swing.JButton btPreviousProduct;
     private javax.swing.JButton btPreviousProject;
+    private javax.swing.JButton btPreviousRole;
     private javax.swing.JButton btPreviousTransactions;
     private javax.swing.JButton btsaveProject;
     private javax.swing.JButton btsaveProject1;
@@ -7487,8 +8271,16 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private datechooser.beans.DateChooserDialog dateChooserDialog3;
     private javax.swing.JComboBox filterProduct;
     private javax.swing.JComboBox filterProject;
-    private javax.swing.JComboBox filterSearch;
+    private javax.swing.JButton filterRoles;
+    private javax.swing.JButton filterRoles2;
+    private javax.swing.JButton filterUser;
+    private javax.swing.JButton filterUser1;
     private javax.swing.JInternalFrame financeFrame;
+    private javax.swing.JMenuItem itMenuNAmeUSEr;
+    private javax.swing.JMenuItem itMenuNAmeUSEr0;
+    private javax.swing.JMenuItem itMenuNAmeUSEr1;
+    private javax.swing.JMenuItem itMenuNAmeUSEr2;
+    private javax.swing.JMenuItem itMenuNAmeUSEr3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -7503,7 +8295,9 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4x;
     private javax.swing.JButton jButton5;
@@ -7525,8 +8319,12 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -7651,6 +8449,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -7667,8 +8467,10 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel lbAddTransaction;
     private javax.swing.JLabel lbCountPage;
+    private javax.swing.JLabel lbCountPageRole;
     private javax.swing.JLabel lbCountProductTable;
     private javax.swing.JLabel lbCountProjectTable;
+    private javax.swing.JLabel lbCountRoles;
     private javax.swing.JLabel lbCountUser;
     public javax.swing.JLabel lbFirstname;
     private javax.swing.JLabel lbGrandTotal;
@@ -7696,6 +8498,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JPopupMenu menuPop;
     private panelLayout.panelMenu panelMenu1;
     private javax.swing.JTextField phone;
+    private javax.swing.JPopupMenu popFilterRoles;
+    private javax.swing.JPopupMenu popFilterUser;
     private javax.swing.JComboBox prjStatus;
     private javax.swing.JInternalFrame productEditFrame;
     private javax.swing.JInternalFrame productsFrame;
@@ -7705,6 +8509,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JInternalFrame projectDetailFrame;
     private javax.swing.JInternalFrame projectFrame;
     private javax.swing.JInternalFrame projectPreview;
+    private javax.swing.JInternalFrame roleFrame;
+    private javax.swing.JInternalFrame rolesEditFrame;
     private javax.swing.JScrollPane scrolltbAccounts;
     private javax.swing.JScrollPane scrolltbAccounts1;
     private javax.swing.JTextField searchProduct;
@@ -7718,9 +8524,13 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JTable tbProductInProjects;
     private javax.swing.JTable tbProductInProjects1;
     private javax.swing.JTable tbProject;
+    private javax.swing.JTable tbRoles;
     private javax.swing.JTable tbTransactionOfProject;
     private javax.swing.JTable tbTransactions;
     private javax.swing.JTable tbUser;
+    private javax.swing.JMenuItem tpopRoles;
+    private javax.swing.JMenuItem tpopRoles1;
+    private javax.swing.JMenuItem tpopRoles2;
     private javax.swing.JInternalFrame transactionEditFrame;
     private javax.swing.JTextField transactionName;
     private javax.swing.JInternalFrame transactionsFrame;
@@ -7745,6 +8555,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JTextField txPageAccounts;
     private javax.swing.JTextField txPageProduct;
     private javax.swing.JTextField txPageProject;
+    private javax.swing.JTextField txPageRole;
     private javax.swing.JTextField txPageTransactions;
     private javax.swing.JTextField txPeralatan;
     private javax.swing.JTextField txPrice;
@@ -7754,12 +8565,16 @@ public String getEmailLEaderbyProjectID(String projectID) {
     private javax.swing.JTextField txProjectid;
     private javax.swing.JTextField txQTY;
     private javax.swing.JTextField txQTYProductsinProject;
+    private javax.swing.JTextPane txRoledescription;
     private javax.swing.JTextField txSKU;
     private javax.swing.JTextField txSearch;
+    private javax.swing.JTextField txSearchRoles;
     private javax.swing.JFormattedTextField txStartProject;
     private javax.swing.JTextField txTenagaKErja;
     private javax.swing.JTextField txTransactionID;
     private javax.swing.JTextField txTransactionValue;
+    private javax.swing.JTextField txroleID;
+    private javax.swing.JTextField txroleName;
     private javax.swing.JTextField txuserID;
     private javax.swing.JInternalFrame userEditFrame;
     private javax.swing.JInternalFrame userFrame;
@@ -7770,6 +8585,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
     javax.swing.table.TableColumn tc = new javax.swing.table.TableColumn();
     javax.swing.table.TableModel tmTabelUser;
     java.util.Vector vectorUser = new java.util.Vector();
+    javax.swing.table.TableModel tmTabelRoles;
+    java.util.Vector vectorRoles = new java.util.Vector();
     javax.swing.table.TableModel tmTabelProducts;
     java.util.Vector vectorProducts = new java.util.Vector();
     javax.swing.table.TableModel tmTableProductsInProject;
@@ -7791,7 +8608,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
             lastPageProducts = 0,
             lastPageAccounts = 0,
             lastPageProjects = 0,
-            lastPageTransactions = 0;
+            lastPageTransactions = 0,
+            lastPageRoles = 0;
     boolean showMenuUser = false, showMenuProduct = false, showMenuTransactions = false;
     Map leaderMap = new LinkedHashMap();
     Map clientMap = new LinkedHashMap();
@@ -8282,34 +9100,58 @@ public String getEmailLEaderbyProjectID(String projectID) {
             Condition += " and a.roles_id<>1 ";
         }
 
-        if (txSearch.getText().length() > 0) {
-            if (filterSearch.getSelectedItem().toString().equalsIgnoreCase("Name")) {
-                StringTokenizer st = new StringTokenizer(txSearch.getText(), " ");
-                int i = 0;
-                String conditionFirstName = "", conditionLastName = "";
-                String tokenGET = "";
-                while (st.hasMoreTokens()) {
-                    tokenGET = st.nextToken();
-                    if (i == 0) {
-                        conditionFirstName += " a.first_name like '%" + tokenGET + "%' ";
-                        conditionLastName += " a.last_name like '%" + tokenGET + "%' ";
-                    } else {
-                        conditionFirstName += " or a.first_name like '%" + tokenGET + "%' ";
-                        conditionLastName += " or a.last_name like '%" + tokenGET + "%' ";
-                    }
-                    i++;
+        if (txSearch.getText().length() > 0 && !txSearch.getText().equalsIgnoreCase("Search")) {
+            String conditon1 = "";
+            StringTokenizer st = new StringTokenizer(txSearch.getText(), " ");
+            int i = 0;
+            String conditionFirstName = "", conditionLastName = "";
+            String tokenGET = "";
+            while (st.hasMoreTokens()) {
+                tokenGET = st.nextToken();
+                if (i == 0) {
+                    conditionFirstName += " a.first_name like '%" + tokenGET + "%' ";
+                    conditionLastName += " a.last_name like '%" + tokenGET + "%' ";
+                } else {
+                    conditionFirstName += " or a.first_name like '%" + tokenGET + "%' ";
+                    conditionLastName += " or a.last_name like '%" + tokenGET + "%' ";
                 }
-                Condition += " and " + conditionFirstName + " or " + conditionLastName + " ";
-            } else if (filterSearch.getSelectedItem().toString().equalsIgnoreCase("Role")) {
-                Condition += " and b.name = '" + txSearch.getText() + "' ";
-            } else if (filterSearch.getSelectedItem().toString().equalsIgnoreCase("Email")) {
-                Condition += " and a.email like '%" + txSearch.getText() + "%' ";
-            } else if (filterSearch.getSelectedItem().toString().equalsIgnoreCase("Company")) {
-                Condition += " and a.company_name like '%" + txSearch.getText() + "%' ";
+                i++;
+            }
+            if (conditon1.length() > 0) {
+                conditon1 += " or ";
+            }
+            conditon1 += " " + conditionFirstName + " or " + conditionLastName + " ";
+
+            if (conditon1.length() > 0) {
+                conditon1 += " or ";
+            }
+            conditon1 += " b.name = '" + txSearch.getText() + "' ";
+
+            if (conditon1.length() > 0) {
+                conditon1 += " or ";
+            }
+            conditon1 += " a.email like '%" + txSearch.getText() + "%' ";
+
+            if (conditon1.length() > 0) {
+                conditon1 += " or ";
+            }
+            conditon1 += " a.company_name like '%" + txSearch.getText() + "%' ";
+            if (conditon1.length() > 0) {
+                Condition += " and (" + conditon1 + ") ";
             }
         }
-
-
+        orderBy = "  a.first_name ";
+        if (!filterUser.getText().equalsIgnoreCase(" Filter")) {
+            if (filterUser.getText().equalsIgnoreCase(" NAME")) {
+                orderBy = " a.first_name ";
+            } else if (filterUser.getText().equalsIgnoreCase(" ROLE")) {
+                orderBy = " b.name ";
+            } else if (filterUser.getText().equalsIgnoreCase(" EMAIL")) {
+                orderBy = " a.email ";
+            } else if (filterUser.getText().equalsIgnoreCase(" COMPANY NAME")) {
+                orderBy = " a.company_name ";
+            }
+        }
 
 
         int positionNow = (Integer.valueOf(txPage.getText()) - 1);
@@ -8323,7 +9165,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
             btFirst.setEnabled(true);
         }
 
-        orderBy = " order by name asc";
+
         int total = 0;
 
 
@@ -8375,7 +9217,9 @@ public String getEmailLEaderbyProjectID(String projectID) {
             int positionNOW2 = positionNow * limit;
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select a.id,a.first_name,a.last_name,b.name as roles,a.email,a.company_name from user a "
-                    + " left join roles b on a.roles_id=b.id" + Condition + limiTation;
+                    + " left join roles b on a.roles_id=b.id" + Condition + " order by "
+                    + orderBy
+                    + limiTation;
             if (fc.isDebugging) {
                 System.out.println(" qry = " + qry);
             }
@@ -8411,6 +9255,118 @@ public String getEmailLEaderbyProjectID(String projectID) {
             }
             tbUser.tableChanged(new javax.swing.event.TableModelEvent(tmTabelUser));
             lbCountPage.setText(" of " + lastPageUSer);
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println("Error in viewUser " + ex.getMessage());
+            }
+        }
+    }
+
+    public void viewRoles() {
+        int limit = 15;
+        common.functionCommon fc = new common.functionCommon();
+        String qry = "", orderBy = " name ", Condition = "";
+        int positionNow = (Integer.valueOf(txPageRole.getText()) - 1);
+
+        if (txSearchRoles.getText().length() > 0 && !txSearchRoles.getText().equalsIgnoreCase("Search")) {
+            Condition = " name like '%"+txSearchRoles.getText()+"%' ";
+            if (Condition.length()>0)
+                Condition +=" or ";
+            Condition += " description like '%"+txSearchRoles.getText()+"%' ";
+            
+            
+            if (Condition.length()>0)
+                Condition =" where "+Condition;
+        }
+        
+        if (!filterRoles.getText().equalsIgnoreCase(" Filter")) {
+            if (filterRoles.getText().equalsIgnoreCase(" ROLE NAME"))
+            orderBy =" name ";
+            else if (filterRoles.getText().equalsIgnoreCase(" DESCRIPTION"))
+            orderBy =" description ";
+        }
+
+        if (positionNow == 0) {
+            btPreviousRole.setEnabled(false);
+            btFirstRole.setEnabled(false);
+        } else {
+            btPreviousRole.setEnabled(true);
+            btFirstRole.setEnabled(true);
+        }
+
+
+        int total = 0;
+
+
+        try {
+            qry = "select count(*) as totalCount from roles " + Condition;
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            if (rs.next()) {
+                total = rs.getInt("totalCount");
+                lbCountRoles.setText(rs.getString("totalCount") + " Roles");
+                if (total > 0) {
+
+                    lastPageRoles = rs.getInt("totalCount") / limit;
+                    if ((rs.getInt("totalCount") % limit) > 0) {
+                        lastPageRoles++;
+                    }
+
+                    if ((lastPageRoles - 1) <= positionNow) {
+                        btNextRole.setEnabled(false);
+                        btLastRole.setEnabled(false);
+                        txPageRole.setText(String.valueOf(lastPageRoles));
+                        positionNow = lastPageRoles - 1;
+                    } else {
+                        if (positionNow < 0) {
+                            positionNow = 0;
+                            txPageRole.setText("1");
+                            btPreviousRole.setEnabled(false);
+                            btFirstRole.setEnabled(false);
+                        }
+                        if (lastPageRoles > 1) {
+                            btNextRole.setEnabled(true);
+                            btLastRole.setEnabled(true);
+                        } else {
+                            btNextRole.setEnabled(false);
+                            btLastRole.setEnabled(false);
+                        }
+                    }
+                } else {
+                    btNextRole.setEnabled(false);
+                    btLastRole.setEnabled(false);
+                    btPreviousRole.setEnabled(false);
+                    btFirstRole.setEnabled(false);
+                    positionNow = 0;
+                    txPageRole.setText("0");
+                }
+            }
+            int positionNOW2 = positionNow * limit;
+            String limiTation = " offset " + positionNOW2 + " limit " + limit;
+            qry = "select id,name,description from roles " + Condition + " order by "
+                    + orderBy
+                    + limiTation;
+            if (fc.isDebugging) {
+                System.out.println(" qry = " + qry);
+            }
+            rs = st.executeQuery(qry);
+            java.util.Vector rowData = null;
+            vectorRoles = new java.util.Vector();
+            while (rs.next()) {
+                rowData = new java.util.Vector();
+
+                rowData.addElement(rs.getInt("id"));
+                rowData.addElement(rs.getString("name"));
+                rowData.addElement(rs.getString("description"));
+                rowData.addElement("");
+                vectorRoles.addElement(rowData);
+
+            }
+            tbRoles.tableChanged(new javax.swing.event.TableModelEvent(tmTabelRoles));
+            lbCountPageRole.setText(" of " + lastPageRoles);
             st.close();
             cn.close();
         } catch (Exception ex) {
@@ -8516,8 +9472,6 @@ public String getEmailLEaderbyProjectID(String projectID) {
     }
 
     void closeAllInternalFrame() {
-        btLeftUSer.setVisible(false);
-        btLeftRoles.setVisible(false);
         userFrame.setVisible(false);
         userEditFrame.setVisible(false);
         projectFrame.setVisible(false);
@@ -8529,6 +9483,10 @@ public String getEmailLEaderbyProjectID(String projectID) {
         transactionsFrame.setVisible(false);
         transactionEditFrame.setVisible(false);
         projectPreview.setVisible(false);
+        btLeftUSer.setVisible(false);
+        btLeftRoles.setVisible(false);
+        roleFrame.setVisible(false);
+        rolesEditFrame.setVisible(false);
     }
 
     void POPUpMenuUsuallycommand() {
@@ -8548,10 +9506,12 @@ public String getEmailLEaderbyProjectID(String projectID) {
                 b.setFocusable(false);
                 b.setRolloverEnabled(false);
                 b.setPreferredSize(new Dimension(22, 22));
+                b.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 add(b);
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editIcon.png")));
             buttons.get(1).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
+
         }
     }
 
@@ -8566,6 +9526,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
                 b.setFocusable(false);
                 b.setRolloverEnabled(false);
                 b.setPreferredSize(new Dimension(22, 22));
+                b.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 add(b);
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
@@ -8583,6 +9544,7 @@ public String getEmailLEaderbyProjectID(String projectID) {
                 b.setFocusable(false);
                 b.setRolloverEnabled(false);
                 b.setPreferredSize(new Dimension(22, 22));
+                b.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 add(b);
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconX.png")));
@@ -8660,6 +9622,89 @@ public String getEmailLEaderbyProjectID(String projectID) {
         }
     }
 
+    class ButtonsEditorRoles extends ButtonsPanel implements TableCellEditor {
+
+        public ButtonsEditorRoles(final JTable table) {
+            super();
+
+            MouseListener ml = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    ButtonModel m = ((JButton) e.getSource()).getModel();
+                    if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
+                        setBackground(table.getBackground());
+                    }
+                    table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
+                }
+            };
+
+
+            buttons.get(0).addMouseListener(ml);
+            buttons.get(1).addMouseListener(ml);
+
+            buttons.get(0).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prepareEditRoles(table);
+                }
+            });
+
+            buttons.get(1).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    removeRole(table);
+                }
+            });
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.setBackground(table.getSelectionBackground());
+            return this;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return "";
+        }
+        //Copid from AbstractCellEditor
+        //protected EventListenerList listenerList = new EventListenerList();
+        transient protected ChangeEvent changeEvent = null;
+
+        @Override
+        public boolean isCellEditable(EventObject e) {
+            return true;
+        }
+
+        @Override
+        public boolean shouldSelectCell(EventObject anEvent) {
+            return true;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            return true;
+        }
+
+        @Override
+        public void cancelCellEditing() {
+        }
+
+        @Override
+        public void addCellEditorListener(CellEditorListener l) {
+            listenerList.add(CellEditorListener.class, l);
+        }
+
+        @Override
+        public void removeCellEditorListener(CellEditorListener l) {
+            listenerList.remove(CellEditorListener.class, l);
+        }
+
+        public CellEditorListener[] getCellEditorListeners() {
+            return listenerList.getListeners(CellEditorListener.class);
+        }
+    }
+
     class ButtonsEditor extends ButtonsPanel implements TableCellEditor {
 
         public ButtonsEditor(final JTable table) {
@@ -8674,6 +9719,8 @@ public String getEmailLEaderbyProjectID(String projectID) {
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
+
+
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
 
