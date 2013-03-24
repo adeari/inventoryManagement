@@ -126,6 +126,14 @@ public class formMenu extends javax.swing.JFrame {
         tpopRoles = new javax.swing.JMenuItem();
         tpopRoles1 = new javax.swing.JMenuItem();
         tpopRoles2 = new javax.swing.JMenuItem();
+        popFilterProducts = new javax.swing.JPopupMenu();
+        tpopProducts = new javax.swing.JMenuItem();
+        tpopProducts1 = new javax.swing.JMenuItem();
+        tpopProducts2 = new javax.swing.JMenuItem();
+        tpopProducts3 = new javax.swing.JMenuItem();
+        tpopProducts3.setVisible(false);
+        tpopProducts4 = new javax.swing.JMenuItem();
+        tpopProducts5 = new javax.swing.JMenuItem();
         panelMenu1 = new panelLayout.panelMenu();
         jButton4x = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -329,11 +337,9 @@ public class formMenu extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         lbCountProductTable = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        filterProduct = new javax.swing.JComboBox();
         searchProduct = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        final String columnProducts[] = {"id", "ITEM", "SKU", "IN STOCK", "STOCK DATE", "ACTION"};
+        final String columnProducts[] = {"id", "ITEM", "SKU", "IN STOCK", "STOCK DATE", " "};
         tmTabelProducts = new javax.swing.table.AbstractTableModel() {
             public int getColumnCount() {
                 return columnProducts.length;
@@ -388,7 +394,7 @@ public class formMenu extends javax.swing.JFrame {
         tc=tbProduct.getColumn("STOCK DATE");
         tc.setMinWidth(105);
         tbProduct.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
-        tc=tbProduct.getColumn("ACTION");
+        tc=tbProduct.getColumn(" ");
         tc.setMinWidth(50);
         tc.setCellRenderer(new ButtonsRenderer());
         tc.setCellEditor(new ButtonsEditorProducts(tbProduct));
@@ -406,12 +412,15 @@ public class formMenu extends javax.swing.JFrame {
         lbPageCountProduct = new javax.swing.JLabel();
         btNextProduct = new javax.swing.JButton();
         btLastProductLast = new javax.swing.JButton();
+        jLabel116 = new javax.swing.JLabel();
+        filterProduct = new javax.swing.JButton();
+        filterProduct1 = new javax.swing.JButton();
         productEditFrame = new javax.swing.JInternalFrame();
+        txItemName = new javax.swing.JTextField();
         LabelAddProducts = new javax.swing.JLabel();
         txProductsID = new javax.swing.JTextField();
         txProductsID.setVisible(false);
         jLabel15 = new javax.swing.JLabel();
-        txItemName = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txSKU = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -424,6 +433,7 @@ public class formMenu extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
+        jLabel117 = new javax.swing.JLabel();
         projectDetailFrame = new javax.swing.JInternalFrame();
         jScrollPane7 = new javax.swing.JScrollPane();
         jPanel9 = new javax.swing.JPanel();
@@ -1310,6 +1320,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterUser.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     popFilterUser.setForeground(new java.awt.Color(255, 255, 255));
     popFilterUser.setOpaque(false);
+    popFilterUser.setPreferredSize(new java.awt.Dimension(160, 100));
 
     itMenuNAmeUSEr0.setBackground(new java.awt.Color(19, 23, 32));
     itMenuNAmeUSEr0.setForeground(new java.awt.Color(255, 255, 255));
@@ -1365,6 +1376,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     popFilterRoles.setForeground(new java.awt.Color(255, 255, 255));
     popFilterRoles.setOpaque(false);
+    popFilterRoles.setPreferredSize(new java.awt.Dimension(120, 62));
 
     tpopRoles.setBackground(new java.awt.Color(19, 23, 32));
     tpopRoles.setForeground(new java.awt.Color(255, 255, 255));
@@ -1395,6 +1407,72 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     popFilterRoles.add(tpopRoles2);
+
+    popFilterProducts.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterProducts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popFilterProducts.setForeground(new java.awt.Color(255, 255, 255));
+    popFilterProducts.setOpaque(false);
+    popFilterProducts.setPreferredSize(new java.awt.Dimension(160, 120));
+
+    tpopProducts.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts.setText(" Filter");
+    tpopProducts.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProductsActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts);
+
+    tpopProducts1.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts1.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts1.setText(" PRODUCT NAME");
+    tpopProducts1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProducts1ActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts1);
+
+    tpopProducts2.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts2.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts2.setText(" S K U");
+    tpopProducts2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProducts2ActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts2);
+
+    tpopProducts3.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts3.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts3.setText(" PRICE");
+    tpopProducts3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProducts3ActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts3);
+
+    tpopProducts4.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts4.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts4.setText(" IN STOCK");
+    tpopProducts4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProducts4ActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts4);
+
+    tpopProducts5.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts5.setForeground(new java.awt.Color(255, 255, 255));
+    tpopProducts5.setText(" STOCK DATE");
+    tpopProducts5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            tpopProducts5ActionPerformed(evt);
+        }
+    });
+    popFilterProducts.add(tpopProducts5);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Project mangement & inventory");
@@ -1616,7 +1694,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(btLast);
-    btLast.setBounds(320, 620, 60, 30);
+    btLast.setBounds(310, 620, 60, 30);
 
     btFirst.setBackground(new java.awt.Color(0, 0, 0));
     btFirst.setForeground(new java.awt.Color(255, 255, 255));
@@ -1661,7 +1739,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(btNext);
-    btNext.setBounds(250, 620, 60, 30);
+    btNext.setBounds(240, 620, 60, 30);
 
     txPage.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     txPage.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1683,7 +1761,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     lbCountPage.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbCountPage.setText("of 10000");
     userFrame.getContentPane().add(lbCountPage);
-    lbCountPage.setBounds(190, 620, 60, 30);
+    lbCountPage.setBounds(182, 620, 60, 30);
 
     filterUser.setBackground(new java.awt.Color(19, 23, 32));
     filterUser.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1700,7 +1778,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     userFrame.getContentPane().add(filterUser);
-    filterUser.setBounds(560, 90, 100, 30);
+    filterUser.setBounds(520, 90, 140, 30);
 
     filterUser1.setBackground(new java.awt.Color(19, 23, 32));
     filterUser1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -2104,13 +2182,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productsFrame.getContentPane().add(jButton9);
     jButton9.setBounds(720, 20, 120, 30);
 
-    filterProduct.setBackground(new java.awt.Color(0, 0, 0));
-    filterProduct.setForeground(new java.awt.Color(255, 255, 255));
-    filterProduct.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Filter", "Name", "SKU", "Price", "Category" }));
-    productsFrame.getContentPane().add(filterProduct);
-    filterProduct.setBounds(520, 90, 140, 30);
-
+    searchProduct.setForeground(new java.awt.Color(204, 204, 204));
     searchProduct.setText("Search");
+    searchProduct.setBorder(null);
+    searchProduct.setOpaque(false);
     searchProduct.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusGained(java.awt.event.FocusEvent evt) {
             searchProductFocusGained(evt);
@@ -2125,11 +2200,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productsFrame.getContentPane().add(searchProduct);
-    searchProduct.setBounds(700, 90, 140, 30);
-
-    jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
-    productsFrame.getContentPane().add(jLabel14);
-    jLabel14.setBounds(680, 90, 30, 30);
+    searchProduct.setBounds(720, 90, 110, 30);
 
     jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
     jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -2180,9 +2251,11 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productsFrame.getContentPane().add(btPreviousProduct);
     btPreviousProduct.setBounds(80, 620, 60, 30);
 
+    txPageProduct.setEditable(false);
     txPageProduct.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     txPageProduct.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     txPageProduct.setText("0");
+    txPageProduct.setBorder(null);
     txPageProduct.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusLost(java.awt.event.FocusEvent evt) {
             txPageProductFocusLost(evt);
@@ -2194,12 +2267,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productsFrame.getContentPane().add(txPageProduct);
-    txPageProduct.setBounds(150, 620, 60, 30);
+    txPageProduct.setBounds(140, 620, 40, 30);
 
     lbPageCountProduct.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbPageCountProduct.setText("of 10000");
     productsFrame.getContentPane().add(lbPageCountProduct);
-    lbPageCountProduct.setBounds(220, 620, 70, 30);
+    lbPageCountProduct.setBounds(190, 620, 60, 30);
 
     btNextProduct.setBackground(new java.awt.Color(0, 0, 0));
     btNextProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -2214,7 +2287,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productsFrame.getContentPane().add(btNextProduct);
-    btNextProduct.setBounds(300, 620, 60, 30);
+    btNextProduct.setBounds(250, 620, 60, 30);
 
     btLastProductLast.setBackground(new java.awt.Color(0, 0, 0));
     btLastProductLast.setForeground(new java.awt.Color(255, 255, 255));
@@ -2229,7 +2302,46 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productsFrame.getContentPane().add(btLastProductLast);
-    btLastProductLast.setBounds(370, 620, 60, 30);
+    btLastProductLast.setBounds(320, 620, 60, 30);
+
+    jLabel116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchButton.png"))); // NOI18N
+    productsFrame.getContentPane().add(jLabel116);
+    jLabel116.setBounds(684, 80, 160, 50);
+
+    filterProduct.setBackground(new java.awt.Color(19, 23, 32));
+    filterProduct.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterProduct.setForeground(new java.awt.Color(255, 255, 255));
+    filterProduct.setText(" Filter");
+    filterProduct.setBorder(null);
+    filterProduct.setBorderPainted(false);
+    filterProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterProduct.setFocusPainted(false);
+    filterProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    filterProduct.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterProductActionPerformed(evt);
+        }
+    });
+    productsFrame.getContentPane().add(filterProduct);
+    filterProduct.setBounds(520, 90, 140, 30);
+
+    filterProduct1.setBackground(new java.awt.Color(19, 23, 32));
+    filterProduct1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    filterProduct1.setForeground(new java.awt.Color(255, 255, 255));
+    filterProduct1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    filterProduct1.setBorder(null);
+    filterProduct1.setBorderPainted(false);
+    filterProduct1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    filterProduct1.setFocusPainted(false);
+    filterProduct1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    filterProduct1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    filterProduct1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filterProduct1ActionPerformed(evt);
+        }
+    });
+    productsFrame.getContentPane().add(filterProduct1);
+    filterProduct1.setBounds(660, 90, 20, 30);
 
     productsFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(productsFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2238,6 +2350,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productEditFrame.setBorder(null);
     productEditFrame.setVisible(false);
     productEditFrame.getContentPane().setLayout(null);
+
+    txItemName.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txItemNameKeyReleased(evt);
+        }
+    });
+    productEditFrame.getContentPane().add(txItemName);
+    txItemName.setBounds(110, 110, 250, 25);
 
     LabelAddProducts.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
     LabelAddProducts.setText("ADD PRODUCTS");
@@ -2250,14 +2370,6 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel15.setText("Item Name");
     productEditFrame.getContentPane().add(jLabel15);
     jLabel15.setBounds(10, 110, 160, 25);
-
-    txItemName.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            txItemNameKeyReleased(evt);
-        }
-    });
-    productEditFrame.getContentPane().add(txItemName);
-    txItemName.setBounds(110, 110, 250, 25);
 
     jLabel16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel16.setText("SKU");
@@ -2308,7 +2420,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     jLabel20.setText("Price");
     productEditFrame.getContentPane().add(jLabel20);
-    jLabel20.setBounds(10, 360, 160, 25);
+    jLabel20.setBounds(10, 360, 100, 25);
 
     txPrice.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -2316,7 +2428,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     productEditFrame.getContentPane().add(txPrice);
-    txPrice.setBounds(110, 360, 250, 25);
+    txPrice.setBounds(140, 360, 220, 25);
 
     jButton10.setBackground(new java.awt.Color(0, 0, 0));
     jButton10.setForeground(new java.awt.Color(255, 255, 255));
@@ -2376,6 +2488,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     productEditFrame.getContentPane().add(jButton19);
     jButton19.setBounds(400, 10, 84, 30);
+
+    jLabel117.setBackground(new java.awt.Color(0, 0, 0));
+    jLabel117.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    jLabel117.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel117.setText(" Rp.");
+    jLabel117.setOpaque(true);
+    productEditFrame.getContentPane().add(jLabel117);
+    jLabel117.setBounds(110, 360, 30, 25);
 
     productEditFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(productEditFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -4088,7 +4208,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     roleFrame.getContentPane().add(btLastRole);
-    btLastRole.setBounds(320, 620, 60, 30);
+    btLastRole.setBounds(310, 620, 60, 30);
 
     btFirstRole.setBackground(new java.awt.Color(0, 0, 0));
     btFirstRole.setForeground(new java.awt.Color(255, 255, 255));
@@ -4133,7 +4253,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     roleFrame.getContentPane().add(btNextRole);
-    btNextRole.setBounds(250, 620, 60, 30);
+    btNextRole.setBounds(240, 620, 60, 30);
 
     txPageRole.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     txPageRole.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -4155,7 +4275,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     lbCountPageRole.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbCountPageRole.setText("of 10000");
     roleFrame.getContentPane().add(lbCountPageRole);
-    lbCountPageRole.setBounds(190, 620, 60, 30);
+    lbCountPageRole.setBounds(182, 620, 60, 30);
 
     filterRoles.setBackground(new java.awt.Color(19, 23, 32));
     filterRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -4457,7 +4577,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         phone.setText("");
         address.setText("");
         companyName.setText("");
-        cbRoles.setSelectedItem("team");
+        cbRoles.setSelectedItem("Team");
     }
 
     int getIdROlesFromNAme(String str) {
@@ -4516,11 +4636,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (btLeftUSer.isVisible()) {
-            jButton1ActionPerformed(null);
-        } else {
-            closeAllInternalFrame();
-        }
+        clearAddUSerFrame();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     boolean isEmailExistonEdit(String mail, String userID) {
@@ -4748,7 +4864,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         if (canAccess) {
             javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-            jButton7ActionPerformed(null);
+            prepareForUserButtonTAB();
+        userFrame.setVisible(true);
+        viewUser();
+        btLeftUSerMouseEntered(null);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -5599,6 +5718,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         jButton19.setVisible(false);
         productEditFrame.setVisible(true);
         LabelAddProducts.setText("ADD PRODUCT");
+        txItemName.requestFocus();
 //        common.functionCommon fc = new common.functionCommon();
 //        cbCategory.removeAllItems();
 //        try {
@@ -5900,16 +6020,15 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 if (fc.isDebugging) {
                     System.out.println(" qry = " + qry);
                 }
-
-
+javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
+                    javax.swing.JOptionPane.PLAIN_MESSAGE);
+jButton11ActionPerformed(null);
                 cn.close();
 
             } catch (Exception ex) {
                 System.out.println(" error in jButton10ActionPerformed " + ex.getMessage());
             }
-            if (txProductsID.getText().length() > 0) {
-                jButton11ActionPerformed(null);
-            }
+            
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -5929,12 +6048,16 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_searchProductKeyReleased
 
     private void searchProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusGained
+        if (searchProduct.getText().equalsIgnoreCase("Search"))
+            searchProduct.setText("");
         searchProduct.selectAll();
+        searchProduct.setForeground(Color.BLACK);
     }//GEN-LAST:event_searchProductFocusGained
 
     private void searchProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusLost
         if (searchProduct.getText().length() < 1) {
             searchProduct.setText("Search");
+            searchProduct.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_searchProductFocusLost
 
@@ -6027,6 +6150,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_txPageProductFocusLost
 
     private void txSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusGained
+        if (txSearch.getText().equalsIgnoreCase("Search"))
+            txSearch.setText("");
         txSearch.selectAll();
         txSearch.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSearchFocusGained
@@ -8023,6 +8148,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }//GEN-LAST:event_btAddRolesActionPerformed
 
     private void txSearchRolesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchRolesFocusGained
+        if (txSearchRoles.getText().equalsIgnoreCase("Search"))
+            txSearchRoles.setText("");
         txSearchRoles.selectAll();
         txSearchRoles.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSearchRolesFocusGained
@@ -8210,6 +8337,44 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         viewRoles();
     }//GEN-LAST:event_tpopRoles2ActionPerformed
 
+    private void filterProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterProductActionPerformed
+        filterProduct1ActionPerformed(null);
+    }//GEN-LAST:event_filterProductActionPerformed
+
+    private void tpopProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProductsActionPerformed
+        filterProduct.setText(tpopProducts.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProductsActionPerformed
+
+    private void tpopProducts1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts1ActionPerformed
+        filterProduct.setText(tpopProducts1.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProducts1ActionPerformed
+
+    private void tpopProducts2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts2ActionPerformed
+        filterProduct.setText(tpopProducts2.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProducts2ActionPerformed
+
+    private void filterProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterProduct1ActionPerformed
+        popFilterProducts.show(filterProduct, 0, 28);
+    }//GEN-LAST:event_filterProduct1ActionPerformed
+
+    private void tpopProducts3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts3ActionPerformed
+        filterProduct.setText(tpopProducts3.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProducts3ActionPerformed
+
+    private void tpopProducts4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts4ActionPerformed
+        filterProduct.setText(tpopProducts4.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProducts4ActionPerformed
+
+    private void tpopProducts5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts5ActionPerformed
+        filterProduct.setText(tpopProducts5.getText());
+        viewProducts();
+    }//GEN-LAST:event_tpopProducts5ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddRoles;
@@ -8269,7 +8434,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private datechooser.beans.DateChooserDialog dateChooserDialog3;
-    private javax.swing.JComboBox filterProduct;
+    private javax.swing.JButton filterProduct;
+    private javax.swing.JButton filterProduct1;
     private javax.swing.JComboBox filterProject;
     private javax.swing.JButton filterRoles;
     private javax.swing.JButton filterRoles2;
@@ -8325,9 +8491,10 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
     private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -8498,6 +8665,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JPopupMenu menuPop;
     private panelLayout.panelMenu panelMenu1;
     private javax.swing.JTextField phone;
+    private javax.swing.JPopupMenu popFilterProducts;
     private javax.swing.JPopupMenu popFilterRoles;
     private javax.swing.JPopupMenu popFilterUser;
     private javax.swing.JComboBox prjStatus;
@@ -8528,6 +8696,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     private javax.swing.JTable tbTransactionOfProject;
     private javax.swing.JTable tbTransactions;
     private javax.swing.JTable tbUser;
+    private javax.swing.JMenuItem tpopProducts;
+    private javax.swing.JMenuItem tpopProducts1;
+    private javax.swing.JMenuItem tpopProducts2;
+    private javax.swing.JMenuItem tpopProducts3;
+    private javax.swing.JMenuItem tpopProducts4;
+    private javax.swing.JMenuItem tpopProducts5;
     private javax.swing.JMenuItem tpopRoles;
     private javax.swing.JMenuItem tpopRoles1;
     private javax.swing.JMenuItem tpopRoles2;
@@ -8885,24 +9059,36 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     }
 
     public void viewProducts() {
+        common.functionCommon fc = new common.functionCommon();
         int limit = 13;
         String qry = "", orderBy = "", Condition = "";
-        if (searchProduct.getText().length() > 0) {
-            if (filterProduct.getSelectedItem().toString().equalsIgnoreCase("Name")) {
-                Condition = " where a.name like '%" + searchProduct.getText() + "%'";
-            } else if (filterProduct.getSelectedItem().toString().equalsIgnoreCase("SKU")) {
-                Condition = " where a.sku like '%" + searchProduct.getText() + "%'";
-            } else if (filterProduct.getSelectedItem().toString().equalsIgnoreCase("Price")) {
-                Condition = " where a.price = " + searchProduct.getText();
-            } else if (filterProduct.getSelectedItem().toString().equalsIgnoreCase("Category")) {
-                Condition = " where b.name = '" + searchProduct.getText() + "'";
+        
+        if (!filterProduct.getText().equalsIgnoreCase(" Filter")) {
+            if (filterProduct.getText().equalsIgnoreCase(" PRODUCT NAME")) {
+                orderBy = " a.name  ";
+            } else if (filterProduct.getText().equalsIgnoreCase(" S K U")) {
+                orderBy = " a.sku ";
+            } else if (filterProduct.getText().equalsIgnoreCase(" IN STOCK")) {
+                orderBy = " a.quantity ";
+            } else if (filterProduct.getText().equalsIgnoreCase(" STOCK DATE")) {
+                orderBy = " a.modified_at ";
+            }
+            if (orderBy.length()>0) orderBy =" order by "+orderBy+" ";
+        }
+
+        if (searchProduct.getText().length()>1&&!searchProduct.getText().equalsIgnoreCase("Search"))  {
+            Condition = " where a.name like '%"+searchProduct.getText()+"%' "
+                    + " or a.sku like '%"+searchProduct.getText()+"%' "
+                    
+                    + " or lower(to_char(a.modified_at,'DD MON YYYY')) = lower('"+searchProduct.getText()+"') ";
+            if (fc.isNumeric(searchProduct.getText())) {
+                Condition += " or a.quantity ="+searchProduct.getText()+" ";
             }
         }
 
 
-
         int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
-        common.functionCommon fc = new common.functionCommon();
+        
         if (positionNow == 0) {
             btPreviousProduct.setEnabled(false);
             btFirstProduct.setEnabled(false);
@@ -8910,11 +9096,13 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             btPreviousProduct.setEnabled(true);
             btFirstProduct.setEnabled(true);
         }
-        orderBy = " order by name asc";
         int total = 0;
 
         try {
-            qry = "select count(*) as totalCount from inventories a " + Condition;
+            qry = "select count(*) as totalCount from items a " + Condition;
+            if (fc.isDebugging) {
+                System.out.println(" qry = " + qry);
+            }
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(qry);
@@ -8961,7 +9149,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select a.id,a.name,a.description,a.sku,a.quantity,"
                     + fc.viewDatefromSQL("a.modified_at", "modified_at")
-                    + " from items a " + Condition
+                    + " from items a " + Condition +orderBy
                     + " " + limiTation;
             if (fc.isDebugging) {
                 System.out.println(" qry = " + qry);
