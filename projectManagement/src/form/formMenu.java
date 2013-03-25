@@ -46,6 +46,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.CellEditorListener;
@@ -69,7 +70,7 @@ public class formMenu extends javax.swing.JFrame {
      */
     public int userID;
     public int role_id;
-
+    
     public formMenu() {
         initComponents();
         settingInternalFrame(userFrame.getUI());
@@ -86,7 +87,7 @@ public class formMenu extends javax.swing.JFrame {
         settingInternalFrame(roleFrame.getUI());
         settingInternalFrame(rolesEditFrame.getUI());
     }
-
+    
     void settingInternalFrame(InternalFrameUI ui) {
         if (ui instanceof BasicInternalFrameUI) {
             BasicInternalFrameUI bui = (BasicInternalFrameUI) ui;
@@ -134,6 +135,22 @@ public class formMenu extends javax.swing.JFrame {
         tpopProducts3.setVisible(false);
         tpopProducts4 = new javax.swing.JMenuItem();
         tpopProducts5 = new javax.swing.JMenuItem();
+        popYear = new javax.swing.JPopupMenu();
+        popMonths = new javax.swing.JPopupMenu();
+        itemMonth = new javax.swing.JMenuItem();
+        itemMonth1 = new javax.swing.JMenuItem();
+        itemMonth2 = new javax.swing.JMenuItem();
+        itemMonth3 = new javax.swing.JMenuItem();
+        itemMonth4 = new javax.swing.JMenuItem();
+        itemMonth5 = new javax.swing.JMenuItem();
+        itemMonth6 = new javax.swing.JMenuItem();
+        itemMonth7 = new javax.swing.JMenuItem();
+        itemMonth8 = new javax.swing.JMenuItem();
+        itemMonth9 = new javax.swing.JMenuItem();
+        itemMonth10 = new javax.swing.JMenuItem();
+        itemMonth11 = new javax.swing.JMenuItem();
+        itemMonth12 = new javax.swing.JMenuItem();
+        popMenuProject = new javax.swing.JPopupMenu();
         panelMenu1 = new panelLayout.panelMenu();
         jButton4x = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -704,8 +721,7 @@ public class formMenu extends javax.swing.JFrame {
         userFrame.getContentPane().setBackground(Color.WHITE);
         jLabel33 = new javax.swing.JLabel();
         countTransactions = new javax.swing.JLabel();
-        searchProduct2 = new javax.swing.JTextField();
-        jLabel34 = new javax.swing.JLabel();
+        searchTransaction = new javax.swing.JTextField();
         scrolltbAccounts1 = new javax.swing.JScrollPane();
         final String columnTransactions[] = {"id","NO.", "DATE", "TRANSACTIONS", "VALUE"," "};
         tmTabelTransactions = new javax.swing.table.AbstractTableModel() {
@@ -779,18 +795,48 @@ public class formMenu extends javax.swing.JFrame {
         lbPageCountTransactions = new javax.swing.JLabel();
         btNextTransactions = new javax.swing.JButton();
         btLastTransactions = new javax.swing.JButton();
-        cbYearFilter = new javax.swing.JComboBox();
+        btAddTransaction = new javax.swing.JButton();
+        cbYearFilter = new javax.swing.JButton();
         Date dt = new Date();
         SimpleDateFormat sdfY = new SimpleDateFormat("YYYY");
         int year1 = Integer.valueOf(sdfY.format(dt));
         int i =0;
-        cbYearFilter.addItem("Year");
+        menuItemPopYear= new javax.swing.JMenuItem();
+        menuItemPopYear.setPreferredSize(new java.awt.Dimension(80, 20));
+        menuItemPopYear.setBackground(new java.awt.Color(0, 0, 0));
+        menuItemPopYear.setForeground(new java.awt.Color(255, 255, 255));
+        menuItemPopYear.setText(" All Years");
+        menuItemPopYear.setFont(new java.awt.Font("Dialog", 0, 12));
+        menuItemPopYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem j = (JMenuItem) evt.getSource();
+                cbYearFilter.setText(j.getText());
+                viewTransactions();
+            }
+        });
+        popYear.add(menuItemPopYear);
         for (i=0;i<=10;i++) {
-            cbYearFilter.addItem((year1-i));
+            menuItemPopYear= new javax.swing.JMenuItem();
+            menuItemPopYear.setBackground(new java.awt.Color(0, 0, 0));
+            menuItemPopYear.setPreferredSize(new java.awt.Dimension(80, 20));
+            menuItemPopYear.setForeground(new java.awt.Color(255, 255, 255));
+            menuItemPopYear.setText(" "+String.valueOf(year1-i));
+            menuItemPopYear.setFont(new java.awt.Font("Dialog", 0, 12));
+            menuItemPopYear.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    JMenuItem j = (JMenuItem) evt.getSource();
+                    cbYearFilter.setText(j.getText());
+                    viewTransactions();
+                }
+            });
+            popYear.add(menuItemPopYear);
         }
-        cbProjectFilter = new javax.swing.JComboBox();
-        cbMonthFilter = new javax.swing.JComboBox();
-        btAddTransaction = new javax.swing.JButton();
+        cbYearFilter1 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cbMonthFilter = new javax.swing.JButton();
+        cbMonthFilter1 = new javax.swing.JButton();
+        cbProjectFilter = new javax.swing.JButton();
+        cbProjectFilter1 = new javax.swing.JButton();
         transactionEditFrame = new javax.swing.JInternalFrame();
         lbAddTransaction = new javax.swing.JLabel();
         txTransactionID = new javax.swing.JTextField();
@@ -861,14 +907,13 @@ public class formMenu extends javax.swing.JFrame {
         jLabel69 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
         tbPeopleinProject1 = new javax.swing.JTable(tmTabelPeopleInProject);
-        tbPeopleinProject1.setAutoResizeMode(tbPeopleinProject.AUTO_RESIZE_OFF);
+        tbPeopleinProject1.setAutoResizeMode(tbPeopleinProject1.AUTO_RESIZE_OFF);
         tc=tbPeopleinProject1.getColumn("id");
         tc.setMinWidth(0);
         tc.setWidth(0);
         tc.setMaxWidth(0);
         tc=tbPeopleinProject1.getColumn("peopleName");
         tc.setMinWidth(270);
-        tc.setCellRenderer(new lbRenderPeople());
         tc=tbPeopleinProject1.getColumn("ACTION");
         tc.setMinWidth(0);
         tc.setWidth(0);
@@ -1267,7 +1312,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     menuPop.add(jMenuItem3);
 
-    ProductPopMenu.setBackground(new java.awt.Color(0, 0, 0));
+    ProductPopMenu.setBackground(new java.awt.Color(19, 23, 32));
     ProductPopMenu.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     ProductPopMenu.setForeground(new java.awt.Color(255, 255, 255));
     ProductPopMenu.setBorder(null);
@@ -1279,9 +1324,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
 
-    jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
+    jMenuItem4.setBackground(new java.awt.Color(19, 23, 32));
     jMenuItem4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jMenuItem4.setForeground(new java.awt.Color(0, 0, 0));
+    jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
     jMenuItem4.setText("Delete");
     jMenuItem4.setBorder(null);
     jMenuItem4.setBorderPainted(false);
@@ -1294,7 +1339,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     ProductPopMenu.add(jMenuItem4);
 
-    transactionsPopUp.setBackground(new java.awt.Color(0, 0, 0));
+    transactionsPopUp.setBackground(new java.awt.Color(19, 23, 32));
+    transactionsPopUp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     transactionsPopUp.setForeground(new java.awt.Color(255, 255, 255));
     transactionsPopUp.setBorder(null);
     transactionsPopUp.setBorderPainted(false);
@@ -1305,9 +1351,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
 
-    jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
+    jMenuItem5.setBackground(new java.awt.Color(19, 23, 32));
     jMenuItem5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    jMenuItem5.setForeground(new java.awt.Color(0, 0, 0));
+    jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
     jMenuItem5.setText("Delete");
     jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1316,13 +1362,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     transactionsPopUp.add(jMenuItem5);
 
-    popFilterUser.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterUser.setBackground(new java.awt.Color(19, 23, 32));
     popFilterUser.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     popFilterUser.setForeground(new java.awt.Color(255, 255, 255));
     popFilterUser.setOpaque(false);
     popFilterUser.setPreferredSize(new java.awt.Dimension(160, 100));
 
     itMenuNAmeUSEr0.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr0.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     itMenuNAmeUSEr0.setForeground(new java.awt.Color(255, 255, 255));
     itMenuNAmeUSEr0.setText(" Filter");
     itMenuNAmeUSEr0.addActionListener(new java.awt.event.ActionListener() {
@@ -1333,6 +1380,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterUser.add(itMenuNAmeUSEr0);
 
     itMenuNAmeUSEr.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     itMenuNAmeUSEr.setForeground(new java.awt.Color(255, 255, 255));
     itMenuNAmeUSEr.setText(" NAME");
     itMenuNAmeUSEr.addActionListener(new java.awt.event.ActionListener() {
@@ -1343,6 +1391,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterUser.add(itMenuNAmeUSEr);
 
     itMenuNAmeUSEr1.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     itMenuNAmeUSEr1.setForeground(new java.awt.Color(255, 255, 255));
     itMenuNAmeUSEr1.setText(" ROLE");
     itMenuNAmeUSEr1.addActionListener(new java.awt.event.ActionListener() {
@@ -1353,6 +1402,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterUser.add(itMenuNAmeUSEr1);
 
     itMenuNAmeUSEr2.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     itMenuNAmeUSEr2.setForeground(new java.awt.Color(255, 255, 255));
     itMenuNAmeUSEr2.setText(" EMAIL");
     itMenuNAmeUSEr2.addActionListener(new java.awt.event.ActionListener() {
@@ -1363,6 +1413,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterUser.add(itMenuNAmeUSEr2);
 
     itMenuNAmeUSEr3.setBackground(new java.awt.Color(19, 23, 32));
+    itMenuNAmeUSEr3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     itMenuNAmeUSEr3.setForeground(new java.awt.Color(255, 255, 255));
     itMenuNAmeUSEr3.setText(" COMPANY NAME");
     itMenuNAmeUSEr3.addActionListener(new java.awt.event.ActionListener() {
@@ -1372,13 +1423,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     popFilterUser.add(itMenuNAmeUSEr3);
 
-    popFilterRoles.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterRoles.setBackground(new java.awt.Color(19, 23, 32));
     popFilterRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     popFilterRoles.setForeground(new java.awt.Color(255, 255, 255));
     popFilterRoles.setOpaque(false);
     popFilterRoles.setPreferredSize(new java.awt.Dimension(120, 62));
 
     tpopRoles.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopRoles.setForeground(new java.awt.Color(255, 255, 255));
     tpopRoles.setText(" Filter");
     tpopRoles.addActionListener(new java.awt.event.ActionListener() {
@@ -1389,6 +1441,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterRoles.add(tpopRoles);
 
     tpopRoles1.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopRoles1.setForeground(new java.awt.Color(255, 255, 255));
     tpopRoles1.setText(" ROLE NAME");
     tpopRoles1.addActionListener(new java.awt.event.ActionListener() {
@@ -1399,6 +1452,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterRoles.add(tpopRoles1);
 
     tpopRoles2.setBackground(new java.awt.Color(19, 23, 32));
+    tpopRoles2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopRoles2.setForeground(new java.awt.Color(255, 255, 255));
     tpopRoles2.setText(" DESCRIPTION");
     tpopRoles2.addActionListener(new java.awt.event.ActionListener() {
@@ -1408,13 +1462,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     popFilterRoles.add(tpopRoles2);
 
-    popFilterProducts.setBackground(new java.awt.Color(0, 0, 0));
+    popFilterProducts.setBackground(new java.awt.Color(19, 23, 32));
     popFilterProducts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     popFilterProducts.setForeground(new java.awt.Color(255, 255, 255));
     popFilterProducts.setOpaque(false);
     popFilterProducts.setPreferredSize(new java.awt.Dimension(160, 120));
 
     tpopProducts.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts.setText(" Filter");
     tpopProducts.addActionListener(new java.awt.event.ActionListener() {
@@ -1425,6 +1480,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterProducts.add(tpopProducts);
 
     tpopProducts1.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts1.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts1.setText(" PRODUCT NAME");
     tpopProducts1.addActionListener(new java.awt.event.ActionListener() {
@@ -1435,6 +1491,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterProducts.add(tpopProducts1);
 
     tpopProducts2.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts2.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts2.setText(" S K U");
     tpopProducts2.addActionListener(new java.awt.event.ActionListener() {
@@ -1445,6 +1502,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterProducts.add(tpopProducts2);
 
     tpopProducts3.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts3.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts3.setText(" PRICE");
     tpopProducts3.addActionListener(new java.awt.event.ActionListener() {
@@ -1455,6 +1513,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterProducts.add(tpopProducts3);
 
     tpopProducts4.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts4.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts4.setText(" IN STOCK");
     tpopProducts4.addActionListener(new java.awt.event.ActionListener() {
@@ -1465,6 +1524,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     popFilterProducts.add(tpopProducts4);
 
     tpopProducts5.setBackground(new java.awt.Color(19, 23, 32));
+    tpopProducts5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     tpopProducts5.setForeground(new java.awt.Color(255, 255, 255));
     tpopProducts5.setText(" STOCK DATE");
     tpopProducts5.addActionListener(new java.awt.event.ActionListener() {
@@ -1473,6 +1533,162 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     popFilterProducts.add(tpopProducts5);
+
+    popYear.setBackground(new java.awt.Color(19, 23, 32));
+    popYear.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popYear.setForeground(new java.awt.Color(255, 255, 255));
+
+    popMonths.setBackground(new java.awt.Color(19, 23, 32));
+    popMonths.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popMonths.setForeground(new java.awt.Color(255, 255, 255));
+    popMonths.setPreferredSize(new java.awt.Dimension(140, 252));
+
+    itemMonth.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth.setText(" All Months");
+    itemMonth.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonthActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth);
+
+    itemMonth1.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth1.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth1.setText(" January");
+    itemMonth1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth1ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth1);
+
+    itemMonth2.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth2.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth2.setText(" February");
+    itemMonth2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth2ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth2);
+
+    itemMonth3.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth3.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth3.setText(" March");
+    itemMonth3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth3ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth3);
+
+    itemMonth4.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth4.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth4.setText(" April");
+    itemMonth4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth4ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth4);
+
+    itemMonth5.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth5.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth5.setText(" May");
+    itemMonth5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth5ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth5);
+
+    itemMonth6.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth6.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth6.setText(" June");
+    itemMonth6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth6ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth6);
+
+    itemMonth7.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth7.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth7.setText(" July");
+    itemMonth7.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth7ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth7);
+
+    itemMonth8.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth8.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth8.setText(" August");
+    itemMonth8.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth8ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth8);
+
+    itemMonth9.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth9.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth9.setText(" September");
+    itemMonth9.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth9ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth9);
+
+    itemMonth10.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth10.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth10.setText(" October");
+    itemMonth10.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth10ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth10);
+
+    itemMonth11.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth11.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth11.setText(" November");
+    itemMonth11.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth11ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth11);
+
+    itemMonth12.setBackground(new java.awt.Color(19, 23, 32));
+    itemMonth12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    itemMonth12.setForeground(new java.awt.Color(255, 255, 255));
+    itemMonth12.setText(" December");
+    itemMonth12.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            itemMonth12ActionPerformed(evt);
+        }
+    });
+    popMonths.add(itemMonth12);
+
+    popMenuProject.setBackground(new java.awt.Color(19, 23, 32));
+    popMenuProject.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    popMenuProject.setForeground(new java.awt.Color(255, 255, 255));
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Project mangement & inventory");
@@ -2308,7 +2524,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productsFrame.getContentPane().add(jLabel116);
     jLabel116.setBounds(684, 80, 160, 50);
 
-    filterProduct.setBackground(new java.awt.Color(19, 23, 32));
+    filterProduct.setBackground(new java.awt.Color(0, 0, 0));
     filterProduct.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     filterProduct.setForeground(new java.awt.Color(255, 255, 255));
     filterProduct.setText(" Filter");
@@ -2325,7 +2541,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     productsFrame.getContentPane().add(filterProduct);
     filterProduct.setBounds(520, 90, 140, 30);
 
-    filterProduct1.setBackground(new java.awt.Color(19, 23, 32));
+    filterProduct1.setBackground(new java.awt.Color(0, 0, 0));
     filterProduct1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     filterProduct1.setForeground(new java.awt.Color(255, 255, 255));
     filterProduct1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
@@ -3278,26 +3494,25 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionsFrame.getContentPane().add(countTransactions);
     countTransactions.setBounds(10, 50, 180, 20);
 
-    searchProduct2.setText("Search");
-    searchProduct2.addFocusListener(new java.awt.event.FocusAdapter() {
+    searchTransaction.setForeground(new java.awt.Color(204, 204, 204));
+    searchTransaction.setText("Search");
+    searchTransaction.setBorder(null);
+    searchTransaction.setOpaque(false);
+    searchTransaction.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusGained(java.awt.event.FocusEvent evt) {
-            searchProduct2FocusGained(evt);
+            searchTransactionFocusGained(evt);
         }
         public void focusLost(java.awt.event.FocusEvent evt) {
-            searchProduct2FocusLost(evt);
+            searchTransactionFocusLost(evt);
         }
     });
-    searchProduct2.addKeyListener(new java.awt.event.KeyAdapter() {
+    searchTransaction.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
-            searchProduct2KeyReleased(evt);
+            searchTransactionKeyReleased(evt);
         }
     });
-    transactionsFrame.getContentPane().add(searchProduct2);
-    searchProduct2.setBounds(700, 90, 140, 30);
-
-    jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchIcon.png"))); // NOI18N
-    transactionsFrame.getContentPane().add(jLabel34);
-    jLabel34.setBounds(680, 90, 30, 30);
+    transactionsFrame.getContentPane().add(searchTransaction);
+    searchTransaction.setBounds(720, 90, 120, 30);
 
     scrolltbAccounts1.setBackground(new java.awt.Color(255, 255, 255));
     scrolltbAccounts1.setBorder(null);
@@ -3349,9 +3564,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     transactionsFrame.getContentPane().add(btPreviousTransactions);
     btPreviousTransactions.setBounds(80, 620, 60, 30);
 
+    txPageTransactions.setEditable(false);
+    txPageTransactions.setBackground(new java.awt.Color(255, 255, 255));
     txPageTransactions.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
     txPageTransactions.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
     txPageTransactions.setText("0");
+    txPageTransactions.setBorder(null);
     txPageTransactions.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusLost(java.awt.event.FocusEvent evt) {
             txPageTransactionsFocusLost(evt);
@@ -3363,12 +3581,12 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     transactionsFrame.getContentPane().add(txPageTransactions);
-    txPageTransactions.setBounds(150, 620, 60, 30);
+    txPageTransactions.setBounds(140, 620, 40, 30);
 
     lbPageCountTransactions.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
     lbPageCountTransactions.setText("of 10000");
     transactionsFrame.getContentPane().add(lbPageCountTransactions);
-    lbPageCountTransactions.setBounds(220, 620, 70, 30);
+    lbPageCountTransactions.setBounds(182, 620, 60, 30);
 
     btNextTransactions.setBackground(new java.awt.Color(0, 0, 0));
     btNextTransactions.setForeground(new java.awt.Color(255, 255, 255));
@@ -3383,7 +3601,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     transactionsFrame.getContentPane().add(btNextTransactions);
-    btNextTransactions.setBounds(300, 620, 60, 30);
+    btNextTransactions.setBounds(240, 620, 60, 30);
 
     btLastTransactions.setBackground(new java.awt.Color(0, 0, 0));
     btLastTransactions.setForeground(new java.awt.Color(255, 255, 255));
@@ -3398,41 +3616,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
     });
     transactionsFrame.getContentPane().add(btLastTransactions);
-    btLastTransactions.setBounds(370, 620, 60, 30);
-
-    cbYearFilter.setBackground(new java.awt.Color(0, 0, 0));
-    cbYearFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    cbYearFilter.setForeground(new java.awt.Color(255, 255, 255));
-    cbYearFilter.addItemListener(new java.awt.event.ItemListener() {
-        public void itemStateChanged(java.awt.event.ItemEvent evt) {
-            cbYearFilterItemStateChanged(evt);
-        }
-    });
-    transactionsFrame.getContentPane().add(cbYearFilter);
-    cbYearFilter.setBounds(430, 90, 90, 30);
-
-    cbProjectFilter.setBackground(new java.awt.Color(0, 0, 0));
-    cbProjectFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    cbProjectFilter.setForeground(new java.awt.Color(255, 255, 255));
-    cbProjectFilter.addItemListener(new java.awt.event.ItemListener() {
-        public void itemStateChanged(java.awt.event.ItemEvent evt) {
-            cbProjectFilterItemStateChanged(evt);
-        }
-    });
-    transactionsFrame.getContentPane().add(cbProjectFilter);
-    cbProjectFilter.setBounds(10, 90, 240, 30);
-
-    cbMonthFilter.setBackground(new java.awt.Color(0, 0, 0));
-    cbMonthFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-    cbMonthFilter.setForeground(new java.awt.Color(255, 255, 255));
-    cbMonthFilter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-    cbMonthFilter.addItemListener(new java.awt.event.ItemListener() {
-        public void itemStateChanged(java.awt.event.ItemEvent evt) {
-            cbMonthFilterItemStateChanged(evt);
-        }
-    });
-    transactionsFrame.getContentPane().add(cbMonthFilter);
-    cbMonthFilter.setBounds(260, 90, 160, 30);
+    btLastTransactions.setBounds(310, 620, 60, 30);
 
     btAddTransaction.setBackground(new java.awt.Color(0, 0, 0));
     btAddTransaction.setForeground(new java.awt.Color(255, 255, 255));
@@ -3448,6 +3632,115 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
     });
     transactionsFrame.getContentPane().add(btAddTransaction);
     btAddTransaction.setBounds(700, 20, 140, 30);
+
+    cbYearFilter.setBackground(new java.awt.Color(19, 23, 32));
+    cbYearFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbYearFilter.setForeground(new java.awt.Color(255, 255, 255));
+    cbYearFilter.setText(" All Years");
+    cbYearFilter.setBorder(null);
+    cbYearFilter.setBorderPainted(false);
+    cbYearFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbYearFilter.setFocusPainted(false);
+    cbYearFilter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    cbYearFilter.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbYearFilterActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbYearFilter);
+    cbYearFilter.setBounds(390, 90, 60, 30);
+
+    cbYearFilter1.setBackground(new java.awt.Color(19, 23, 32));
+    cbYearFilter1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbYearFilter1.setForeground(new java.awt.Color(255, 255, 255));
+    cbYearFilter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    cbYearFilter1.setBorder(null);
+    cbYearFilter1.setBorderPainted(false);
+    cbYearFilter1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbYearFilter1.setFocusPainted(false);
+    cbYearFilter1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    cbYearFilter1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    cbYearFilter1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbYearFilter1ActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbYearFilter1);
+    cbYearFilter1.setBounds(450, 90, 20, 30);
+
+    jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchButton.png"))); // NOI18N
+    transactionsFrame.getContentPane().add(jLabel14);
+    jLabel14.setBounds(687, 80, 157, 50);
+
+    cbMonthFilter.setBackground(new java.awt.Color(19, 23, 32));
+    cbMonthFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbMonthFilter.setForeground(new java.awt.Color(255, 255, 255));
+    cbMonthFilter.setText(" All Months");
+    cbMonthFilter.setBorder(null);
+    cbMonthFilter.setBorderPainted(false);
+    cbMonthFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbMonthFilter.setFocusPainted(false);
+    cbMonthFilter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    cbMonthFilter.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbMonthFilterActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbMonthFilter);
+    cbMonthFilter.setBounds(260, 90, 100, 30);
+
+    cbMonthFilter1.setBackground(new java.awt.Color(19, 23, 32));
+    cbMonthFilter1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbMonthFilter1.setForeground(new java.awt.Color(255, 255, 255));
+    cbMonthFilter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    cbMonthFilter1.setBorder(null);
+    cbMonthFilter1.setBorderPainted(false);
+    cbMonthFilter1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbMonthFilter1.setFocusPainted(false);
+    cbMonthFilter1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    cbMonthFilter1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    cbMonthFilter1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbMonthFilter1ActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbMonthFilter1);
+    cbMonthFilter1.setBounds(360, 90, 20, 30);
+
+    cbProjectFilter.setBackground(new java.awt.Color(19, 23, 32));
+    cbProjectFilter.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbProjectFilter.setForeground(new java.awt.Color(255, 255, 255));
+    cbProjectFilter.setText(" All Projects");
+    cbProjectFilter.setBorder(null);
+    cbProjectFilter.setBorderPainted(false);
+    cbProjectFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbProjectFilter.setFocusPainted(false);
+    cbProjectFilter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    cbProjectFilter.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbProjectFilterActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbProjectFilter);
+    cbProjectFilter.setBounds(10, 90, 220, 30);
+
+    cbProjectFilter1.setBackground(new java.awt.Color(19, 23, 32));
+    cbProjectFilter1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+    cbProjectFilter1.setForeground(new java.awt.Color(255, 255, 255));
+    cbProjectFilter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bottomArrow.png"))); // NOI18N
+    cbProjectFilter1.setBorder(null);
+    cbProjectFilter1.setBorderPainted(false);
+    cbProjectFilter1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    cbProjectFilter1.setFocusPainted(false);
+    cbProjectFilter1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    cbProjectFilter1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    cbProjectFilter1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cbProjectFilter1ActionPerformed(evt);
+        }
+    });
+    transactionsFrame.getContentPane().add(cbProjectFilter1);
+    cbProjectFilter1.setBounds(230, 90, 20, 30);
 
     transactionsFrame.setBounds(0, 0, 860, 720);
     jDesktopPane1.add(transactionsFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -4482,14 +4775,14 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         prepareForUserButtonTAB();
         userFrame.setVisible(true);
         viewUser();
         btLeftUSerMouseEntered(null);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     void prepareForUserButtonTAB() {
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -4499,7 +4792,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         btLeftRoles.setVisible(true);
         btLeftRoles.setText("ROLES");
     }
-
+    
     void prePAreforFinanceTABButton() {
         closeAllInternalFrame();
         disableALlButtonHeader();
@@ -4509,7 +4802,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         btLeftRoles.setVisible(true);
         btLeftRoles.setText("ACCOUNTS");
     }
-
+    
     JComboBox addItemProject(JComboBox comboChoose) {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -4531,16 +4824,58 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return comboChoose;
     }
-
+    
     void PrepareTransactionsFrame() {
-        cbProjectFilter.removeAllItems();
-        cbProjectFilter.addItem(addJcomboBoxItemWithDuplicate("PROJECT NAME", cbProjectFilter));
-        projectFilterMap.put(cbProjectFilter.getItemCount() - 1, "");
-        cbProjectFilter = addItemProject(cbProjectFilter);
+        popMenuProject.removeAll();
+        
+        menuItemPopYear = new javax.swing.JMenuItem();
+        menuItemPopYear.setPreferredSize(new java.awt.Dimension(240, 20));
+        menuItemPopYear.setBackground(new java.awt.Color(0, 0, 0));
+        menuItemPopYear.setForeground(new java.awt.Color(255, 255, 255));
+        menuItemPopYear.setText(" All Projects");
+        menuItemPopYear.setFont(new java.awt.Font("Dialog", 0, 12));
+        menuItemPopYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem j = (JMenuItem) evt.getSource();
+                cbProjectFilter.setText(j.getText());
+                viewTransactions();
+            }
+        });
+        popMenuProject.add(menuItemPopYear);
+        
+        common.functionCommon fc = new common.functionCommon();
+        try {
+            String qry = "select title from projects group by title order by title";
+            Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(qry);
+            while (rs.next()) {
+                menuItemPopYear = new javax.swing.JMenuItem();
+                menuItemPopYear.setPreferredSize(new java.awt.Dimension(240, 20));
+                menuItemPopYear.setBackground(new java.awt.Color(0, 0, 0));
+                menuItemPopYear.setForeground(new java.awt.Color(255, 255, 255));
+                menuItemPopYear.setText(" "+rs.getString("title"));
+                menuItemPopYear.setFont(new java.awt.Font("Dialog", 0, 12));
+                menuItemPopYear.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        JMenuItem j = (JMenuItem) evt.getSource();
+                        cbProjectFilter.setText(j.getText());
+                        viewTransactions();
+                    }
+                });
+                popMenuProject.add(menuItemPopYear);
+            }
+            rs.close();
+            st.close();
+            cn.close();
+        } catch (Exception ex) {
+            if (fc.isDebugging) {
+                System.out.println(" error in PrepareTransactionsFrame " + ex.getMessage());
+            }
+        }
         viewTransactions();
-
     }
-
+    
     private void btLeftUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftUSerActionPerformed
         disableButtonLeft();
         if (btLeftUSer.getText().equalsIgnoreCase("USERS")) {
@@ -4554,9 +4889,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         btLeftUSerMouseEntered(null);
     }//GEN-LAST:event_btLeftUSerActionPerformed
-
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        
         closeAllInternalFrame();
         disableALlButtonHeader();
         jButton3MouseEntered(null);
@@ -4564,7 +4899,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         viewProjects();
         jButton4x.setOpaque(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     void clearAddUSerFrame() {
         txInUserName.setEditable(true);
         txuserID.setText("");
@@ -4579,7 +4914,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         companyName.setText("");
         cbRoles.setSelectedItem("Team");
     }
-
+    
     int getIdROlesFromNAme(String str) {
         int getBack = 100;
         common.functionCommon fc = new common.functionCommon();
@@ -4601,7 +4936,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         return getBack;
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        closeAllInternalFrame();
+        
         btLeftUSer.setVisible(true);
         btLeftRoles.setVisible(true);
         userEditFrame.setVisible(true);
@@ -4634,11 +4969,11 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         // end add roles options
         clearAddUSerFrame();
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         clearAddUSerFrame();
     }//GEN-LAST:event_jButton7ActionPerformed
-
+    
     boolean isEmailExistonEdit(String mail, String userID) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -4661,7 +4996,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     boolean isEmailExist(String mail) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -4684,7 +5019,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     boolean isUserNameExist(String str) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -4707,7 +5042,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String qry = "";
         boolean canAccess = true;
@@ -4737,20 +5072,20 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
             if (txEmail.getText().length() > 0 && canAccess) {
-
+                
                 if (!fc.isValidEmailAddress(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                     javax.swing.JOptionPane.showConfirmDialog(null, "Email not valid", "Information",
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
-
+                
                 if (isEmailExist(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                 }
             }
-
+            
             if (txInUserName.getText().length() > 0 && canAccess) {
                 if (isUserNameExist(txInUserName.getText())) {
                     txInUserName.requestFocus();
@@ -4758,8 +5093,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             }
             if (canAccess) {
-
-
+                
+                
                 String EnkripPAssword = fc.MD5(pass1);
                 try {
                     if (txuserID.getText().length() < 1) {
@@ -4776,16 +5111,16 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                                 + "," + getIdROlesFromNAme(cbRoles.getSelectedItem().toString()) + ""
                                 + ",now(),now());";
                     }
-
+                    
                     if (fc.isDebugging) {
                         System.out.println(" qry = " + qry);
                     }
                     Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                     Statement st = cn.createStatement();
                     st.executeUpdate(qry);
-
-
-
+                    
+                    
+                    
                     st.close();
                     cn.close();
                 } catch (Exception ex) {
@@ -4818,7 +5153,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
             }
-
+            
             if (txEmail.getText().length() > 0 && canAccess) {
                 if (!fc.isValidEmailAddress(txEmail.getText()) && canAccess) {
                     txEmail.requestFocus();
@@ -4826,13 +5161,13 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     javax.swing.JOptionPane.showConfirmDialog(null, "Email not valid", "Information",
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
-
+                
                 if (isEmailExistonEdit(txEmail.getText(), txuserID.getText()) && canAccess) {
                     txEmail.requestFocus();
                     canAccess = false;
                 }
             }
-
+            
             if (canAccess) {
                 try {
                     qry = "update user set email='" + txEmail.getText() + "',"
@@ -4860,91 +5195,91 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             }
         }
-
+        
         if (canAccess) {
             javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
             prepareForUserButtonTAB();
-        userFrame.setVisible(true);
-        viewUser();
-        btLeftUSerMouseEntered(null);
+            userFrame.setVisible(true);
+            viewUser();
+            btLeftUSerMouseEntered(null);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
-
+    
     private void txFirstNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txFirstNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txLAstNAme.requestFocus();
         }
     }//GEN-LAST:event_txFirstNameKeyReleased
-
+    
     private void txLAstNAmeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txLAstNAmeKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             cbRoles.requestFocus();
         }
     }//GEN-LAST:event_txLAstNAmeKeyReleased
-
+    
     private void cbRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbRolesKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txEmail.requestFocus();
         }
     }//GEN-LAST:event_cbRolesKeyReleased
-
+    
     private void phoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             address.requestFocus();
         }
     }//GEN-LAST:event_phoneKeyReleased
-
+    
     private void addressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             companyName.requestFocus();
         }
     }//GEN-LAST:event_addressKeyReleased
-
+    
     private void txInUserNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txInUserNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txPAss1.requestFocus();
         }
     }//GEN-LAST:event_txInUserNameKeyReleased
-
+    
     private void txPAss1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPAss1KeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txPAss2.requestFocus();
         }
     }//GEN-LAST:event_txPAss1KeyReleased
-
+    
     private void txPAss2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPAss2KeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txFirstName.requestFocus();
         }
     }//GEN-LAST:event_txPAss2KeyReleased
-
+    
     private void txEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txEmailKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             phone.requestFocus();
         }
     }//GEN-LAST:event_txEmailKeyReleased
-
+    
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
         txPage.setText(String.valueOf(Integer.valueOf(txPage.getText()) + 1));
         viewUser();
     }//GEN-LAST:event_btNextActionPerformed
-
+    
     private void btPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousActionPerformed
         txPage.setText(String.valueOf(Integer.valueOf(txPage.getText()) - 1));
         viewUser();
     }//GEN-LAST:event_btPreviousActionPerformed
-
+    
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
         txPage.setText("1");
         viewUser();
     }//GEN-LAST:event_btFirstActionPerformed
-
+    
     private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
         txPage.setText(String.valueOf(lastPageUSer));
         viewUser();
     }//GEN-LAST:event_btLastActionPerformed
-
+    
     private void txPageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPage.getText().length() > 0) {
@@ -4958,7 +5293,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             viewUser();
         }
     }//GEN-LAST:event_txPageKeyReleased
-
+    
     public void deletePeopleInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this People?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -4991,7 +5326,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public void deleteProductInProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this products?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -5024,7 +5359,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public void deleteAccounts(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -5056,7 +5391,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public void dropDataProject(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Project?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -5084,7 +5419,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 st.executeUpdate(qry);
                 qry = "delete from projects where id in (" + projectIDLISt + ");";
                 st.executeUpdate(qry);
-
+                
                 st.close();
                 cn.close();
                 viewProjects();
@@ -5095,7 +5430,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public void dropDataProduct(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Inventory?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -5120,7 +5455,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 qry = "delete from inventories where item_id in "
                         + "(select id from items where id in (" + itemIDLISt + "))";
                 st.executeUpdate(qry);
-
+                
                 qry = "delete from items where id in (" + itemIDLISt + ");";
                 st.executeUpdate(qry);
                 st.close();
@@ -5164,7 +5499,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public boolean OnlySuperAdminCandeleteAdmin(int roleSelected, JTable table) {
         boolean getBack = true;
         common.functionCommon fc = new common.functionCommon();
@@ -5198,7 +5533,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     public void dropDataUSer(JTable table) {
         if (OnlySuperAdminCandeleteAdmin(role_id, table)) {
             if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this user?", "Question",
@@ -5232,7 +5567,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }
-
+    
     public void prepareEditUSer(String userEditted) {
         txFirstName.requestFocus();
         jButton6ActionPerformed(null);
@@ -5267,7 +5602,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         txInUserName.setEditable(false);
     }
-
+    
     public void previewPrint() {
         jLabel87.setText("");
         jLabel68.setText("");
@@ -5281,7 +5616,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         tbProductInProjects1.removeAll();
         tbPeopleinProject1.removeAll();
         tbTransactionOfProject.removeAll();
-
+        
         lbTotal3.setText("0");
         lbTotal4.setText("0");
         lbTotal5.setText("0");
@@ -5290,8 +5625,9 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         lbTotal2.setText("0");
         lbTotal9.setText("0");
         lbGrandTotal1.setText("0");
+        common.functionCommon fc = new common.functionCommon();
         try {
-            common.functionCommon fc = new common.functionCommon();
+            
             String qry = "select a.title,a.description,a.location"
                     + ",b.first_name as first_nameleader,b.last_name as last_nameleader"
                     + ",c.first_name as first_nameclient,c.last_name as last_nameclient"
@@ -5314,7 +5650,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 jLabel93.setText(fc.getStatusProject(rs.getInt("status")));
                 jLabel61.setText(rs.getString("location"));
             }
-
+            
             qry = "select valueData "
                     + "from project_metas "
                     + "where keyData='progress' and project_id=" + txProjectid.getText();
@@ -5344,7 +5680,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             tbProductInProjects1.tableChanged(new javax.swing.event.TableModelEvent(tmTableProductsInProject));
             //end view items in project 
 
-            qry = "select a.user_id,b.first_name,b.last_name "
+            qry = "select a.id,a.user_id,b.first_name,b.last_name "
                     + " from assignments a "
                     + " left join user b on a.user_id=b.id "
                     + " where a.project_id = " + txProjectid.getText();
@@ -5353,44 +5689,44 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             vectorPeopleInProject = new java.util.Vector();
             while (rs.next()) {
                 rowData = new java.util.Vector();
-                rowData.addElement("");
-                rowData.addElement(" " + rs.getString("first_name")
+                rowData.addElement(rs.getInt("user_id"));
+                rowData.addElement( rs.getString("first_name")
                         + " " + rs.getString("last_name")
-                        + " - Programmer");
+                        + " - Programmer1");
                 rowData.addElement("");
                 vectorPeopleInProject.addElement(rowData);
             }
             tbPeopleinProject1.tableChanged(new javax.swing.event.TableModelEvent(tmTabelPeopleInProject));
-
-
+            
+            
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 0";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal3.setText(fc.digitNumber(rs.getString("value")));
             }
-
+            
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 1";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal4.setText(fc.digitNumber(rs.getString("value")));
             }
-
+            
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 2";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal5.setText(fc.digitNumber(rs.getString("value")));
             }
-
+            
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 3";
             rs = st.executeQuery(qry);
             if (rs.next()) {
                 lbTotal6.setText(fc.digitNumber(rs.getString("value")));
             }
-
+            
             qry = "select value from transactions where project_id=" + txProjectid.getText() + " "
                     + " and account_id = 4";
             rs = st.executeQuery(qry);
@@ -5413,7 +5749,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             int countDiscount = total * (Integer.valueOf(txPPN.getText())) / 100;
             total -= countDiscount;
             lbGrandTotal1.setText(fc.digitNumber(String.valueOf(total)));
-
+            
             lbTotal11.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
@@ -5424,7 +5760,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             } catch (Exception ex) {
             }
-
+            
             lbTotal12.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
@@ -5435,7 +5771,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             } catch (Exception ex) {
             }
-
+            
             lbTotal13.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
@@ -5446,7 +5782,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             } catch (Exception ex) {
             }
-
+            
             lbTotal14.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
@@ -5457,7 +5793,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             } catch (Exception ex) {
             }
-
+            
             lbTotal15.setText("0");
             try {
                 qry = "select sum(a.value) from transactions a left join accounts b on a.account_id=b.id "
@@ -5468,7 +5804,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 }
             } catch (Exception ex) {
             }
-
+            
             total = 0;
             total += Integer.valueOf(lbTotal11.getText().replace(".", ""));
             total += Integer.valueOf(lbTotal12.getText().replace(".", ""));
@@ -5476,8 +5812,8 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             total += Integer.valueOf(lbTotal14.getText().replace(".", ""));
             total += Integer.valueOf(lbTotal15.getText().replace(".", ""));
             lbTotal10.setText(fc.digitNumber(String.valueOf(total)));
-
-
+            
+            
             qry = "select a.id,a.title,c.title as projecttitle,"
                     + fc.viewDatefromSQL1("a.modified_at", "modified_at") + ","
                     + "a.value,b.unique_id,b.name   "
@@ -5498,20 +5834,21 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>"
                         + rs.getString("unique_id") + " - " + rs.getString("projecttitle") + " - "
                         + rs.getString("name") + "</html>");
-
+                
                 rowData.addElement(fc.digitNumber(rs.getString("value")));
                 vectorTransactionOnProject.addElement(rowData);
             }
             tbTransactionOfProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelTransactiononProject));
-
+            
             rs.close();
             st.close();
             cn.close();
         } catch (Exception ex) {
-            System.out.println(" error previewPrint " + ex.getMessage());
+            if (fc.isDebugging)
+                System.out.println(" error previewPrint " + ex.getMessage());
         }
     }
-
+    
     public void prepareEditProjects(JTable table) {
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
@@ -5646,7 +5983,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         countGrandTotalAndTotal();
         btDelProject.setVisible(true);
     }
-
+    
     public void prepareEditProduct(JTable table) {
         jButton9ActionPerformed(null);
         jButton19.setVisible(true);
@@ -5657,7 +5994,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                 + " inner join inventories b on a.id=b.item_id "
                 + " inner join inventory_prices c on b.id=c.inventory_id "
                 + " where a.id=" + txProductsID.getText();
-
+        
         common.functionCommon fc = new common.functionCommon();
         if (fc.isDebugging) {
             System.out.println(" qry = " + qry);
@@ -5687,13 +6024,13 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             prepareEditUSer(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
         }
     }//GEN-LAST:event_tbUserMouseClicked
-
+    
     private void tbUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             dropDataUSer(tbUser);
         }
     }//GEN-LAST:event_tbUserKeyReleased
-
+    
     private void jButton4xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4xActionPerformed
         btLeftUSer.setVisible(true);
         btLeftRoles.setVisible(true);
@@ -5703,7 +6040,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         productsFrame.setVisible(true);
         viewProducts();
     }//GEN-LAST:event_jButton4xActionPerformed
-
+    
     void clearProductEditForm() {
         txItemName.setText("");
         txSKU.setText("");
@@ -5742,29 +6079,29 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
 //        }
         clearProductEditForm();
     }//GEN-LAST:event_jButton9ActionPerformed
-
+    
     private void tbProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductMouseClicked
         if (evt.getClickCount() == 2) {
             prepareEditProduct(tbProduct);
         }
     }//GEN-LAST:event_tbProductMouseClicked
-
+    
     private void tbProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             dropDataProduct(tbProduct);
         }
     }//GEN-LAST:event_tbProductKeyReleased
-
+    
     private void btFirstProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstProductActionPerformed
         txPageProduct.setText("1");
         viewProducts();
     }//GEN-LAST:event_btFirstProductActionPerformed
-
+    
     private void btPreviousProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousProductActionPerformed
         txPageProduct.setText(String.valueOf(Integer.valueOf(txPageProduct.getText()) - 1));
         viewProducts();
     }//GEN-LAST:event_btPreviousProductActionPerformed
-
+    
     private void txPageProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageProductKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageProduct.getText().length() > 0) {
@@ -5778,29 +6115,29 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             viewProducts();
         }
     }//GEN-LAST:event_txPageProductKeyReleased
-
+    
     private void btNextProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextProductActionPerformed
         txPageProduct.setText(String.valueOf(Integer.valueOf(txPageProduct.getText()) + 1));
         viewProducts();
     }//GEN-LAST:event_btNextProductActionPerformed
-
+    
     private void btLastProductLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastProductLastActionPerformed
         txPageProduct.setText(String.valueOf(lastPageProducts));
         viewProducts();
     }//GEN-LAST:event_btLastProductLastActionPerformed
-
+    
     private void txItemNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txItemNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txSKU.requestFocus();
         }
     }//GEN-LAST:event_txItemNameKeyReleased
-
+    
     private void txSKUKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSKUKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txQTY.requestFocus();
         }
     }//GEN-LAST:event_txSKUKeyReleased
-
+    
     private void txQTYKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -5817,7 +6154,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txQTYKeyReleased
-
+    
     private void txPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPriceKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -5834,7 +6171,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             }
         }
     }//GEN-LAST:event_txPriceKeyReleased
-
+    
     int getIdCategoryItemFromName(String str) {
         int getBack = 100;
         common.functionCommon fc = new common.functionCommon();
@@ -5855,7 +6192,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     boolean isRoleAlreadyExist(String str, String idTable) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -5879,7 +6216,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     boolean isItemAlreadyExist(String str, String idTable) {
         common.functionCommon fc = new common.functionCommon();
         boolean getBack = false;
@@ -5903,7 +6240,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
         }
         return getBack;
     }
-
+    
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         boolean canAccess = true;
@@ -5912,25 +6249,25 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Item", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-
+            
         } else if (txSKU.getText().length() < 1) {
             txSKU.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter SKU", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-
+            
         } else if (txQTY.getText().length() < 1 && canAccess) {
             txQTY.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Quantity", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-
+            
         } else if (txPrice.getText().length() < 1 && canAccess) {
             txPrice.requestFocus();
             canAccess = false;
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Price", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
-
+            
         }
         if (canAccess && txItemName.getText().length() > 0 && txProductsID.getText().length() < 1) {
             if (isItemAlreadyExist(txItemName.getText(), "")) {
@@ -5978,7 +6315,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.close();
                     psIdentity.close();
                     result.close();
-
+                    
                     qry = "insert into inventories (item_id"
                             + ",stock_in,stock_out"
                             + ",created_at,modified_at) values (?,0,0,now(),now())";
@@ -5992,7 +6329,7 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     psInsert.close();
                     psIdentity.close();
                     result.close();
-
+                    
                     qry = "insert into inventory_prices (inventory_id"
                             + ",price_in,price_out) values (?,?,0)";
                     psInsert = cn.prepareStatement(qry);
@@ -6014,30 +6351,32 @@ dateChooserDialog3.addSelectionChangedListener(new datechooser.events.SelectionC
                     qry = "update inventory_prices set price_in = " + priceThis + " "
                             + " where inventory_id in (select id from inventories where item_id= " + txProductsID.getText() + ")";
                     st.executeUpdate(qry);
-
+                    
                     st.close();
                 }
                 if (fc.isDebugging) {
                     System.out.println(" qry = " + qry);
                 }
-javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
-                    javax.swing.JOptionPane.PLAIN_MESSAGE);
-jButton11ActionPerformed(null);
+                javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Success",
+                        javax.swing.JOptionPane.PLAIN_MESSAGE);
+                jButton11ActionPerformed(null);
                 cn.close();
-
+                
             } catch (Exception ex) {
-                System.out.println(" error in jButton10ActionPerformed " + ex.getMessage());
+                if (fc.isDebugging) {
+                    System.out.println(" error in jButton10ActionPerformed " + ex.getMessage());
+                }
             }
             
         }
     }//GEN-LAST:event_jButton10ActionPerformed
-
+    
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         closeAllInternalFrame();
         productsFrame.setVisible(true);
         viewProducts();
     }//GEN-LAST:event_jButton11ActionPerformed
-
+    
     private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPageProduct.getText()) > 1) {
@@ -6046,38 +6385,39 @@ jButton11ActionPerformed(null);
             viewProducts();
         }
     }//GEN-LAST:event_searchProductKeyReleased
-
+    
     private void searchProductFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusGained
-        if (searchProduct.getText().equalsIgnoreCase("Search"))
+        if (searchProduct.getText().equalsIgnoreCase("Search")) {
             searchProduct.setText("");
+        }
         searchProduct.selectAll();
         searchProduct.setForeground(Color.BLACK);
     }//GEN-LAST:event_searchProductFocusGained
-
+    
     private void searchProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProductFocusLost
         if (searchProduct.getText().length() < 1) {
             searchProduct.setText("Search");
-            searchProduct.setForeground(new Color(204,204,204));
+            searchProduct.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_searchProductFocusLost
-
+    
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         jButton3ActionPerformed(null);
     }//GEN-LAST:event_jButton13ActionPerformed
-
+    
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         closeAllInternalFrame();
         projectDetailFrame.setVisible(true);
         viewProjectDetailEmpty();
     }//GEN-LAST:event_jButton14ActionPerformed
-
+    
     private void txProjectNAmeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProjectNAmeFocusGained
         if (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME")) {
             txProjectNAme.setText("");
         }
         txProjectNAme.selectAll();
     }//GEN-LAST:event_txProjectNAmeFocusGained
-
+    
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -6091,13 +6431,13 @@ jButton11ActionPerformed(null);
         }
         dateChooserDialog1.showDialog(null, true);
     }//GEN-LAST:event_jButton15ActionPerformed
-
+    
     private void dateChooserDialog1OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog1OnSelectionChange
         if (dateChooserDialog1.getSelectedDate() != null) {
             txStartProject.setText(sdf.format(dateChooserDialog1.getSelectedDate().getTime()));
         }
     }//GEN-LAST:event_dateChooserDialog1OnSelectionChange
-
+    
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -6111,22 +6451,21 @@ jButton11ActionPerformed(null);
         }
         dateChooserDialog2.showDialog(null, true);
     }//GEN-LAST:event_jButton16ActionPerformed
-
+    
     private void dateChooserDialog2OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog2OnSelectionChange
         if (dateChooserDialog2.getSelectedDate() != null) {
             txDuedate.setText(sdf.format(dateChooserDialog2.getSelectedDate().getTime()));
         }
     }//GEN-LAST:event_dateChooserDialog2OnSelectionChange
-
+    
     private void txSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSearchKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
-            if (Integer.valueOf(txPage.getText()) > 1) {
-                txPage.setText("1");
+            if (txSearch.getText().length() > 0 && !txSearch.getText().equalsIgnoreCase("Search")) {
+                viewUser();
             }
-            viewUser();
         }
     }//GEN-LAST:event_txSearchKeyReleased
-
+    
     private void txPageFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageFocusLost
         if (txPage.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -6137,7 +6476,7 @@ jButton11ActionPerformed(null);
             txPage.setText("1");
         }
     }//GEN-LAST:event_txPageFocusLost
-
+    
     private void txPageProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageProductFocusLost
         if (txPageProduct.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -6148,50 +6487,51 @@ jButton11ActionPerformed(null);
             txPageProduct.setText("1");
         }
     }//GEN-LAST:event_txPageProductFocusLost
-
+    
     private void txSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusGained
-        if (txSearch.getText().equalsIgnoreCase("Search"))
+        if (txSearch.getText().equalsIgnoreCase("Search")) {
             txSearch.setText("");
+        }
         txSearch.selectAll();
         txSearch.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSearchFocusGained
-
+    
     private void txSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchFocusLost
         if (txSearch.getText().length() < 1) {
             txSearch.setText("Search");
-            txSearch.setForeground(new Color(204,204,204));
+            txSearch.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txSearchFocusLost
-
+    
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         menuPop.show(jButton18, -80, 50);
         showMenuUser = true;
     }//GEN-LAST:event_jButton18ActionPerformed
-
+    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         POPUpMenuUsuallycommand();
         prepareEditUSer(String.valueOf(userID));
         btLeftUSer.setVisible(false);
         btLeftRoles.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         POPUpMenuUsuallycommand();
         loginForm lf = new loginForm();
         lf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         POPUpMenuUsuallycommand();
         formWindowClosing(null);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
+    
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         ProductPopMenu.show(jButton19, 0, 30);
         showMenuProduct = true;
     }//GEN-LAST:event_jButton19ActionPerformed
-
+    
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Inventory?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -6201,26 +6541,17 @@ jButton11ActionPerformed(null);
                 String qry = "";
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 Statement st = cn.createStatement();
-
+                
                 qry = "delete from inventory_prices where inventory_id in "
                         + "(select id from inventories where item_id in "
-                        + "(select id from items where id in (" + txProductsID.getText() + ")))";
-                System.out.println("qry 1 " + qry);
+                        + "(select id from items where id in (" + txProductsID.getText() + ")))";                
                 st.executeUpdate(qry);
                 qry = "delete from inventories where item_id in "
-                        + "(select id from items where id in (" + txProductsID.getText() + "))";
-                System.out.println("qry 2 " + qry);
+                        + "(select id from items where id in (" + txProductsID.getText() + "))";                
+                st.executeUpdate(qry);                
+                qry = "delete from items where id in (" + txProductsID.getText() + ");";                
                 st.executeUpdate(qry);
-
-                qry = "delete from items where id in (" + txProductsID.getText() + ");";
-                if (fc.isDebugging) {
-                    System.out.println(" qry delete inventory = " + qry);
-                }
-                st.executeUpdate(qry);
-
-
-
-
+                                
                 st.close();
                 cn.close();
                 jButton11ActionPerformed(null);
@@ -6232,13 +6563,13 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
+    
     private void txProjectNAmeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProjectNAmeFocusLost
         if (txProjectNAme.getText().length() < 1) {
             txProjectNAme.setText("PROJECT NAME");
         }
     }//GEN-LAST:event_txProjectNAmeFocusLost
-
+    
     private void lbFirstnameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseExited
         if ((showMenuUser && evt.getPoint().y < 0)
                 || (showMenuUser
@@ -6247,7 +6578,7 @@ jButton11ActionPerformed(null);
             showMenuUser = false;
         }
     }//GEN-LAST:event_lbFirstnameMouseExited
-
+    
     private void menuPopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPopMouseExited
         if ((showMenuUser && (evt.getX() < 0 || evt.getX() > 99))
                 || (showMenuUser && (evt.getY() < 0 || evt.getY() > 59))) {
@@ -6255,19 +6586,19 @@ jButton11ActionPerformed(null);
             showMenuUser = false;
         }
     }//GEN-LAST:event_menuPopMouseExited
-
+    
     private void lbFirstnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseClicked
         menuPop.show(jButton18, -80, 50);
         showMenuUser = true;
     }//GEN-LAST:event_lbFirstnameMouseClicked
-
+    
     private void jButton18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseMoved
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_jButton18MouseMoved
-
+    
     private void jButton18MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseExited
         if ((showMenuUser && evt.getY() < 0)
                 || (showMenuUser
@@ -6276,77 +6607,77 @@ jButton11ActionPerformed(null);
             showMenuUser = false;
         }
     }//GEN-LAST:event_jButton18MouseExited
-
+    
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         prePAreforFinanceTABButton();
         transactionsFrame.setVisible(true);
         btLeftUSerMouseEntered(null);
         PrepareTransactionsFrame();
     }//GEN-LAST:event_jButton12ActionPerformed
-
+    
     private void jButton4xMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseExited
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
             jButton4x.setOpaque(false);
         }
     }//GEN-LAST:event_jButton4xMouseExited
-
+    
     private void jButton4xMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4xMouseEntered
         if (!productsFrame.isVisible()
                 && !productEditFrame.isVisible()) {
             jButton4x.setOpaque(true);
         }
     }//GEN-LAST:event_jButton4xMouseEntered
-
+    
     void disableALlButtonHeader() {
         jButton4x.setOpaque(false);
         jButton12.setOpaque(false);
         jButton1.setOpaque(false);
         jButton3.setOpaque(false);
     }
-
+    
     void disableButtonLeft() {
         btLeftRoles.setOpaque(false);
         btLeftUSer.setOpaque(false);
     }
-
+    
     private void lbFirstnameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFirstnameMouseEntered
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_lbFirstnameMouseEntered
-
+    
     private void jButton18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseEntered
         if (!showMenuUser) {
             menuPop.show(jButton18, -80, 50);
             showMenuUser = true;
         }
     }//GEN-LAST:event_jButton18MouseEntered
-
+    
     private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
         lbFirstnameMouseClicked(null);
     }//GEN-LAST:event_jButton18MouseClicked
-
+    
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
         if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(true);
         }
     }//GEN-LAST:event_jButton3MouseEntered
-
+    
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
         if (!projectFrame.isVisible() && !projectDetailFrame.isVisible()) {
             jButton3.setOpaque(false);
         }
     }//GEN-LAST:event_jButton3MouseExited
-
+    
     private void jButton12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseEntered
         if (!financeFrame.isVisible()
                 && !accountsFrame.isVisible()) {
             jButton12.setOpaque(true);
         }
     }//GEN-LAST:event_jButton12MouseEntered
-
+    
     private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
         if (!transactionsFrame.isVisible()
                 && !accountsFrame.isVisible()
@@ -6354,19 +6685,19 @@ jButton11ActionPerformed(null);
             jButton12.setOpaque(false);
         }
     }//GEN-LAST:event_jButton12MouseExited
-
+    
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(true);
         }
     }//GEN-LAST:event_jButton1MouseEntered
-
+    
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
         if (!userFrame.isVisible() && !userEditFrame.isVisible()) {
             jButton1.setOpaque(false);
         }
     }//GEN-LAST:event_jButton1MouseExited
-
+    
     private void btLeftRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftRolesActionPerformed
         if (btLeftRoles.getText().equalsIgnoreCase("ACCOUNTS")) {
             prePAreforFinanceTABButton();
@@ -6382,30 +6713,30 @@ jButton11ActionPerformed(null);
             viewRoles();
         }
     }//GEN-LAST:event_btLeftRolesActionPerformed
-
+    
     private void btLeftRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseEntered
-
+        
         btLeftRoles.setOpaque(true);
     }//GEN-LAST:event_btLeftRolesMouseEntered
-
+    
     private void btLeftRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftRolesMouseExited
         if (!accountsFrame.isVisible() && !roleFrame.isVisible()) {
             btLeftRoles.setOpaque(false);
         }
     }//GEN-LAST:event_btLeftRolesMouseExited
-
+    
     private void searchProduct1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1FocusGained
-
+    
     private void searchProduct1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct1FocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1FocusLost
-
+    
     private void searchProduct1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProduct1KeyReleased
-
+    
     private void accNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (acc.getText().length() > 0 && acc.getText().length() > 0) {
@@ -6413,13 +6744,13 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_accNameKeyReleased
-
+    
     private void accKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             accName.requestFocus();
         }
     }//GEN-LAST:event_accKeyReleased
-
+    
     private boolean isACCExist(String idUnique) {
         boolean getBack = false;
         common.functionCommon fc = new common.functionCommon();
@@ -6478,52 +6809,52 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jButton20ActionPerformed
-
+    
     private void accFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusGained
         if (acc.getText().equalsIgnoreCase("ACC#")) {
             acc.setText("");
             acc.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_accFocusGained
-
+    
     private void accFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accFocusLost
         if (acc.getText().length() < 1) {
             acc.setText("ACC#");
             acc.setForeground(new java.awt.Color(204, 204, 204));
         }
     }//GEN-LAST:event_accFocusLost
-
+    
     private void accNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusGained
         if (accName.getText().equalsIgnoreCase("Account Name")) {
             accName.setText("");
             accName.setForeground(Color.BLACK);
         }
-
+        
     }//GEN-LAST:event_accNameFocusGained
-
+    
     private void accNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accNameFocusLost
         if (accName.getText().length() < 1) {
             accName.setText("Account Name");
             accName.setForeground(new java.awt.Color(204, 204, 204));
         }
     }//GEN-LAST:event_accNameFocusLost
-
+    
     private void tbAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAccountsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteAccounts(tbAccounts);
         }
     }//GEN-LAST:event_tbAccountsKeyReleased
-
+    
     private void btFirstAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstAccountsActionPerformed
         txPageAccounts.setText("1");
         viewAccounts();
     }//GEN-LAST:event_btFirstAccountsActionPerformed
-
+    
     private void btPreviousAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) - 1));
         viewAccounts();
     }//GEN-LAST:event_btPreviousAccountsActionPerformed
-
+    
     private void txPageAccountsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageAccountsFocusLost
         if (txPageAccounts.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -6534,7 +6865,7 @@ jButton11ActionPerformed(null);
             txPageAccounts.setText("1");
         }
     }//GEN-LAST:event_txPageAccountsFocusLost
-
+    
     private void txPageAccountsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageAccountsKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageAccounts.getText().length() > 0) {
@@ -6548,29 +6879,40 @@ jButton11ActionPerformed(null);
             viewAccounts();
         }
     }//GEN-LAST:event_txPageAccountsKeyReleased
-
+    
     private void btNextAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(Integer.valueOf(txPageAccounts.getText()) + 1));
         viewAccounts();
     }//GEN-LAST:event_btNextAccountsActionPerformed
-
+    
     private void btLastAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastAccountsActionPerformed
         txPageAccounts.setText(String.valueOf(lastPageAccounts));
         viewAccounts();
     }//GEN-LAST:event_btLastAccountsActionPerformed
-
-    private void searchProduct2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchProduct2FocusGained
-
-    private void searchProduct2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProduct2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchProduct2FocusLost
-
-    private void searchProduct2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProduct2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchProduct2KeyReleased
-
+    
+    private void searchTransactionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTransactionFocusGained
+        if (searchTransaction.getText().equalsIgnoreCase("Search")) {
+            searchTransaction.setText("");
+        }
+        searchTransaction.selectAll();
+        searchTransaction.setForeground(Color.BLACK);
+    }//GEN-LAST:event_searchTransactionFocusGained
+    
+    private void searchTransactionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTransactionFocusLost
+        if (searchTransaction.getText().length() < 1) {
+            searchTransaction.setText("Search");
+            searchTransaction.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_searchTransactionFocusLost
+    
+    private void searchTransactionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTransactionKeyReleased
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            if (searchTransaction.getText().length() > 0 && !searchTransaction.getText().equalsIgnoreCase("Search")) {
+                viewTransactions();
+            }
+        }
+    }//GEN-LAST:event_searchTransactionKeyReleased
+    
     public void prepareEditTransactions(JTable table) {
         common.functionCommon fc = new common.functionCommon();
         btActionTransactions.setVisible(true);
@@ -6603,13 +6945,13 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     private void tbTransactionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTransactionsMouseClicked
         if (evt.getClickCount() == 2) {
             prepareEditTransactions(tbTransactions);
         }
     }//GEN-LAST:event_tbTransactionsMouseClicked
-
+    
     public void deleteTransaction(JTable table) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -6641,7 +6983,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     public void deleteTransaction(String idTransactions) {
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Accounts?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
@@ -6651,7 +6993,7 @@ jButton11ActionPerformed(null);
                 String qry = "";
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 Statement st = cn.createStatement();
-
+                
                 qry = "delete from transactions where id in (" + idTransactions + ");";
                 if (fc.isDebugging) {
                     System.out.println(" qry delete transaction = " + qry);
@@ -6667,23 +7009,23 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     private void tbTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTransactionsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteTransaction(tbTransactions);
         }
     }//GEN-LAST:event_tbTransactionsKeyReleased
-
+    
     private void btFirstTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstTransactionsActionPerformed
         txPageTransactions.setText("1");
         viewTransactions();
     }//GEN-LAST:event_btFirstTransactionsActionPerformed
-
+    
     private void btPreviousTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousTransactionsActionPerformed
         txPageTransactions.setText(String.valueOf(Integer.valueOf(txPageTransactions.getText()) - 1));
         viewTransactions();
     }//GEN-LAST:event_btPreviousTransactionsActionPerformed
-
+    
     private void txPageTransactionsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageTransactionsFocusLost
         if (txPageTransactions.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -6694,7 +7036,7 @@ jButton11ActionPerformed(null);
             txPageTransactions.setText("1");
         }
     }//GEN-LAST:event_txPageTransactionsFocusLost
-
+    
     private void txPageTransactionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageTransactionsKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageTransactions.getText().length() > 0) {
@@ -6708,12 +7050,12 @@ jButton11ActionPerformed(null);
             viewTransactions();
         }
     }//GEN-LAST:event_txPageTransactionsKeyReleased
-
+    
     private void btNextTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextTransactionsActionPerformed
         txPageTransactions.setText(String.valueOf(Integer.valueOf(txPageTransactions.getText()) + 1));
         viewTransactions();
     }//GEN-LAST:event_btNextTransactionsActionPerformed
-
+    
     private void btLastTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastTransactionsActionPerformed
         txPageTransactions.setText(String.valueOf(lastPageTransactions));
         viewTransactions();
@@ -6739,7 +7081,7 @@ jButton11ActionPerformed(null);
             txPeralatan.requestFocus();
         }
     }//GEN-LAST:event_txMaterialKeyReleased
-
+    
     private void txPeralatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPeralatanKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPeralatan, evt);
@@ -6748,7 +7090,7 @@ jButton11ActionPerformed(null);
             txTenagaKErja.requestFocus();
         }
     }//GEN-LAST:event_txPeralatanKeyReleased
-
+    
     private void txTenagaKErjaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenagaKErjaKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txTenagaKErja, evt);
@@ -6757,7 +7099,7 @@ jButton11ActionPerformed(null);
             txOverHEadeCost.requestFocus();
         }
     }//GEN-LAST:event_txTenagaKErjaKeyReleased
-
+    
     private void txOverHEadeCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txOverHEadeCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txOverHEadeCost, evt);
@@ -6766,7 +7108,7 @@ jButton11ActionPerformed(null);
             txManagementCost.requestFocus();
         }
     }//GEN-LAST:event_txOverHEadeCostKeyReleased
-
+    
     private void txManagementCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txManagementCostKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txManagementCost, evt);
@@ -6774,7 +7116,7 @@ jButton11ActionPerformed(null);
             txPPN.requestFocus();
         }
     }//GEN-LAST:event_txManagementCostKeyReleased
-
+    
     private void txPPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPPNKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txPPN, evt);
@@ -6783,7 +7125,7 @@ jButton11ActionPerformed(null);
             txPPN.setText("100");
         }
     }//GEN-LAST:event_txPPNKeyReleased
-
+    
     private void txQTYProductsinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectKeyReleased
         common.functionCommon fc = new common.functionCommon();
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -6803,7 +7145,7 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_txQTYProductsinProjectKeyReleased
-
+    
     void refreshTablePeopleINProject() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -6832,7 +7174,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     private void refreshTableProductInProject() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -6860,7 +7202,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     void refreshcbProductsInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbProductsInProject.removeAllItems();
@@ -6887,7 +7229,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     void refreshcbPeopleInProject() {
         common.functionCommon fc = new common.functionCommon();
         cbPeopleInProject.removeAllItems();
@@ -6918,7 +7260,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean canSave = true;
         if (canSave && productMap.get(cbProductsInProject.getSelectedIndex()).toString().length() < 1) {
@@ -6940,7 +7282,7 @@ jButton11ActionPerformed(null);
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
         }
-
+        
         if (canSave) {
             common.functionCommon fc = new common.functionCommon();
             try {
@@ -6967,7 +7309,7 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         boolean canSave = true;
@@ -6999,45 +7341,45 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    
     private void projectDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusGained
         if (projectDescription.getText().equalsIgnoreCase("Description")) {
             projectDescription.setText("");
         }
         projectDescription.selectAll();
     }//GEN-LAST:event_projectDescriptionFocusGained
-
+    
     private void projectDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_projectDescriptionFocusLost
         projectDescription.setText(projectDescription.getText().replaceAll("\t", ""));
         if (projectDescription.getText().length() < 1) {
             projectDescription.setText("Description");
         }
     }//GEN-LAST:event_projectDescriptionFocusLost
-
+    
     private void txStartProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txStartProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txDuedate.requestFocus();
         }
     }//GEN-LAST:event_txStartProjectKeyReleased
-
+    
     private void txProjectNAmeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProjectNAmeKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             projectDescription.requestFocus();
         }
     }//GEN-LAST:event_txProjectNAmeKeyReleased
-
+    
     private void tbPeopleinProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPeopleinProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deletePeopleInProject(tbPeopleinProject);
         }
     }//GEN-LAST:event_tbPeopleinProjectKeyReleased
-
+    
     private void tbProductInProjectsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProductInProjectsKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             deleteProductInProject(tbProductInProjects);
         }
     }//GEN-LAST:event_tbProductInProjectsKeyReleased
-
+    
     private void jButton19MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseExited
         if ((showMenuProduct && evt.getPoint().y < 0)
                 || (showMenuProduct
@@ -7046,22 +7388,22 @@ jButton11ActionPerformed(null);
             showMenuProduct = false;
         }
     }//GEN-LAST:event_jButton19MouseExited
-
+    
     private void jButton19MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseEntered
         if (!showMenuProduct) {
             ProductPopMenu.show(jButton19, 0, 30);
             showMenuProduct = true;
         }
     }//GEN-LAST:event_jButton19MouseEntered
-
+    
     private void jButton19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseMoved
-
+        
         if (!showMenuProduct) {
             ProductPopMenu.show(jButton19, 0, 30);
             showMenuProduct = true;
         }
     }//GEN-LAST:event_jButton19MouseMoved
-
+    
     public boolean isHasItemswhenEdit(int itemID, int projectID) {
         boolean getBack = false;
         try {
@@ -7081,7 +7423,7 @@ jButton11ActionPerformed(null);
         }
         return getBack;
     }
-
+    
     public boolean isHasPeoplewhenEdit(int peopleID, int projectID) {
         boolean getBack = false;
         try {
@@ -7102,7 +7444,7 @@ jButton11ActionPerformed(null);
         }
         return getBack;
     }
-
+    
     private void btsaveProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProjectActionPerformed
         boolean canSave = true;
         if (canSave && (txProjectNAme.getText().equalsIgnoreCase("PROJECT NAME")
@@ -7112,7 +7454,7 @@ jButton11ActionPerformed(null);
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Project Name", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
-
+        
         if (canSave && (projectDescription.getText().equalsIgnoreCase("Description")
                 || projectDescription.getText().length() < 1)) {
             canSave = false;
@@ -7120,14 +7462,14 @@ jButton11ActionPerformed(null);
             javax.swing.JOptionPane.showConfirmDialog(null, "Enter Project Description", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
-
+        
         if (canSave && leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString().length() < 1) {
             canSave = false;
             cbLeaderinProject.requestFocus();
             javax.swing.JOptionPane.showConfirmDialog(null, "Select Leader", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
-
+        
         if (canSave && clientMap.get(cbClientinProject.getSelectedIndex()).toString().length() < 1) {
             canSave = false;
             cbClientinProject.requestFocus();
@@ -7135,8 +7477,9 @@ jButton11ActionPerformed(null);
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
         if (canSave) {
+            common.functionCommon fc = new common.functionCommon();
             try {
-                common.functionCommon fc = new common.functionCommon();
+                
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 String qry = "";
                 PreparedStatement psInsert = null;
@@ -7159,24 +7502,24 @@ jButton11ActionPerformed(null);
                     psInsert.setString(3, projectDescription.getText());
                     psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
                     psInsert.setInt(5, prjStatus.getSelectedIndex());
-
+                    
                     java.util.Date dt = sdf.parse(txStartProject.getText());
                     java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
                     psInsert.setTimestamp(6, dts);
-
-
+                    
+                    
                     dt = sdf.parse(txDuedate.getText());
                     dts = new java.sql.Timestamp(dt.getTime());
                     psInsert.setTimestamp(7, dts);
-
+                    
                     psInsert.setInt(8, userID);
                     psInsert.setString(9, txLocation.getText());
                     psInsert.executeUpdate();
-
+                    
                     int projectID = Integer.valueOf(txProjectid.getText());
-
+                    
                     addProjectMetas(projectID, "progress", txProgressPrecent.getText());
-
+                    
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
                     ResultSet result = st.executeQuery(qry);
@@ -7211,9 +7554,9 @@ jButton11ActionPerformed(null);
                     }
                     st.close();
                     result.close();
-
-
-
+                    
+                    
+                    
                     qry = "select * from cache_people_in_project where id_user=" + String.valueOf(userID);
                     st = cn.createStatement();
                     result = st.executeQuery(qry);
@@ -7242,7 +7585,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 0);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "update transactions set "
                             + " value=?,created_by=?,modified_at=now() "
                             + " where project_id=? and account_id=?;";
@@ -7253,7 +7596,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 1);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "update transactions set "
                             + " value=?,created_by=?,modified_at=now() "
                             + " where project_id=? and account_id=?;";
@@ -7264,7 +7607,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 2);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "update transactions set "
                             + " value=?,created_by=?,modified_at=now() "
                             + " where project_id=? and account_id=?;";
@@ -7275,7 +7618,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 3);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "update transactions set "
                             + " value=?,created_by=?,modified_at=now() "
                             + " where project_id=? and account_id=?;";
@@ -7286,7 +7629,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 4);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "update transactions set "
                             + " value=?,created_by=?,modified_at=now() "
                             + " where project_id=? and account_id=?;";
@@ -7305,7 +7648,7 @@ jButton11ActionPerformed(null);
                         psInsert.executeUpdate();
                         psInsert.close();
                     }
-
+                    
                 } else {
                     qry = "insert into projects (client_id,title"
                             + ",description,leader_id,status"
@@ -7326,16 +7669,16 @@ jButton11ActionPerformed(null);
                     psInsert.setString(3, projectDescription.getText());
                     psInsert.setInt(4, Integer.valueOf(leaderMap.get(cbLeaderinProject.getSelectedIndex()).toString()));
                     psInsert.setInt(5, prjStatus.getSelectedIndex());
-
+                    
                     java.util.Date dt = sdf.parse(txStartProject.getText());
                     java.sql.Timestamp dts = new java.sql.Timestamp(dt.getTime());
                     psInsert.setTimestamp(6, dts);
-
-
+                    
+                    
                     dt = sdf.parse(txDuedate.getText());
                     dts = new java.sql.Timestamp(dt.getTime());
                     psInsert.setTimestamp(7, dts);
-
+                    
                     psInsert.setInt(8, userID);
                     psInsert.setString(9, txLocation.getText());
                     psInsert.executeUpdate();
@@ -7346,9 +7689,9 @@ jButton11ActionPerformed(null);
                     psInsert.close();
                     psIdentity.close();
                     result.close();
-
+                    
                     addProjectMetas(projectID, "progress", txProgressPrecent.getText());
-
+                    
                     qry = "select * from cache_products_in_project where user_id=" + String.valueOf(userID);
                     Statement st = cn.createStatement();
                     result = st.executeQuery(qry);
@@ -7372,7 +7715,7 @@ jButton11ActionPerformed(null);
                     }
                     st.close();
                     result.close();
-
+                    
                     qry = "select * from cache_people_in_project where id_user=" + String.valueOf(userID);
                     st = cn.createStatement();
                     result = st.executeQuery(qry);
@@ -7404,7 +7747,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 0);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "insert into transactions (title,description,"
                             + "value,created_at,modified_at,"
                             + "created_by,project_id,account_id"
@@ -7420,7 +7763,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 1);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "insert into transactions (title,description,"
                             + "value,created_at,modified_at,"
                             + "created_by,project_id,account_id"
@@ -7436,7 +7779,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 2);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "insert into transactions (title,description,"
                             + "value,created_at,modified_at,"
                             + "created_by,project_id,account_id"
@@ -7452,7 +7795,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 3);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "insert into transactions (title,description,"
                             + "value,created_at,modified_at,"
                             + "created_by,project_id,account_id"
@@ -7468,7 +7811,7 @@ jButton11ActionPerformed(null);
                     psInsert.setInt(4, 4);
                     psInsert.executeUpdate();
                     psInsert.close();
-
+                    
                     qry = "insert into transactions (title,description,"
                             + "value,created_at,modified_at,"
                             + "created_by,project_id,account_id"
@@ -7486,19 +7829,20 @@ jButton11ActionPerformed(null);
                     psInsert.close();
                     //end insert transactions
 
-
+                    
                 }
                 cn.close();
             } catch (Exception ex) {
+                if (fc.isDebugging)
                 System.out.println(" error in btsaveProjectActionPerformed = " + ex.getMessage());
             }
         }
     }//GEN-LAST:event_btsaveProjectActionPerformed
-
+    
     void addProjectMetas(int projectID, String keyData, String valueData) {
         String qry = "";
         common.functionCommon cf = new common.functionCommon();
-
+        
         try {
             Connection cn = DriverManager.getConnection(cf.connection, cf.userName, cf.passWord);
             qry = "select valueData from project_metas where project_id=? and keyData=?";
@@ -7520,7 +7864,7 @@ jButton11ActionPerformed(null);
                 psInsert.setString(2, keyData);
                 psInsert.setString(3, valueData);
                 psInsert.executeUpdate();
-
+                
             }
             psInsert.close();
             cn.close();
@@ -7535,23 +7879,23 @@ jButton11ActionPerformed(null);
             prepareEditProjects(tbProject);
         }
     }//GEN-LAST:event_tbProjectMouseClicked
-
+    
     private void tbProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_DELETE) {
             dropDataProject(tbProject);
         }
     }//GEN-LAST:event_tbProjectKeyReleased
-
+    
     private void btLastProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastProjectActionPerformed
         txPageProject.setText(String.valueOf(lastPageProjects));
         viewProjects();
     }//GEN-LAST:event_btLastProjectActionPerformed
-
+    
     private void btNextProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextProjectActionPerformed
         txPageProject.setText(String.valueOf(Integer.valueOf(txPageProject.getText()) + 1));
         viewProjects();
     }//GEN-LAST:event_btNextProjectActionPerformed
-
+    
     private void txPageProjectFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageProjectFocusLost
         if (txPageProject.getText().length() > 0) {
             common.functionCommon cf = new common.functionCommon();
@@ -7562,7 +7906,7 @@ jButton11ActionPerformed(null);
             txPageProject.setText("1");
         }
     }//GEN-LAST:event_txPageProjectFocusLost
-
+    
     private void txPageProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (txPageProject.getText().length() > 0) {
@@ -7576,27 +7920,27 @@ jButton11ActionPerformed(null);
             viewProjects();
         }
     }//GEN-LAST:event_txPageProjectKeyReleased
-
+    
     private void btPreviousProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousProjectActionPerformed
         txPageProject.setText(String.valueOf(Integer.valueOf(txPageProject.getText()) - 1));
         viewProjects();
     }//GEN-LAST:event_btPreviousProjectActionPerformed
-
+    
     private void btFirstProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstProjectActionPerformed
         txPageProject.setText("1");
         viewProjects();
     }//GEN-LAST:event_btFirstProjectActionPerformed
-
+    
     private void searchProjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProjectFocusGained
         searchProject.selectAll();
     }//GEN-LAST:event_searchProjectFocusGained
-
+    
     private void searchProjectFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchProjectFocusLost
         if (searchProject.getText().length() < 1) {
             searchProject.setText("Search");
         }
     }//GEN-LAST:event_searchProjectFocusLost
-
+    
     private void searchProjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProjectKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (Integer.valueOf(txPageProject.getText()) > 1) {
@@ -7605,46 +7949,46 @@ jButton11ActionPerformed(null);
             viewProjects();
         }
     }//GEN-LAST:event_searchProjectKeyReleased
-
+    
     private void txMaterialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txMaterialFocusGained
         txMaterial.selectAll();
     }//GEN-LAST:event_txMaterialFocusGained
-
+    
     private void txPeralatanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPeralatanFocusGained
         txPeralatan.selectAll();
     }//GEN-LAST:event_txPeralatanFocusGained
-
+    
     private void txTenagaKErjaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txTenagaKErjaFocusGained
         txTenagaKErja.selectAll();
     }//GEN-LAST:event_txTenagaKErjaFocusGained
-
+    
     private void txOverHEadeCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txOverHEadeCostFocusGained
         txOverHEadeCost.selectAll();
     }//GEN-LAST:event_txOverHEadeCostFocusGained
-
+    
     private void txManagementCostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txManagementCostFocusGained
         txManagementCost.selectAll();
     }//GEN-LAST:event_txManagementCostFocusGained
-
+    
     private void txPPNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPPNFocusGained
         txPPN.selectAll();
     }//GEN-LAST:event_txPPNFocusGained
-
+    
     private void txQTYProductsinProjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txQTYProductsinProjectFocusGained
         txQTYProductsinProject.selectAll();
     }//GEN-LAST:event_txQTYProductsinProjectFocusGained
-
+    
     private void ProductPopMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductPopMenuMouseExited
-
+        
         if ((showMenuProduct && (evt.getX() < 0 || evt.getX() >= 80))
                 || (showMenuProduct && (evt.getY() < 0 || evt.getY() >= 30))) {
             ProductPopMenu.setVisible(false);
             showMenuProduct = false;
         }
     }//GEN-LAST:event_ProductPopMenuMouseExited
-
+    
     private void btDelProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelProjectActionPerformed
-
+        
         if (javax.swing.JOptionPane.showConfirmDialog(null, "Delete this Project?", "Question",
                 javax.swing.JOptionPane.YES_NO_OPTION,
                 javax.swing.JOptionPane.QUESTION_MESSAGE) == javax.swing.JOptionPane.YES_OPTION) {
@@ -7662,7 +8006,7 @@ jButton11ActionPerformed(null);
                 st.executeUpdate(qry);
                 qry = "delete from projects where id in (" + projectIDLISt + ");";
                 st.executeUpdate(qry);
-
+                
                 st.close();
                 cn.close();
                 jButton3ActionPerformed(null);
@@ -7673,7 +8017,7 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_btDelProjectActionPerformed
-
+    
     void printPreview() {
         common.functionCommon fc = new common.functionCommon();
         java.util.Map parameter = new java.util.HashMap();
@@ -7697,13 +8041,13 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     private void btPreviewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviewProjectActionPerformed
         closeAllInternalFrame();
         projectPreview.setVisible(true);
         previewPrint();
     }//GEN-LAST:event_btPreviewProjectActionPerformed
-
+    
     private void prjStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prjStatusItemStateChanged
         if (prjStatus.getSelectedIndex() == 2
                 && txProjectid.getText().length() > 0) {
@@ -7712,19 +8056,19 @@ jButton11ActionPerformed(null);
             btPreviewProject.setVisible(false);
         }
     }//GEN-LAST:event_prjStatusItemStateChanged
-
+    
     private void btLeftUSerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseEntered
-
+        
         btLeftUSer.setOpaque(true);
-
+        
     }//GEN-LAST:event_btLeftUSerMouseEntered
-
+    
     private void btLeftUSerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLeftUSerMouseExited
         if (!transactionsFrame.isVisible() && !userFrame.isVisible()) {
             btLeftUSer.setOpaque(false);
         }
     }//GEN-LAST:event_btLeftUSerMouseExited
-
+    
     void addItemsforAccountsInTransaction() {
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -7745,7 +8089,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     void prepareaddTransaction() {
         btActionTransactions.setVisible(false);
         txTransactionID.setText("");
@@ -7762,7 +8106,7 @@ jButton11ActionPerformed(null);
         projectFilterMap.put(cbProjectListTransaction.getItemCount() - 1, "");
         cbProjectListTransaction = addItemProject(cbProjectListTransaction);
     }
-
+    
     private void btAddTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddTransactionActionPerformed
         closeAllInternalFrame();
         prePAreforFinanceTABButton();
@@ -7771,7 +8115,7 @@ jButton11ActionPerformed(null);
         lbAddTransaction.setText("ADD TRANSACTION");
         prepareaddTransaction();
     }//GEN-LAST:event_btAddTransactionActionPerformed
-
+    
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         boolean canSave = true;
         if (canSave && accountsListMap.get(cbAccountListTransaction.getSelectedIndex()).toString().length() < 1) {
@@ -7780,7 +8124,7 @@ jButton11ActionPerformed(null);
             javax.swing.JOptionPane.showConfirmDialog(null, "Select Account", "Information",
                     javax.swing.JOptionPane.PLAIN_MESSAGE);
         }
-
+        
         if (canSave && projectFilterMap.get(cbProjectListTransaction.getSelectedIndex()).toString().length() < 1) {
             canSave = false;
             cbProjectListTransaction.requestFocus();
@@ -7831,49 +8175,44 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jButton17ActionPerformed
-
+    
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         disableButtonLeft();
-
+        
         prePAreforFinanceTABButton();
         transactionsFrame.setVisible(true);
         PrepareTransactionsFrame();
         btLeftUSerMouseEntered(null);
     }//GEN-LAST:event_jButton21ActionPerformed
-
+    
     private void btActionTransactionsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseExited
-        System.out.println("exited x = " + evt.getPoint().x + " y = " + evt.getPoint().y);
-        if (showMenuTransactions) {
-            System.out.println(" masih show tr");
-        }
         if ((showMenuTransactions && evt.getPoint().y < 0)
                 || (showMenuTransactions
                 && (evt.getPoint().x < 0 || evt.getPoint().x > 83))) {
-            System.out.println(" kosng");
             transactionsPopUp.setVisible(false);
             showMenuTransactions = false;
         }
     }//GEN-LAST:event_btActionTransactionsMouseExited
-
+    
     private void btActionTransactionsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseEntered
         if (!showMenuTransactions) {
             transactionsPopUp.show(btActionTransactions, 0, 30);
             showMenuTransactions = true;
         }
     }//GEN-LAST:event_btActionTransactionsMouseEntered
-
+    
     private void btActionTransactionsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btActionTransactionsMouseMoved
         if (!showMenuTransactions) {
             transactionsPopUp.show(btActionTransactions, 0, 30);
             showMenuTransactions = true;
         }
     }//GEN-LAST:event_btActionTransactionsMouseMoved
-
+    
     private void btActionTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActionTransactionsActionPerformed
         transactionsPopUp.show(btActionTransactions, 0, 30);
         showMenuTransactions = true;
     }//GEN-LAST:event_btActionTransactionsActionPerformed
-
+    
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -7887,34 +8226,34 @@ jButton11ActionPerformed(null);
         }
         dateChooserDialog3.showDialog(null, true);
     }//GEN-LAST:event_jButton23ActionPerformed
-
+    
     private void txDateTransationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDateTransationKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txDateTransationKeyReleased
-
+    
     private void dateChooserDialog3OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserDialog3OnSelectionChange
         if (dateChooserDialog3.getSelectedDate() != null) {
             txDateTransation.setText(sdf.format(dateChooserDialog3.getSelectedDate().getTime()));
         }
     }//GEN-LAST:event_dateChooserDialog3OnSelectionChange
-
+    
     private void txDateTransationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDateTransationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txDateTransationActionPerformed
-
+    
     private void txDescriptionTransactionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionTransactionKeyPressed
         if (evt.getKeyCode() == evt.VK_TAB) {
             txTransactionValue.requestFocus();
             txDescriptionTransaction.setText(txDescriptionTransaction.getText().replaceAll("\t", ""));
         }
     }//GEN-LAST:event_txDescriptionTransactionKeyPressed
-
+    
     private void transactionNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_transactionNameKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txDescriptionTransaction.requestFocus();
         }
     }//GEN-LAST:event_transactionNameKeyPressed
-
+    
     private void txTransactionValueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTransactionValueKeyReleased
         common.functionCommon fc = new common.functionCommon();
         try {
@@ -7927,28 +8266,28 @@ jButton11ActionPerformed(null);
             txTransactionValue.setText("0");
         }
     }//GEN-LAST:event_txTransactionValueKeyReleased
-
+    
     private void txDescriptionTransactionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txDescriptionTransactionFocusLost
         txDescriptionTransaction.setText(txDescriptionTransaction.getText().replaceAll("\t", ""));
     }//GEN-LAST:event_txDescriptionTransactionFocusLost
-
+    
     private void txDescriptionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescriptionKeyPressed
         if (evt.getKeyCode() == evt.VK_TAB) {
             txDescription.setText(txDescription.getText().replaceAll("\t", ""));
             txPrice.requestFocus();
         }
     }//GEN-LAST:event_txDescriptionKeyPressed
-
+    
     private void txDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txDescriptionFocusLost
         txDescription.setText(txDescription.getText().replaceAll("\t", ""));
     }//GEN-LAST:event_txDescriptionFocusLost
-
+    
     private void projectDescriptionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_projectDescriptionKeyPressed
         if (evt.getKeyCode() == evt.VK_TAB) {
             cbLeaderinProject.requestFocus();
         }
     }//GEN-LAST:event_projectDescriptionKeyPressed
-
+    
     private void transactionsPopUpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionsPopUpMouseExited
         if ((showMenuTransactions && (evt.getX() < 0 || evt.getX() >= 80))
                 || (showMenuTransactions && (evt.getY() < 0 || evt.getY() >= 30))) {
@@ -7956,24 +8295,12 @@ jButton11ActionPerformed(null);
             showMenuTransactions = false;
         }
     }//GEN-LAST:event_transactionsPopUpMouseExited
-
+    
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         deleteTransaction(txTransactionID.getText());
         jButton21ActionPerformed(null);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void cbProjectFilterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbProjectFilterItemStateChanged
-        viewTransactions();
-    }//GEN-LAST:event_cbProjectFilterItemStateChanged
-
-    private void cbMonthFilterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMonthFilterItemStateChanged
-        cbProjectFilterItemStateChanged(null);
-    }//GEN-LAST:event_cbMonthFilterItemStateChanged
-
-    private void cbYearFilterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbYearFilterItemStateChanged
-        cbProjectFilterItemStateChanged(null);
-    }//GEN-LAST:event_cbYearFilterItemStateChanged
-
+    
     private void txProgressPrecentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProgressPrecentKeyReleased
         common.functionCommon fc = new common.functionCommon();
         fc.setNumericPointinTextField(txProgressPrecent, evt);
@@ -7983,14 +8310,15 @@ jButton11ActionPerformed(null);
         int percent = Integer.valueOf(txProgressPrecent.getText());
         progressBarProject.setValue(percent);
     }//GEN-LAST:event_txProgressPrecentKeyReleased
-
+    
     private void txProgressPrecentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txProgressPrecentFocusGained
         txProgressPrecent.selectAll();
     }//GEN-LAST:event_txProgressPrecentFocusGained
     public String getEmailLEaderbyProjectID(String projectID) {
         String getBack = "", qry = "";
+        final common.functionCommon fc = new common.functionCommon();
         try {
-            final common.functionCommon fc = new common.functionCommon();
+            
             qry = "select email from user where id="
                     + "(select leader_id from projects where id = " + projectID + ")";
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
@@ -7999,23 +8327,24 @@ jButton11ActionPerformed(null);
             if (rs.next()) {
                 getBack = rs.getString("email");
             }
-
+            
         } catch (Exception ex) {
-            System.out.println(" erro in getEmailLEaderbyProjectID " + ex.getMessage());
+            if (fc.isDebugging)
+                System.out.println(" erro in getEmailLEaderbyProjectID " + ex.getMessage());
         }
         return getBack;
     }
-
+    
     private void btsaveProject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveProject1ActionPerformed
         final common.functionCommon fc = new common.functionCommon();
         try {
-
-
+            
+            
             String from = "ade_ari_w0@yahoo.com",
                     to = getEmailLEaderbyProjectID(txProjectid.getText()),
                     fileAttachment = fc.getPath() + "/pdf/project_" + jLabel87.getText().replaceAll(" ", "_") + ".pdf",
                     fileName = "project_" + jLabel87.getText().replaceAll(" ", "_") + ".pdf";
-
+            
             if (to.length() > 0) {
                 java.util.Map parameter = new java.util.HashMap();
                 parameter.put("projectID", Integer.valueOf(txProjectid.getText()));
@@ -8023,22 +8352,22 @@ jButton11ActionPerformed(null);
                 parameter.put("iconPeople", fc.getPath() + "/reportJXML/userIcon.png");
                 parameter.put("iconBudget", fc.getPath() + "/reportJXML/iconTransactions.jpg");
                 parameter.put("iconTransactionsOf", fc.getPath() + "/reportJXML/transactionOfIcon.jpg");
-
+                
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
                 net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(
                         fc.getPath() + "/reportJXML/reportProjects.jasper", parameter, cn);
                 net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(jasperPrint, fileAttachment);
-
-
-
-
-
+                
+                
+                
+                
+                
                 Properties props = new Properties();
                 props.put("mail.smtp.auth", "true");
                 props.put("mail.smtp.starttls.enable", "true");
                 props.put("mail.smtp.host", "smtp.gmail.com");
                 props.put("mail.smtp.port", "587");
-
+                
                 Session session;
                 session = Session.getInstance(props,
                         new javax.mail.Authenticator() {
@@ -8053,16 +8382,16 @@ jButton11ActionPerformed(null);
                         InternetAddress.parse(to));
                 message.setSubject("Report from Project " + jLabel87.getText());
                 message.setText("Read attachment");
-
-
+                
+                
                 MimeBodyPart messageBodyPart =
                         new MimeBodyPart();
                 messageBodyPart.setText("Read Attachmanet");
-
+                
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(messageBodyPart);
-
-
+                
+                
                 messageBodyPart = new MimeBodyPart();
                 DataSource source =
                         new FileDataSource(fileAttachment);
@@ -8076,7 +8405,7 @@ jButton11ActionPerformed(null);
                 javax.swing.JOptionPane.showConfirmDialog(null, "Email recepient is empty", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
-
+            
             if (fc.isDebugging) {
                 System.out.println("Sent message successfully....");
             }
@@ -8086,13 +8415,13 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_btsaveProject1ActionPerformed
-
+    
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
         printPreview();
     }//GEN-LAST:event_PrintActionPerformed
-
+    
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-
+        
         int Xposition = 0;
         if (getWidth() - 10 > panelMenu1.getWidth()) {
             Xposition = (getWidth() - 10 - panelMenu1.getWidth()) / 2;
@@ -8103,41 +8432,41 @@ jButton11ActionPerformed(null);
         }
         panelMenu1.setLocation(Xposition, Yposition);
     }//GEN-LAST:event_formComponentResized
-
+    
     private void filterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUserActionPerformed
-
+        
         filterUser1ActionPerformed(evt);
     }//GEN-LAST:event_filterUserActionPerformed
-
+    
     private void filterUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUser1ActionPerformed
         popFilterUser.show(filterUser, 0, 29);
     }//GEN-LAST:event_filterUser1ActionPerformed
-
+    
     private void itMenuNAmeUSErActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSErActionPerformed
         filterUser.setText(itMenuNAmeUSEr.getText());
         viewUser();
     }//GEN-LAST:event_itMenuNAmeUSErActionPerformed
-
+    
     private void itMenuNAmeUSEr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr1ActionPerformed
         filterUser.setText(itMenuNAmeUSEr1.getText());
         viewUser();
     }//GEN-LAST:event_itMenuNAmeUSEr1ActionPerformed
-
+    
     private void itMenuNAmeUSEr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr2ActionPerformed
         filterUser.setText(itMenuNAmeUSEr2.getText());
         viewUser();
     }//GEN-LAST:event_itMenuNAmeUSEr2ActionPerformed
-
+    
     private void itMenuNAmeUSEr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr3ActionPerformed
         filterUser.setText(itMenuNAmeUSEr3.getText());
         viewUser();
     }//GEN-LAST:event_itMenuNAmeUSEr3ActionPerformed
-
+    
     private void itMenuNAmeUSEr0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itMenuNAmeUSEr0ActionPerformed
         filterUser.setText(itMenuNAmeUSEr0.getText());
         viewUser();
     }//GEN-LAST:event_itMenuNAmeUSEr0ActionPerformed
-
+    
     private void btAddRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddRolesActionPerformed
         rolesEditFrame.setVisible(true);
         txroleID.setText("");
@@ -8146,28 +8475,31 @@ jButton11ActionPerformed(null);
         LabelAddRoles.setText("ADD ROLE");
         txroleName.requestFocus();
     }//GEN-LAST:event_btAddRolesActionPerformed
-
+    
     private void txSearchRolesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchRolesFocusGained
-        if (txSearchRoles.getText().equalsIgnoreCase("Search"))
+        if (txSearchRoles.getText().equalsIgnoreCase("Search")) {
             txSearchRoles.setText("");
+        }
         txSearchRoles.selectAll();
         txSearchRoles.setForeground(Color.BLACK);
     }//GEN-LAST:event_txSearchRolesFocusGained
-
+    
     private void txSearchRolesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txSearchRolesFocusLost
-        if (txSearchRoles.getText().length()<1) {
+        if (txSearchRoles.getText().length() < 1) {
             txSearchRoles.setText("Search");
-            txSearchRoles.setForeground(new Color(204,204,204));
+            txSearchRoles.setForeground(new Color(204, 204, 204));
         }
         
     }//GEN-LAST:event_txSearchRolesFocusLost
-
+    
     private void txSearchRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSearchRolesKeyReleased
-        if (evt.getKeyCode()==evt.VK_ENTER) {
-            viewRoles();
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            if (txSearchRoles.getText().length() > 0 && !txSearchRoles.getText().equalsIgnoreCase("Search")) {
+                viewRoles();
+            }
         }
     }//GEN-LAST:event_txSearchRolesKeyReleased
-
+    
     void prepareEditRoles(JTable table) {
         rolesEditFrame.setVisible(true);
         txroleID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
@@ -8175,9 +8507,9 @@ jButton11ActionPerformed(null);
         String qry = "select name,description from roles  "
                 + " where id=" + txroleID.getText();
         txroleName.setText("");
-        txRoledescription .setText("");
+        txRoledescription.setText("");
         txroleName.requestFocus();
-
+        
         common.functionCommon fc = new common.functionCommon();
         if (fc.isDebugging) {
             System.out.println(" qry = " + qry);
@@ -8205,106 +8537,106 @@ jButton11ActionPerformed(null);
             prepareEditRoles(tbRoles);
         }
     }//GEN-LAST:event_tbRolesMouseClicked
-
+    
     private void tbRolesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRolesKeyReleased
-        if (evt.getKeyCode()==evt.VK_DELETE) {
+        if (evt.getKeyCode() == evt.VK_DELETE) {
             removeRole(tbRoles);
         }
     }//GEN-LAST:event_tbRolesKeyReleased
-
+    
     private void btLastRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastRoleActionPerformed
         txPageRole.setText(String.valueOf(lastPageRoles));
         viewRoles();
     }//GEN-LAST:event_btLastRoleActionPerformed
-
+    
     private void btFirstRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstRoleActionPerformed
         txPageRole.setText("1");
         viewRoles();
     }//GEN-LAST:event_btFirstRoleActionPerformed
-
+    
     private void btPreviousRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreviousRoleActionPerformed
-        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText())-1));
+        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText()) - 1));
         viewRoles();
     }//GEN-LAST:event_btPreviousRoleActionPerformed
-
+    
     private void btNextRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextRoleActionPerformed
-        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText())+1));
+        txPageRole.setText(String.valueOf(Integer.valueOf(txPageRole.getText()) + 1));
         viewRoles();
     }//GEN-LAST:event_btNextRoleActionPerformed
-
+    
     private void txPageRoleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txPageRoleFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txPageRoleFocusLost
-
+    
     private void txPageRoleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPageRoleKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txPageRoleKeyReleased
-
+    
     private void filterRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterRolesActionPerformed
         filterRoles2ActionPerformed(null);
     }//GEN-LAST:event_filterRolesActionPerformed
-
+    
     private void filterRoles2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterRoles2ActionPerformed
         popFilterRoles.show(filterRoles, 0, 29);
     }//GEN-LAST:event_filterRoles2ActionPerformed
-
+    
     private void txroleNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txroleNameKeyReleased
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txRoledescription.requestFocus();
         }
     }//GEN-LAST:event_txroleNameKeyReleased
-
+    
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         common.functionCommon fc = new common.functionCommon();
         boolean canSave = true;
         try {
             if (canSave && txroleName.getText().length() < 1) {
-                canSave=false;
+                canSave = false;
                 txroleName.requestFocus();
                 javax.swing.JOptionPane.showConfirmDialog(null, "Enter Role Name", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
-
+            
             if (canSave && txroleName.getText().length() > 0) {
                 if (isRoleAlreadyExist(txroleName.getText(), txroleID.getText())) {
-                    canSave=false;
+                    canSave = false;
                     txroleName.requestFocus();
                     javax.swing.JOptionPane.showConfirmDialog(null, "Role Name already exist", "Information",
                             javax.swing.JOptionPane.PLAIN_MESSAGE);
                 }
             }
-
+            
             if (canSave && txRoledescription.getText().length() < 1) {
                 txRoledescription.requestFocus();
-                canSave=false;
+                canSave = false;
                 javax.swing.JOptionPane.showConfirmDialog(null, "Enter Description", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
             }
-
+            
             if (canSave) {
                 String qry = "";
                 Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
-
+                
                 if (txroleID.getText().length() < 1) {
                     qry = "insert into roles (name,description) values (?,?)";
-
+                    
                     PreparedStatement psInsert = cn.prepareStatement(qry);
-
+                    
                     psInsert.setString(1, txroleName.getText());
                     psInsert.setString(2, txRoledescription.getText());
                     psInsert.executeUpdate();
                     psInsert.close();
                 } else {
                     qry = "update roles set name=?,description=? where id =" + txroleID.getText();
-
+                    
                     PreparedStatement psInsert = cn.prepareStatement(qry);
-
+                    
                     psInsert.setString(1, txroleName.getText());
                     psInsert.setString(2, txRoledescription.getText());
                     psInsert.executeUpdate();
                     psInsert.close();
                 }
-
+                
                 cn.close();
                 javax.swing.JOptionPane.showConfirmDialog(null, "Data has been saved", "Information",
                         javax.swing.JOptionPane.PLAIN_MESSAGE);
@@ -8316,65 +8648,154 @@ jButton11ActionPerformed(null);
             }
         }
     }//GEN-LAST:event_jButton22ActionPerformed
-
+    
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         rolesEditFrame.setVisible(false);
         viewRoles();
     }//GEN-LAST:event_jButton24ActionPerformed
-
+    
     private void tpopRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRolesActionPerformed
         filterRoles.setText(tpopRoles.getText());
         viewRoles();
     }//GEN-LAST:event_tpopRolesActionPerformed
-
+    
     private void tpopRoles1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRoles1ActionPerformed
         filterRoles.setText(tpopRoles1.getText());
         viewRoles();
     }//GEN-LAST:event_tpopRoles1ActionPerformed
-
+    
     private void tpopRoles2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopRoles2ActionPerformed
         filterRoles.setText(tpopRoles2.getText());
         viewRoles();
     }//GEN-LAST:event_tpopRoles2ActionPerformed
-
+    
     private void filterProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterProductActionPerformed
         filterProduct1ActionPerformed(null);
     }//GEN-LAST:event_filterProductActionPerformed
-
+    
     private void tpopProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProductsActionPerformed
         filterProduct.setText(tpopProducts.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProductsActionPerformed
-
+    
     private void tpopProducts1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts1ActionPerformed
         filterProduct.setText(tpopProducts1.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProducts1ActionPerformed
-
+    
     private void tpopProducts2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts2ActionPerformed
         filterProduct.setText(tpopProducts2.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProducts2ActionPerformed
-
+    
     private void filterProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterProduct1ActionPerformed
         popFilterProducts.show(filterProduct, 0, 28);
     }//GEN-LAST:event_filterProduct1ActionPerformed
-
+    
     private void tpopProducts3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts3ActionPerformed
         filterProduct.setText(tpopProducts3.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProducts3ActionPerformed
-
+    
     private void tpopProducts4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts4ActionPerformed
         filterProduct.setText(tpopProducts4.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProducts4ActionPerformed
-
+    
     private void tpopProducts5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpopProducts5ActionPerformed
         filterProduct.setText(tpopProducts5.getText());
         viewProducts();
     }//GEN-LAST:event_tpopProducts5ActionPerformed
-
+    
+    private void cbYearFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYearFilterActionPerformed
+        cbYearFilter1ActionPerformed(null);
+    }//GEN-LAST:event_cbYearFilterActionPerformed
+    javax.swing.JMenuItem menuItemPopYear;
+    private void cbYearFilter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYearFilter1ActionPerformed
+        popYear.show(cbYearFilter, 0, 28);
+        
+    }//GEN-LAST:event_cbYearFilter1ActionPerformed
+    
+    private void cbMonthFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonthFilterActionPerformed
+        cbMonthFilter1ActionPerformed(null);
+    }//GEN-LAST:event_cbMonthFilterActionPerformed
+    
+    private void cbMonthFilter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonthFilter1ActionPerformed
+        popMonths.show(cbMonthFilter, 0, 28);
+    }//GEN-LAST:event_cbMonthFilter1ActionPerformed
+    
+    private void itemMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonthActionPerformed
+        cbMonthFilter.setText(itemMonth.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonthActionPerformed
+    
+    private void itemMonth1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth1ActionPerformed
+        cbMonthFilter.setText(itemMonth1.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth1ActionPerformed
+    
+    private void itemMonth2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth2ActionPerformed
+        cbMonthFilter.setText(itemMonth2.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth2ActionPerformed
+    
+    private void itemMonth3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth3ActionPerformed
+        cbMonthFilter.setText(itemMonth3.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth3ActionPerformed
+    
+    private void itemMonth4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth4ActionPerformed
+        cbMonthFilter.setText(itemMonth4.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth4ActionPerformed
+    
+    private void itemMonth5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth5ActionPerformed
+        cbMonthFilter.setText(itemMonth5.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth5ActionPerformed
+    
+    private void itemMonth6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth6ActionPerformed
+        cbMonthFilter.setText(itemMonth6.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth6ActionPerformed
+    
+    private void itemMonth7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth7ActionPerformed
+        cbMonthFilter.setText(itemMonth7.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth7ActionPerformed
+    
+    private void itemMonth8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth8ActionPerformed
+        cbMonthFilter.setText(itemMonth8.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth8ActionPerformed
+    
+    private void itemMonth9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth9ActionPerformed
+        cbMonthFilter.setText(itemMonth9.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth9ActionPerformed
+    
+    private void itemMonth10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth10ActionPerformed
+        cbMonthFilter.setText(itemMonth10.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth10ActionPerformed
+    
+    private void itemMonth11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth11ActionPerformed
+        cbMonthFilter.setText(itemMonth11.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth11ActionPerformed
+    
+    private void itemMonth12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMonth12ActionPerformed
+        cbMonthFilter.setText(itemMonth12.getText());
+        viewTransactions();
+    }//GEN-LAST:event_itemMonth12ActionPerformed
+    
+    private void cbProjectFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProjectFilterActionPerformed
+        cbProjectFilter1ActionPerformed(null);
+    }//GEN-LAST:event_cbProjectFilterActionPerformed
+    
+    private void cbProjectFilter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProjectFilter1ActionPerformed
+        popMenuProject.show(cbProjectFilter, 0, 28);
+    }//GEN-LAST:event_cbProjectFilter1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAddProducts;
     private javax.swing.JLabel LabelAddRoles;
@@ -8421,13 +8842,16 @@ jButton11ActionPerformed(null);
     private javax.swing.JComboBox cbAccountListTransaction;
     private javax.swing.JComboBox cbClientinProject;
     private javax.swing.JComboBox cbLeaderinProject;
-    private javax.swing.JComboBox cbMonthFilter;
+    private javax.swing.JButton cbMonthFilter;
+    private javax.swing.JButton cbMonthFilter1;
     private javax.swing.JComboBox cbPeopleInProject;
     private javax.swing.JComboBox cbProductsInProject;
-    private javax.swing.JComboBox cbProjectFilter;
+    private javax.swing.JButton cbProjectFilter;
+    private javax.swing.JButton cbProjectFilter1;
     private javax.swing.JComboBox cbProjectListTransaction;
     private javax.swing.JComboBox cbRoles;
-    private javax.swing.JComboBox cbYearFilter;
+    private javax.swing.JButton cbYearFilter;
+    private javax.swing.JButton cbYearFilter1;
     private javax.swing.JTextField companyName;
     private javax.swing.JLabel countAccounts;
     private javax.swing.JLabel countTransactions;
@@ -8447,6 +8871,19 @@ jButton11ActionPerformed(null);
     private javax.swing.JMenuItem itMenuNAmeUSEr1;
     private javax.swing.JMenuItem itMenuNAmeUSEr2;
     private javax.swing.JMenuItem itMenuNAmeUSEr3;
+    private javax.swing.JMenuItem itemMonth;
+    private javax.swing.JMenuItem itemMonth1;
+    private javax.swing.JMenuItem itemMonth10;
+    private javax.swing.JMenuItem itemMonth11;
+    private javax.swing.JMenuItem itemMonth12;
+    private javax.swing.JMenuItem itemMonth2;
+    private javax.swing.JMenuItem itemMonth3;
+    private javax.swing.JMenuItem itemMonth4;
+    private javax.swing.JMenuItem itemMonth5;
+    private javax.swing.JMenuItem itemMonth6;
+    private javax.swing.JMenuItem itemMonth7;
+    private javax.swing.JMenuItem itemMonth8;
+    private javax.swing.JMenuItem itemMonth9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -8495,6 +8932,7 @@ jButton11ActionPerformed(null);
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -8516,7 +8954,6 @@ jButton11ActionPerformed(null);
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
@@ -8668,6 +9105,9 @@ jButton11ActionPerformed(null);
     private javax.swing.JPopupMenu popFilterProducts;
     private javax.swing.JPopupMenu popFilterRoles;
     private javax.swing.JPopupMenu popFilterUser;
+    private javax.swing.JPopupMenu popMenuProject;
+    private javax.swing.JPopupMenu popMonths;
+    private javax.swing.JPopupMenu popYear;
     private javax.swing.JComboBox prjStatus;
     private javax.swing.JInternalFrame productEditFrame;
     private javax.swing.JInternalFrame productsFrame;
@@ -8683,8 +9123,8 @@ jButton11ActionPerformed(null);
     private javax.swing.JScrollPane scrolltbAccounts1;
     private javax.swing.JTextField searchProduct;
     private javax.swing.JTextField searchProduct1;
-    private javax.swing.JTextField searchProduct2;
     private javax.swing.JTextField searchProject;
+    private javax.swing.JTextField searchTransaction;
     private javax.swing.JTable tbAccounts;
     private javax.swing.JTable tbPeopleinProject;
     private javax.swing.JTable tbPeopleinProject1;
@@ -8791,53 +9231,41 @@ jButton11ActionPerformed(null);
     Map peopleInProjectMap = new LinkedHashMap();
     Map projectFilterMap = new LinkedHashMap();
     Map accountsListMap = new LinkedHashMap();
-
+    
     public void viewTransactions() {
         common.functionCommon fc = new common.functionCommon();
         int limit = 13;
         String qry = "", orderBy = "", Condition = "";
+        
         try {
-            if (cbProjectFilter.getSelectedIndex() > 0) {
-                if (projectFilterMap.get(cbProjectFilter.getSelectedIndex()).toString().length() > 0) {
-                    if (Condition.length() > 0) {
-                        Condition += " and ";
-                    }
-                    Condition += " a.project_id = " + projectFilterMap.get(cbProjectFilter.getSelectedIndex()).toString() + " ";
-                }
+            if  (!cbProjectFilter.getText().equalsIgnoreCase(" All Projects")) {
+                Condition +=" c.title like '%"+cbProjectFilter.getText().substring(1) +"%' ";
             }
-        } catch (Exception ex) {
-        }
-
-        try {
-            if (cbMonthFilter.getSelectedIndex() > 0) {
-                if (Condition.length() > 0) {
-                    Condition += " and ";
-                }
-                String monthSelected = String.valueOf(cbMonthFilter.getSelectedIndex());
-                if (monthSelected.length() < 2) {
-                    monthSelected = "0" + monthSelected;
-                }
-                Condition += " to_char(a.modified_at,'MM') = '" + monthSelected + "' ";
+            if  (!cbMonthFilter.getText().equalsIgnoreCase(" All Months")) {
+                if (Condition.length()>0) Condition +=" and ";
+                Condition +=" lower(to_char(a.modified_at,' MMMM')) =lower('"+cbMonthFilter.getText()+"') ";
             }
-        } catch (Exception ex) {
-        }
-
-        try {
-            if (cbYearFilter.getSelectedIndex() > 0) {
-                if (Condition.length() > 0) {
-                    Condition += " and ";
-                }
-                Condition += " to_char(a.modified_at,'YYYY') = '" + cbYearFilter.getSelectedItem() + "' ";
+            if  (!cbYearFilter.getText().equalsIgnoreCase(" All Years")) {
+                if (Condition.length()>0) Condition +=" and ";
+                Condition +=" lower(to_char(a.modified_at,' YYYY')) =lower('"+cbYearFilter.getText()+"') ";
             }
+            if (Condition.length()>0) Condition=" where ("+Condition+") ";
         } catch (Exception ex) {
+            if (fc.isDebugging)
+                System.out.println(" error in "+ex.getMessage());
         }
-        if (Condition.length() > 0) {
-            Condition = " where " + Condition;
+        
+        if (searchTransaction.getText().length()>0
+                &&!searchTransaction.getText().equalsIgnoreCase("Search")) {
+            if (Condition.length()>0) {
+                Condition += " and ";
+            }
+            //Condition +=" ("
         }
-        System.out.println(" Condition= " + Condition);
-
+        
+        
         int positionNow = (Integer.valueOf(txPageTransactions.getText()) - 1);
-
+        
         if (positionNow == 0) {
             btPreviousTransactions.setEnabled(false);
             btFirstTransactions.setEnabled(false);
@@ -8847,7 +9275,7 @@ jButton11ActionPerformed(null);
         }
         orderBy = " order by modified_at desc";
         int total = 0;
-
+        
         try {
             qry = "select count(*) as totalCount from transactions a "
                     + " left join accounts b on a.account_id = b.id "
@@ -8859,12 +9287,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 countTransactions.setText(rs.getString("totalCount") + " Transactions");
                 if (total > 0) {
-
+                    
                     lastPageTransactions = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageTransactions++;
                     }
-
+                    
                     if ((lastPageTransactions - 1) <= positionNow) {
                         btNextTransactions.setEnabled(false);
                         btLastTransactions.setEnabled(false);
@@ -8913,18 +9341,18 @@ jButton11ActionPerformed(null);
             while (rs.next()) {
                 nomber++;
                 rowData = new java.util.Vector();
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(nomber + " ");
                 rowData.addElement(rs.getString("modified_at"));
                 rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>"
                         + rs.getString("unique_id") + " - " + rs.getString("projecttitle") + " - "
                         + rs.getString("name") + "</html>");
-
+                
                 rowData.addElement(fc.digitNumber(rs.getString("value")));
                 rowData.addElement("");
                 vectorTransactions.addElement(rowData);
-
+                
             }
             tbTransactions.tableChanged(new javax.swing.event.TableModelEvent(tmTabelTransactions));
             lbPageCountTransactions.setText(" of " + lastPageTransactions);
@@ -8936,7 +9364,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     public void viewProjects() {
         common.functionCommon fc = new common.functionCommon();
         int limit = 13;
@@ -8955,12 +9383,12 @@ jButton11ActionPerformed(null);
             } else if (filterProject.getSelectedItem().toString().equalsIgnoreCase("STATUS")) {
                 Condition = " where a.status  ='" + fc.getStatusProjectIndex(searchProject.getText()) + "' ";
             }
-
+            
         }
-
-
+        
+        
         int positionNow = (Integer.valueOf(txPageProject.getText()) - 1);
-
+        
         if (positionNow == 0) {
             btPreviousProject.setEnabled(false);
             btFirstProject.setEnabled(false);
@@ -8970,7 +9398,7 @@ jButton11ActionPerformed(null);
         }
         orderBy = " order by name asc";
         int total = 0;
-
+        
         try {
             qry = "select count(*) as totalCount from projects a "
                     + " left join user b on a.leader_id = b.id "
@@ -8982,12 +9410,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 lbCountProjectTable.setText(rs.getString("totalCount") + " Projects");
                 if (total > 0) {
-
+                    
                     lastPageProjects = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageProjects++;
                     }
-
+                    
                     if ((lastPageProjects - 1) <= positionNow) {
                         btNextProject.setEnabled(false);
                         btLastProject.setEnabled(false);
@@ -9033,10 +9461,10 @@ jButton11ActionPerformed(null);
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorProject = new java.util.Vector();
-
+            
             while (rs.next()) {
                 rowData = new java.util.Vector();
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement("<html><strong>" + rs.getString("title") + "</strong><br>" + rs.getString("description") + "</html>");
                 rowData.addElement(rs.getString("leaderf") + " " + rs.getString("leaderl"));
@@ -9045,7 +9473,7 @@ jButton11ActionPerformed(null);
                 rowData.addElement(fc.getStatusProject(rs.getInt("status")));
                 rowData.addElement("");
                 vectorProject.addElement(rowData);
-
+                
             }
             tbProject.tableChanged(new javax.swing.event.TableModelEvent(tmTabelProject));
             lbPageCountProject.setText(" of " + lastPageProjects);
@@ -9057,7 +9485,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     public void viewProducts() {
         common.functionCommon fc = new common.functionCommon();
         int limit = 13;
@@ -9073,20 +9501,22 @@ jButton11ActionPerformed(null);
             } else if (filterProduct.getText().equalsIgnoreCase(" STOCK DATE")) {
                 orderBy = " a.modified_at ";
             }
-            if (orderBy.length()>0) orderBy =" order by "+orderBy+" ";
-        }
-
-        if (searchProduct.getText().length()>1&&!searchProduct.getText().equalsIgnoreCase("Search"))  {
-            Condition = " where a.name like '%"+searchProduct.getText()+"%' "
-                    + " or a.sku like '%"+searchProduct.getText()+"%' "
-                    
-                    + " or lower(to_char(a.modified_at,'DD MON YYYY')) = lower('"+searchProduct.getText()+"') ";
-            if (fc.isNumeric(searchProduct.getText())) {
-                Condition += " or a.quantity ="+searchProduct.getText()+" ";
+            if (orderBy.length() > 0) {
+                orderBy = " order by " + orderBy + " ";
             }
         }
-
-
+        
+        if (searchProduct.getText().length() > 1 && !searchProduct.getText().equalsIgnoreCase("Search")) {
+            Condition = " where a.name like '%" + searchProduct.getText() + "%' "
+                    + " or a.sku like '%" + searchProduct.getText() + "%' "
+                    + " or a.description like '%" + searchProduct.getText() + "%' "
+                    + " or lower(to_char(a.modified_at,'DD MON YYYY')) = lower('" + searchProduct.getText() + "') ";
+            if (fc.isNumeric(searchProduct.getText())) {
+                Condition += " or a.quantity =" + searchProduct.getText() + " ";
+            }
+        }
+        
+        
         int positionNow = (Integer.valueOf(txPageProduct.getText()) - 1);
         
         if (positionNow == 0) {
@@ -9097,7 +9527,7 @@ jButton11ActionPerformed(null);
             btFirstProduct.setEnabled(true);
         }
         int total = 0;
-
+        
         try {
             qry = "select count(*) as totalCount from items a " + Condition;
             if (fc.isDebugging) {
@@ -9110,12 +9540,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 lbCountProductTable.setText(rs.getString("totalCount") + " Products");
                 if (total > 0) {
-
+                    
                     lastPageProducts = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageProducts++;
                     }
-
+                    
                     if ((lastPageProducts - 1) <= positionNow) {
                         btNextProduct.setEnabled(false);
                         btLastProductLast.setEnabled(false);
@@ -9149,7 +9579,7 @@ jButton11ActionPerformed(null);
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select a.id,a.name,a.description,a.sku,a.quantity,"
                     + fc.viewDatefromSQL("a.modified_at", "modified_at")
-                    + " from items a " + Condition +orderBy
+                    + " from items a " + Condition + orderBy
                     + " " + limiTation;
             if (fc.isDebugging) {
                 System.out.println(" qry = " + qry);
@@ -9157,10 +9587,10 @@ jButton11ActionPerformed(null);
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorProducts = new java.util.Vector();
-
+            
             while (rs.next()) {
                 rowData = new java.util.Vector();
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement("<html><strong>" + rs.getString("name") + "</strong><br>" + rs.getString("description") + "</html>");
                 rowData.addElement(rs.getString("sku"));
@@ -9168,7 +9598,7 @@ jButton11ActionPerformed(null);
                 rowData.addElement(rs.getString("modified_at"));
                 rowData.addElement("");
                 vectorProducts.addElement(rowData);
-
+                
             }
             tbProduct.tableChanged(new javax.swing.event.TableModelEvent(tmTabelProducts));
             lbPageCountProduct.setText(" of " + lastPageProducts);
@@ -9180,12 +9610,12 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     public void viewAccounts() {
         int limit = 12;
         String qry = "", orderBy = "", Condition = "";
-
-
+        
+        
         int positionNow = (Integer.valueOf(txPageAccounts.getText()) - 1);
         common.functionCommon fc = new common.functionCommon();
         if (positionNow == 0) {
@@ -9197,7 +9627,7 @@ jButton11ActionPerformed(null);
         }
         orderBy = " order by unique_id asc";
         int total = 0;
-
+        
         try {
             qry = "select count(*) as totalCount from accounts";
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
@@ -9207,12 +9637,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 countAccounts.setText(rs.getString("totalCount") + " Accounts");
                 if (total > 0) {
-
+                    
                     lastPageAccounts = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageAccounts++;
                     }
-
+                    
                     if ((lastPageAccounts - 1) <= positionNow) {
                         btNextAccounts.setEnabled(false);
                         btLastAccounts.setEnabled(false);
@@ -9242,7 +9672,7 @@ jButton11ActionPerformed(null);
                     txPageAccounts.setText("0");
                 }
             }
-
+            
             int positionNOW2 = positionNow * limit;
             String limiTation = " offset " + positionNOW2 + " limit " + limit;
             qry = "select id,unique_id,name from accounts" + orderBy + limiTation;
@@ -9252,34 +9682,34 @@ jButton11ActionPerformed(null);
             rs = st.executeQuery(qry);
             java.util.Vector rowData = null;
             vectorAccounts = new java.util.Vector();
-
+            
             while (rs.next()) {
                 rowData = new java.util.Vector();
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(rs.getString("unique_id"));
                 rowData.addElement(rs.getString("name"));
                 rowData.addElement("");
                 vectorAccounts.addElement(rowData);
-
+                
             }
             tbAccounts.tableChanged(new javax.swing.event.TableModelEvent(tmTabelAccounts));
             lbPageCountAccounts.setText(" of " + lastPageAccounts);
             st.close();
             cn.close();
-
+            
         } catch (Exception ex) {
             if (fc.isDebugging) {
                 System.out.println("Error in viewAccounts " + ex.getMessage());
             }
         }
     }
-
+    
     public void viewUser() {
         int limit = 15;
         common.functionCommon fc = new common.functionCommon();
         String qry = "", orderBy = "", Condition = "";
-
+        
         Condition = " where a.id<>" + userID + " ";
         if (role_id != 0) {
             Condition += " and a.roles_id<>0 ";
@@ -9287,7 +9717,7 @@ jButton11ActionPerformed(null);
         if (role_id != 1 && role_id != 0) {
             Condition += " and a.roles_id<>1 ";
         }
-
+        
         if (txSearch.getText().length() > 0 && !txSearch.getText().equalsIgnoreCase("Search")) {
             String conditon1 = "";
             StringTokenizer st = new StringTokenizer(txSearch.getText(), " ");
@@ -9309,17 +9739,17 @@ jButton11ActionPerformed(null);
                 conditon1 += " or ";
             }
             conditon1 += " " + conditionFirstName + " or " + conditionLastName + " ";
-
+            
             if (conditon1.length() > 0) {
                 conditon1 += " or ";
             }
             conditon1 += " b.name = '" + txSearch.getText() + "' ";
-
+            
             if (conditon1.length() > 0) {
                 conditon1 += " or ";
             }
             conditon1 += " a.email like '%" + txSearch.getText() + "%' ";
-
+            
             if (conditon1.length() > 0) {
                 conditon1 += " or ";
             }
@@ -9340,11 +9770,11 @@ jButton11ActionPerformed(null);
                 orderBy = " a.company_name ";
             }
         }
-
-
+        
+        
         int positionNow = (Integer.valueOf(txPage.getText()) - 1);
-
-
+        
+        
         if (positionNow == 0) {
             btPrevious.setEnabled(false);
             btFirst.setEnabled(false);
@@ -9352,11 +9782,11 @@ jButton11ActionPerformed(null);
             btPrevious.setEnabled(true);
             btFirst.setEnabled(true);
         }
-
-
+        
+        
         int total = 0;
-
-
+        
+        
         try {
             qry = "select count(*) as totalCount from user a "
                     + " left join roles b on a.roles_id=b.id " + Condition;
@@ -9367,12 +9797,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 lbCountUser.setText(rs.getString("totalCount") + " Users");
                 if (total > 0) {
-
+                    
                     lastPageUSer = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageUSer++;
                     }
-
+                    
                     if ((lastPageUSer - 1) <= positionNow) {
                         btNext.setEnabled(false);
                         btLast.setEnabled(false);
@@ -9431,7 +9861,7 @@ jButton11ActionPerformed(null);
                         nameUser += rs.getString("last_name");
                     }
                 }
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(nameUser);
                 rowData.addElement(rs.getString("roles"));
@@ -9439,7 +9869,7 @@ jButton11ActionPerformed(null);
                 rowData.addElement(rs.getString("company_name"));
                 rowData.addElement("");
                 vectorUser.addElement(rowData);
-
+                
             }
             tbUser.tableChanged(new javax.swing.event.TableModelEvent(tmTabelUser));
             lbCountPage.setText(" of " + lastPageUSer);
@@ -9451,31 +9881,34 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     public void viewRoles() {
         int limit = 15;
         common.functionCommon fc = new common.functionCommon();
         String qry = "", orderBy = " name ", Condition = "";
         int positionNow = (Integer.valueOf(txPageRole.getText()) - 1);
-
+        
         if (txSearchRoles.getText().length() > 0 && !txSearchRoles.getText().equalsIgnoreCase("Search")) {
-            Condition = " name like '%"+txSearchRoles.getText()+"%' ";
-            if (Condition.length()>0)
-                Condition +=" or ";
-            Condition += " description like '%"+txSearchRoles.getText()+"%' ";
+            Condition = " name like '%" + txSearchRoles.getText() + "%' ";
+            if (Condition.length() > 0) {
+                Condition += " or ";
+            }
+            Condition += " description like '%" + txSearchRoles.getText() + "%' ";
             
             
-            if (Condition.length()>0)
-                Condition =" where "+Condition;
+            if (Condition.length() > 0) {
+                Condition = " where " + Condition;
+            }
         }
         
         if (!filterRoles.getText().equalsIgnoreCase(" Filter")) {
-            if (filterRoles.getText().equalsIgnoreCase(" ROLE NAME"))
-            orderBy =" name ";
-            else if (filterRoles.getText().equalsIgnoreCase(" DESCRIPTION"))
-            orderBy =" description ";
+            if (filterRoles.getText().equalsIgnoreCase(" ROLE NAME")) {
+                orderBy = " name ";
+            } else if (filterRoles.getText().equalsIgnoreCase(" DESCRIPTION")) {
+                orderBy = " description ";
+            }
         }
-
+        
         if (positionNow == 0) {
             btPreviousRole.setEnabled(false);
             btFirstRole.setEnabled(false);
@@ -9483,11 +9916,11 @@ jButton11ActionPerformed(null);
             btPreviousRole.setEnabled(true);
             btFirstRole.setEnabled(true);
         }
-
-
+        
+        
         int total = 0;
-
-
+        
+        
         try {
             qry = "select count(*) as totalCount from roles " + Condition;
             Connection cn = DriverManager.getConnection(fc.connection, fc.userName, fc.passWord);
@@ -9497,12 +9930,12 @@ jButton11ActionPerformed(null);
                 total = rs.getInt("totalCount");
                 lbCountRoles.setText(rs.getString("totalCount") + " Roles");
                 if (total > 0) {
-
+                    
                     lastPageRoles = rs.getInt("totalCount") / limit;
                     if ((rs.getInt("totalCount") % limit) > 0) {
                         lastPageRoles++;
                     }
-
+                    
                     if ((lastPageRoles - 1) <= positionNow) {
                         btNextRole.setEnabled(false);
                         btLastRole.setEnabled(false);
@@ -9545,13 +9978,13 @@ jButton11ActionPerformed(null);
             vectorRoles = new java.util.Vector();
             while (rs.next()) {
                 rowData = new java.util.Vector();
-
+                
                 rowData.addElement(rs.getInt("id"));
                 rowData.addElement(rs.getString("name"));
                 rowData.addElement(rs.getString("description"));
                 rowData.addElement("");
                 vectorRoles.addElement(rowData);
-
+                
             }
             tbRoles.tableChanged(new javax.swing.event.TableModelEvent(tmTabelRoles));
             lbCountPageRole.setText(" of " + lastPageRoles);
@@ -9563,7 +9996,7 @@ jButton11ActionPerformed(null);
             }
         }
     }
-
+    
     void getDataClientAndLEader() {
         // get Data Leader getData Leader and client
         common.functionCommon fc = new common.functionCommon();
@@ -9592,7 +10025,7 @@ jButton11ActionPerformed(null);
                         rs.getString("first_name") + " "
                         + rs.getString("last_name"), cbLeaderinProject));
                 leaderMap.put(cbLeaderinProject.getItemCount() - 1, rs.getInt("id"));
-
+                
                 cbClientinProject.addItem(addJcomboBoxItemWithDuplicate(
                         rs.getString("first_name") + " "
                         + rs.getString("last_name"), cbClientinProject));
@@ -9611,7 +10044,7 @@ jButton11ActionPerformed(null);
         }
         //end getData Leader and client
     }
-
+    
     void viewProjectDetailEmpty() {
         txProjectid.setText("");
         txProjectNAme.setText("PROJECT NAME");
@@ -9633,9 +10066,9 @@ jButton11ActionPerformed(null);
         btPreviewProject.setVisible(false);
         txProgressPrecent.setText("0");
         progressBarProject.setValue(0);
-
+        
         getDataClientAndLEader();
-
+        
         refreshTableProductInProject();
         refreshcbProductsInProject();
         refreshTablePeopleINProject();
@@ -9644,7 +10077,7 @@ jButton11ActionPerformed(null);
         prjStatus.addItem("<html><font color=#F52887>Pending</font></html>");
         prjStatus.addItem("<html><font color=orange>In Process</font></html>");
     }
-
+    
     public String addJcomboBoxItemWithDuplicate(String text, JComboBox jcb) {
         String getBack = text;
         boolean exist = true;
@@ -9658,7 +10091,7 @@ jButton11ActionPerformed(null);
         }
         return getBack;
     }
-
+    
     void closeAllInternalFrame() {
         userFrame.setVisible(false);
         userEditFrame.setVisible(false);
@@ -9676,17 +10109,17 @@ jButton11ActionPerformed(null);
         roleFrame.setVisible(false);
         rolesEditFrame.setVisible(false);
     }
-
+    
     void POPUpMenuUsuallycommand() {
         showMenuUser = false;
         showMenuProduct = false;
         showMenuTransactions = false;
     }
-
+    
     class ButtonsPanel extends JPanel {
-
+        
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""), new JButton(""));
-
+        
         public ButtonsPanel() {
             super();
             setOpaque(true);
@@ -9699,14 +10132,14 @@ jButton11ActionPerformed(null);
             }
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editIcon.png")));
             buttons.get(1).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
-
+            
         }
     }
-
+    
     class ButtonsPanelAccounts extends JPanel {
-
+        
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
-
+        
         public ButtonsPanelAccounts() {
             super();
             setOpaque(true);
@@ -9720,11 +10153,11 @@ jButton11ActionPerformed(null);
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delIcon.png")));
         }
     }
-
+    
     class BTXDelete extends JPanel {
-
+        
         public final java.util.List<JButton> buttons = Arrays.asList(new JButton(""));
-
+        
         public BTXDelete() {
             super();
             setOpaque(true);
@@ -9738,11 +10171,11 @@ jButton11ActionPerformed(null);
             buttons.get(0).setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconX.png")));
         }
     }
-
+    
     class labelPeople extends JPanel {
-
+        
         public JLabel lbPeopleName = new JLabel();
-
+        
         public labelPeople() {
             super();
             setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -9752,14 +10185,14 @@ jButton11ActionPerformed(null);
             add(lbPeopleName);
         }
     }
-
+    
     class lbRenderPeople extends labelPeople implements TableCellRenderer {
-
+        
         public lbRenderPeople() {
             super();
             setName("Table.cellRenderPeople");
         }
-
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
@@ -9767,54 +10200,57 @@ jButton11ActionPerformed(null);
             return this;
         }
     }
-
+    
+    
+    
+    
     class ButtonsRendererAccounts extends ButtonsPanelAccounts implements TableCellRenderer {
-
+        
         public ButtonsRendererAccounts() {
             super();
             setName("Table.cellRendererAccounts");
         }
-
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-
+    
     class ButtonsRendererbtXDelete extends BTXDelete implements TableCellRenderer {
-
+        
         public ButtonsRendererbtXDelete() {
             super();
             setName("Table.cellRendererAccounts");
         }
-
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-
+    
     class ButtonsRenderer extends ButtonsPanel implements TableCellRenderer {
-
+        
         public ButtonsRenderer() {
             super();
             setName("Table.cellRenderer");
         }
-
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
             return this;
         }
     }
-
+    
     class ButtonsEditorRoles extends ButtonsPanel implements TableCellEditor {
-
+        
         public ButtonsEditorRoles(final JTable table) {
             super();
-
+            
             MouseListener ml = new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     ButtonModel m = ((JButton) e.getSource()).getModel();
@@ -9824,33 +10260,33 @@ jButton11ActionPerformed(null);
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
-
-
+            
+            
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditRoles(table);
                 }
             });
-
+            
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     removeRole(table);
                 }
             });
-
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -9858,46 +10294,46 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditor extends ButtonsPanel implements TableCellEditor {
-
+        
         public ButtonsEditor(final JTable table) {
             super();
-
+            
             MouseListener ml = new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     ButtonModel m = ((JButton) e.getSource()).getModel();
@@ -9907,33 +10343,33 @@ jButton11ActionPerformed(null);
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
-
-
+            
+            
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditUSer(table.getValueAt(table.getSelectedRow(), 0).toString());
                 }
             });
-
+            
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dropDataUSer(table);
                 }
             });
-
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -9941,43 +10377,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorProducts extends ButtonsPanel implements TableCellEditor {
-
+        
         public ButtonsEditorProducts(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -9986,35 +10422,35 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditProduct(table);
                 }
             });
-
+            
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dropDataProduct(table);
                 }
             });
-
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10022,43 +10458,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorProjects extends ButtonsPanel implements TableCellEditor {
-
+        
         public ButtonsEditorProjects(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -10067,35 +10503,35 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
             buttons.get(1).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     prepareEditProjects(table);
                 }
             });
-
+            
             buttons.get(1).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dropDataProject(table);
                 }
             });
-
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10103,43 +10539,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorTransactions extends ButtonsPanelAccounts implements TableCellEditor {
-
+        
         public ButtonsEditorTransactions(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -10148,28 +10584,28 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteTransaction(table);
                 }
             });
-
-
+            
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10177,43 +10613,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorAccounts extends ButtonsPanelAccounts implements TableCellEditor {
-
+        
         public ButtonsEditorAccounts(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -10222,28 +10658,28 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteAccounts(table);
                 }
             });
-
-
+            
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10251,43 +10687,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorXDeletePeopleInProject extends ButtonsRendererbtXDelete implements TableCellEditor {
-
+        
         public ButtonsEditorXDeletePeopleInProject(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -10296,28 +10732,28 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deletePeopleInProject(table);
                 }
             });
-
-
+            
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10325,43 +10761,43 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
     }
-
+    
     class ButtonsEditorXDelete extends ButtonsRendererbtXDelete implements TableCellEditor {
-
+        
         public ButtonsEditorXDelete(final JTable table) {
             super();
             MouseListener ml = new MouseAdapter() {
@@ -10370,28 +10806,28 @@ jButton11ActionPerformed(null);
                     if (m.isPressed() && table.isRowSelected(table.getEditingRow()) && e.isControlDown()) {
                         setBackground(table.getBackground());
                     }
-
+                    
                     table.setRowSelectionInterval(table.getEditingRow(), table.getEditingRow());
                 }
             };
             buttons.get(0).addMouseListener(ml);
-
+            
             buttons.get(0).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteProductInProject(table);
                 }
             });
-
-
+            
+            
         }
-
+        
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.setBackground(table.getSelectionBackground());
             return this;
         }
-
+        
         @Override
         public Object getCellEditorValue() {
             return "";
@@ -10399,36 +10835,36 @@ jButton11ActionPerformed(null);
         //Copid from AbstractCellEditor
         //protected EventListenerList listenerList = new EventListenerList();
         transient protected ChangeEvent changeEvent = null;
-
+        
         @Override
         public boolean isCellEditable(EventObject e) {
             return true;
         }
-
+        
         @Override
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-
+        
         @Override
         public boolean stopCellEditing() {
             return true;
         }
-
+        
         @Override
         public void cancelCellEditing() {
         }
-
+        
         @Override
         public void addCellEditorListener(CellEditorListener l) {
             listenerList.add(CellEditorListener.class, l);
         }
-
+        
         @Override
         public void removeCellEditorListener(CellEditorListener l) {
             listenerList.remove(CellEditorListener.class, l);
         }
-
+        
         public CellEditorListener[] getCellEditorListeners() {
             return listenerList.getListeners(CellEditorListener.class);
         }
