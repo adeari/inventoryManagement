@@ -44,7 +44,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txEmail">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Insert Username or Email"/>
+            <Property name="toolTipText" type="java.lang.String" value="Insert Username"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txEmailFocusGained"/>

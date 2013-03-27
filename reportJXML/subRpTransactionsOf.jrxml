@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRpProductInproject" language="groovy" pageWidth="381" pageHeight="842" columnWidth="381" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c2dbc1ae-925f-4fe8-b259-a682f97a8cf7">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="133"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="projectID" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
@@ -74,7 +74,7 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement uuid="953c7aa9-b158-49fe-89ec-1de796de4d82" x="83" y="1" width="235" height="13"/>
+				<reportElement uuid="953c7aa9-b158-49fe-89ec-1de796de4d82" x="88" y="1" width="225" height="13"/>
 				<box leftPadding="2"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{TITLE}]]></textFieldExpression>
@@ -82,7 +82,7 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 			<textField>
 				<reportElement uuid="4e760fcd-18e0-49cc-86aa-5b672ad43cbc" x="0" y="1" width="23" height="13"/>
 				<box rightPadding="2"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MM-yyyy">
@@ -91,7 +91,7 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 				<textFieldExpression><![CDATA[$F{MODIFIED_AT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement uuid="1ea446f5-fff4-48d2-a64b-739842a1093c" x="333" y="1" width="54" height="13"/>
+				<reportElement uuid="1ea446f5-fff4-48d2-a64b-739842a1093c" x="337" y="1" width="44" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{VALUE}]]></textFieldExpression>
 			</textField>
@@ -101,7 +101,7 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Rp]]></text>
+				<text><![CDATA[Rp.]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="206c025c-6eba-442d-a7aa-090f187934ca" x="22" y="-16" width="1" height="45"/>
@@ -128,7 +128,7 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement uuid="24717db2-24eb-47df-ac67-c0c64f6a45d5" x="85" y="14" width="233" height="13"/>
+				<reportElement uuid="24717db2-24eb-47df-ac67-c0c64f6a45d5" x="88" y="14" width="225" height="13"/>
 				<box leftPadding="2"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{UNIQUE_ID} + " - " + $F{PROJECTTITLE} + " - "+$F{NAME}]]></textFieldExpression>

@@ -57,9 +57,9 @@ where a.id=$P{projectID}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="18">
+		<band height="20">
 			<subreport>
-				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" x="0" y="0" width="290" height="18" backcolor="#999999"/>
+				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="290" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -67,7 +67,7 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpProductInproject.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToTallestObject" x="291" y="0" width="281" height="18" backcolor="#999999"/>
+				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToTallestObject" mode="Opaque" x="291" y="0" width="281" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="iconPeople">
 					<subreportParameterExpression><![CDATA[$P{iconPeople}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -92,11 +92,11 @@ where a.id=$P{projectID}]]>
 			</subreport>
 			<subreport>
 				<reportElement uuid="15037392-2c8e-4232-a63f-015b37e62ab4" stretchType="RelativeToTallestObject" x="197" y="0" width="191" height="18" backcolor="#999999"/>
+				<subreportParameter name="iconBudget">
+					<subreportParameterExpression><![CDATA[$P{iconBudget}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="iconTransactionsOf">
-					<subreportParameterExpression><![CDATA[$P{iconTransactionsOf}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpActualBudget.jasper"]]></subreportExpression>

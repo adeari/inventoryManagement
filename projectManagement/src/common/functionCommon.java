@@ -21,8 +21,8 @@ public class functionCommon {
     public String userName = "inventory";
     public String passWord = "ert3456";
     
-    public String emailUser = "priyangansiomay@gmail.com"
-            ,emailPass="q2w3e4r5t";
+    public String emailUser = "project@eyesimple.us"
+            ,emailPass=" eyesimple25";
     
     public boolean isDebugging = true;
     public static boolean isDevelop = true;
@@ -200,7 +200,7 @@ public class functionCommon {
     public String getStatusProject(int id) {
         String getBack="";
         switch(id) {
-            case 0 : getBack="<html><font color=#F52887>Pending</font></html>";
+            case 0 : getBack="<html><font color=red>Pending</font></html>";
                 break;
             case 1 : getBack="<html><font color=orange>In Process</font></html>";
                 break;

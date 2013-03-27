@@ -55,7 +55,7 @@ public class loginForm extends javax.swing.JFrame {
 
         panelLogin1.setLayout(null);
 
-        txEmail.setToolTipText("Insert Username or Email");
+        txEmail.setToolTipText("Insert Username");
         txEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txEmailFocusGained(evt);
@@ -184,7 +184,7 @@ public class loginForm extends javax.swing.JFrame {
         Xposition=(getWidth()-10-panelLogin1.getWidth())/2;
      int Yposition = 0;
      if (getHeight()-10>panelLogin1.getHeight())
-        Yposition=(getHeight()-panelLogin1.getHeight())/2;
+        Yposition=(getHeight() -10 -panelLogin1.getHeight())/2;
      panelLogin1.setLocation(Xposition, Yposition);
     }//GEN-LAST:event_formComponentResized
 
