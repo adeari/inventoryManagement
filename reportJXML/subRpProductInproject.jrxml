@@ -15,9 +15,9 @@ where a.project_id=$P{projectID}]]>
 	<field name="NAME" class="java.lang.String"/>
 	<field name="INVENTORY_QTY" class="java.lang.Integer"/>
 	<title>
-		<band height="20" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="0" y="0" width="288" height="20"/>
+				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="4" y="5" width="284" height="16"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -26,9 +26,9 @@ where a.project_id=$P{projectID}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="17" splitType="Stretch">
 			<textField>
-				<reportElement uuid="10fdff92-6ac6-481f-956c-c94bab742b1a" x="0" y="0" width="288" height="15"/>
+				<reportElement uuid="10fdff92-6ac6-481f-956c-c94bab742b1a" x="4" y="1" width="284" height="15"/>
 				<box leftPadding="2"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{NAME} +" - "+ $F{INVENTORY_QTY}]]></textFieldExpression>

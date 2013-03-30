@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProjects" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dda4b52-274c-4014-abfd-5ba443139d24">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="25"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="projectID" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
 	</parameter>
@@ -57,9 +57,9 @@ where a.id=$P{projectID}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="20">
+		<band height="26">
 			<subreport>
-				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="290" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="a72ef57b-9354-42b7-a830-0cd954f84f0b" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="4" width="388" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -67,7 +67,7 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpProductInproject.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToTallestObject" mode="Opaque" x="291" y="0" width="281" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="6084e6e7-8412-4f7f-8e53-0ae7b6a44b5b" stretchType="RelativeToBandHeight" mode="Opaque" x="390" y="4" width="182" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="iconPeople">
 					<subreportParameterExpression><![CDATA[$P{iconPeople}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -78,9 +78,9 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpPeopleInproject.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="18">
+		<band height="26">
 			<subreport>
-				<reportElement uuid="19f6c12f-62a0-4254-a2de-7911dc0fdf70" stretchType="RelativeToTallestObject" x="0" y="0" width="195" height="18" backcolor="#999999"/>
+				<reportElement uuid="19f6c12f-62a0-4254-a2de-7911dc0fdf70" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="4" width="195" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="iconBudget">
 					<subreportParameterExpression><![CDATA[$P{iconBudget}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -91,7 +91,7 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpAllocatedBudget.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement uuid="15037392-2c8e-4232-a63f-015b37e62ab4" stretchType="RelativeToTallestObject" x="197" y="0" width="191" height="18" backcolor="#999999"/>
+				<reportElement uuid="15037392-2c8e-4232-a63f-015b37e62ab4" stretchType="RelativeToBandHeight" mode="Opaque" x="197" y="4" width="191" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="iconBudget">
 					<subreportParameterExpression><![CDATA[$P{iconBudget}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -102,7 +102,7 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpActualBudget.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement uuid="b4fec06b-e07c-46d1-a3ed-cf267abb936f" stretchType="RelativeToTallestObject" x="390" y="0" width="182" height="18" backcolor="#999999"/>
+				<reportElement uuid="b4fec06b-e07c-46d1-a3ed-cf267abb936f" stretchType="RelativeToBandHeight" mode="Opaque" x="390" y="4" width="182" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -110,9 +110,9 @@ where a.id=$P{projectID}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subRpprojectInfo.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="18">
+		<band height="26">
 			<subreport>
-				<reportElement uuid="e0230e8c-9e01-47a5-9357-b259e0514908" stretchType="RelativeToTallestObject" x="0" y="0" width="572" height="18" backcolor="#999999"/>
+				<reportElement uuid="e0230e8c-9e01-47a5-9357-b259e0514908" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="4" width="388" height="18" backcolor="#CCCCCC"/>
 				<subreportParameter name="projectID">
 					<subreportParameterExpression><![CDATA[$P{projectID}]]></subreportParameterExpression>
 				</subreportParameter>

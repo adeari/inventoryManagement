@@ -180,11 +180,13 @@ public class loginForm extends javax.swing.JFrame {
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         int Xposition = 0;
+        
      if (getWidth()-10>panelLogin1.getWidth())
         Xposition=(getWidth()-10-panelLogin1.getWidth())/2;
      int Yposition = 0;
-     if (getHeight()-10>panelLogin1.getHeight())
-        Yposition=(getHeight() -10 -panelLogin1.getHeight())/2;
+     if (getHeight()>(799))
+        Yposition=(getHeight() - 799)/2;
+     
      panelLogin1.setLocation(Xposition, Yposition);
     }//GEN-LAST:event_formComponentResized
 

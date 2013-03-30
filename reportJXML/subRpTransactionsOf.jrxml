@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRpProductInproject" language="groovy" pageWidth="381" pageHeight="842" columnWidth="381" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c2dbc1ae-925f-4fe8-b259-a682f97a8cf7">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="133"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="projectID" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
@@ -21,58 +21,54 @@ where a.project_id=$P{projectID} and b.unique_id not like 'A-%']]>
 	<field name="UNIQUE_ID" class="java.lang.String"/>
 	<field name="NAME" class="java.lang.String"/>
 	<title>
-		<band height="31" splitType="Stretch">
-			<rectangle>
-				<reportElement uuid="fa41de47-8206-4a23-b201-7db0880d271e" stretchType="RelativeToTallestObject" x="0" y="0" width="387" height="31" backcolor="#CCCCCC"/>
-				<graphicElement>
-					<pen lineWidth="0.0"/>
-				</graphicElement>
-			</rectangle>
+		<band height="39" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="13" y="0" width="374" height="16"/>
+				<reportElement uuid="dd32ef4c-bb14-408e-bfe0-776323799205" x="13" y="4" width="374" height="16"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Transactions for this project]]></text>
 			</staticText>
 			<image>
-				<reportElement uuid="58c0683a-4c20-4224-8edb-a6183d9284fd" stretchType="RelativeToTallestObject" x="2" y="3" width="9" height="9"/>
+				<reportElement uuid="58c0683a-4c20-4224-8edb-a6183d9284fd" stretchType="RelativeToTallestObject" x="2" y="7" width="9" height="9"/>
 				<imageExpression><![CDATA[$P{iconTransactionsOf}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="d9c01817-e506-437f-9a9e-10517666025f" x="0" y="16" width="23" height="15"/>
+				<reportElement uuid="d9c01817-e506-437f-9a9e-10517666025f" x="0" y="24" width="23" height="15"/>
 				<box leftPadding="2"/>
-				<textElement/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[NO.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dad694d6-616c-4228-83fc-cc404c805049" x="23" y="16" width="60" height="15"/>
+				<reportElement uuid="dad694d6-616c-4228-83fc-cc404c805049" x="23" y="24" width="60" height="15"/>
 				<box leftPadding="2"/>
-				<textElement/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[DATE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="98e93113-c724-4fc3-a72a-4c9c676a5048" x="83" y="16" width="235" height="15"/>
+				<reportElement uuid="98e93113-c724-4fc3-a72a-4c9c676a5048" x="88" y="24" width="230" height="15"/>
 				<box leftPadding="2"/>
-				<textElement/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[TRANSACTIONS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2480333e-f92e-422f-a439-976d7fe144d5" x="319" y="16" width="68" height="15"/>
+				<reportElement uuid="2480333e-f92e-422f-a439-976d7fe144d5" x="319" y="24" width="62" height="15"/>
 				<box leftPadding="2"/>
-				<textElement/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[VALUE]]></text>
 			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="29">
-			<rectangle>
-				<reportElement uuid="21305d70-a1be-4dbd-a108-e67312154304" stretchType="RelativeToTallestObject" x="0" y="0" width="387" height="29" backcolor="#CCCCCC"/>
-				<graphicElement>
-					<pen lineWidth="0.0"/>
-				</graphicElement>
-			</rectangle>
 			<textField>
 				<reportElement uuid="953c7aa9-b158-49fe-89ec-1de796de4d82" x="88" y="1" width="225" height="13"/>
 				<box leftPadding="2"/>

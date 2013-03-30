@@ -1,0 +1,38 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>/home/ade/Dropbox/Project Management &amp; Inventory (2)/DEV/apps/projectManagement.jar</jar>
+  <outfile>/home/ade/Dropbox/Project Management &amp; Inventory (2)/DEV/apps/projectManagement.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon></icon>
+  <singleInstance>
+    <mutexName>Project Management &amp; Inventory</mutexName>
+    <windowTitle>Project Management &amp; Inventory</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.1.1</txtFileVersion>
+    <fileDescription>Project Management &amp; Inventory</fileDescription>
+    <copyright>eyesimple</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.1.1</txtProductVersion>
+    <productName>Project Management &amp; Inventory</productName>
+    <companyName>eyesimple</companyName>
+    <internalName>projectManagement</internalName>
+    <originalFilename>projectManagement.exe</originalFilename>
+  </versionInfo>
+</launch4jConfig>

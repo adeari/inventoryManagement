@@ -24,8 +24,8 @@ public class functionCommon {
     public String emailUser = "project@eyesimple.us"
             ,emailPass=" eyesimple25";
     
-    public boolean isDebugging = true;
-    public static boolean isDevelop = true;
+    public boolean isDebugging = false;
+    public static boolean isDevelop = false;
 
     public static String getPath() {
         String getBack = "", path = "";
